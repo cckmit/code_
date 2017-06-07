@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mika.credit.facade.globalsearch.core.dao.CollectionMapper">
+  <resultMap id="BaseResultMap" type="com.mika.credit.facade.globalsearch.core.model.Collection">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="customer_id" jdbcType="INTEGER" property="customerId" />
+    <result column="collection_company" jdbcType="VARCHAR" property="collectionCompany" />
+    <result column="collection_time" jdbcType="TIMESTAMP" property="collectionTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, customer_id, collection_company, collection_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from collection
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectCountSelective" resultType="java.lang.Integer"
+          parameterType="com.mika.credit.facade.globalsearch.core.model.Collection">
+    select
+    count(1)
+    from collection
+    where 1=1
+    <if test="id != null">
+      and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="customerId != null and customerId!=0">
+      and customer_id = #{customerId,jdbcType=INTEGER}
+    </if>
+    <if test="collectionCompany != null">
+      and collection_company = #{collectionCompany,jdbcType=VARCHAR}
+    </if>
+    <if test="collectionTime != null">
+      and collection_time = #{collectionTime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+  <select id="selectSelective" resultMap="BaseResultMap"
+          parameterType="com.mika.credit.facade.globalsearch.core.model.Collection">
+    select
+    <include refid="Base_Column_List"/>
+    from collection
+    where 1=1
+    <if test="id != null and id != 0">
+      and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="customerId != null and customerId!=0">
+      and customer_id = #{customerId,jdbcType=INTEGER}
+    </if>
+    <if test="collectionCompany != null">
+      and collection_company = #{collectionCompany,jdbcType=VARCHAR}
+    </if>
+    <if test="collectionTime != null">
+      and collection_time = #{collectionTime,jdbcType=TIMESTAMP}
+    </if>
+    order by collection_time DESC
+  </select>
+  <select id="getCollectionByCustomerId" parameterType="com.mika.credit.facade.globalsearch.core.model.Collection" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from collection
+    where customer_id = #{customerId,jdbcType=INTEGER} AND collection_company=#{collectionCompany,jdbcType=VARCHAR};
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from collection
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="delByCidAndCname" parameterType="com.mika.credit.facade.globalsearch.core.model.Collection">
+    delete from collection
+    where customer_id = #{customerId,jdbcType=INTEGER} AND collection_company=#{collectionCompany,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.mika.credit.facade.globalsearch.core.model.Collection">
+    insert into collection (id, customer_id, collection_company,
+      collection_time)
+    values (#{id,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, #{collectionCompany,jdbcType=VARCHAR},
+      #{collectionTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mika.credit.facade.globalsearch.core.model.Collection">
+    insert into collection
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="collectionCompany != null">
+        collection_company,
+      </if>
+      <if test="collectionTime != null">
+        collection_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="customerId != null">
+        #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="collectionCompany != null">
+        #{collectionCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="collectionTime != null">
+        #{collectionTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mika.credit.facade.globalsearch.core.model.Collection">
+    update collection
+    <set>
+      <if test="collectionName != null">
+        customer_id = #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="collectionCompany != null">
+        collection_company = #{collectionCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="collectionTime != null">
+        collection_time = #{collectionTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mika.credit.facade.globalsearch.core.model.Collection">
+    update collection
+    set customer_id = #{customerId,jdbcType=INTEGER},
+      collection_company = #{collectionCompany,jdbcType=VARCHAR},
+      collection_time = #{collectionTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

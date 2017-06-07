@@ -1,0 +1,736 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.globalsearch.core.dao.CustomerMapper">
+    <resultMap id="BaseResultMap" type="com.mika.credit.facade.globalsearch.core.model.Customer">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="dept_id" property="deptId" jdbcType="VARCHAR"/>
+        <result column="corp_id" property="corpId" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="passwd" property="passwd" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="theme" property="theme" jdbcType="VARCHAR"/>
+        <result column="idcard" property="idcard" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="addr" property="addr" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="login_count" property="loginCount" jdbcType="INTEGER"/>
+        <result column="last_time" property="lastTime" jdbcType="TIMESTAMP"/>
+        <result column="enable" property="enable" jdbcType="VARCHAR"/>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="CHAR"/>
+        <result column="birthday" property="birthday" jdbcType="DATE"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="other_contact" property="otherContact" jdbcType="VARCHAR"/>
+        <result column="sos_person" property="sosPerson" jdbcType="VARCHAR"/>
+        <result column="sos_mobile" property="sosMobile" jdbcType="VARCHAR"/>
+        <result column="born_place" property="bornPlace" jdbcType="VARCHAR"/>
+        <result column="level_id" property="levelId" jdbcType="INTEGER"/>
+        <result column="balance" property="balance" jdbcType="REAL"/>
+
+        <result column="company_name" property="companyName" jdbcType="VARCHAR"/>
+        <result column="company_address" property="companyAddress" jdbcType="VARCHAR"/>
+        <result column="company_phone" property="companyPhone" jdbcType="VARCHAR"/>
+        <result column="position" property="position" jdbcType="VARCHAR"/>
+        <result column="check_status" property="checkStatus" jdbcType="VARCHAR"/>
+        <result column="check_status_option" property="checkStatusOption" jdbcType="VARCHAR"/>
+
+
+        <result column="company_attach" property="companyAttach" jdbcType="LONGVARCHAR"/>
+        <result column="company_desc" property="companyDesc" jdbcType="VARCHAR"/>
+        <result column="is_audit" property="isAudit" jdbcType="VARCHAR"/>
+        <result column="auth_sub_time" property="authSubTime" jdbcType="DATE"/>
+        <result column="auth_end_time" property="authEndTime" jdbcType="DATE"/>
+        <result column="fail_reason" property="failReason" jdbcType="VARCHAR"/>
+
+
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, dept_id, corp_id, code, passwd, name, theme, idcard, phone, addr, email, create_time,
+        login_count, last_time, enable, create_by, sex, birthday, mobile, other_contact,
+        sos_person, sos_mobile, born_place ,level_id ,balance,company_name,company_address,company_phone,
+        `position`,check_status,company_attach,company_desc,is_audit,auth_sub_time,auth_end_time,fail_reason,check_status_option
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from customer
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectByEmail" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from customer
+        where email = #{email,jdbcType=VARCHAR}
+    </select>
+    <select id="selectCountSelective" resultType="java.lang.Integer"
+            parameterType="com.mika.credit.facade.globalsearch.core.model.Customer">
+        select
+        count(1)
+        from customer
+        where 1=1
+        <if test="id != 0">
+            and id = #{id,jdbcType=INTEGER}
+        </if>
+        <if test="deptId != null">
+            and dept_id = #{deptId,jdbcType=VARCHAR}
+        </if>
+        <if test="corpId != null">
+            and corp_id = #{corpId,jdbcType=VARCHAR}
+        </if>
+        <if test="code != null">
+            and code = #{code,jdbcType=VARCHAR}
+        </if>
+        <if test="passwd != null">
+            and passwd = #{passwd,jdbcType=VARCHAR}
+        </if>
+        <if test="name != null">
+            and name = #{name,jdbcType=VARCHAR}
+        </if>
+        <if test="theme != null">
+            and theme= #{theme,jdbcType=VARCHAR}
+        </if>
+        <if test="idcard != null">
+            and idcard = #{idcard,jdbcType=VARCHAR}
+        </if>
+        <if test="phone != null">
+            and phone= #{phone,jdbcType=VARCHAR}
+        </if>
+        <if test="addr != null">
+            and addr= #{addr,jdbcType=VARCHAR}
+        </if>
+        <if test="email != null">
+            and email= #{email,jdbcType=VARCHAR}
+        </if>
+        <if test="createTime != null">
+            and create_time= #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="loginCount != null">
+            and login_count= #{loginCount,jdbcType=VARCHAR}
+        </if>
+        <if test="lastTime != null">
+            and last_time= #{lastTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="enable != null">
+            and enable= #{enable,jdbcType=VARCHAR}
+        </if>
+        <if test="createBy != null">
+            and create_by= #{createBy,jdbcType=VARCHAR}
+        </if>
+        <if test="sex != null">
+            and sex= #{sex,jdbcType=VARCHAR}
+        </if>
+        <if test="birthday != null">
+            and birthday = #{birthday,jdbcType=VARCHAR}
+        </if>
+        <if test="mobile != null">
+            and mobile = #{mobile,jdbcType=VARCHAR}
+        </if>
+        <if test="otherContact != null">
+            and other_contact = #{otherContact,jdbcType=VARCHAR}
+        </if>
+        <if test="sosPerson != null">
+            and sos_person = #{sosPerson,jdbcType=VARCHAR}
+        </if>
+        <if test="sosMobile != null">
+            and sos_mobile = #{sosMobile,jdbcType=VARCHAR}
+        </if>
+        <if test="bornPlace != null">
+            and born_place = #{bornPlace,jdbcType=VARCHAR}
+        </if>
+        <if test="levelId != null and levelId!=0">
+            and level_id = #{levelId,jdbcType=INTEGER}
+        </if>
+        <if test="balance != null and levelId!=0">
+            and balance = #{balance,jdbcType=REAL}
+        </if>
+
+        <if test="companyName != null">
+            and company_name = #{companyName,jdbcType=VARCHAR}
+        </if>
+        <if test="companyAddress != null">
+            and company_address = #{companyAddress,jdbcType=VARCHAR}
+        </if>
+        <if test="companyPhone != null">
+            and company_phone = #{companyPhone,jdbcType=VARCHAR}
+        </if>
+        <if test="position != null">
+            and `position` = #{position,jdbcType=VARCHAR}
+        </if>
+        <if test="checkStatus != null">
+            and check_status = #{checkStatus,jdbcType=VARCHAR}
+        </if>
+        <if test="checkStatusOption != null">
+            and check_status_option = #{checkStatusOption,jdbcType=VARCHAR}
+        </if>
+
+        <if test="companyAttach != null">
+            and company_attach = #{companyAttach,jdbcType=LONGVARCHAR}
+        </if>
+        <if test="companyDesc != null">
+            and company_desc = #{companyDesc,jdbcType=VARCHAR}
+        </if>
+        <if test="isAudit != null">
+            and is_audit = #{isAudit,jdbcType=VARCHAR}
+        </if>
+        <if test="authSubTime != null">
+            and auth_sub_time = #{authSubTime,jdbcType=DATE}
+        </if>
+        <if test="authEndTime != null">
+            and auth_end_time = #{authEndTime,jdbcType=DATE}
+        </if>
+        <if test="failReason != null">
+            and fail_reason = #{failReason,jdbcType=VARCHAR}
+        </if>
+
+    </select>
+    <select id="selectSelective" resultMap="BaseResultMap"
+            parameterType="com.mika.credit.facade.globalsearch.core.model.Customer">
+        select
+        <include refid="Base_Column_List"/>
+        from customer
+        where 1=1
+        <if test="id != 0">
+            and id = #{id,jdbcType=INTEGER}
+        </if>
+        <if test="deptId != null">
+            and dept_id = #{deptId,jdbcType=VARCHAR}
+        </if>
+        <if test="corpId != null">
+            and corp_id = #{corpId,jdbcType=VARCHAR}
+        </if>
+        <if test="code != null">
+            and code = #{code,jdbcType=VARCHAR}
+        </if>
+        <if test="passwd != null">
+            and passwd = #{passwd,jdbcType=VARCHAR}
+        </if>
+        <if test="name != null">
+            and name = #{name,jdbcType=VARCHAR}
+        </if>
+        <if test="theme != null">
+            and theme= #{theme,jdbcType=VARCHAR}
+        </if>
+        <if test="idcard != null">
+            and idcard = #{idcard,jdbcType=VARCHAR}
+        </if>
+        <if test="phone != null">
+            and phone= #{phone,jdbcType=VARCHAR}
+        </if>
+        <if test="addr != null">
+            and addr= #{addr,jdbcType=VARCHAR}
+        </if>
+        <if test="email != null">
+            and email= #{email,jdbcType=VARCHAR}
+        </if>
+        <if test="createTime != null">
+            and create_time= #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="loginCount != null">
+            and login_count= #{loginCount,jdbcType=VARCHAR}
+        </if>
+        <if test="lastTime != null">
+            and last_time= #{lastTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="enable != null">
+            and enable= #{enable,jdbcType=VARCHAR}
+        </if>
+        <if test="createBy != null">
+            and create_by= #{createBy,jdbcType=VARCHAR}
+        </if>
+        <if test="sex != null">
+            and sex= #{sex,jdbcType=VARCHAR}
+        </if>
+        <if test="birthday != null">
+            and birthday = #{birthday,jdbcType=VARCHAR}
+        </if>
+        <if test="mobile != null">
+            and mobile = #{mobile,jdbcType=VARCHAR}
+        </if>
+        <if test="otherContact != null">
+            and other_contact = #{otherContact,jdbcType=VARCHAR}
+        </if>
+        <if test="sosPerson != null">
+            and sos_person = #{sosPerson,jdbcType=VARCHAR}
+        </if>
+        <if test="sosMobile != null">
+            and sos_mobile = #{sosMobile,jdbcType=VARCHAR}
+        </if>
+        <if test="bornPlace != null">
+            and born_place = #{bornPlace,jdbcType=VARCHAR}
+        </if>
+        <if test="levelId != null and levelId!=0">
+            and level_id = #{levelId,jdbcType=INTEGER}
+        </if>
+        <if test="balance != null and balance!=0">
+            and balance = #{balance,jdbcType=REAL}
+        </if>
+        <if test="companyName != null">
+            and company_name = #{companyName,jdbcType=VARCHAR}
+        </if>
+        <if test="companyAddress != null">
+            and company_address = #{companyAddress,jdbcType=VARCHAR}
+        </if>
+        <if test="companyPhone != null">
+            and company_phone = #{companyPhone,jdbcType=VARCHAR}
+        </if>
+        <if test="position != null">
+            and `position` = #{position,jdbcType=VARCHAR}
+        </if>
+        <if test="checkStatus != null">
+            and check_status = #{checkStatus,jdbcType=VARCHAR}
+        </if>
+        <if test="checkStatusOption != null">
+            and check_status_option = #{checkStatusOption,jdbcType=VARCHAR}
+        </if>
+
+        <if test="companyAttach != null">
+            and company_attach = #{companyAttach,jdbcType=LONGVARCHAR}
+        </if>
+        <if test="companyDesc != null">
+            and company_desc = #{companyDesc,jdbcType=VARCHAR}
+        </if>
+        <if test="isAudit != null">
+            and is_audit = #{isAudit,jdbcType=VARCHAR}
+        </if>
+        <if test="authSubTime != null">
+            and auth_sub_time = #{authSubTime,jdbcType=DATE}
+        </if>
+        <if test="authEndTime != null">
+            and auth_end_time = #{authEndTime,jdbcType=DATE}
+        </if>
+        <if test="failReason != null">
+            and fail_reason = #{failReason,jdbcType=VARCHAR}
+        </if>
+
+
+        order by id
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from customer
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.mika.credit.facade.globalsearch.core.model.Customer" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into customer (dept_id, corp_id,
+        code, passwd, name,
+        theme, idcard, phone,
+        addr, email, create_time,
+        login_count, last_time, enable,
+        create_by, sex, birthday,
+        mobile, other_contact, sos_person,
+        sos_mobile, born_place ,level_id ,balance,
+        company_name,company_address,company_phone,
+        `position`,check_status,company_attach,company_desc,is_audit,auth_sub_time,auth_end_time,fail_reason,
+        check_status_option)
+        values ( #{deptId,jdbcType=VARCHAR}, #{corpId,jdbcType=VARCHAR},
+        #{code,jdbcType=VARCHAR}, #{passwd,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+        #{theme,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+        #{addr,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+        #{loginCount,jdbcType=INTEGER}, #{lastTime,jdbcType=TIMESTAMP}, #{enable,jdbcType=VARCHAR},
+        #{createBy,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{birthday,jdbcType=DATE},
+        #{mobile,jdbcType=VARCHAR}, #{otherContact,jdbcType=VARCHAR}, #{sosPerson,jdbcType=VARCHAR},
+        #{sosMobile,jdbcType=VARCHAR}, #{bornPlace,jdbcType=VARCHAR}, #{levelId,jdbcType=INTEGER},
+        #{balance,jdbcType=REAL},
+        #{companyName,jdbcType=VARCHAR},#{companyAddress,jdbcType=VARCHAR},#{companyPhone,jdbcType=VARCHAR},#{position,jdbcType=VARCHAR},
+        #{checkStatus,jdbcType=VARCHAR},#{companyAttach,jdbcType=LONGVARCHAR},#{companyDesc,jdbcType=VARCHAR},#{isAudit,jdbcType=VARCHAR},
+        #{authSubTime,jdbcType=TIMESTAMP},#{authEndTime,jdbcType=TIMESTAMP},#{failReason,jdbcType=VARCHAR}, #{checkStatusOption,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.mika.credit.facade.globalsearch.core.model.Customer" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into customer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="deptId != null">
+                dept_id,
+            </if>
+            <if test="corpId != null">
+                corp_id,
+            </if>
+            <if test="code != null">
+                code,
+            </if>
+            <if test="passwd != null">
+                passwd,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="theme != null">
+                theme,
+            </if>
+            <if test="idcard != null">
+                idcard,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="addr != null">
+                addr,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="loginCount != null">
+                login_count,
+            </if>
+            <if test="lastTime != null">
+                last_time,
+            </if>
+            <if test="enable != null">
+                enable,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="birthday != null">
+                birthday,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="otherContact != null">
+                other_contact,
+            </if>
+            <if test="sosPerson != null">
+                sos_person,
+            </if>
+            <if test="sosMobile != null">
+                sos_mobile,
+            </if>
+            <if test="bornPlace != null">
+                born_place,
+            </if>
+            <if test="levelId != null">
+                level_id,
+            </if>
+            <if test="balance != null">
+                balance,
+            </if>
+            <if test="companyName != null">
+                company_name,
+            </if>
+            <if test="companyAddress != null">
+                company_address,
+            </if>
+            <if test="companyPhone != null">
+                company_phone ,
+            </if>
+            <if test="position != null">
+                `position` ,
+            </if>
+            <if test="checkStatus != null">
+                check_status,
+            </if>
+            <if test="checkStatusOption != null">
+                check_status_option,
+            </if>
+
+            <if test="companyAttach != null">
+                company_attach,
+            </if>
+            <if test="companyDesc != null">
+                company_desc,
+            </if>
+            <if test="isAudit != null">
+                is_audit,
+            </if>
+            <if test="authSubTime != null">
+                auth_sub_time,
+            </if>
+            <if test="authEndTime != null">
+                auth_end_time,
+            </if>
+            <if test="failReason != null">
+                fail_reason,
+            </if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="deptId != null">
+                #{deptId,jdbcType=VARCHAR},
+            </if>
+            <if test="corpId != null">
+                #{corpId,jdbcType=VARCHAR},
+            </if>
+            <if test="code != null">
+                #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="passwd != null">
+                #{passwd,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="theme != null">
+                #{theme,jdbcType=VARCHAR},
+            </if>
+            <if test="idcard != null">
+                #{idcard,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="addr != null">
+                #{addr,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="loginCount != null">
+                #{loginCount,jdbcType=INTEGER},
+            </if>
+            <if test="lastTime != null">
+                #{lastTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="enable != null">
+                #{enable,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=CHAR},
+            </if>
+            <if test="birthday != null">
+                #{birthday,jdbcType=DATE},
+            </if>
+            <if test="mobile != null">
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="otherContact != null">
+                #{otherContact,jdbcType=VARCHAR},
+            </if>
+            <if test="sosPerson != null">
+                #{sosPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="sosMobile != null">
+                #{sosMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="bornPlace != null">
+                #{bornPlace,jdbcType=VARCHAR},
+            </if>
+            <if test="levelId != null">
+                #{levelId,jdbcType=INTEGER},
+            </if>
+            <if test="balance != null">
+                #{balance,jdbcType=REAL},
+            </if>
+            <if test="companyName != null">
+                #{companyName,jdbcType=VARCHAR},
+            </if>
+            <if test="companyAddress != null">
+                #{companyAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="companyPhone != null">
+                #{companyPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="position != null">
+                #{position,jdbcType=VARCHAR},
+            </if>
+            <if test="checkStatus != null">
+                #{checkStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="checkStatusOption != null">
+                #{checkStatusOption,jdbcType=VARCHAR},
+            </if>
+
+            <if test="companyAttach != null">
+                #{companyAttach,jdbcType=LONGVARCHAR}
+            </if>
+            <if test="companyDesc != null">
+                #{companyDesc,jdbcType=VARCHAR}
+            </if>
+            <if test="isAudit != null">
+                #{isAudit,jdbcType=VARCHAR}
+            </if>
+            <if test="authSubTime != null">
+                #{authSubTime,jdbcType=DATE}
+            </if>
+            <if test="authEndTime != null">
+                #{authEndTime,jdbcType=DATE}
+            </if>
+            <if test="failReason != null">
+                #{failReason,jdbcType=VARCHAR}
+            </if>
+
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mika.credit.facade.globalsearch.core.model.Customer">
+        update customer
+        <set>
+            <if test="corpId != null">
+                corp_id = #{corpId,jdbcType=VARCHAR},
+            </if>
+            <if test="code != null">
+                code = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="passwd != null">
+                passwd = #{passwd,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="theme != null">
+                theme = #{theme,jdbcType=VARCHAR},
+            </if>
+            <if test="idcard != null">
+                idcard = #{idcard,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="addr != null">
+                addr = #{addr,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="loginCount != null">
+                login_count = #{loginCount,jdbcType=INTEGER},
+            </if>
+            <if test="lastTime != null">
+                last_time = #{lastTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="enable != null">
+                enable = #{enable,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=CHAR},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday,jdbcType=DATE},
+            </if>
+            <if test="mobile != null">
+                mobile = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="otherContact != null">
+                other_contact = #{otherContact,jdbcType=VARCHAR},
+            </if>
+            <if test="sosPerson != null">
+                sos_person = #{sosPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="sosMobile != null">
+                sos_mobile = #{sosMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="bornPlace != null">
+                born_place = #{bornPlace,jdbcType=VARCHAR},
+            </if>
+            <if test="levelId != null">
+                level_id = #{levelId,jdbcType=INTEGER},
+            </if>
+            <if test="balance != null">
+                balance = #{balance,jdbcType=REAL},
+            </if>
+            <if test="companyName != null">
+                company_name = #{companyName,jdbcType=VARCHAR},
+            </if>
+            <if test="companyAddress != null">
+                company_address = #{companyAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="companyPhone != null">
+                company_phone = #{companyPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="position != null">
+                `position` = #{position,jdbcType=VARCHAR},
+            </if>
+            <if test="checkStatus != null">
+                check_status = #{checkStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="checkStatusOption != null">
+                check_status_option = #{checkStatusOption,jdbcType=VARCHAR},
+            </if>
+
+            <if test="companyAttach != null">
+                company_attach = #{companyAttach,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="companyDesc != null">
+                company_desc = #{companyDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="isAudit != null">
+                is_audit = #{isAudit,jdbcType=VARCHAR},
+            </if>
+            <if test="authSubTime != null">
+                auth_sub_time = #{authSubTime,jdbcType=DATE},
+            </if>
+            <if test="authEndTime != null">
+                auth_end_time = #{authEndTime,jdbcType=DATE},
+            </if>
+            <if test="failReason != null">
+                fail_reason = #{failReason,jdbcType=VARCHAR},
+            </if>
+
+
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mika.credit.facade.globalsearch.core.model.Customer">
+    update customer
+    set
+      corp_id = #{corpId,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      passwd = #{passwd,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      theme = #{theme,jdbcType=VARCHAR},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      addr = #{addr,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      login_count = #{loginCount,jdbcType=INTEGER},
+      last_time = #{lastTime,jdbcType=TIMESTAMP},
+      enable = #{enable,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=CHAR},
+      birthday = #{birthday,jdbcType=DATE},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      other_contact = #{otherContact,jdbcType=VARCHAR},
+      sos_person = #{sosPerson,jdbcType=VARCHAR},
+      sos_mobile = #{sosMobile,jdbcType=VARCHAR},
+      born_place = #{bornPlace,jdbcType=VARCHAR},
+      level_id = #{levelId,jdbcType=INTEGER},
+      balance = #{balance,jdbcType=REAL},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      company_address = #{companyAddress,jdbcType=VARCHAR},
+      company_phone = #{companyPhone,jdbcType=VARCHAR},
+      `position` = #{position,jdbcType=VARCHAR},
+      check_status = #{checkStatus,jdbcType=VARCHAR},
+      check_status_option = #{checkStatusOption,jdbcType=VARCHAR},
+
+      company_attach = #{companyAttach,jdbcType=LONGVARCHAR},
+      company_desc = #{companyDesc,jdbcType=VARCHAR},
+      is_audit = #{isAudit,jdbcType=VARCHAR},
+      auth_sub_time = #{authSubTime,jdbcType=DATE},
+      auth_end_time = #{authEndTime,jdbcType=DATE},
+      fail_reason = #{failReason,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <update id="updatePasswordByEmail" parameterType="com.mika.credit.facade.globalsearch.core.model.Customer">
+        update customer
+        set
+        passwd = #{passwd,jdbcType=VARCHAR}
+        where email = #{email,jdbcType=VARCHAR}
+    </update>
+    <update id="updateCheckStatusById" parameterType="com.mika.credit.facade.globalsearch.core.model.Customer">
+        update customer
+        set
+        check_status_option = #{checkStatusOption,jdbcType=VARCHAR},
+        check_status = #{checkStatus,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

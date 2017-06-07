@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mika.credit.facade.gugu.dao.VersionsMapper">
+  <resultMap id="BaseResultMap" type="com.mika.credit.facade.gugu.model.Versions">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="del_flag" jdbcType="VARCHAR" property="delFlag" />
+    <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="version_no" jdbcType="VARCHAR" property="versionNo" />
+    <result column="version_type" jdbcType="VARCHAR" property="versionType" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, del_flag, update_time, url, version_no, version_type
+  </sql>
+  <sql id="condition">
+    <where>
+      <if test="id != null and id != 0">
+        and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="delFlag != null">
+        and del_flag = #{delFlag,jdbcType=VARCHAR}
+      </if>
+      <if test="updateTime != null">
+        and update_time = #{updateTime,jdbcType=VARCHAR}
+      </if>
+      <if test="url != null">
+        and url = #{url,jdbcType=VARCHAR}
+      </if>
+      <if test="versionNo != null">
+        and  version_no = #{versionNo,jdbcType=VARCHAR}
+      </if>
+      <if test="versionType != null">
+        and version_type = #{versionType,jdbcType=VARCHAR}
+      </if>
+      ORDER BY id DESC
+    </where>
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from versions
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPrimaryKeySelective" parameterType="com.mika.credit.facade.gugu.model.Versions" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from versions
+    <include refid="condition" />
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from versions
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mika.credit.facade.gugu.model.Versions" useGeneratedKeys="true" keyProperty="id">
+    insert into versions (id, del_flag, update_time, 
+      url, version_no, version_type
+      )
+    values (#{id,jdbcType=INTEGER}, #{delFlag,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{versionNo,jdbcType=VARCHAR}, #{versionType,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mika.credit.facade.gugu.model.Versions" useGeneratedKeys="true" keyProperty="id">
+    insert into versions
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="versionNo != null">
+        version_no,
+      </if>
+      <if test="versionType != null">
+        version_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="versionNo != null">
+        #{versionNo,jdbcType=VARCHAR},
+      </if>
+      <if test="versionType != null">
+        #{versionType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mika.credit.facade.gugu.model.Versions">
+    update versions
+    <set>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="versionNo != null">
+        version_no = #{versionNo,jdbcType=VARCHAR},
+      </if>
+      <if test="versionType != null">
+        version_type = #{versionType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mika.credit.facade.gugu.model.Versions">
+    update versions
+    set del_flag = #{delFlag,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      version_no = #{versionNo,jdbcType=VARCHAR},
+      version_type = #{versionType,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

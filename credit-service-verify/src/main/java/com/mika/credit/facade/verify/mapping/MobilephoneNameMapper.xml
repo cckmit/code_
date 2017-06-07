@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mika.credit.facade.verify.dao.MobilephoneNameMapper">
+  <resultMap id="BaseResultMap" type="com.mika.credit.facade.verify.model.MobilephoneName">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="correct_person_name" jdbcType="VARCHAR" property="correctPersonName" />
+    <result column="del_flag" jdbcType="VARCHAR" property="delFlag" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="person_name" jdbcType="VARCHAR" property="personName" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="source_flag" jdbcType="VARCHAR" property="sourceFlag" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="time_score" jdbcType="VARCHAR" property="timeScore" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, correct_person_name, del_flag, note, person_name, phone, source_flag, update_time, 
+    create_date, time_score
+  </sql>
+  <sql id="condition">
+    <where>
+      <if test="id != null">
+       and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="correctPersonName != null">
+        and correct_person_name = #{correctPersonName,jdbcType=VARCHAR}
+      </if>
+      <if test="delFlag != null">
+        and del_flag = #{delFlag,jdbcType=VARCHAR}
+      </if>
+      <if test="note != null">
+        and note = #{note,jdbcType=VARCHAR}
+      </if>
+      <if test="personName != null">
+        and person_name = #{personName,jdbcType=VARCHAR}
+      </if>
+      <if test="phone != null">
+        and phone = #{phone,jdbcType=VARCHAR}
+      </if>
+      <if test="sourceFlag != null">
+        and source_flag = #{sourceFlag,jdbcType=VARCHAR}
+      </if>
+      <if test="updateTime != null">
+        and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createDate != null">
+        and create_date = #{createDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="timeScore != null">
+        and time_score = #{timeScore,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mobilephone_name
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectSeletive" parameterType="com.mika.credit.facade.verify.model.MobilephoneName" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from mobilephone_name
+    <include refid="condition" />
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mobilephone_name
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mika.credit.facade.verify.model.MobilephoneName" useGeneratedKeys="true" keyProperty="id">
+    insert into mobilephone_name (id, correct_person_name, del_flag, 
+      note, person_name, phone, 
+      source_flag, update_time, create_date, 
+      time_score)
+    values (#{id,jdbcType=INTEGER}, #{correctPersonName,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR}, 
+      #{note,jdbcType=VARCHAR}, #{personName,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{sourceFlag,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{timeScore,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mika.credit.facade.verify.model.MobilephoneName" useGeneratedKeys="true" keyProperty="id">
+    insert into mobilephone_name
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="correctPersonName != null">
+        correct_person_name,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+      <if test="personName != null">
+        person_name,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="sourceFlag != null">
+        source_flag,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="timeScore != null">
+        time_score,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="correctPersonName != null">
+        #{correctPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="personName != null">
+        #{personName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceFlag != null">
+        #{sourceFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeScore != null">
+        #{timeScore,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mika.credit.facade.verify.model.MobilephoneName">
+    update mobilephone_name
+    <set>
+      <if test="correctPersonName != null">
+        correct_person_name = #{correctPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="personName != null">
+        person_name = #{personName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceFlag != null">
+        source_flag = #{sourceFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeScore != null">
+        time_score = #{timeScore,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mika.credit.facade.verify.model.MobilephoneName">
+    update mobilephone_name
+    set correct_person_name = #{correctPersonName,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      person_name = #{personName,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      source_flag = #{sourceFlag,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      time_score = #{timeScore,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

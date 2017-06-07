@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.front.cn.dao.impl.FinancialRatiosDaoImpl" >
+  <cache eviction="LRU" type="com.mika.credit.common.core.mybatis.cache.redis.sharded.MybatiesRedisCache" />
+  <resultMap id="BaseResultMap" type="com.mika.credit.common.entity.report.cn.FinancialRatios" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="assets_turnover" property="assetsTurnover" jdbcType="VARCHAR" />
+    <result column="collection_period" property="collectionPeriod" jdbcType="VARCHAR" />
+    <result column="credit_period" property="creditPeriod" jdbcType="VARCHAR" />
+    <result column="crefo_no" property="crefoNo" jdbcType="VARCHAR" />
+    <result column="current_rato" property="currentRato" jdbcType="VARCHAR" />
+    <result column="debt_ratio" property="debtRatio" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="VARCHAR" />
+    <result column="dtid" property="dtid" jdbcType="INTEGER" />
+    <result column="financial_id" property="financialId" jdbcType="INTEGER" />
+    <result column="fs_id" property="fsId" jdbcType="INTEGER" />
+    <result column="gross_margin" property="grossMargin" jdbcType="VARCHAR" />
+    <result column="month" property="month" jdbcType="VARCHAR" />
+    <result column="netprofit_growth_rate" property="netprofitGrowthRate" jdbcType="VARCHAR" />
+    <result column="operating_revenue_per_employee" property="operatingRevenuePerEmployee" jdbcType="VARCHAR" />
+    <result column="profit_margin" property="profitMargin" jdbcType="VARCHAR" />
+    <result column="profit_per_employee" property="profitPerEmployee" jdbcType="VARCHAR" />
+    <result column="quick_ratio" property="quickRatio" jdbcType="VARCHAR" />
+    <result column="return_on_assets" property="returnOnAssets" jdbcType="VARCHAR" />
+    <result column="return_on_equity" property="returnOnEquity" jdbcType="VARCHAR" />
+    <result column="sales_growth_rate" property="salesGrowthRate" jdbcType="VARCHAR" />
+    <result column="sales_period" property="salesPeriod" jdbcType="VARCHAR" />
+    <result column="shareholder_funds_per_employess" property="shareholderFundsPerEmployess" jdbcType="VARCHAR" />
+    <result column="shareholders_liquidity_rato" property="shareholdersLiquidityRato" jdbcType="VARCHAR" />
+    <result column="solvency_ratio" property="solvencyRatio" jdbcType="VARCHAR" />
+    <result column="stock_turnover" property="stockTurnover" jdbcType="VARCHAR" />
+    <result column="total_assets_growth_rate" property="totalAssetsGrowthRate" jdbcType="VARCHAR" />
+    <result column="total_assets_per_employee" property="totalAssetsPerEmployee" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+    <result column="year" property="year" jdbcType="VARCHAR" />
+    <result column="full_report_id" property="fullReportId" jdbcType="INTEGER" />
+  </resultMap>
+
+  <sql id="table"> financial_ratios </sql>
+
+  <sql id="Base_Column_List" >
+    id, assets_turnover, collection_period, credit_period, crefo_no, current_rato, debt_ratio, 
+    del_flag, dtid, financial_id, fs_id, gross_margin, month, netprofit_growth_rate, operating_revenue_per_employee,
+    profit_margin, profit_per_employee, quick_ratio, return_on_assets, return_on_equity, 
+    sales_growth_rate, sales_period, shareholder_funds_per_employess, shareholders_liquidity_rato, 
+    solvency_ratio, stock_turnover, total_assets_growth_rate, total_assets_per_employee, 
+    update_time, year,full_report_id
+  </sql>
+
+  <sql id="condition_sql">
+    <if test="id != null" >
+      and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="assetsTurnover != null" >
+      and assets_turnover = #{assetsTurnover,jdbcType=VARCHAR}
+    </if>
+    <if test="collectionPeriod != null" >
+      and collection_period = #{collectionPeriod,jdbcType=VARCHAR}
+    </if>
+    <if test="creditPeriod != null" >
+      and credit_period = #{creditPeriod,jdbcType=VARCHAR}
+    </if>
+    <if test="crefoNo != null" >
+      and crefo_no = #{crefoNo,jdbcType=VARCHAR}
+    </if>
+    <if test="currentRato != null" >
+      and current_rato = #{currentRato,jdbcType=VARCHAR}
+    </if>
+    <if test="debtRatio != null" >
+      and debt_ratio = #{debtRatio,jdbcType=VARCHAR}
+    </if>
+    <if test="delFlag != null" >
+      and del_flag = #{delFlag,jdbcType=VARCHAR}
+    </if>
+    <if test="dtid != null" >
+      and dtid = #{dtid,jdbcType=INTEGER},
+    </if>
+    <if test="financialId != null" >
+      and financial_id = #{financialId,jdbcType=INTEGER}
+    </if>
+    <if test="fsId != null" >
+      and fs_id = #{fsId,jdbcType=INTEGER}
+    </if>
+    <if test="grossMargin != null" >
+      and gross_margin = #{grossMargin,jdbcType=VARCHAR}
+    </if>
+    <if test="month != null" >
+      and month = #{month,jdbcType=VARCHAR}
+    </if>
+    <if test="netprofitGrowthRate != null" >
+      and netprofit_growth_rate = #{netprofitGrowthRate,jdbcType=VARCHAR}
+    </if>
+    <if test="operatingRevenuePerEmployee != null" >
+      and operating_revenue_per_employee = #{operatingRevenuePerEmployee,jdbcType=VARCHAR}
+    </if>
+    <if test="profitMargin != null" >
+      and profit_margin = #{profitMargin,jdbcType=VARCHAR}
+    </if>
+    <if test="profitPerEmployee != null" >
+      and profit_per_employee = #{profitPerEmployee,jdbcType=VARCHAR}
+    </if>
+    <if test="quickRatio != null" >
+      and quick_ratio = #{quickRatio,jdbcType=VARCHAR}
+    </if>
+    <if test="returnOnAssets != null" >
+      and return_on_assets = #{returnOnAssets,jdbcType=VARCHAR}
+    </if>
+    <if test="returnOnEquity != null" >
+      and return_on_equity = #{returnOnEquity,jdbcType=VARCHAR}
+    </if>
+    <if test="salesGrowthRate != null" >
+      and sales_growth_rate = #{salesGrowthRate,jdbcType=VARCHAR}
+    </if>
+    <if test="salesPeriod != null" >
+      and sales_period = #{salesPeriod,jdbcType=VARCHAR}
+    </if>
+    <if test="shareholderFundsPerEmployess != null" >
+      and shareholder_funds_per_employess = #{shareholderFundsPerEmployess,jdbcType=VARCHAR}
+    </if>
+    <if test="shareholdersLiquidityRato != null" >
+      and shareholders_liquidity_rato = #{shareholdersLiquidityRato,jdbcType=VARCHAR}
+    </if>
+    <if test="solvencyRatio != null" >
+      and solvency_ratio = #{solvencyRatio,jdbcType=VARCHAR}
+    </if>
+    <if test="stockTurnover != null" >
+      and stock_turnover = #{stockTurnover,jdbcType=VARCHAR}
+    </if>
+    <if test="totalAssetsGrowthRate != null" >
+      and total_assets_growth_rate = #{totalAssetsGrowthRate,jdbcType=VARCHAR}
+    </if>
+    <if test="totalAssetsPerEmployee != null" >
+      and total_assets_per_employee = #{totalAssetsPerEmployee,jdbcType=VARCHAR}
+    </if>
+    <if test="updateTime != null" >
+      and update_time = #{updateTime,jdbcType=VARCHAR}
+    </if>
+    <if test="year != null" >
+      and year = #{year,jdbcType=VARCHAR}
+    </if>
+    <if test="year != null" >
+      and year = #{year,jdbcType=VARCHAR}
+    </if>
+    <if test="fullReportId != null" >
+      and full_report_id = #{fullReportId,jdbcType=INTEGER}
+    </if>
+  </sql>
+
+  <select id="getById" parameterType="Integer" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    where ID = #{id}
+  </select>
+
+  <select id="listBy" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+    ORDER BY `year`*1 DESC
+  </select>
+
+  <select id="listPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+    <![CDATA[ order by ID desc]]>
+  </select>
+
+  <select id="listPageCount" parameterType="java.util.Map" resultType="Integer">
+    select count(1) from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <insert id="insert" parameterType="com.mika.credit.common.entity.report.cn.FinancialRatios" keyProperty="id" useGeneratedKeys="true">
+    insert into
+    <include refid="table" />
+    (id, assets_turnover, collection_period,
+    credit_period, crefo_no, current_rato,
+    debt_ratio, del_flag, dtid,
+    financial_id, fs_id, gross_margin,
+    month, netprofit_growth_rate, operating_revenue_per_employee,
+    profit_margin, profit_per_employee, quick_ratio,
+    return_on_assets, return_on_equity, sales_growth_rate,
+    sales_period, shareholder_funds_per_employess,
+    shareholders_liquidity_rato, solvency_ratio,
+    stock_turnover, total_assets_growth_rate, total_assets_per_employee,
+    update_time, year,full_report_id)
+    values (#{id,jdbcType=INTEGER}, #{assetsTurnover,jdbcType=VARCHAR}, #{collectionPeriod,jdbcType=VARCHAR},
+    #{creditPeriod,jdbcType=VARCHAR}, #{crefoNo,jdbcType=VARCHAR}, #{currentRato,jdbcType=VARCHAR},
+    #{debtRatio,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR}, #{dtid,jdbcType=INTEGER},
+    #{financialId,jdbcType=INTEGER}, #{fsId,jdbcType=INTEGER}, #{grossMargin,jdbcType=VARCHAR},
+    #{month,jdbcType=VARCHAR}, #{netprofitGrowthRate,jdbcType=VARCHAR}, #{operatingRevenuePerEmployee,jdbcType=VARCHAR},
+    #{profitMargin,jdbcType=VARCHAR}, #{profitPerEmployee,jdbcType=VARCHAR}, #{quickRatio,jdbcType=VARCHAR},
+    #{returnOnAssets,jdbcType=VARCHAR}, #{returnOnEquity,jdbcType=VARCHAR}, #{salesGrowthRate,jdbcType=VARCHAR},
+    #{salesPeriod,jdbcType=VARCHAR}, #{shareholderFundsPerEmployess,jdbcType=VARCHAR},
+    #{shareholdersLiquidityRato,jdbcType=VARCHAR}, #{solvencyRatio,jdbcType=VARCHAR},
+    #{stockTurnover,jdbcType=VARCHAR}, #{totalAssetsGrowthRate,jdbcType=VARCHAR}, #{totalAssetsPerEmployee,jdbcType=VARCHAR},
+    #{updateTime,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR},#{fullReportId,jdbcType=INTEGER})
+  </insert>
+
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from
+    <include refid="table" />
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <update id="update" parameterType="com.mika.credit.common.entity.report.cn.FinancialRatios" >
+    update financial_ratios
+    set assets_turnover = #{assetsTurnover,jdbcType=VARCHAR},
+      collection_period = #{collectionPeriod,jdbcType=VARCHAR},
+      credit_period = #{creditPeriod,jdbcType=VARCHAR},
+      crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      current_rato = #{currentRato,jdbcType=VARCHAR},
+      debt_ratio = #{debtRatio,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=VARCHAR},
+      dtid = #{dtid,jdbcType=INTEGER},
+      financial_id = #{financialId,jdbcType=INTEGER},
+      fs_id = #{fsId,jdbcType=INTEGER},
+      gross_margin = #{grossMargin,jdbcType=VARCHAR},
+      month = #{month,jdbcType=VARCHAR},
+      netprofit_growth_rate = #{netprofitGrowthRate,jdbcType=VARCHAR},
+      operating_revenue_per_employee = #{operatingRevenuePerEmployee,jdbcType=VARCHAR},
+      profit_margin = #{profitMargin,jdbcType=VARCHAR},
+      profit_per_employee = #{profitPerEmployee,jdbcType=VARCHAR},
+      quick_ratio = #{quickRatio,jdbcType=VARCHAR},
+      return_on_assets = #{returnOnAssets,jdbcType=VARCHAR},
+      return_on_equity = #{returnOnEquity,jdbcType=VARCHAR},
+      sales_growth_rate = #{salesGrowthRate,jdbcType=VARCHAR},
+      sales_period = #{salesPeriod,jdbcType=VARCHAR},
+      shareholder_funds_per_employess = #{shareholderFundsPerEmployess,jdbcType=VARCHAR},
+      shareholders_liquidity_rato = #{shareholdersLiquidityRato,jdbcType=VARCHAR},
+      solvency_ratio = #{solvencyRatio,jdbcType=VARCHAR},
+      stock_turnover = #{stockTurnover,jdbcType=VARCHAR},
+      total_assets_growth_rate = #{totalAssetsGrowthRate,jdbcType=VARCHAR},
+      total_assets_per_employee = #{totalAssetsPerEmployee,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      year = #{year,jdbcType=VARCHAR},
+      full_report_id = #{fullReportId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <insert id="insertSelective" parameterType="com.mika.credit.common.entity.report.cn.FinancialRatios" >
+    insert into financial_ratios
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="assetsTurnover != null" >
+        assets_turnover,
+      </if>
+      <if test="collectionPeriod != null" >
+        collection_period,
+      </if>
+      <if test="creditPeriod != null" >
+        credit_period,
+      </if>
+      <if test="crefoNo != null" >
+        crefo_no,
+      </if>
+      <if test="currentRato != null" >
+        current_rato,
+      </if>
+      <if test="debtRatio != null" >
+        debt_ratio,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="dtid != null" >
+        dtid,
+      </if>
+      <if test="financialId != null" >
+        financial_id,
+      </if>
+      <if test="fsId != null" >
+        fs_id,
+      </if>
+      <if test="grossMargin != null" >
+        gross_margin,
+      </if>
+      <if test="month != null" >
+        month,
+      </if>
+      <if test="netprofitGrowthRate != null" >
+        netprofit_growth_rate,
+      </if>
+      <if test="operatingRevenuePerEmployee != null" >
+        operating_revenue_per_employee,
+      </if>
+      <if test="profitMargin != null" >
+        profit_margin,
+      </if>
+      <if test="profitPerEmployee != null" >
+        profit_per_employee,
+      </if>
+      <if test="quickRatio != null" >
+        quick_ratio,
+      </if>
+      <if test="returnOnAssets != null" >
+        return_on_assets,
+      </if>
+      <if test="returnOnEquity != null" >
+        return_on_equity,
+      </if>
+      <if test="salesGrowthRate != null" >
+        sales_growth_rate,
+      </if>
+      <if test="salesPeriod != null" >
+        sales_period,
+      </if>
+      <if test="shareholderFundsPerEmployess != null" >
+        shareholder_funds_per_employess,
+      </if>
+      <if test="shareholdersLiquidityRato != null" >
+        shareholders_liquidity_rato,
+      </if>
+      <if test="solvencyRatio != null" >
+        solvency_ratio,
+      </if>
+      <if test="stockTurnover != null" >
+        stock_turnover,
+      </if>
+      <if test="totalAssetsGrowthRate != null" >
+        total_assets_growth_rate,
+      </if>
+      <if test="totalAssetsPerEmployee != null" >
+        total_assets_per_employee,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="year != null" >
+        year,
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="assetsTurnover != null" >
+        #{assetsTurnover,jdbcType=VARCHAR},
+      </if>
+      <if test="collectionPeriod != null" >
+        #{collectionPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="creditPeriod != null" >
+        #{creditPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="crefoNo != null" >
+        #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="currentRato != null" >
+        #{currentRato,jdbcType=VARCHAR},
+      </if>
+      <if test="debtRatio != null" >
+        #{debtRatio,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="dtid != null" >
+        #{dtid,jdbcType=INTEGER},
+      </if>
+      <if test="financialId != null" >
+        #{financialId,jdbcType=INTEGER},
+      </if>
+      <if test="fsId != null" >
+        #{fsId,jdbcType=INTEGER},
+      </if>
+      <if test="grossMargin != null" >
+        #{grossMargin,jdbcType=VARCHAR},
+      </if>
+      <if test="month != null" >
+        #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="netprofitGrowthRate != null" >
+        #{netprofitGrowthRate,jdbcType=VARCHAR},
+      </if>
+      <if test="operatingRevenuePerEmployee != null" >
+        #{operatingRevenuePerEmployee,jdbcType=VARCHAR},
+      </if>
+      <if test="profitMargin != null" >
+        #{profitMargin,jdbcType=VARCHAR},
+      </if>
+      <if test="profitPerEmployee != null" >
+        #{profitPerEmployee,jdbcType=VARCHAR},
+      </if>
+      <if test="quickRatio != null" >
+        #{quickRatio,jdbcType=VARCHAR},
+      </if>
+      <if test="returnOnAssets != null" >
+        #{returnOnAssets,jdbcType=VARCHAR},
+      </if>
+      <if test="returnOnEquity != null" >
+        #{returnOnEquity,jdbcType=VARCHAR},
+      </if>
+      <if test="salesGrowthRate != null" >
+        #{salesGrowthRate,jdbcType=VARCHAR},
+      </if>
+      <if test="salesPeriod != null" >
+        #{salesPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="shareholderFundsPerEmployess != null" >
+        #{shareholderFundsPerEmployess,jdbcType=VARCHAR},
+      </if>
+      <if test="shareholdersLiquidityRato != null" >
+        #{shareholdersLiquidityRato,jdbcType=VARCHAR},
+      </if>
+      <if test="solvencyRatio != null" >
+        #{solvencyRatio,jdbcType=VARCHAR},
+      </if>
+      <if test="stockTurnover != null" >
+        #{stockTurnover,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAssetsGrowthRate != null" >
+        #{totalAssetsGrowthRate,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAssetsPerEmployee != null" >
+        #{totalAssetsPerEmployee,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        #{fullReportId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateSelective" parameterType="com.mika.credit.common.entity.report.cn.FinancialRatios" >
+    update financial_ratios
+    <set >
+      <if test="assetsTurnover != null" >
+        assets_turnover = #{assetsTurnover,jdbcType=VARCHAR},
+      </if>
+      <if test="collectionPeriod != null" >
+        collection_period = #{collectionPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="creditPeriod != null" >
+        credit_period = #{creditPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="crefoNo != null" >
+        crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="currentRato != null" >
+        current_rato = #{currentRato,jdbcType=VARCHAR},
+      </if>
+      <if test="debtRatio != null" >
+        debt_ratio = #{debtRatio,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="dtid != null" >
+        dtid = #{dtid,jdbcType=INTEGER},
+      </if>
+      <if test="financialId != null" >
+        financial_id = #{financialId,jdbcType=INTEGER},
+      </if>
+      <if test="fsId != null" >
+        fs_id = #{fsId,jdbcType=INTEGER},
+      </if>
+      <if test="grossMargin != null" >
+        gross_margin = #{grossMargin,jdbcType=VARCHAR},
+      </if>
+      <if test="month != null" >
+        month = #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="netprofitGrowthRate != null" >
+        netprofit_growth_rate = #{netprofitGrowthRate,jdbcType=VARCHAR},
+      </if>
+      <if test="operatingRevenuePerEmployee != null" >
+        operating_revenue_per_employee = #{operatingRevenuePerEmployee,jdbcType=VARCHAR},
+      </if>
+      <if test="profitMargin != null" >
+        profit_margin = #{profitMargin,jdbcType=VARCHAR},
+      </if>
+      <if test="profitPerEmployee != null" >
+        profit_per_employee = #{profitPerEmployee,jdbcType=VARCHAR},
+      </if>
+      <if test="quickRatio != null" >
+        quick_ratio = #{quickRatio,jdbcType=VARCHAR},
+      </if>
+      <if test="returnOnAssets != null" >
+        return_on_assets = #{returnOnAssets,jdbcType=VARCHAR},
+      </if>
+      <if test="returnOnEquity != null" >
+        return_on_equity = #{returnOnEquity,jdbcType=VARCHAR},
+      </if>
+      <if test="salesGrowthRate != null" >
+        sales_growth_rate = #{salesGrowthRate,jdbcType=VARCHAR},
+      </if>
+      <if test="salesPeriod != null" >
+        sales_period = #{salesPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="shareholderFundsPerEmployess != null" >
+        shareholder_funds_per_employess = #{shareholderFundsPerEmployess,jdbcType=VARCHAR},
+      </if>
+      <if test="shareholdersLiquidityRato != null" >
+        shareholders_liquidity_rato = #{shareholdersLiquidityRato,jdbcType=VARCHAR},
+      </if>
+      <if test="solvencyRatio != null" >
+        solvency_ratio = #{solvencyRatio,jdbcType=VARCHAR},
+      </if>
+      <if test="stockTurnover != null" >
+        stock_turnover = #{stockTurnover,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAssetsGrowthRate != null" >
+        total_assets_growth_rate = #{totalAssetsGrowthRate,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAssetsPerEmployee != null" >
+        total_assets_per_employee = #{totalAssetsPerEmployee,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null" >
+        year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id = #{fullReportId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+</mapper>

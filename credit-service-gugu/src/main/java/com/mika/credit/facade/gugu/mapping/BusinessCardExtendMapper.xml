@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mika.credit.facade.gugu.dao.BusinessCardExtendMapper">
+  <resultMap id="BaseResultMap" type="com.mika.credit.facade.gugu.model.BusinessCardExtend">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="param_type" jdbcType="VARCHAR" property="paramType" />
+    <result column="param1" jdbcType="VARCHAR" property="param1" />
+    <result column="param2" jdbcType="VARCHAR" property="param2" />
+    <result column="param_ext" jdbcType="VARCHAR" property="paramExt" />
+    <result column="param_note" jdbcType="VARCHAR" property="paramNote" />
+    <result column="card_id" jdbcType="INTEGER" property="cardId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, card_id, type, param_type, param1, param2, param_ext, param_note
+  </sql>
+  <sql id="condition">
+    <where>
+      <if test="id != null and id != 0">
+        and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="cardId != null and cardId != 0">
+        and card_id = #{cardId,jdbcType=INTEGER}
+      </if>
+      <if test="type != null">
+        and type = #{type,jdbcType=VARCHAR}
+      </if>
+      <if test="paramType != null">
+        and param_type = #{paramType,jdbcType=VARCHAR}
+      </if>
+      <if test="param1 != null">
+        and param1 = #{param1,jdbcType=VARCHAR}
+      </if>
+      <if test="param2 != null">
+        and param2 = #{param2,jdbcType=VARCHAR}
+      </if>
+      <if test="paramExt != null">
+        and param_ext = #{paramExt,jdbcType=VARCHAR}
+      </if>
+      <if test="paramNote != null">
+        and param_note = #{paramNote,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from business_card_extend
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPrimaryKeySelective" parameterType="com.mika.credit.facade.gugu.model.BusinessCardExtend" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from business_card_extend
+    <include refid="condition" />
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from business_card_extend
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteSelective" parameterType="com.mika.credit.facade.gugu.model.BusinessCardExtend">
+    delete from business_card_extend
+    <include refid="condition" />
+  </delete>
+  <insert id="insert" parameterType="com.mika.credit.facade.gugu.model.BusinessCardExtend" useGeneratedKeys="true" keyProperty="id">
+    insert into business_card_extend (id, card_id, type, 
+      param_type, param1, param2, 
+      param_ext, param_note)
+    values (#{id,jdbcType=INTEGER}, #{cardId,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR},
+      #{paramType,jdbcType=VARCHAR}, #{param1,jdbcType=VARCHAR}, #{param2,jdbcType=VARCHAR}, 
+      #{paramExt,jdbcType=VARCHAR}, #{paramNote,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mika.credit.facade.gugu.model.BusinessCardExtend" useGeneratedKeys="true" keyProperty="id">
+    insert into business_card_extend
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cardId != null and  cardId != 0">
+        card_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="paramType != null">
+        param_type,
+      </if>
+      <if test="param1 != null">
+        param1,
+      </if>
+      <if test="param2 != null">
+        param2,
+      </if>
+      <if test="paramExt != null">
+        param_ext,
+      </if>
+      <if test="paramNote != null">
+        param_note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cardId != null and cardId != 0">
+        #{cardId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="paramType != null">
+        #{paramType,jdbcType=VARCHAR},
+      </if>
+      <if test="param1 != null">
+        #{param1,jdbcType=VARCHAR},
+      </if>
+      <if test="param2 != null">
+        #{param2,jdbcType=VARCHAR},
+      </if>
+      <if test="paramExt != null">
+        #{paramExt,jdbcType=VARCHAR},
+      </if>
+      <if test="paramNote != null">
+        #{paramNote,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mika.credit.facade.gugu.model.BusinessCardExtend">
+    update business_card_extend
+    <set>
+      <if test="cardId != null and cardId != 0">
+        card_id = #{cardId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="paramType != null">
+        param_type = #{paramType,jdbcType=VARCHAR},
+      </if>
+      <if test="param1 != null">
+        param1 = #{param1,jdbcType=VARCHAR},
+      </if>
+      <if test="param2 != null">
+        param2 = #{param2,jdbcType=VARCHAR},
+      </if>
+      <if test="paramExt != null">
+        param_ext = #{paramExt,jdbcType=VARCHAR},
+      </if>
+      <if test="paramNote != null">
+        param_note = #{paramNote,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mika.credit.facade.gugu.model.BusinessCardExtend">
+    update business_card_extend
+    set card_id = #{cardId,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      param_type = #{paramType,jdbcType=VARCHAR},
+      param1 = #{param1,jdbcType=VARCHAR},
+      param2 = #{param2,jdbcType=VARCHAR},
+      param_ext = #{paramExt,jdbcType=VARCHAR},
+      param_note = #{paramNote,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

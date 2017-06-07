@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mika.credit.facade.gugu.dao.IconRecordMapper">
+  <resultMap id="BaseResultMap" type="com.mika.credit.facade.gugu.model.IconRecord">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="icon_name" jdbcType="VARCHAR" property="iconName" />
+    <result column="image_name" jdbcType="VARCHAR" property="imageName" />
+    <result column="icon_type" jdbcType="VARCHAR" property="iconType" />
+    <result column="order_by" jdbcType="VARCHAR" property="orderBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="del_flag" jdbcType="VARCHAR" property="delFlag" />
+    <result column="image_path" jdbcType="VARCHAR" property="imagePath" />
+    <result column="icon_path" jdbcType="VARCHAR" property="iconPath" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, icon_name, image_name, icon_type, order_by, update_time, del_flag, image_path, 
+    icon_path
+  </sql>
+  <sql id="condition">
+    <where>
+      <if test="id != null and id != 0">
+        and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="userId != null">
+        and user_id = #{userId,jdbcType=INTEGER}
+      </if>
+      <if test="iconName != null">
+        and icon_name = #{iconName,jdbcType=VARCHAR}
+      </if>
+      <if test="imageName != null">
+        and image_name = #{imageName,jdbcType=VARCHAR}
+      </if>
+      <if test="iconType != null">
+        and  icon_type = #{iconType,jdbcType=VARCHAR}
+      </if>
+      <if test="orderBy != null">
+        and order_by = #{orderBy,jdbcType=VARCHAR}
+      </if>
+      <if test="updateTime != null">
+        and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="delFlag != null">
+        and del_flag = #{delFlag,jdbcType=VARCHAR}
+      </if>
+      <if test="imagePath != null">
+        and  image_path = #{imagePath,jdbcType=VARCHAR}
+      </if>
+      <if test="iconPath != null">
+        and icon_path = #{iconPath,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from icon_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPrimaryKeySelective" parameterType="com.mika.credit.facade.gugu.model.IconRecord" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from icon_record
+    <include refid="condition" />
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from icon_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mika.credit.facade.gugu.model.IconRecord" useGeneratedKeys="true" keyProperty="id">
+    insert into icon_record (id, user_id, icon_name, 
+      image_name, icon_type, order_by, 
+      update_time, del_flag, image_path, 
+      icon_path)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{iconName,jdbcType=VARCHAR}, 
+      #{imageName,jdbcType=VARCHAR}, #{iconType,jdbcType=VARCHAR}, #{orderBy,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=VARCHAR}, #{imagePath,jdbcType=VARCHAR}, 
+      #{iconPath,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mika.credit.facade.gugu.model.IconRecord" useGeneratedKeys="true" keyProperty="id">
+    insert into icon_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="iconName != null">
+        icon_name,
+      </if>
+      <if test="imageName != null">
+        image_name,
+      </if>
+      <if test="iconType != null">
+        icon_type,
+      </if>
+      <if test="orderBy != null">
+        order_by,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="imagePath != null">
+        image_path,
+      </if>
+      <if test="iconPath != null">
+        icon_path,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="iconName != null">
+        #{iconName,jdbcType=VARCHAR},
+      </if>
+      <if test="imageName != null">
+        #{imageName,jdbcType=VARCHAR},
+      </if>
+      <if test="iconType != null">
+        #{iconType,jdbcType=VARCHAR},
+      </if>
+      <if test="orderBy != null">
+        #{orderBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="imagePath != null">
+        #{imagePath,jdbcType=VARCHAR},
+      </if>
+      <if test="iconPath != null">
+        #{iconPath,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mika.credit.facade.gugu.model.IconRecord">
+    update icon_record
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="iconName != null">
+        icon_name = #{iconName,jdbcType=VARCHAR},
+      </if>
+      <if test="imageName != null">
+        image_name = #{imageName,jdbcType=VARCHAR},
+      </if>
+      <if test="iconType != null">
+        icon_type = #{iconType,jdbcType=VARCHAR},
+      </if>
+      <if test="orderBy != null">
+        order_by = #{orderBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="imagePath != null">
+        image_path = #{imagePath,jdbcType=VARCHAR},
+      </if>
+      <if test="iconPath != null">
+        icon_path = #{iconPath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mika.credit.facade.gugu.model.IconRecord">
+    update icon_record
+    set user_id = #{userId,jdbcType=INTEGER},
+      icon_name = #{iconName,jdbcType=VARCHAR},
+      image_name = #{imageName,jdbcType=VARCHAR},
+      icon_type = #{iconType,jdbcType=VARCHAR},
+      order_by = #{orderBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      del_flag = #{delFlag,jdbcType=VARCHAR},
+      image_path = #{imagePath,jdbcType=VARCHAR},
+      icon_path = #{iconPath,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

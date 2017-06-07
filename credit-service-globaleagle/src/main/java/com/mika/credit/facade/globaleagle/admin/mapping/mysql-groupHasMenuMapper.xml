@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.globaleagle.admin.dao.GroupHasMenuMapper" >
+  <resultMap id="BaseResultMap" type="com.mika.credit.facade.globaleagle.admin.model.GroupHasMenu" >
+    <id column="group_id" property="groupId" jdbcType="VARCHAR" />
+    <id column="menu_id" property="menuId" jdbcType="VARCHAR" />
+    <result column="access" property="access" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    group_id, menu_id, access
+  </sql>
+  <select id="selectByGroupId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from s_group_has_menu
+    where group_id = #{groupId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from s_group_has_menu
+    where group_id = #{groupId,jdbcType=VARCHAR}
+      and menu_id = #{menuId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByGroupId" parameterType="java.lang.String" >
+    delete from s_group_has_menu
+    where group_id = #{groupId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from s_group_has_menu
+    where group_id = #{groupId,jdbcType=VARCHAR}
+      and menu_id = #{menuId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.mika.credit.facade.globaleagle.admin.model.GroupHasMenu" >
+    insert into s_group_has_menu (group_id, menu_id, access
+      )
+    values (#{groupId,jdbcType=VARCHAR}, #{menuId,jdbcType=VARCHAR}, #{access,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mika.credit.facade.globaleagle.admin.model.GroupHasMenu" >
+    insert into s_group_has_menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="groupId != null" >
+        group_id,
+      </if>
+      <if test="menuId != null" >
+        menu_id,
+      </if>
+      <if test="access != null" >
+        access,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="groupId != null" >
+        #{groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuId != null" >
+        #{menuId,jdbcType=VARCHAR},
+      </if>
+      <if test="access != null" >
+        #{access,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mika.credit.facade.globaleagle.admin.model.GroupHasMenu" >
+    update s_group_has_menu
+    <set >
+      <if test="access != null" >
+        access = #{access,jdbcType=CHAR},
+      </if>
+    </set>
+    where group_id = #{groupId,jdbcType=VARCHAR}
+      and menu_id = #{menuId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mika.credit.facade.globaleagle.admin.model.GroupHasMenu" >
+    update s_group_has_menu
+    set access = #{access,jdbcType=CHAR}
+    where group_id = #{groupId,jdbcType=VARCHAR}
+      and menu_id = #{menuId,jdbcType=VARCHAR}
+  </update>
+</mapper>

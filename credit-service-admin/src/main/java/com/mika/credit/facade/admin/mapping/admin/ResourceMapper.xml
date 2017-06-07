@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.admin.dao.admin.ResourceMapper">
+    <resultMap id="resourceMap" type="com.mika.credit.facade.admin.model.Resource">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="icon" property="icon" jdbcType="VARCHAR"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="enable" property="enable" jdbcType="BIT"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+        <result column="is_sys" property="isSYS" jdbcType="BIT"/>
+        <association property="system" column="system_id" fetchType="eager" javaType="com.mika.credit.facade.admin.model.System" select="com.mika.credit.facade.admin.dao.admin.SystemMapper.queryById">
+        </association>
+        <association property="category" column="category_id" fetchType="eager" javaType="com.mika.credit.facade.admin.model.Category" select="com.mika.credit.facade.admin.dao.admin.CategoryMapper.queryById">
+        </association>
+    </resultMap>
+
+    <resultMap id="resourceGroupMap" type="com.mika.credit.facade.admin.model.Resource" extends="resourceMap">
+        <collection property="groupList" ofType="com.mika.credit.facade.admin.model.Group">
+            <id column="g_id" property="id" jdbcType="VARCHAR"/>
+            <result column="g_name" property="name" jdbcType="VARCHAR"/>
+            <result column="g_enable" property="enable" jdbcType="BIT"/>
+        </collection>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, category_id,system_id, name, icon, url, perms, type, enable, sort, is_sys
+    </sql>
+    <sql id="condition">
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id,jdbcType=VARCHAR}
+            </if>
+            <if test="category !=null and category.id !=null and category.id != ''">
+                and category_id = #{category.id,jdbcType=VARCHAR}
+            </if>
+            <if test="system !=null and system.id !=null and system.id != ''">
+                and system_id = #{system.id,jdbcType=VARCHAR}
+            </if>
+            <if test="name !=null and name != ''">
+                and name= #{name,jdbcType=VARCHAR}
+            </if>
+            <if test="icon !=null and icon != ''">
+                and icon = #{icon,jdbcType=VARCHAR}
+            </if>
+            <if test="url !=null and url != ''">
+                and url = #{url,jdbcType=VARCHAR}
+            </if>
+            <if test="perms !=null and perms != ''">
+                and perms = #{perms,jdbcType=VARCHAR}
+            </if>
+            <if test="type !=null and type != ''">
+                and type = #{type,jdbcType=TINYINT}
+            </if>
+            <if test="enable !=null">
+                and enable=#{enable,jdbcType=BIT}
+            </if>
+            <if test="sort !=null">
+                and sort = #{sort,jdbcType=INTEGER}
+            </if>
+            <if test="isSYS !=null">
+                and is_sys = #{isSYS,jdbcType=BIT}
+            </if>
+        </where>
+    </sql>
+    <select id="queryById" resultMap="resourceMap" parameterType="java.lang.String">
+        select *
+        from s_resource
+        where id = #{id}
+    </select>
+    <select id="queryAll" resultMap="resourceMap">
+        select *
+        from s_resource
+        order by sort ASC
+    </select>
+    <select id="querySelective" resultMap="resourceMap" parameterType="com.mika.credit.facade.admin.model.Resource">
+        select *
+        from s_resource
+        <include refid="condition"/>
+        order by sort ASC
+    </select>
+    <insert id="save" parameterType="com.mika.credit.facade.admin.model.Resource">
+        insert into s_resource(id,category_id,system_id,name,icon ,url,perms, type,enable,sort,is_sys)
+        values(#{id,jdbcType=VARCHAR},#{category.id,jdbcType=VARCHAR},#{system.id,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{icon,jdbcType=VARCHAR},#{url,jdbcType=VARCHAR},#{perms,jdbcType=VARCHAR},#{type,jdbcType=TINYINT},#{enable,jdbcType=BIT},#{sort,jdbcType=INTEGER},#{isSYS,jdbcType=BIT})
+    </insert>
+    <update id="update" parameterType="com.mika.credit.facade.admin.model.Resource">
+        update s_resource set
+        category_id=#{category.id,jdbcType=VARCHAR},
+        system_id=#{system.id,jdbcType=VARCHAR},
+        name=#{name,jdbcType=VARCHAR},
+         icon=#{icon,jdbcType=VARCHAR},
+         url=#{url,jdbcType=VARCHAR},
+         perms=#{perms,jdbcType=VARCHAR},
+         type=#{type,jdbcType=TINYINT},
+         enable=#{enable,jdbcType=BIT},
+         sort=#{sort,jdbcType=INTEGER},
+         is_sys=#{isSYS,jdbcType=BIT}
+      where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByIdSelective" parameterType="com.mika.credit.facade.admin.model.Resource">
+        update s_resource
+        <set>
+            <if test="category !=null and category.id !=null and category.id != ''">
+                category_id = #{category.id,jdbcType=VARCHAR},
+            </if>
+            <if test="system !=null and system.id !=null and system.id != ''">
+                system_id = #{system.id,jdbcType=VARCHAR},
+            </if>
+            <if test="name !=null and name != ''">
+                name= #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="icon !=null and icon != ''">
+               icon = #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="url !=null and url != ''">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="perms !=null and perms != ''">
+                perms = #{perms,jdbcType=VARCHAR},
+            </if>
+            <if test="type !=null and type != ''">
+                type = #{type,jdbcType=TINYINT},
+            </if>
+            <if test="enable !=null">
+                enable=#{enable,jdbcType=BIT},
+            </if>
+            <if test="sort !=null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="isSYS !=null">
+                is_sys = #{isSYS,jdbcType=BIT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.String">
+        delete from s_resource
+        where id=#{id}
+    </delete>
+    <delete id="delete" parameterType="com.mika.credit.facade.admin.model.Resource">
+        delete from s_resource
+        <include refid="condition"/>
+    </delete>
+
+    <!-- 根据resource表中的id查询资源和组信息 -->
+    <select id="selectResourceGroup" parameterType="java.lang.String" resultMap="resourceGroupMap">
+        select r.* , gi.id as
+        g_id,gi.name as g_name, gi.enable as g_enable,
+        gi.code from s_resource r left join s_group_has_resource rg on r.id=rg.resource_id
+        left join s_group gi on rg.group_id=gi.id where r.id = #{id}
+    </select>
+
+    <!-- 保存资源和组之间的关系信息 -->
+    <insert id="saveRelativity" parameterType="com.mika.credit.facade.admin.model.ResourceGroupLink" keyProperty="id" useGeneratedKeys="true">
+        insert into s_group_has_resource(resource_id,group_id)
+        values(#{resource.id},#{group.id})
+    </insert>
+
+    <select id="selectCountByCategory" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(1) from s_resource r where r.category_id = #{id}
+    </select>
+</mapper>

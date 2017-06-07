@@ -1,0 +1,125 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.mika.credit.common</groupId>
+		<artifactId>credit-common-pom</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	<groupId>com.mika.credit.common</groupId>
+	<artifactId>credit-common-parent</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>credit-common-parent</name>
+	<url>http://maven.apache.org</url>
+	<repositories>
+		<repository>
+			<id>nexus</id>
+			<name>nexus</name>
+			<url>http://192.168.1.217:8081/nexus/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			</repository>
+	</repositories>
+	<properties>
+
+		<!--===================================== credit-common ========================================-->
+		<credit.common.version>1.11-SNAPSHOT</credit.common.version>
+		<credit.common.config.version>1.20-SNAPSHOT</credit.common.config.version>
+		<credit.common.core.version>1.01-SNAPSHOT</credit.common.core.version>
+		<credit.common.web.version>1.0-SNAPSHOT</credit.common.web.version>
+
+		<!--===================================== credit-service ========================================-->
+		<credit.service.admin.version>1.02-SNAPSHOT</credit.service.admin.version>
+		<credit.service.cpm.version>1.0-SNAPSHOT</credit.service.cpm.version>
+		<credit.service.ebiz.version>1.0-SNAPSHOT</credit.service.ebiz.version>
+		<credit.service.email.version>1.02-SNAPSHOT</credit.service.email.version>
+		<credit.service.coredb.en.version>1.3-SNAPSHOT</credit.service.coredb.en.version>
+		<credit.service.coredb.cn.version>1.2-SNAPSHOT</credit.service.coredb.cn.version>
+		<credit.service.front.cn.version>1.08-SNAPSHOT</credit.service.front.cn.version>
+		<credit.service.front.en.version>1.03-SNAPSHOT</credit.service.front.en.version>
+		<credit.service.front.version>1.0-SNAPSHOT</credit.service.front.version>
+		<credit.service.globaleagle.version>1.02-SNAPSHOT</credit.service.globaleagle.version>
+		<credit.service.globalsearch.version>1.02-SNAPSHOT</credit.service.globalsearch.version>
+		<credit.service.index.version>1.02-SNAPSHOT</credit.service.index.version>
+		<credit.service.product.version>1.0-SNAPSHOT</credit.service.product.version>
+		<credit.service.order.version>1.17-SNAPSHOT</credit.service.order.version>
+		<credit.service.pay.version>1.11-SNAPSHOT</credit.service.pay.version>
+		<credit.service.pdf.version>1.07-SNAPSHOT</credit.service.pdf.version>
+		<credit.service.notify.version>1.1-SNAPSHOT</credit.service.notify.version>
+		<credit.service.translate.version>1.04-SNAPSHOT</credit.service.translate.version>
+		<credit.service.gugu.version>1.01-SNAPSHOT</credit.service.gugu.version>
+		<credit.service.verify.version>1.06-SNAPSHOT</credit.service.verify.version>
+		<credit.service.messagebox.version>1.02-SNAPSHOT</credit.service.messagebox.version>
+		<credit.service.record.version>1.01-SNAPSHOT</credit.service.record.version>
+		<credit.service.commondata.version>1.01-SNAPSHOT</credit.service.commondata.version>
+
+		<!--===================================== credit-web ========================================-->
+		<credit.web.admin.version>1.12-SNAPSHOT</credit.web.admin.version>
+		<credit.web.pay.version>1.0-SNAPSHOT</credit.web.pay.version>
+		<credit.web.cpm.version>1.0-SNAPSHOT</credit.web.cpm.version>
+		<credit.web.ebiz.version>1.0-SNAPSHOT</credit.web.ebiz.version>
+		<credit.web.front.cn.version>1.0-SNAPSHOT</credit.web.front.cn.version>
+		<credit.web.front.en.version>1.0-SNAPSHOT</credit.web.front.en.version>
+		<credit.web.globaleagle.version>1.01-SNAPSHOT</credit.web.globaleagle.version>
+		<credit.web.globalsearch.version>1.01-SNAPSHOT</credit.web.globalsearch.version>
+		<credit.web.gugu.version>1.0-SNAPSHOT</credit.web.gugu.version>
+
+		<!--===================================== credit-ws ========================================-->
+		<credit.ws.version>1.0-SNAPSHOT</credit.ws.version>
+
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<jar.scope>compile</jar.scope>
+		<spring.version>4.3.1.RELEASE</spring.version>
+		<mysql.version>5.1.39</mysql.version>
+		<mybatis.version>3.4.1</mybatis.version>
+		<mybatis-spring.version>1.3.0</mybatis-spring.version>
+		<pagehelper.version>4.1.6</pagehelper.version>
+		<druid.version>1.0.22</druid.version>
+		<jackson-mapper-asl.version>1.9.13</jackson-mapper-asl.version>
+		<commons-fileupload.version>1.3.2</commons-fileupload.version>
+		<log4j.version>1.2.17</log4j.version>
+		<fastjson.version>1.2.13</fastjson.version>
+		<aspectjweaver.version>1.8.9</aspectjweaver.version>
+		<jackson.version>2.8.0</jackson.version>
+		<jstl.version>1.2</jstl.version>
+		<activemq.version>5.11.4</activemq.version>
+		<ehcache-spring-annotations.version>1.2.0</ehcache-spring-annotations.version>
+		<commons-lang.version>2.6</commons-lang.version>
+		<activiti.version>5.16.6</activiti.version>
+		<slf4j-log4j12.version>1.7.21</slf4j-log4j12.version>
+		<commons-lang3.version>3.4</commons-lang3.version>
+		<commons-jexl.version>2.1.1</commons-jexl.version>
+		<commons-logging.version>1.2</commons-logging.version>
+		<taglibs.version>1.1.2</taglibs.version>
+		<poi.version>3.14</poi.version>
+		<mail.version>1.4.7</mail.version>
+		<dubbo.version>2.5.3</dubbo.version>
+		<jedis.version>2.6.2</jedis.version>
+		<zkclient.version>0.3</zkclient.version>
+		<junit.version>4.12</junit.version>
+		<spring-data-jpa.version>1.10.2.RELEASE</spring-data-jpa.version>
+		<hibernate-jpa-2.1-api.version>1.0.0.Final</hibernate-jpa-2.1-api.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>6.0.37</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>6.0.37</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>credit-common-parent</finalName>
+	</build>
+</project>

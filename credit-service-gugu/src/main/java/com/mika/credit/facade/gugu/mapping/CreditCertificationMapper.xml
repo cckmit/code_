@@ -1,0 +1,788 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mika.credit.facade.gugu.dao.CreditCertificationMapper">
+  <resultMap id="BaseResultMap" type="com.mika.credit.facade.gugu.model.CreditCertification">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="card_id" jdbcType="INTEGER" property="cardId" />
+    <result column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="crefo_no" jdbcType="VARCHAR" property="crefoNo" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="repayment_index" jdbcType="VARCHAR" property="repaymentIndex" />
+    <result column="credit_risk_evaluation" jdbcType="VARCHAR" property="creditRiskEvaluation" />
+    <result column="credits" jdbcType="VARCHAR" property="credits" />
+    <result column="credit_risk_score" jdbcType="VARCHAR" property="creditRiskScore" />
+    <result column="establish_date" jdbcType="VARCHAR" property="establishDate" />
+    <result column="establish_date_score" jdbcType="VARCHAR" property="establishDateScore" />
+    <result column="company_property" jdbcType="VARCHAR" property="companyProperty" />
+    <result column="company_property_score" jdbcType="VARCHAR" property="companyPropertyScore" />
+    <result column="employee_num" jdbcType="VARCHAR" property="employeeNum" />
+    <result column="employee_num_score" jdbcType="VARCHAR" property="employeeNumScore" />
+    <result column="company_status" jdbcType="VARCHAR" property="companyStatus" />
+    <result column="company_status_score" jdbcType="VARCHAR" property="companyStatusScore" />
+    <result column="main_business" jdbcType="VARCHAR" property="mainBusiness" />
+    <result column="main_business_score" jdbcType="VARCHAR" property="mainBusinessScore" />
+    <result column="industry" jdbcType="VARCHAR" property="industry" />
+    <result column="industry_score" jdbcType="VARCHAR" property="industryScore" />
+    <result column="litigation_record" jdbcType="VARCHAR" property="litigationRecord" />
+    <result column="litigation_record_score" jdbcType="VARCHAR" property="litigationRecordScore" />
+    <result column="reg_capital" jdbcType="VARCHAR" property="regCapital" />
+    <result column="reg_capital_score" jdbcType="VARCHAR" property="regCapitalScore" />
+    <result column="paid_capital" jdbcType="VARCHAR" property="paidCapital" />
+    <result column="paid_capital_score" jdbcType="VARCHAR" property="paidCapitalScore" />
+    <result column="return_on_equity" jdbcType="VARCHAR" property="returnOnEquity" />
+    <result column="return_on_equity_score" jdbcType="VARCHAR" property="returnOnEquityScore" />
+    <result column="profit_margin" jdbcType="VARCHAR" property="profitMargin" />
+    <result column="profit_margin_score" jdbcType="VARCHAR" property="profitMarginScore" />
+    <result column="profit_margin_scope" jdbcType="VARCHAR" property="profitMarginScope" />
+    <result column="current_ratio" jdbcType="VARCHAR" property="currentRatio" />
+    <result column="current_ratio_score" jdbcType="VARCHAR" property="currentRatioScore" />
+    <result column="current_ratio_scope" jdbcType="VARCHAR" property="currentRatioScope" />
+    <result column="quick_ratio" jdbcType="VARCHAR" property="quickRatio" />
+    <result column="quick_ratio_score" jdbcType="VARCHAR" property="quickRatioScore" />
+    <result column="quick_ratio_scope" jdbcType="VARCHAR" property="quickRatioScope" />
+    <result column="debt_ratio" jdbcType="VARCHAR" property="debtRatio" />
+    <result column="debt_ratio_score" jdbcType="VARCHAR" property="debtRatioScore" />
+    <result column="debt_ratio_scope" jdbcType="VARCHAR" property="debtRatioScope" />
+    <result column="sales_growth_rate" jdbcType="VARCHAR" property="salesGrowthRate" />
+    <result column="sales_growth_rate_score" jdbcType="VARCHAR" property="salesGrowthRateScore" />
+    <result column="sales_growth_rate_scope" jdbcType="VARCHAR" property="salesGrowthRateScope" />
+    <result column="company_size" jdbcType="VARCHAR" property="companySize" />
+    <result column="paid_currency" jdbcType="VARCHAR" property="paidCurrency" />
+    <result column="reg_currency" jdbcType="VARCHAR" property="regCurrency" />
+    <result column="del_flag" jdbcType="VARCHAR" property="delFlag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, card_id, order_id, user_id, crefo_no, update_time, repayment_index, credit_risk_evaluation, 
+    credits, credit_risk_score, establish_date, establish_date_score, company_property, 
+    company_property_score, employee_num, employee_num_score, company_status, company_status_score, 
+    main_business, main_business_score, industry, industry_score, litigation_record, 
+    litigation_record_score, reg_capital, reg_capital_score, paid_capital, paid_capital_score, 
+    return_on_equity, return_on_equity_score, profit_margin, profit_margin_score, profit_margin_scope, 
+    current_ratio, current_ratio_score, current_ratio_scope, quick_ratio, quick_ratio_score, 
+    quick_ratio_scope, debt_ratio, debt_ratio_score, debt_ratio_scope, sales_growth_rate, 
+    sales_growth_rate_score, sales_growth_rate_scope, company_size, paid_currency, reg_currency, 
+    del_flag
+  </sql>
+  <sql id="condition">
+    <where>
+      <if test="id != null and id != 0">
+        and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="cardId != null and cardId != 0">
+        and card_id = #{cardId,jdbcType=INTEGER}
+      </if>
+      <if test="orderId != null and orderId != 0">
+        and order_id = #{orderId,jdbcType=INTEGER}
+      </if>
+      <if test="userId != null and userId != 0">
+        and user_id = #{userId,jdbcType=INTEGER}
+      </if>
+      <if test="crefoNo != null">
+        and crefo_no = #{crefoNo,jdbcType=VARCHAR}
+      </if>
+      <if test="updateTime != null">
+        and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="repaymentIndex != null">
+        and repayment_index = #{repaymentIndex,jdbcType=VARCHAR}
+      </if>
+      <if test="creditRiskEvaluation != null">
+        and credit_risk_evaluation = #{creditRiskEvaluation,jdbcType=VARCHAR}
+      </if>
+      <if test="credits != null">
+        and credits = #{credits,jdbcType=VARCHAR}
+      </if>
+      <if test="creditRiskScore != null">
+        and credit_risk_score = #{creditRiskScore,jdbcType=VARCHAR}
+      </if>
+      <if test="establishDate != null">
+        and establish_date = #{establishDate,jdbcType=VARCHAR}
+      </if>
+      <if test="establishDateScore != null">
+        and establish_date_score = #{establishDateScore,jdbcType=VARCHAR}
+      </if>
+      <if test="companyProperty != null">
+        and company_property = #{companyProperty,jdbcType=VARCHAR}
+      </if>
+      <if test="companyPropertyScore != null">
+        and company_property_score = #{companyPropertyScore,jdbcType=VARCHAR}
+      </if>
+      <if test="employeeNum != null">
+        and employee_num = #{employeeNum,jdbcType=VARCHAR}
+      </if>
+      <if test="employeeNumScore != null">
+        and employee_num_score = #{employeeNumScore,jdbcType=VARCHAR}
+      </if>
+      <if test="companyStatus != null">
+        and company_status = #{companyStatus,jdbcType=VARCHAR}
+      </if>
+      <if test="companyStatusScore != null">
+        and company_status_score = #{companyStatusScore,jdbcType=VARCHAR}
+      </if>
+      <if test="mainBusiness != null">
+        and main_business = #{mainBusiness,jdbcType=VARCHAR}
+      </if>
+      <if test="mainBusinessScore != null">
+        and main_business_score = #{mainBusinessScore,jdbcType=VARCHAR}
+      </if>
+      <if test="industry != null">
+        and industry = #{industry,jdbcType=VARCHAR}
+      </if>
+      <if test="industryScore != null">
+        and industry_score = #{industryScore,jdbcType=VARCHAR}
+      </if>
+      <if test="litigationRecord != null">
+        and litigation_record = #{litigationRecord,jdbcType=VARCHAR}
+      </if>
+      <if test="litigationRecordScore != null">
+        and litigation_record_score = #{litigationRecordScore,jdbcType=VARCHAR}
+      </if>
+      <if test="regCapital != null">
+        and reg_capital = #{regCapital,jdbcType=VARCHAR}
+      </if>
+      <if test="regCapitalScore != null">
+        and reg_capital_score = #{regCapitalScore,jdbcType=VARCHAR}
+      </if>
+      <if test="paidCapital != null">
+        and paid_capital = #{paidCapital,jdbcType=VARCHAR}
+      </if>
+      <if test="paidCapitalScore != null">
+        and paid_capital_score = #{paidCapitalScore,jdbcType=VARCHAR}
+      </if>
+      <if test="returnOnEquity != null">
+        and return_on_equity = #{returnOnEquity,jdbcType=VARCHAR}
+      </if>
+      <if test="returnOnEquityScore != null">
+        and return_on_equity_score = #{returnOnEquityScore,jdbcType=VARCHAR}
+      </if>
+      <if test="profitMargin != null">
+        and profit_margin = #{profitMargin,jdbcType=VARCHAR}
+      </if>
+      <if test="profitMarginScore != null">
+        and profit_margin_score = #{profitMarginScore,jdbcType=VARCHAR}
+      </if>
+      <if test="profitMarginScope != null">
+        and profit_margin_scope = #{profitMarginScope,jdbcType=VARCHAR}
+      </if>
+      <if test="currentRatio != null">
+        and current_ratio = #{currentRatio,jdbcType=VARCHAR}
+      </if>
+      <if test="currentRatioScore != null">
+        and current_ratio_score = #{currentRatioScore,jdbcType=VARCHAR}
+      </if>
+      <if test="currentRatioScope != null">
+        and current_ratio_scope = #{currentRatioScope,jdbcType=VARCHAR}
+      </if>
+      <if test="quickRatio != null">
+        and quick_ratio = #{quickRatio,jdbcType=VARCHAR}
+      </if>
+      <if test="quickRatioScore != null">
+        and quick_ratio_score = #{quickRatioScore,jdbcType=VARCHAR}
+      </if>
+      <if test="quickRatioScope != null">
+        and quick_ratio_scope = #{quickRatioScope,jdbcType=VARCHAR}
+      </if>
+      <if test="debtRatio != null">
+        and debt_ratio = #{debtRatio,jdbcType=VARCHAR}
+      </if>
+      <if test="debtRatioScore != null">
+        and debt_ratio_score = #{debtRatioScore,jdbcType=VARCHAR}
+      </if>
+      <if test="debtRatioScope != null">
+        and debt_ratio_scope = #{debtRatioScope,jdbcType=VARCHAR}
+      </if>
+      <if test="salesGrowthRate != null">
+        and sales_growth_rate = #{salesGrowthRate,jdbcType=VARCHAR}
+      </if>
+      <if test="salesGrowthRateScore != null">
+        and sales_growth_rate_score = #{salesGrowthRateScore,jdbcType=VARCHAR}
+      </if>
+      <if test="salesGrowthRateScope != null">
+        and sales_growth_rate_scope = #{salesGrowthRateScope,jdbcType=VARCHAR}
+      </if>
+      <if test="companySize != null">
+        and company_size = #{companySize,jdbcType=VARCHAR}
+      </if>
+      <if test="paidCurrency != null">
+        and paid_currency = #{paidCurrency,jdbcType=VARCHAR}
+      </if>
+      <if test="regCurrency != null">
+        and reg_currency = #{regCurrency,jdbcType=VARCHAR}
+      </if>
+      <if test="delFlag != null">
+        and del_flag = #{delFlag,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from credit_certification
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByPrimaryId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from credit_certification
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByPrimaryCardId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from credit_certification
+    where card_id = #{cardId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByPrimaryKeySelective" parameterType="com.mika.credit.facade.gugu.model.CreditCertification" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from credit_certification
+    <include refid="condition" />
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from credit_certification
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mika.credit.facade.gugu.model.CreditCertification" useGeneratedKeys="true" keyProperty="id">
+    insert into credit_certification (id, card_id, order_id, 
+      user_id, crefo_no, update_time, 
+      repayment_index, credit_risk_evaluation, credits, 
+      credit_risk_score, establish_date, establish_date_score, 
+      company_property, company_property_score, 
+      employee_num, employee_num_score, company_status, 
+      company_status_score, main_business, main_business_score, 
+      industry, industry_score, litigation_record, 
+      litigation_record_score, reg_capital, reg_capital_score, 
+      paid_capital, paid_capital_score, return_on_equity, 
+      return_on_equity_score, profit_margin, profit_margin_score, 
+      profit_margin_scope, current_ratio, current_ratio_score, 
+      current_ratio_scope, quick_ratio, quick_ratio_score, 
+      quick_ratio_scope, debt_ratio, debt_ratio_score, 
+      debt_ratio_scope, sales_growth_rate, sales_growth_rate_score, 
+      sales_growth_rate_scope, company_size, paid_currency, 
+      reg_currency, del_flag)
+    values (#{id,jdbcType=INTEGER}, #{cardId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, 
+      #{userId,jdbcType=INTEGER}, #{crefoNo,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{repaymentIndex,jdbcType=VARCHAR}, #{creditRiskEvaluation,jdbcType=VARCHAR}, #{credits,jdbcType=VARCHAR}, 
+      #{creditRiskScore,jdbcType=VARCHAR}, #{establishDate,jdbcType=VARCHAR}, #{establishDateScore,jdbcType=VARCHAR},
+      #{companyProperty,jdbcType=VARCHAR}, #{companyPropertyScore,jdbcType=VARCHAR}, 
+      #{employeeNum,jdbcType=VARCHAR}, #{employeeNumScore,jdbcType=VARCHAR}, #{companyStatus,jdbcType=VARCHAR}, 
+      #{companyStatusScore,jdbcType=VARCHAR}, #{mainBusiness,jdbcType=VARCHAR}, #{mainBusinessScore,jdbcType=VARCHAR}, 
+      #{industry,jdbcType=VARCHAR}, #{industryScore,jdbcType=VARCHAR}, #{litigationRecord,jdbcType=VARCHAR}, 
+      #{litigationRecordScore,jdbcType=VARCHAR}, #{regCapital,jdbcType=VARCHAR}, #{regCapitalScore,jdbcType=VARCHAR}, 
+      #{paidCapital,jdbcType=VARCHAR}, #{paidCapitalScore,jdbcType=VARCHAR}, #{returnOnEquity,jdbcType=VARCHAR}, 
+      #{returnOnEquityScore,jdbcType=VARCHAR}, #{profitMargin,jdbcType=VARCHAR}, #{profitMarginScore,jdbcType=VARCHAR}, 
+      #{profitMarginScope,jdbcType=VARCHAR}, #{currentRatio,jdbcType=VARCHAR}, #{currentRatioScore,jdbcType=VARCHAR}, 
+      #{currentRatioScope,jdbcType=VARCHAR}, #{quickRatio,jdbcType=VARCHAR}, #{quickRatioScore,jdbcType=VARCHAR}, 
+      #{quickRatioScope,jdbcType=VARCHAR}, #{debtRatio,jdbcType=VARCHAR}, #{debtRatioScore,jdbcType=VARCHAR}, 
+      #{debtRatioScope,jdbcType=VARCHAR}, #{salesGrowthRate,jdbcType=VARCHAR}, #{salesGrowthRateScore,jdbcType=VARCHAR}, 
+      #{salesGrowthRateScope,jdbcType=VARCHAR}, #{companySize,jdbcType=VARCHAR}, #{paidCurrency,jdbcType=VARCHAR}, 
+      #{regCurrency,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mika.credit.facade.gugu.model.CreditCertification" useGeneratedKeys="true" keyProperty="id">
+    insert into credit_certification
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cardId != null">
+        card_id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="crefoNo != null">
+        crefo_no,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="repaymentIndex != null">
+        repayment_index,
+      </if>
+      <if test="creditRiskEvaluation != null">
+        credit_risk_evaluation,
+      </if>
+      <if test="credits != null">
+        credits,
+      </if>
+      <if test="creditRiskScore != null">
+        credit_risk_score,
+      </if>
+      <if test="establishDate != null">
+        establish_date,
+      </if>
+      <if test="establishDateScore != null">
+        establish_date_score,
+      </if>
+      <if test="companyProperty != null">
+        company_property,
+      </if>
+      <if test="companyPropertyScore != null">
+        company_property_score,
+      </if>
+      <if test="employeeNum != null">
+        employee_num,
+      </if>
+      <if test="employeeNumScore != null">
+        employee_num_score,
+      </if>
+      <if test="companyStatus != null">
+        company_status,
+      </if>
+      <if test="companyStatusScore != null">
+        company_status_score,
+      </if>
+      <if test="mainBusiness != null">
+        main_business,
+      </if>
+      <if test="mainBusinessScore != null">
+        main_business_score,
+      </if>
+      <if test="industry != null">
+        industry,
+      </if>
+      <if test="industryScore != null">
+        industry_score,
+      </if>
+      <if test="litigationRecord != null">
+        litigation_record,
+      </if>
+      <if test="litigationRecordScore != null">
+        litigation_record_score,
+      </if>
+      <if test="regCapital != null">
+        reg_capital,
+      </if>
+      <if test="regCapitalScore != null">
+        reg_capital_score,
+      </if>
+      <if test="paidCapital != null">
+        paid_capital,
+      </if>
+      <if test="paidCapitalScore != null">
+        paid_capital_score,
+      </if>
+      <if test="returnOnEquity != null">
+        return_on_equity,
+      </if>
+      <if test="returnOnEquityScore != null">
+        return_on_equity_score,
+      </if>
+      <if test="profitMargin != null">
+        profit_margin,
+      </if>
+      <if test="profitMarginScore != null">
+        profit_margin_score,
+      </if>
+      <if test="profitMarginScope != null">
+        profit_margin_scope,
+      </if>
+      <if test="currentRatio != null">
+        current_ratio,
+      </if>
+      <if test="currentRatioScore != null">
+        current_ratio_score,
+      </if>
+      <if test="currentRatioScope != null">
+        current_ratio_scope,
+      </if>
+      <if test="quickRatio != null">
+        quick_ratio,
+      </if>
+      <if test="quickRatioScore != null">
+        quick_ratio_score,
+      </if>
+      <if test="quickRatioScope != null">
+        quick_ratio_scope,
+      </if>
+      <if test="debtRatio != null">
+        debt_ratio,
+      </if>
+      <if test="debtRatioScore != null">
+        debt_ratio_score,
+      </if>
+      <if test="debtRatioScope != null">
+        debt_ratio_scope,
+      </if>
+      <if test="salesGrowthRate != null">
+        sales_growth_rate,
+      </if>
+      <if test="salesGrowthRateScore != null">
+        sales_growth_rate_score,
+      </if>
+      <if test="salesGrowthRateScope != null">
+        sales_growth_rate_scope,
+      </if>
+      <if test="companySize != null">
+        company_size,
+      </if>
+      <if test="paidCurrency != null">
+        paid_currency,
+      </if>
+      <if test="regCurrency != null">
+        reg_currency,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cardId != null">
+        #{cardId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="crefoNo != null">
+        #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="repaymentIndex != null">
+        #{repaymentIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="creditRiskEvaluation != null">
+        #{creditRiskEvaluation,jdbcType=VARCHAR},
+      </if>
+      <if test="credits != null">
+        #{credits,jdbcType=VARCHAR},
+      </if>
+      <if test="creditRiskScore != null">
+        #{creditRiskScore,jdbcType=VARCHAR},
+      </if>
+      <if test="establishDate != null">
+        #{establishDate,jdbcType=VARCHAR},
+      </if>
+      <if test="establishDateScore != null">
+        #{establishDateScore,jdbcType=VARCHAR},
+      </if>
+      <if test="companyProperty != null">
+        #{companyProperty,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPropertyScore != null">
+        #{companyPropertyScore,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeNum != null">
+        #{employeeNum,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeNumScore != null">
+        #{employeeNumScore,jdbcType=VARCHAR},
+      </if>
+      <if test="companyStatus != null">
+        #{companyStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="companyStatusScore != null">
+        #{companyStatusScore,jdbcType=VARCHAR},
+      </if>
+      <if test="mainBusiness != null">
+        #{mainBusiness,jdbcType=VARCHAR},
+      </if>
+      <if test="mainBusinessScore != null">
+        #{mainBusinessScore,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null">
+        #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="industryScore != null">
+        #{industryScore,jdbcType=VARCHAR},
+      </if>
+      <if test="litigationRecord != null">
+        #{litigationRecord,jdbcType=VARCHAR},
+      </if>
+      <if test="litigationRecordScore != null">
+        #{litigationRecordScore,jdbcType=VARCHAR},
+      </if>
+      <if test="regCapital != null">
+        #{regCapital,jdbcType=VARCHAR},
+      </if>
+      <if test="regCapitalScore != null">
+        #{regCapitalScore,jdbcType=VARCHAR},
+      </if>
+      <if test="paidCapital != null">
+        #{paidCapital,jdbcType=VARCHAR},
+      </if>
+      <if test="paidCapitalScore != null">
+        #{paidCapitalScore,jdbcType=VARCHAR},
+      </if>
+      <if test="returnOnEquity != null">
+        #{returnOnEquity,jdbcType=VARCHAR},
+      </if>
+      <if test="returnOnEquityScore != null">
+        #{returnOnEquityScore,jdbcType=VARCHAR},
+      </if>
+      <if test="profitMargin != null">
+        #{profitMargin,jdbcType=VARCHAR},
+      </if>
+      <if test="profitMarginScore != null">
+        #{profitMarginScore,jdbcType=VARCHAR},
+      </if>
+      <if test="profitMarginScope != null">
+        #{profitMarginScope,jdbcType=VARCHAR},
+      </if>
+      <if test="currentRatio != null">
+        #{currentRatio,jdbcType=VARCHAR},
+      </if>
+      <if test="currentRatioScore != null">
+        #{currentRatioScore,jdbcType=VARCHAR},
+      </if>
+      <if test="currentRatioScope != null">
+        #{currentRatioScope,jdbcType=VARCHAR},
+      </if>
+      <if test="quickRatio != null">
+        #{quickRatio,jdbcType=VARCHAR},
+      </if>
+      <if test="quickRatioScore != null">
+        #{quickRatioScore,jdbcType=VARCHAR},
+      </if>
+      <if test="quickRatioScope != null">
+        #{quickRatioScope,jdbcType=VARCHAR},
+      </if>
+      <if test="debtRatio != null">
+        #{debtRatio,jdbcType=VARCHAR},
+      </if>
+      <if test="debtRatioScore != null">
+        #{debtRatioScore,jdbcType=VARCHAR},
+      </if>
+      <if test="debtRatioScope != null">
+        #{debtRatioScope,jdbcType=VARCHAR},
+      </if>
+      <if test="salesGrowthRate != null">
+        #{salesGrowthRate,jdbcType=VARCHAR},
+      </if>
+      <if test="salesGrowthRateScore != null">
+        #{salesGrowthRateScore,jdbcType=VARCHAR},
+      </if>
+      <if test="salesGrowthRateScope != null">
+        #{salesGrowthRateScope,jdbcType=VARCHAR},
+      </if>
+      <if test="companySize != null">
+        #{companySize,jdbcType=VARCHAR},
+      </if>
+      <if test="paidCurrency != null">
+        #{paidCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="regCurrency != null">
+        #{regCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mika.credit.facade.gugu.model.CreditCertification">
+    update credit_certification
+    <set>
+      <if test="cardId != null">
+        card_id = #{cardId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="crefoNo != null">
+        crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="repaymentIndex != null">
+        repayment_index = #{repaymentIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="creditRiskEvaluation != null">
+        credit_risk_evaluation = #{creditRiskEvaluation,jdbcType=VARCHAR},
+      </if>
+      <if test="credits != null">
+        credits = #{credits,jdbcType=VARCHAR},
+      </if>
+      <if test="creditRiskScore != null">
+        credit_risk_score = #{creditRiskScore,jdbcType=VARCHAR},
+      </if>
+      <if test="establishDate != null">
+        establish_date = #{establishDate,jdbcType=VARCHAR},
+      </if>
+      <if test="establishDateScore != null">
+        establish_date_score = #{establishDateScore,jdbcType=VARCHAR},
+      </if>
+      <if test="companyProperty != null">
+        company_property = #{companyProperty,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPropertyScore != null">
+        company_property_score = #{companyPropertyScore,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeNum != null">
+        employee_num = #{employeeNum,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeNumScore != null">
+        employee_num_score = #{employeeNumScore,jdbcType=VARCHAR},
+      </if>
+      <if test="companyStatus != null">
+        company_status = #{companyStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="companyStatusScore != null">
+        company_status_score = #{companyStatusScore,jdbcType=VARCHAR},
+      </if>
+      <if test="mainBusiness != null">
+        main_business = #{mainBusiness,jdbcType=VARCHAR},
+      </if>
+      <if test="mainBusinessScore != null">
+        main_business_score = #{mainBusinessScore,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null">
+        industry = #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="industryScore != null">
+        industry_score = #{industryScore,jdbcType=VARCHAR},
+      </if>
+      <if test="litigationRecord != null">
+        litigation_record = #{litigationRecord,jdbcType=VARCHAR},
+      </if>
+      <if test="litigationRecordScore != null">
+        litigation_record_score = #{litigationRecordScore,jdbcType=VARCHAR},
+      </if>
+      <if test="regCapital != null">
+        reg_capital = #{regCapital,jdbcType=VARCHAR},
+      </if>
+      <if test="regCapitalScore != null">
+        reg_capital_score = #{regCapitalScore,jdbcType=VARCHAR},
+      </if>
+      <if test="paidCapital != null">
+        paid_capital = #{paidCapital,jdbcType=VARCHAR},
+      </if>
+      <if test="paidCapitalScore != null">
+        paid_capital_score = #{paidCapitalScore,jdbcType=VARCHAR},
+      </if>
+      <if test="returnOnEquity != null">
+        return_on_equity = #{returnOnEquity,jdbcType=VARCHAR},
+      </if>
+      <if test="returnOnEquityScore != null">
+        return_on_equity_score = #{returnOnEquityScore,jdbcType=VARCHAR},
+      </if>
+      <if test="profitMargin != null">
+        profit_margin = #{profitMargin,jdbcType=VARCHAR},
+      </if>
+      <if test="profitMarginScore != null">
+        profit_margin_score = #{profitMarginScore,jdbcType=VARCHAR},
+      </if>
+      <if test="profitMarginScope != null">
+        profit_margin_scope = #{profitMarginScope,jdbcType=VARCHAR},
+      </if>
+      <if test="currentRatio != null">
+        current_ratio = #{currentRatio,jdbcType=VARCHAR},
+      </if>
+      <if test="currentRatioScore != null">
+        current_ratio_score = #{currentRatioScore,jdbcType=VARCHAR},
+      </if>
+      <if test="currentRatioScope != null">
+        current_ratio_scope = #{currentRatioScope,jdbcType=VARCHAR},
+      </if>
+      <if test="quickRatio != null">
+        quick_ratio = #{quickRatio,jdbcType=VARCHAR},
+      </if>
+      <if test="quickRatioScore != null">
+        quick_ratio_score = #{quickRatioScore,jdbcType=VARCHAR},
+      </if>
+      <if test="quickRatioScope != null">
+        quick_ratio_scope = #{quickRatioScope,jdbcType=VARCHAR},
+      </if>
+      <if test="debtRatio != null">
+        debt_ratio = #{debtRatio,jdbcType=VARCHAR},
+      </if>
+      <if test="debtRatioScore != null">
+        debt_ratio_score = #{debtRatioScore,jdbcType=VARCHAR},
+      </if>
+      <if test="debtRatioScope != null">
+        debt_ratio_scope = #{debtRatioScope,jdbcType=VARCHAR},
+      </if>
+      <if test="salesGrowthRate != null">
+        sales_growth_rate = #{salesGrowthRate,jdbcType=VARCHAR},
+      </if>
+      <if test="salesGrowthRateScore != null">
+        sales_growth_rate_score = #{salesGrowthRateScore,jdbcType=VARCHAR},
+      </if>
+      <if test="salesGrowthRateScope != null">
+        sales_growth_rate_scope = #{salesGrowthRateScope,jdbcType=VARCHAR},
+      </if>
+      <if test="companySize != null">
+        company_size = #{companySize,jdbcType=VARCHAR},
+      </if>
+      <if test="paidCurrency != null">
+        paid_currency = #{paidCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="regCurrency != null">
+        reg_currency = #{regCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mika.credit.facade.gugu.model.CreditCertification">
+    update credit_certification
+    set card_id = #{cardId,jdbcType=INTEGER},
+      order_id = #{orderId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      repayment_index = #{repaymentIndex,jdbcType=VARCHAR},
+      credit_risk_evaluation = #{creditRiskEvaluation,jdbcType=VARCHAR},
+      credits = #{credits,jdbcType=VARCHAR},
+      credit_risk_score = #{creditRiskScore,jdbcType=VARCHAR},
+      establish_date = #{establishDate,jdbcType=VARCHAR},
+      establish_date_score = #{establishDateScore,jdbcType=VARCHAR},
+      company_property = #{companyProperty,jdbcType=VARCHAR},
+      company_property_score = #{companyPropertyScore,jdbcType=VARCHAR},
+      employee_num = #{employeeNum,jdbcType=VARCHAR},
+      employee_num_score = #{employeeNumScore,jdbcType=VARCHAR},
+      company_status = #{companyStatus,jdbcType=VARCHAR},
+      company_status_score = #{companyStatusScore,jdbcType=VARCHAR},
+      main_business = #{mainBusiness,jdbcType=VARCHAR},
+      main_business_score = #{mainBusinessScore,jdbcType=VARCHAR},
+      industry = #{industry,jdbcType=VARCHAR},
+      industry_score = #{industryScore,jdbcType=VARCHAR},
+      litigation_record = #{litigationRecord,jdbcType=VARCHAR},
+      litigation_record_score = #{litigationRecordScore,jdbcType=VARCHAR},
+      reg_capital = #{regCapital,jdbcType=VARCHAR},
+      reg_capital_score = #{regCapitalScore,jdbcType=VARCHAR},
+      paid_capital = #{paidCapital,jdbcType=VARCHAR},
+      paid_capital_score = #{paidCapitalScore,jdbcType=VARCHAR},
+      return_on_equity = #{returnOnEquity,jdbcType=VARCHAR},
+      return_on_equity_score = #{returnOnEquityScore,jdbcType=VARCHAR},
+      profit_margin = #{profitMargin,jdbcType=VARCHAR},
+      profit_margin_score = #{profitMarginScore,jdbcType=VARCHAR},
+      profit_margin_scope = #{profitMarginScope,jdbcType=VARCHAR},
+      current_ratio = #{currentRatio,jdbcType=VARCHAR},
+      current_ratio_score = #{currentRatioScore,jdbcType=VARCHAR},
+      current_ratio_scope = #{currentRatioScope,jdbcType=VARCHAR},
+      quick_ratio = #{quickRatio,jdbcType=VARCHAR},
+      quick_ratio_score = #{quickRatioScore,jdbcType=VARCHAR},
+      quick_ratio_scope = #{quickRatioScope,jdbcType=VARCHAR},
+      debt_ratio = #{debtRatio,jdbcType=VARCHAR},
+      debt_ratio_score = #{debtRatioScore,jdbcType=VARCHAR},
+      debt_ratio_scope = #{debtRatioScope,jdbcType=VARCHAR},
+      sales_growth_rate = #{salesGrowthRate,jdbcType=VARCHAR},
+      sales_growth_rate_score = #{salesGrowthRateScore,jdbcType=VARCHAR},
+      sales_growth_rate_scope = #{salesGrowthRateScope,jdbcType=VARCHAR},
+      company_size = #{companySize,jdbcType=VARCHAR},
+      paid_currency = #{paidCurrency,jdbcType=VARCHAR},
+      reg_currency = #{regCurrency,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

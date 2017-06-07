@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mika.credit.facade.gugu.dao.RechargeLogMapper">
+  <resultMap id="BaseResultMap" type="com.mika.credit.facade.gugu.model.RechargeLog">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="log_id" jdbcType="INTEGER" property="logId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="login_ip" jdbcType="VARCHAR" property="loginIp" />
+    <result column="recharge_date" jdbcType="TIMESTAMP" property="rechargeDate" />
+    <result column="capital" jdbcType="VARCHAR" property="capital" />
+    <result column="recharge_money" jdbcType="VARCHAR" property="rechargeMoney" />
+    <result column="current_money" jdbcType="VARCHAR" property="currentMoney" />
+    <result column="recharge_num" jdbcType="VARCHAR" property="rechargeNum" />
+    <result column="recharge_status" jdbcType="VARCHAR" property="rechargeStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, log_id, user_id, login_ip, recharge_date, capital, recharge_money, current_money, 
+    recharge_num, recharge_status
+  </sql>
+  <sql id="condition">
+    <where>
+      <if test="id != null and id != 0">
+        and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="logId != null and logId != 0">
+        and log_id = #{logId,jdbcType=INTEGER}
+      </if>
+      <if test="userId != null and userId != 0">
+        and user_id = #{userId,jdbcType=INTEGER}
+      </if>
+      <if test="loginIp != null">
+        and login_ip = #{loginIp,jdbcType=VARCHAR}
+      </if>
+      <if test="rechargeDate != null">
+        and recharge_date = #{rechargeDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="capital != null">
+        and capital = #{capital,jdbcType=VARCHAR}
+      </if>
+      <if test="rechargeMoney != null">
+        and  recharge_money = #{rechargeMoney,jdbcType=VARCHAR}
+      </if>
+      <if test="currentMoney != null">
+        and current_money = #{currentMoney,jdbcType=VARCHAR}
+      </if>
+      <if test="rechargeNum != null">
+        and  recharge_num = #{rechargeNum,jdbcType=VARCHAR}
+      </if>
+      <if test="rechargeStatus != null">
+        and recharge_status = #{rechargeStatus,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from recharge_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPrimaryKeySelective" parameterType="com.mika.credit.facade.gugu.model.RechargeLog" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from recharge_log
+    <include refid="condition" />
+  </select>
+  <select id="selectByPrimaryKeyCount" parameterType="com.mika.credit.facade.gugu.model.RechargeLog" resultMap="BaseResultMap">
+    select
+    count(1)
+    from recharge_log
+    <include refid="condition" />
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from recharge_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mika.credit.facade.gugu.model.RechargeLog" useGeneratedKeys="true" keyProperty="id">
+    insert into recharge_log (id, log_id, user_id, 
+      login_ip, recharge_date, capital, 
+      recharge_money, current_money, recharge_num, 
+      recharge_status)
+    values (#{id,jdbcType=INTEGER}, #{logId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{loginIp,jdbcType=VARCHAR}, #{rechargeDate,jdbcType=TIMESTAMP}, #{capital,jdbcType=VARCHAR},
+      #{rechargeMoney,jdbcType=VARCHAR}, #{currentMoney,jdbcType=VARCHAR}, #{rechargeNum,jdbcType=VARCHAR}, 
+      #{rechargeStatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mika.credit.facade.gugu.model.RechargeLog" useGeneratedKeys="true" keyProperty="id">
+    insert into recharge_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="logId != null">
+        log_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="loginIp != null">
+        login_ip,
+      </if>
+      <if test="rechargeDate != null">
+        recharge_date,
+      </if>
+      <if test="capital != null">
+        capital,
+      </if>
+      <if test="rechargeMoney != null">
+        recharge_money,
+      </if>
+      <if test="currentMoney != null">
+        current_money,
+      </if>
+      <if test="rechargeNum != null">
+        recharge_num,
+      </if>
+      <if test="rechargeStatus != null">
+        recharge_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="logId != null">
+        #{logId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="loginIp != null">
+        #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargeDate != null">
+        #{rechargeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="capital != null">
+        #{capital,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargeMoney != null">
+        #{rechargeMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="currentMoney != null">
+        #{currentMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargeNum != null">
+        #{rechargeNum,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargeStatus != null">
+        #{rechargeStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mika.credit.facade.gugu.model.RechargeLog">
+    update recharge_log
+    <set>
+      <if test="logId != null">
+        log_id = #{logId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="loginIp != null">
+        login_ip = #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargeDate != null">
+        recharge_date = #{rechargeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="capital != null">
+        capital = #{capital,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargeMoney != null">
+        recharge_money = #{rechargeMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="currentMoney != null">
+        current_money = #{currentMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargeNum != null">
+        recharge_num = #{rechargeNum,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargeStatus != null">
+        recharge_status = #{rechargeStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mika.credit.facade.gugu.model.RechargeLog">
+    update recharge_log
+    set log_id = #{logId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      login_ip = #{loginIp,jdbcType=VARCHAR},
+      recharge_date = #{rechargeDate,jdbcType=TIMESTAMP},
+      capital = #{capital,jdbcType=VARCHAR},
+      recharge_money = #{rechargeMoney,jdbcType=VARCHAR},
+      current_money = #{currentMoney,jdbcType=VARCHAR},
+      recharge_num = #{rechargeNum,jdbcType=VARCHAR},
+      recharge_status = #{rechargeStatus,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

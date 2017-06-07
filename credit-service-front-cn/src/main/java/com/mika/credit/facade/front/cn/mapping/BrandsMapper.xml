@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.front.cn.dao.impl.BrandsDaoImpl" >
+  <cache eviction="LRU" type="com.mika.credit.common.core.mybatis.cache.redis.sharded.MybatiesRedisCache" />
+  <resultMap id="BaseResultMap" type="com.mika.credit.common.entity.report.cn.Brands" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="application_date" property="applicationDate" jdbcType="VARCHAR" />
+    <result column="application_number" property="applicationNumber" jdbcType="VARCHAR" />
+    <result column="apply_name" property="applyName" jdbcType="VARCHAR" />
+    <result column="case_status" property="caseStatus" jdbcType="VARCHAR" />
+    <result column="classification_number" property="classificationNumber" jdbcType="VARCHAR" />
+    <result column="crefo_no" property="crefoNo" jdbcType="VARCHAR" />
+    <result column="info_source" property="infoSource" jdbcType="VARCHAR" />
+    <result column="inventor_name" property="inventorName" jdbcType="VARCHAR" />
+    <result column="link" property="link" jdbcType="VARCHAR" />
+    <result column="patent_name" property="patentName" jdbcType="VARCHAR" />
+    <result column="patent_name_en" property="patentNameEN" jdbcType="VARCHAR" />
+    <result column="priority" property="priority" jdbcType="VARCHAR" />
+    <result column="proxy_info" property="proxyInfo" jdbcType="LONGVARCHAR" />
+    <result column="record_nature" property="recordNature" jdbcType="VARCHAR" />
+    <result column="release_date" property="releaseDate" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="type_en" property="typeEN" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+    <result column="full_report_id" property="fullReportId" jdbcType="INTEGER" />
+  </resultMap>
+
+  <sql id="table"> brands </sql>
+
+  <sql id="Base_Column_List" >
+    id, application_date, application_number, apply_name, case_status, classification_number, 
+    crefo_no, info_source, inventor_name, link, patent_name,patent_name_en, priority, proxy_info, record_nature,
+    release_date, type,type_en, update_time,full_report_id
+  </sql>
+
+  <sql id="condition_sql">
+    <if test="id != null" >
+      and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="applicationDate != null" >
+      and application_date = #{applicationDate,jdbcType=VARCHAR}
+    </if>
+    <if test="applicationNumber != null" >
+      and application_number = #{applicationNumber,jdbcType=VARCHAR}
+    </if>
+    <if test="applyName != null" >
+      and apply_name = #{applyName,jdbcType=VARCHAR}
+    </if>
+    <if test="caseStatus != null" >
+      and case_status = #{caseStatus,jdbcType=VARCHAR}
+    </if>
+    <if test="classificationNumber != null" >
+      and classification_number = #{classificationNumber,jdbcType=VARCHAR}
+    </if>
+    <if test="crefoNo != null" >
+      and crefo_no = #{crefoNo,jdbcType=VARCHAR}
+    </if>
+    <if test="infoSource != null" >
+      and info_source = #{infoSource,jdbcType=VARCHAR}
+    </if>
+    <if test="inventorName != null" >
+      and inventor_name = #{inventorName,jdbcType=VARCHAR}
+    </if>
+    <if test="link != null" >
+      and link = #{link,jdbcType=VARCHAR}
+    </if>
+    <if test="patentName != null" >
+      and patent_name = #{patentName,jdbcType=VARCHAR}
+    </if>
+    <if test="patentNameEN != null" >
+      and patent_name_en = #{patentNameEN,jdbcType=VARCHAR}
+    </if>
+    <if test="priority != null" >
+      and priority = #{priority,jdbcType=VARCHAR}
+    </if>
+    <if test="proxyInfo != null" >
+      and proxy_info = #{proxyInfo,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="recordNature != null" >
+      and record_nature = #{recordNature,jdbcType=VARCHAR}
+    </if>
+    <if test="releaseDate != null" >
+      and release_date = #{releaseDate,jdbcType=VARCHAR}
+    </if>
+    <if test="type != null" >
+      and type = #{type,jdbcType=VARCHAR}
+    </if>
+    <if test="typeEN != null" >
+      and type_en = #{typeEN,jdbcType=VARCHAR}
+    </if>
+    <if test="updateTime != null" >
+      and update_time = #{updateTime,jdbcType=VARCHAR}
+    </if>
+    <if test="fullReportId != null" >
+      and full_report_id = #{fullReportId,jdbcType=INTEGER}
+    </if>
+  </sql>
+
+  <select id="getById" parameterType="Integer" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    where ID = #{id}
+  </select>
+
+  <select id="listBy" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <select id="listPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+    <![CDATA[ order by ID desc]]>
+  </select>
+
+  <select id="listPageCount" parameterType="java.util.Map" resultType="Integer">
+    select count(1) from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <insert id="insert" parameterType="com.mika.credit.common.entity.report.cn.Brands" keyProperty="id" useGeneratedKeys="true">
+    insert into
+    <include refid="table" />
+    (id, application_date, application_number,
+    apply_name, case_status, classification_number,
+    crefo_no, info_source, inventor_name,
+    link, patent_name,patent_name_en, priority,
+    proxy_info, record_nature, release_date,
+    type,type_en, update_time,full_report_id)
+    values (#{id,jdbcType=INTEGER}, #{applicationDate,jdbcType=VARCHAR}, #{applicationNumber,jdbcType=VARCHAR},
+    #{applyName,jdbcType=VARCHAR}, #{caseStatus,jdbcType=VARCHAR}, #{classificationNumber,jdbcType=VARCHAR},
+    #{crefoNo,jdbcType=VARCHAR}, #{infoSource,jdbcType=VARCHAR}, #{inventorName,jdbcType=VARCHAR},
+    #{link,jdbcType=VARCHAR}, #{patentName,jdbcType=VARCHAR}, #{patentNameEN,jdbcType=VARCHAR}, #{priority,jdbcType=VARCHAR},
+    #{proxyInfo,jdbcType=LONGVARCHAR}, #{recordNature,jdbcType=VARCHAR}, #{releaseDate,jdbcType=VARCHAR},
+    #{type,jdbcType=VARCHAR},#{typeEN,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR},#{fullReportId,jdbcType=INTEGER})
+  </insert>
+
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from
+    <include refid="table" />
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <update id="update" parameterType="com.mika.credit.common.entity.report.cn.Brands" >
+    update brands
+    set application_date = #{applicationDate,jdbcType=VARCHAR},
+      application_number = #{applicationNumber,jdbcType=VARCHAR},
+      apply_name = #{applyName,jdbcType=VARCHAR},
+      case_status = #{caseStatus,jdbcType=VARCHAR},
+      classification_number = #{classificationNumber,jdbcType=VARCHAR},
+      crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      info_source = #{infoSource,jdbcType=VARCHAR},
+      inventor_name = #{inventorName,jdbcType=VARCHAR},
+      link = #{link,jdbcType=VARCHAR},
+      patent_name = #{patentName,jdbcType=VARCHAR},
+      patent_name_en = #{patentNameEN,jdbcType=VARCHAR},
+      priority = #{priority,jdbcType=VARCHAR},
+      proxy_info = #{proxyInfo,jdbcType=LONGVARCHAR},
+      record_nature = #{recordNature,jdbcType=VARCHAR},
+      release_date = #{releaseDate,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      type_en = #{typeEN,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      full_report_id = #{fullReportId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <insert id="insertSelective" parameterType="com.mika.credit.common.entity.report.cn.Brands" >
+    insert into brands
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="applicationDate != null" >
+        application_date,
+      </if>
+      <if test="applicationNumber != null" >
+        application_number,
+      </if>
+      <if test="applyName != null" >
+        apply_name,
+      </if>
+      <if test="caseStatus != null" >
+        case_status,
+      </if>
+      <if test="classificationNumber != null" >
+        classification_number,
+      </if>
+      <if test="crefoNo != null" >
+        crefo_no,
+      </if>
+      <if test="infoSource != null" >
+        info_source,
+      </if>
+      <if test="inventorName != null" >
+        inventor_name,
+      </if>
+      <if test="link != null" >
+        link,
+      </if>
+      <if test="patentName != null" >
+        patent_name,
+      </if>
+      <if test="patentNameEN != null" >
+        patent_name_en,
+      </if>
+      <if test="priority != null" >
+        priority,
+      </if>
+      <if test="proxyInfo != null" >
+        proxy_info,
+      </if>
+      <if test="recordNature != null" >
+        record_nature,
+      </if>
+      <if test="releaseDate != null" >
+        release_date,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="typeEN != null" >
+        type_en,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="applicationDate != null" >
+        #{applicationDate,jdbcType=VARCHAR},
+      </if>
+      <if test="applicationNumber != null" >
+        #{applicationNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="applyName != null" >
+        #{applyName,jdbcType=VARCHAR},
+      </if>
+      <if test="caseStatus != null" >
+        #{caseStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="classificationNumber != null" >
+        #{classificationNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="crefoNo != null" >
+        #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="infoSource != null" >
+        #{infoSource,jdbcType=VARCHAR},
+      </if>
+      <if test="inventorName != null" >
+        #{inventorName,jdbcType=VARCHAR},
+      </if>
+      <if test="link != null" >
+        #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="patentName != null" >
+        #{patentName,jdbcType=VARCHAR},
+      </if>
+      <if test="patentNameEN != null" >
+        #{patentNameEN,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null" >
+        #{priority,jdbcType=VARCHAR},
+      </if>
+      <if test="proxyInfo != null" >
+        #{proxyInfo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="recordNature != null" >
+        #{recordNature,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseDate != null" >
+        #{releaseDate,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="typeEN != null" >
+        #{typeEN,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        #{fullReportId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateSelective" parameterType="com.mika.credit.common.entity.report.cn.Brands" >
+    update brands
+    <set >
+      <if test="applicationDate != null" >
+        application_date = #{applicationDate,jdbcType=VARCHAR},
+      </if>
+      <if test="applicationNumber != null" >
+        application_number = #{applicationNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="applyName != null" >
+        apply_name = #{applyName,jdbcType=VARCHAR},
+      </if>
+      <if test="caseStatus != null" >
+        case_status = #{caseStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="classificationNumber != null" >
+        classification_number = #{classificationNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="crefoNo != null" >
+        crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="infoSource != null" >
+        info_source = #{infoSource,jdbcType=VARCHAR},
+      </if>
+      <if test="inventorName != null" >
+        inventor_name = #{inventorName,jdbcType=VARCHAR},
+      </if>
+      <if test="link != null" >
+        link = #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="patentName != null" >
+        patent_name = #{patentName,jdbcType=VARCHAR},
+      </if>
+      <if test="patentNameEN != null" >
+        patent_name_en = #{patentNameEN,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null" >
+        priority = #{priority,jdbcType=VARCHAR},
+      </if>
+      <if test="proxyInfo != null" >
+        proxy_info = #{proxyInfo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="recordNature != null" >
+        record_nature = #{recordNature,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseDate != null" >
+        release_date = #{releaseDate,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="typeEN != null" >
+        type = #{type_en,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id = #{fullReportId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+
+
+
+</mapper>

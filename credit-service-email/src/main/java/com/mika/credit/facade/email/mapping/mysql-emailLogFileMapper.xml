@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.email.dao.EmailLogFileMapper" >
+  <resultMap id="BaseResultMap" type="com.mika.credit.facade.email.model.EmailLogFile" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="invoke_obj" property="invokeObj" jdbcType="VARCHAR" />
+    <result column="send_mail" property="sendMail" jdbcType="VARCHAR" />
+    <result column="receive_mail" property="receiveMail" jdbcType="VARCHAR" />
+    <result column="copyto_mail" property="copytoMail" jdbcType="VARCHAR" />
+    <result column="mail_content" property="mailContent" jdbcType="LONGVARCHAR" />
+    <result column="mail_subject" property="mailSubject" jdbcType="VARCHAR" />
+    <result column="is_success" property="isSuccess" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, invoke_obj, send_mail, receive_mail, copyto_mail, mail_content, mail_subject,
+    is_success, start_time, end_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from email_logfile
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <insert id="insertSelective" parameterType="com.mika.credit.facade.email.model.EmailLogFile" useGeneratedKeys="true" keyProperty="id">
+    insert into email_logfile
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="invokeObj != null" >
+        invoke_obj,
+      </if>
+      <if test="sendMail != null" >
+        send_mail,
+      </if>
+      <if test="receiveMail != null" >
+        receive_mail,
+      </if>
+      <if test="copytoMail != null" >
+        copyto_mail,
+      </if>
+      <if test="mailContent != null" >
+        mail_content,
+      </if>
+      <if test="mailSubject != null" >
+        mail_subject,
+      </if>
+      <if test="isSuccess != null" >
+        is_success,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="invokeObj != null" >
+        #{invokeObj,jdbcType=VARCHAR},
+      </if>
+      <if test="sendMail != null" >
+        #{sendMail,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveMail != null" >
+        #{receiveMail,jdbcType=VARCHAR},
+      </if>
+      <if test="copytoMail != null" >
+        #{copytoMail,jdbcType=VARCHAR},
+      </if>
+      <if test="mailContent != null" >
+        #{mailContent,jdbcType=VARCHAR},
+      </if>
+      <if test="mailSubject != null" >
+        #{mailSubject,jdbcType=VARCHAR},
+      </if>
+      <if test="isSuccess != null" >
+        #{isSuccess,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

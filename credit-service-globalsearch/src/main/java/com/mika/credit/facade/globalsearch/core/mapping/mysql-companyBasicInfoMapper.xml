@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mika.credit.facade.globalsearch.core.dao.CompanyBasicInfoMapper">
+  <resultMap id="BaseResultMap" type="com.mika.credit.facade.globalsearch.core.model.CompanyBasicInfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+    <result column="company_name_en" jdbcType="VARCHAR" property="companyNameEn" />
+    <result column="registration_id" jdbcType="VARCHAR" property="registrationId" />
+    <result column="local" jdbcType="VARCHAR" property="local" />
+    <result column="local_en" jdbcType="VARCHAR" property="localEn" />
+    <result column="trade_name" jdbcType="VARCHAR" property="tradeName" />
+    <result column="trade_name_en" jdbcType="VARCHAR" property="tradeNameEn" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="product_introduction" jdbcType="VARCHAR" property="productIntroduction" />
+    <result column="product_introduction_en" jdbcType="VARCHAR" property="productIntroductionEn" />
+    <result column="product_introduction_link" jdbcType="VARCHAR" property="productIntroductionLink" />
+    <result column="services_introduction" jdbcType="VARCHAR" property="servicesIntroduction" />
+    <result column="services_introduction_en" jdbcType="VARCHAR" property="servicesIntroductionEn" />
+    <result column="services_introduction_link" jdbcType="VARCHAR" property="servicesIntroductionLink" />
+    <result column="main_address" jdbcType="VARCHAR" property="mainAddress" />
+    <result column="main_address_en" jdbcType="VARCHAR" property="mainAddressEn" />
+    <result column="zip" jdbcType="VARCHAR" property="zip" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="telphone" jdbcType="VARCHAR" property="telphone" />
+    <result column="about_us" jdbcType="VARCHAR" property="aboutUs" />
+    <result column="about_us_en" jdbcType="VARCHAR" property="aboutUsEn" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, company_name, company_name_en, registration_id, local, local_en, trade_name, 
+    trade_name_en, url, product_introduction, product_introduction_en, product_introduction_link, 
+    services_introduction, services_introduction_en, services_introduction_link, main_address, 
+    main_address_en, zip, email, telphone, about_us, about_us_en
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from company_basic_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByCompanyName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from company_basic_info
+    where  company_name= #{companyName,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from company_basic_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.mika.credit.facade.globalsearch.core.model.CompanyBasicInfo">
+    insert into company_basic_info (id, company_name, company_name_en, 
+      registration_id, local, local_en, 
+      trade_name, trade_name_en, url, 
+      product_introduction, product_introduction_en, 
+      product_introduction_link, services_introduction, 
+      services_introduction_en, services_introduction_link, 
+      main_address, main_address_en, zip, 
+      email, telphone, about_us, 
+      about_us_en)
+    values (#{id,jdbcType=BIGINT}, #{companyName,jdbcType=VARCHAR}, #{companyNameEn,jdbcType=VARCHAR}, 
+      #{registrationId,jdbcType=VARCHAR}, #{local,jdbcType=VARCHAR}, #{localEn,jdbcType=VARCHAR}, 
+      #{tradeName,jdbcType=VARCHAR}, #{tradeNameEn,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{productIntroduction,jdbcType=VARCHAR}, #{productIntroductionEn,jdbcType=VARCHAR}, 
+      #{productIntroductionLink,jdbcType=VARCHAR}, #{servicesIntroduction,jdbcType=VARCHAR}, 
+      #{servicesIntroductionEn,jdbcType=VARCHAR}, #{servicesIntroductionLink,jdbcType=VARCHAR}, 
+      #{mainAddress,jdbcType=VARCHAR}, #{mainAddressEn,jdbcType=VARCHAR}, #{zip,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{telphone,jdbcType=VARCHAR}, #{aboutUs,jdbcType=VARCHAR}, 
+      #{aboutUsEn,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mika.credit.facade.globalsearch.core.model.CompanyBasicInfo">
+    insert into company_basic_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="companyName != null">
+        company_name,
+      </if>
+      <if test="companyNameEn != null">
+        company_name_en,
+      </if>
+      <if test="registrationId != null">
+        registration_id,
+      </if>
+      <if test="local != null">
+        local,
+      </if>
+      <if test="localEn != null">
+        local_en,
+      </if>
+      <if test="tradeName != null">
+        trade_name,
+      </if>
+      <if test="tradeNameEn != null">
+        trade_name_en,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="productIntroduction != null">
+        product_introduction,
+      </if>
+      <if test="productIntroductionEn != null">
+        product_introduction_en,
+      </if>
+      <if test="productIntroductionLink != null">
+        product_introduction_link,
+      </if>
+      <if test="servicesIntroduction != null">
+        services_introduction,
+      </if>
+      <if test="servicesIntroductionEn != null">
+        services_introduction_en,
+      </if>
+      <if test="servicesIntroductionLink != null">
+        services_introduction_link,
+      </if>
+      <if test="mainAddress != null">
+        main_address,
+      </if>
+      <if test="mainAddressEn != null">
+        main_address_en,
+      </if>
+      <if test="zip != null">
+        zip,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="telphone != null">
+        telphone,
+      </if>
+      <if test="aboutUs != null">
+        about_us,
+      </if>
+      <if test="aboutUsEn != null">
+        about_us_en,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="companyName != null">
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyNameEn != null">
+        #{companyNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="registrationId != null">
+        #{registrationId,jdbcType=VARCHAR},
+      </if>
+      <if test="local != null">
+        #{local,jdbcType=VARCHAR},
+      </if>
+      <if test="localEn != null">
+        #{localEn,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeName != null">
+        #{tradeName,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeNameEn != null">
+        #{tradeNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="productIntroduction != null">
+        #{productIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="productIntroductionEn != null">
+        #{productIntroductionEn,jdbcType=VARCHAR},
+      </if>
+      <if test="productIntroductionLink != null">
+        #{productIntroductionLink,jdbcType=VARCHAR},
+      </if>
+      <if test="servicesIntroduction != null">
+        #{servicesIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="servicesIntroductionEn != null">
+        #{servicesIntroductionEn,jdbcType=VARCHAR},
+      </if>
+      <if test="servicesIntroductionLink != null">
+        #{servicesIntroductionLink,jdbcType=VARCHAR},
+      </if>
+      <if test="mainAddress != null">
+        #{mainAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="mainAddressEn != null">
+        #{mainAddressEn,jdbcType=VARCHAR},
+      </if>
+      <if test="zip != null">
+        #{zip,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="telphone != null">
+        #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="aboutUs != null">
+        #{aboutUs,jdbcType=VARCHAR},
+      </if>
+      <if test="aboutUsEn != null">
+        #{aboutUsEn,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mika.credit.facade.globalsearch.core.model.CompanyBasicInfo">
+    update company_basic_info
+    <set>
+      <if test="companyName != null">
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyNameEn != null">
+        company_name_en = #{companyNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="registrationId != null">
+        registration_id = #{registrationId,jdbcType=VARCHAR},
+      </if>
+      <if test="local != null">
+        local = #{local,jdbcType=VARCHAR},
+      </if>
+      <if test="localEn != null">
+        local_en = #{localEn,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeName != null">
+        trade_name = #{tradeName,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeNameEn != null">
+        trade_name_en = #{tradeNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="productIntroduction != null">
+        product_introduction = #{productIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="productIntroductionEn != null">
+        product_introduction_en = #{productIntroductionEn,jdbcType=VARCHAR},
+      </if>
+      <if test="productIntroductionLink != null">
+        product_introduction_link = #{productIntroductionLink,jdbcType=VARCHAR},
+      </if>
+      <if test="servicesIntroduction != null">
+        services_introduction = #{servicesIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="servicesIntroductionEn != null">
+        services_introduction_en = #{servicesIntroductionEn,jdbcType=VARCHAR},
+      </if>
+      <if test="servicesIntroductionLink != null">
+        services_introduction_link = #{servicesIntroductionLink,jdbcType=VARCHAR},
+      </if>
+      <if test="mainAddress != null">
+        main_address = #{mainAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="mainAddressEn != null">
+        main_address_en = #{mainAddressEn,jdbcType=VARCHAR},
+      </if>
+      <if test="zip != null">
+        zip = #{zip,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="telphone != null">
+        telphone = #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="aboutUs != null">
+        about_us = #{aboutUs,jdbcType=VARCHAR},
+      </if>
+      <if test="aboutUsEn != null">
+        about_us_en = #{aboutUsEn,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mika.credit.facade.globalsearch.core.model.CompanyBasicInfo">
+    update company_basic_info
+    set company_name = #{companyName,jdbcType=VARCHAR},
+      company_name_en = #{companyNameEn,jdbcType=VARCHAR},
+      registration_id = #{registrationId,jdbcType=VARCHAR},
+      local = #{local,jdbcType=VARCHAR},
+      local_en = #{localEn,jdbcType=VARCHAR},
+      trade_name = #{tradeName,jdbcType=VARCHAR},
+      trade_name_en = #{tradeNameEn,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      product_introduction = #{productIntroduction,jdbcType=VARCHAR},
+      product_introduction_en = #{productIntroductionEn,jdbcType=VARCHAR},
+      product_introduction_link = #{productIntroductionLink,jdbcType=VARCHAR},
+      services_introduction = #{servicesIntroduction,jdbcType=VARCHAR},
+      services_introduction_en = #{servicesIntroductionEn,jdbcType=VARCHAR},
+      services_introduction_link = #{servicesIntroductionLink,jdbcType=VARCHAR},
+      main_address = #{mainAddress,jdbcType=VARCHAR},
+      main_address_en = #{mainAddressEn,jdbcType=VARCHAR},
+      zip = #{zip,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      telphone = #{telphone,jdbcType=VARCHAR},
+      about_us = #{aboutUs,jdbcType=VARCHAR},
+      about_us_en = #{aboutUsEn,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

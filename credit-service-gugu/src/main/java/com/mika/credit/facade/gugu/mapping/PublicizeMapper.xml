@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mika.credit.facade.gugu.dao.PublicizeMapper">
+  <resultMap id="BaseResultMap" type="com.mika.credit.facade.gugu.model.Publicize">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="full_company" jdbcType="VARCHAR" property="fullCompany" />
+    <result column="abb_company" jdbcType="VARCHAR" property="abbCompany" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="fax" jdbcType="VARCHAR" property="fax" />
+    <result column="zip" jdbcType="VARCHAR" property="zip" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="website" jdbcType="VARCHAR" property="website" />
+    <result column="del_flag" jdbcType="VARCHAR" property="delFlag" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="publicize_flag_id" jdbcType="INTEGER" property="publicizeFlagId" />
+    <result column="introduction" jdbcType="VARCHAR" property="introduction" />
+    <result column="credit_risk_score" jdbcType="VARCHAR" property="creditRiskScore" />
+    <result column="view_count" jdbcType="VARCHAR" property="viewCount" />
+    <result column="main_products" jdbcType="VARCHAR" property="mainProducts" />
+    <result column="repayment_index" jdbcType="VARCHAR" property="repaymentIndex" />
+    <result column="creditRisk_evaluation" jdbcType="VARCHAR" property="creditriskEvaluation" />
+    <result column="credits" jdbcType="VARCHAR" property="credits" />
+    <result column="card_id" jdbcType="INTEGER" property="cardId" />
+    <result column="photo_path" jdbcType="VARCHAR" property="photoPath" />
+    <result column="area_code" jdbcType="INTEGER" property="areaCode" />
+    <result column="contact_card_id" jdbcType="INTEGER" property="contactCardId" />
+    <result column="country_code" jdbcType="INTEGER" property="countryCode" />
+    <result column="province_code" jdbcType="INTEGER" property="provinceCode" />
+    <result column="city_code" jdbcType="INTEGER" property="cityCode" />
+    <result column="district_code" jdbcType="INTEGER" property="districtCode" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="credit_certification" jdbcType="INTEGER" property="creditCertification" />
+    <result column="credit_verification" jdbcType="INTEGER" property="creditVerification" />
+    <result column="publicize_score" jdbcType="INTEGER" property="publicizeScore" />
+    <result column="keyword" jdbcType="VARCHAR" property="keyword" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, full_company, abb_company, tel, phone, fax, zip, address, email, website, 
+    del_flag, update_time, publicize_flag_id, introduction, credit_risk_score, view_count, 
+    main_products, repayment_index, creditRisk_evaluation, credits, card_id, photo_path, 
+    area_code, contact_card_id, country_code, province_code, city_code, district_code, 
+    create_date, credit_certification, credit_verification, publicize_score, keyword
+  </sql>
+  <sql id="condition">
+    <where>
+      <if test="id != null and id != 0">
+        and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="userId != null and userId != 0">
+        and user_id = #{userId,jdbcType=INTEGER}
+      </if>
+      <if test="fullCompany != null">
+        and full_company like concat('%', #{fullCompany,jdbcType=VARCHAR}, '%')
+      </if>
+      <if test="abbCompany != null">
+        and abb_company like concat('%', #{abbCompany,jdbcType=VARCHAR}, '%')
+      </if>
+      <if test="tel != null">
+        and tel = #{tel,jdbcType=VARCHAR}
+      </if>
+      <if test="phone != null">
+        and  phone = #{phone,jdbcType=VARCHAR}
+      </if>
+      <if test="fax != null">
+        and fax = #{fax,jdbcType=VARCHAR}
+      </if>
+      <if test="zip != null">
+        and zip = #{zip,jdbcType=VARCHAR}
+      </if>
+      <if test="address != null">
+        and address like concat('%', #{address,jdbcType=VARCHAR}, '%')
+      </if>
+      <if test="email != null">
+        and email = #{email,jdbcType=VARCHAR}
+      </if>
+      <if test="website != null">
+        and website = #{website,jdbcType=VARCHAR}
+      </if>
+      <if test="delFlag != null">
+        and del_flag = #{delFlag,jdbcType=VARCHAR}
+      </if>
+      <if test="updateTime != null">
+        and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="publicizeFlagId != null and publicizeFlagId != 0">
+        and publicize_flag_id = #{publicizeFlagId,jdbcType=INTEGER}
+      </if>
+      <if test="introduction != null">
+        and introduction = #{introduction,jdbcType=VARCHAR}
+      </if>
+      <if test="creditRiskScore != null">
+        and credit_risk_score = #{creditRiskScore,jdbcType=VARCHAR}
+      </if>
+      <if test="viewCount != null">
+        and view_count = #{viewCount,jdbcType=VARCHAR}
+      </if>
+      <if test="mainProducts != null">
+        and main_products = #{mainProducts,jdbcType=VARCHAR}
+      </if>
+      <if test="repaymentIndex != null">
+        and repayment_index = #{repaymentIndex,jdbcType=VARCHAR}
+      </if>
+      <if test="creditriskEvaluation != null">
+        and creditRisk_evaluation = #{creditriskEvaluation,jdbcType=VARCHAR}
+      </if>
+      <if test="credits != null">
+        and credits = #{credits,jdbcType=VARCHAR}
+      </if>
+      <if test="cardId != null and cardId != 0">
+        and card_id = #{cardId,jdbcType=INTEGER}
+      </if>
+      <if test="photoPath != null">
+        and photo_path = #{photoPath,jdbcType=VARCHAR}
+      </if>
+      <if test="areaCode != null and areaCode != 0">
+        and area_code = #{areaCode,jdbcType=INTEGER}
+      </if>
+      <if test="contactCardId != null and contactCardId != 0">
+        and contact_card_id = #{contactCardId,jdbcType=INTEGER}
+      </if>
+      <if test="countryCode != null and countryCode != 0">
+        and country_code = #{countryCode,jdbcType=INTEGER}
+      </if>
+      <if test="provinceCode != null and provinceCode != 0">
+        and province_code = #{provinceCode,jdbcType=INTEGER}
+      </if>
+      <if test="cityCode != null and cityCode != 0">
+        and city_code = #{cityCode,jdbcType=INTEGER}
+      </if>
+      <if test="districtCode != null and districtCode != 0">
+        and district_code = #{districtCode,jdbcType=INTEGER}
+      </if>
+      <if test="createDate != null">
+        and create_date = #{createDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="creditCertification != null and creditCertification != 0">
+        and  credit_certification = #{creditCertification,jdbcType=INTEGER}
+      </if>
+      <if test="creditVerification != null and creditVerification != 0">
+        and credit_verification = #{creditVerification,jdbcType=INTEGER}
+      </if>
+      <if test="publicizeScore != null and publicizeScore != 0">
+        and publicize_score = #{publicizeScore,jdbcType=INTEGER}
+      </if>
+      <if test="keyword != null">
+        and keyword = #{keyword,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from publicize
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPrimaryKeySelective" parameterType="com.mika.credit.facade.gugu.model.Publicize" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from publicize
+    <include refid="condition" />
+    order by publicize_score
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from publicize
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mika.credit.facade.gugu.model.Publicize" useGeneratedKeys="true" keyProperty="id">
+    insert into publicize (id, user_id, full_company, 
+      abb_company, tel, phone, 
+      fax, zip, address, 
+      email, website, del_flag, 
+      update_time, publicize_flag_id, introduction, 
+      credit_risk_score, view_count, main_products, 
+      repayment_index, creditRisk_evaluation, credits, 
+      card_id, photo_path, area_code, 
+      contact_card_id, country_code, province_code, 
+      city_code, district_code, create_date, 
+      credit_certification, credit_verification, 
+      publicize_score, keyword)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{fullCompany,jdbcType=VARCHAR}, 
+      #{abbCompany,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{fax,jdbcType=VARCHAR}, #{zip,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{website,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{publicizeFlagId,jdbcType=INTEGER}, #{introduction,jdbcType=VARCHAR}, 
+      #{creditRiskScore,jdbcType=VARCHAR}, #{viewCount,jdbcType=VARCHAR}, #{mainProducts,jdbcType=VARCHAR}, 
+      #{repaymentIndex,jdbcType=VARCHAR}, #{creditriskEvaluation,jdbcType=VARCHAR}, #{credits,jdbcType=VARCHAR}, 
+      #{cardId,jdbcType=INTEGER}, #{photoPath,jdbcType=VARCHAR}, #{areaCode,jdbcType=INTEGER}, 
+      #{contactCardId,jdbcType=INTEGER}, #{countryCode,jdbcType=INTEGER}, #{provinceCode,jdbcType=INTEGER}, 
+      #{cityCode,jdbcType=INTEGER}, #{districtCode,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{creditCertification,jdbcType=INTEGER}, #{creditVerification,jdbcType=INTEGER}, 
+      #{publicizeScore,jdbcType=INTEGER}, #{keyword,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mika.credit.facade.gugu.model.Publicize" useGeneratedKeys="true" keyProperty="id">
+    insert into publicize
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="fullCompany != null">
+        full_company,
+      </if>
+      <if test="abbCompany != null">
+        abb_company,
+      </if>
+      <if test="tel != null">
+        tel,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="fax != null">
+        fax,
+      </if>
+      <if test="zip != null">
+        zip,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="website != null">
+        website,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="publicizeFlagId != null">
+        publicize_flag_id,
+      </if>
+      <if test="introduction != null">
+        introduction,
+      </if>
+      <if test="creditRiskScore != null">
+        credit_risk_score,
+      </if>
+      <if test="viewCount != null">
+        view_count,
+      </if>
+      <if test="mainProducts != null">
+        main_products,
+      </if>
+      <if test="repaymentIndex != null">
+        repayment_index,
+      </if>
+      <if test="creditriskEvaluation != null">
+        creditRisk_evaluation,
+      </if>
+      <if test="credits != null">
+        credits,
+      </if>
+      <if test="cardId != null">
+        card_id,
+      </if>
+      <if test="photoPath != null">
+        photo_path,
+      </if>
+      <if test="areaCode != null">
+        area_code,
+      </if>
+      <if test="contactCardId != null">
+        contact_card_id,
+      </if>
+      <if test="countryCode != null">
+        country_code,
+      </if>
+      <if test="provinceCode != null">
+        province_code,
+      </if>
+      <if test="cityCode != null">
+        city_code,
+      </if>
+      <if test="districtCode != null">
+        district_code,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="creditCertification != null">
+        credit_certification,
+      </if>
+      <if test="creditVerification != null">
+        credit_verification,
+      </if>
+      <if test="publicizeScore != null">
+        publicize_score,
+      </if>
+      <if test="keyword != null">
+        keyword,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="fullCompany != null">
+        #{fullCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="abbCompany != null">
+        #{abbCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null">
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="zip != null">
+        #{zip,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="website != null">
+        #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publicizeFlagId != null">
+        #{publicizeFlagId,jdbcType=INTEGER},
+      </if>
+      <if test="introduction != null">
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="creditRiskScore != null">
+        #{creditRiskScore,jdbcType=VARCHAR},
+      </if>
+      <if test="viewCount != null">
+        #{viewCount,jdbcType=VARCHAR},
+      </if>
+      <if test="mainProducts != null">
+        #{mainProducts,jdbcType=VARCHAR},
+      </if>
+      <if test="repaymentIndex != null">
+        #{repaymentIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="creditriskEvaluation != null">
+        #{creditriskEvaluation,jdbcType=VARCHAR},
+      </if>
+      <if test="credits != null">
+        #{credits,jdbcType=VARCHAR},
+      </if>
+      <if test="cardId != null">
+        #{cardId,jdbcType=INTEGER},
+      </if>
+      <if test="photoPath != null">
+        #{photoPath,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null">
+        #{areaCode,jdbcType=INTEGER},
+      </if>
+      <if test="contactCardId != null">
+        #{contactCardId,jdbcType=INTEGER},
+      </if>
+      <if test="countryCode != null">
+        #{countryCode,jdbcType=INTEGER},
+      </if>
+      <if test="provinceCode != null">
+        #{provinceCode,jdbcType=INTEGER},
+      </if>
+      <if test="cityCode != null">
+        #{cityCode,jdbcType=INTEGER},
+      </if>
+      <if test="districtCode != null">
+        #{districtCode,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creditCertification != null">
+        #{creditCertification,jdbcType=INTEGER},
+      </if>
+      <if test="creditVerification != null">
+        #{creditVerification,jdbcType=INTEGER},
+      </if>
+      <if test="publicizeScore != null">
+        #{publicizeScore,jdbcType=INTEGER},
+      </if>
+      <if test="keyword != null">
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mika.credit.facade.gugu.model.Publicize">
+    update publicize
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="fullCompany != null">
+        full_company = #{fullCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="abbCompany != null">
+        abb_company = #{abbCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null">
+        fax = #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="zip != null">
+        zip = #{zip,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="website != null">
+        website = #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publicizeFlagId != null">
+        publicize_flag_id = #{publicizeFlagId,jdbcType=INTEGER},
+      </if>
+      <if test="introduction != null">
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="creditRiskScore != null">
+        credit_risk_score = #{creditRiskScore,jdbcType=VARCHAR},
+      </if>
+      <if test="viewCount != null">
+        view_count = #{viewCount,jdbcType=VARCHAR},
+      </if>
+      <if test="mainProducts != null">
+        main_products = #{mainProducts,jdbcType=VARCHAR},
+      </if>
+      <if test="repaymentIndex != null">
+        repayment_index = #{repaymentIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="creditriskEvaluation != null">
+        creditRisk_evaluation = #{creditriskEvaluation,jdbcType=VARCHAR},
+      </if>
+      <if test="credits != null">
+        credits = #{credits,jdbcType=VARCHAR},
+      </if>
+      <if test="cardId != null">
+        card_id = #{cardId,jdbcType=INTEGER},
+      </if>
+      <if test="photoPath != null">
+        photo_path = #{photoPath,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null">
+        area_code = #{areaCode,jdbcType=INTEGER},
+      </if>
+      <if test="contactCardId != null">
+        contact_card_id = #{contactCardId,jdbcType=INTEGER},
+      </if>
+      <if test="countryCode != null">
+        country_code = #{countryCode,jdbcType=INTEGER},
+      </if>
+      <if test="provinceCode != null">
+        province_code = #{provinceCode,jdbcType=INTEGER},
+      </if>
+      <if test="cityCode != null">
+        city_code = #{cityCode,jdbcType=INTEGER},
+      </if>
+      <if test="districtCode != null">
+        district_code = #{districtCode,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creditCertification != null">
+        credit_certification = #{creditCertification,jdbcType=INTEGER},
+      </if>
+      <if test="creditVerification != null">
+        credit_verification = #{creditVerification,jdbcType=INTEGER},
+      </if>
+      <if test="publicizeScore != null">
+        publicize_score = #{publicizeScore,jdbcType=INTEGER},
+      </if>
+      <if test="keyword != null">
+        keyword = #{keyword,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mika.credit.facade.gugu.model.Publicize">
+    update publicize
+    set user_id = #{userId,jdbcType=INTEGER},
+      full_company = #{fullCompany,jdbcType=VARCHAR},
+      abb_company = #{abbCompany,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      fax = #{fax,jdbcType=VARCHAR},
+      zip = #{zip,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      website = #{website,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      publicize_flag_id = #{publicizeFlagId,jdbcType=INTEGER},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      credit_risk_score = #{creditRiskScore,jdbcType=VARCHAR},
+      view_count = #{viewCount,jdbcType=VARCHAR},
+      main_products = #{mainProducts,jdbcType=VARCHAR},
+      repayment_index = #{repaymentIndex,jdbcType=VARCHAR},
+      creditRisk_evaluation = #{creditriskEvaluation,jdbcType=VARCHAR},
+      credits = #{credits,jdbcType=VARCHAR},
+      card_id = #{cardId,jdbcType=INTEGER},
+      photo_path = #{photoPath,jdbcType=VARCHAR},
+      area_code = #{areaCode,jdbcType=INTEGER},
+      contact_card_id = #{contactCardId,jdbcType=INTEGER},
+      country_code = #{countryCode,jdbcType=INTEGER},
+      province_code = #{provinceCode,jdbcType=INTEGER},
+      city_code = #{cityCode,jdbcType=INTEGER},
+      district_code = #{districtCode,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      credit_certification = #{creditCertification,jdbcType=INTEGER},
+      credit_verification = #{creditVerification,jdbcType=INTEGER},
+      publicize_score = #{publicizeScore,jdbcType=INTEGER},
+      keyword = #{keyword,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.front.cn.dao.impl.FyggDaoImpl" >
+  <cache eviction="LRU" type="com.mika.credit.common.core.mybatis.cache.redis.sharded.MybatiesRedisCache" />
+  <resultMap id="BaseResultMap" type="com.mika.credit.common.entity.report.cn.Fygg" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="crefo_no" property="crefoNo" jdbcType="VARCHAR" />
+    <result column="fygg_id" property="fyggId" jdbcType="VARCHAR" />
+    <result column="sort_time" property="sortTime" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+    <result column="body" property="body" jdbcType="LONGVARCHAR" />
+    <result column="court" property="court" jdbcType="LONGVARCHAR" />
+    <result column="notice_type" property="noticeType" jdbcType="LONGVARCHAR" />
+    <result column="layout" property="layout" jdbcType="LONGVARCHAR" />
+    <result column="pname" property="pname" jdbcType="LONGVARCHAR" />
+    <result column="related_party" property="relatedParty" jdbcType="LONGVARCHAR" />
+    <result column="full_report_id" property="fullReportId" jdbcType="INTEGER" />
+    <result column="pname_en" property="pnameEN" jdbcType="LONGVARCHAR" />
+    <result column="court_en" property="courtEN" jdbcType="LONGVARCHAR" />
+    <result column="notice_type_en" property="noticeTypeEN" jdbcType="LONGVARCHAR" />
+    <result column="body_en" property="bodyEN" jdbcType="LONGVARCHAR" />
+  </resultMap>
+
+  <sql id="table"> fygg </sql>
+
+  <sql id="Base_Column_List" >
+    id, crefo_no, fygg_id, sort_time, update_time,
+    body, court, notice_type, layout, pname, related_party,full_report_id,pname_en,court_en,notice_type_en,body_en
+  </sql>
+
+  <sql id="condition_sql">
+    <if test="id != null" >
+      and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="crefoNo != null" >
+      and crefo_no = #{crefoNo,jdbcType=VARCHAR}
+    </if>
+    <if test="fyggId != null" >
+      and fygg_id = #{fyggId,jdbcType=VARCHAR}
+    </if>
+    <if test="sortTime != null" >
+      and sort_time = #{sortTime,jdbcType=VARCHAR}
+    </if>
+    <if test="updateTime != null" >
+      and update_time = #{updateTime,jdbcType=VARCHAR}
+    </if>
+    <if test="body != null" >
+      and body = #{body,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="court != null" >
+      and court = #{court,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="noticeType != null" >
+      and notice_type = #{noticeType,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="layout != null" >
+      and layout = #{layout,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="pname != null" >
+      and pname = #{pname,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="relatedParty != null" >
+      and related_party = #{relatedParty,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="fullReportId != null" >
+      and full_report_id = #{fullReportId,jdbcType=INTEGER}
+    </if>
+    <if test="pnameEN != null" >
+      and pname_en = #{pnameEN,jdbcType=INTEGER}
+    </if>
+    <if test="courtEN != null" >
+      and court_en = #{courtEN,jdbcType=INTEGER}
+    </if>
+    <if test="noticeTypeEN != null" >
+      and notice_type_en = #{noticeTypeEN,jdbcType=INTEGER}
+    </if>
+    <if test="bodyEN != null" >
+      and body_en = #{bodyEN,jdbcType=LONGVARCHAR}
+    </if>
+  </sql>
+
+  <select id="getById" parameterType="Integer" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    where ID = #{id}
+  </select>
+
+  <select id="listBy" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <select id="listPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+    <![CDATA[ order by ID desc]]>
+  </select>
+
+  <select id="listPageCount" parameterType="java.util.Map" resultType="Integer">
+    select count(1) from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <insert id="insert" parameterType="com.mika.credit.common.entity.report.cn.Fygg" keyProperty="id" useGeneratedKeys="true">
+    insert into
+    <include refid="table" />
+    (id, crefo_no, fygg_id,
+    sort_time, update_time, body,
+    court, notice_type, layout,
+    pname, related_party,full_report_id,pname_en,court_en,notice_type_en,body_en)
+    values (#{id,jdbcType=INTEGER}, #{crefoNo,jdbcType=VARCHAR}, #{fyggId,jdbcType=VARCHAR},
+    #{sortTime,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, #{body,jdbcType=LONGVARCHAR},
+    #{court,jdbcType=LONGVARCHAR}, #{noticeType,jdbcType=LONGVARCHAR}, #{layout,jdbcType=LONGVARCHAR},
+    #{pname,jdbcType=LONGVARCHAR}, #{relatedParty,jdbcType=LONGVARCHAR},#{fullReportId,jdbcType=INTEGER},
+    #{pnameEN,jdbcType=LONGVARCHAR},#{courtEN,jdbcType=LONGVARCHAR},#{noticeTypeEN,jdbcType=LONGVARCHAR},#{bodyEN,jdbcType=LONGVARCHAR})
+  </insert>
+
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from
+    <include refid="table" />
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <update id="update" parameterType="com.mika.credit.common.entity.report.cn.Fygg" >
+    update fygg
+    set crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      fygg_id = #{fyggId,jdbcType=VARCHAR},
+      sort_time = #{sortTime,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      body = #{body,jdbcType=LONGVARCHAR},
+      court = #{court,jdbcType=LONGVARCHAR},
+      notice_type = #{noticeType,jdbcType=LONGVARCHAR},
+      layout = #{layout,jdbcType=LONGVARCHAR},
+      pname = #{pname,jdbcType=LONGVARCHAR},
+      related_party = #{relatedParty,jdbcType=LONGVARCHAR},
+	  full_report_id = #{fullReportId,jdbcType=INTEGER},
+      pname_en = #{pnameEN,jdbcType=LONGVARCHAR},
+      court_en = #{courtEN,jdbcType=LONGVARCHAR},
+      notice_type_en = #{noticeTypeEN,jdbcType=LONGVARCHAR},
+      body_en = #{bodyEN,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <insert id="insertSelective" parameterType="com.mika.credit.common.entity.report.cn.Fygg" >
+    insert into fygg
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="crefoNo != null" >
+        crefo_no,
+      </if>
+      <if test="fyggId != null" >
+        fygg_id,
+      </if>
+      <if test="sortTime != null" >
+        sort_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="body != null" >
+        body,
+      </if>
+      <if test="court != null" >
+        court,
+      </if>
+      <if test="noticeType != null" >
+        notice_type,
+      </if>
+      <if test="layout != null" >
+        layout,
+      </if>
+      <if test="pname != null" >
+        pname,
+      </if>
+      <if test="relatedParty != null" >
+        related_party,
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id,
+      </if>
+      <if test="pnameEN != null" >
+        pname_en,
+      </if>
+      <if test="courtEN != null" >
+        court_en,
+      </if>
+      <if test="noticeTypeEN != null" >
+        notice_type_en,
+      </if>
+      <if test="bodyEN != null" >
+        body_en,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="crefoNo != null" >
+        #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="fyggId != null" >
+        #{fyggId,jdbcType=VARCHAR},
+      </if>
+      <if test="sortTime != null" >
+        #{sortTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="body != null" >
+        #{body,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="court != null" >
+        #{court,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="noticeType != null" >
+        #{noticeType,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="layout != null" >
+        #{layout,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="pname != null" >
+        #{pname,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="relatedParty != null" >
+        #{relatedParty,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        #{fullReportId,jdbcType=INTEGER},
+      </if>
+      <if test="pnameEN != null" >
+        #{pnameEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="courtEN != null" >
+        #{courtEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="noticeTypeEN != null" >
+        #{noticeTypeEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bodyEN != null" >
+        #{bodyEN,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateSelective" parameterType="com.mika.credit.common.entity.report.cn.Fygg" >
+    update fygg
+    <set >
+      <if test="crefoNo != null" >
+        crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="fyggId != null" >
+        fygg_id = #{fyggId,jdbcType=VARCHAR},
+      </if>
+      <if test="sortTime != null" >
+        sort_time = #{sortTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="body != null" >
+        body = #{body,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="court != null" >
+        court = #{court,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="noticeType != null" >
+        notice_type = #{noticeType,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="layout != null" >
+        layout = #{layout,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="pname != null" >
+        pname = #{pname,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="relatedParty != null" >
+        related_party = #{relatedParty,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id = #{fullReportId,jdbcType=INTEGER},
+      </if>
+      <if test="pnameEN != null" >
+        pname_en = #{pnameEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="courtEN != null" >
+        court_en = #{courtEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="noticeTypeEN != null" >
+        notice_type_en = #{noticeTypeEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bodyEN != null" >
+        body_en = #{bodyEN,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+</mapper>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	   xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://code.alibabatech.com/schema/dubbo
+         http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+         http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+	<!-- 
+	  dubbo:registry 标签一些属性的说明：
+	      1）register是否向此注册中心注册服务，如果设为false，将只订阅，不注册。
+	      2）check注册中心不存在时，是否报错。
+	      3）subscribe是否向此注册中心订阅服务，如果设为false，将只注册，不订阅。
+	      4）timeout注册中心请求超时时间(毫秒)。
+	      5）address可以Zookeeper集群配置，地址可以多个以逗号隔开等。
+ 	 dubbo:service标签的一些属性说明：
+	     1）interface服务接口的路径
+	     2）ref引用对应的实现类的Bean的ID
+	     3）registry向指定注册中心注册，在多个注册中心时使用，值为<dubbo:registry>的id属性，多个注册中心ID用逗号分隔，如果不想将该服务注册到任何registry，可将值设为N/A
+	     4）register 默认true ，该协议的服务是否注册到注册中心。
+	 -->
+    <!-- 提供方应用信息，用于计算依赖关系 -->
+    <dubbo:application name="credit-web-gugu"/>
+      <!-- 等待时间，重试0次 -->
+    <dubbo:consumer timeout="600000" retries="0" check="false" lazy="true"/>
+
+    <!--&lt;!&ndash; 基础信息 &ndash;&gt;-->
+      <!--<dubbo:reference id="userService"  interface="com.mika.service.UserService"-->
+      		 <!--url="dubbo://localhost:20880"/>-->
+
+	<!-- 使用zookeeper注册中心暴露服务地址 -->
+	<!-- 到这里调用 -->
+	<dubbo:registry protocol="zookeeper" address="${dubbo.registry.address.client}" id="zookeeperClient" />
+
+	<!-- 调用dubbo接口 -->
+	<dubbo:reference id="businessCardService" interface="com.mika.credit.facade.gugu.service.BusinessCardService"
+					 check="false" version="1.0" url="" registry="zookeeperClient"  protocol="dubbo" timeout="600000"/>
+	<dubbo:reference id="cardNoteService" interface="com.mika.credit.facade.gugu.service.CardNoteService"
+					 check="false" version="1.0" url="" registry="zookeeperClient"  protocol="dubbo" timeout="600000"/>
+	<dubbo:reference id="feedbackService" interface="com.mika.credit.facade.gugu.service.FeedbackService"
+					 check="false" version="1.0" url="" registry="zookeeperClient"  protocol="dubbo" timeout="600000"/>
+	<!--<dubbo:reference id="helpService" interface="com.mika.credit.facade.gugu.service.HelpService"-->
+					 <!--check="false" version="1.0" url="" registry="zookeeperClient"  protocol="dubbo" timeout="600000"/>-->
+	<dubbo:reference id="iconRecordService" interface="com.mika.credit.facade.gugu.service.IconRecordService"
+					 check="false" version="1.0" url="" registry="zookeeperClient"  protocol="dubbo" timeout="600000"/>
+	<dubbo:reference id="informService" interface="com.mika.credit.facade.gugu.service.InformService"
+					 check="false" version="1.0" url="" registry="zookeeperClient"  protocol="dubbo" timeout="600000"/>
+	<dubbo:reference id="regionService" interface="com.mika.credit.facade.gugu.service.RegionService"
+					 check="false" version="1.0" url="" registry="zookeeperClient"  protocol="dubbo" timeout="600000"/>
+	<dubbo:reference id="shareRecordService" interface="com.mika.credit.facade.gugu.service.ShareRecordService"
+					 check="false" version="1.0" url="" registry="zookeeperClient"  protocol="dubbo" timeout="600000"/>
+	<dubbo:reference id="userService" interface="com.mika.credit.facade.gugu.service.UserService"
+					 check="false" version="1.0" url="" registry="zookeeperClient"  protocol="dubbo" timeout="600000"/>
+	<dubbo:reference id="versionService" interface="com.mika.credit.facade.gugu.service.VersionService"
+					 check="false" version="1.0" url="" registry="zookeeperClient"  protocol="dubbo" timeout="600000"/>
+	<dubbo:reference id="scanningCardService" interface="com.mika.credit.facade.gugu.service.ScanningCardService"
+					 check="false" version="1.0" url="" registry="zookeeperClient"  protocol="dubbo" timeout="600000"/>
+	<dubbo:reference id="indexDetailService" interface="com.mika.credit.facade.gugu.service.IndexDetailService"
+					 check="false" version="1.0" url="" registry="zookeeperClient"  protocol="dubbo" timeout="600000"/>
+	<dubbo:reference id="certificationService" interface="com.mika.credit.facade.gugu.service.CertificationService"
+					 check="false" version="1.0" url="" registry="zookeeperClient"  protocol="dubbo" timeout="600000"/>
+	<dubbo:reference id="verificationResultService" interface="com.mika.credit.facade.gugu.service.VerificationResultService"
+					 check="false" version="1.0" url="" registry="zookeeperClient"  protocol="dubbo" timeout="600000"/>
+	<dubbo:reference id="gongShangService" interface="com.mika.credit.facade.gugu.service.GongShangService"
+					 check="false" version="1.0" url="" registry="zookeeperClient"  protocol="dubbo" timeout="600000"/>
+	<dubbo:reference id="orderInfoService" interface="com.mika.credit.facade.gugu.service.OrderInfoService"
+					 check="false" version="1.0" url="" registry="zookeeperClient"  protocol="dubbo" timeout="600000"/>
+	<dubbo:reference id="rechargeService" interface="com.mika.credit.facade.gugu.service.RechargeService"
+					 check="false" version="1.0" url="" registry="zookeeperClient"  protocol="dubbo" timeout="600000"/>
+	<dubbo:reference id="publicizeService" interface="com.mika.credit.facade.gugu.service.PublicizeService"
+					 check="false" version="1.0" url="" registry="zookeeperClient"  protocol="dubbo" timeout="600000"/>
+	<dubbo:reference id="financingService" interface="com.mika.credit.facade.gugu.service.FinancingService"
+					 check="false" version="1.0" url="" registry="zookeeperClient"  protocol="dubbo" timeout="600000"/>
+	<dubbo:reference id="messageQuestionService" interface="com.mika.credit.facade.gugu.service.MessageQuestionService"
+					 check="false" version="1.0" url="" registry="zookeeperClient"  protocol="dubbo" timeout="600000"/>
+</beans>

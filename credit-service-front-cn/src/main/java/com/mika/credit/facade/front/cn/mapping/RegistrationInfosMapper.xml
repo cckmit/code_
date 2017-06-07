@@ -1,0 +1,1248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.front.cn.dao.impl.RegistrationInfosDaoImpl" >
+  <cache eviction="LRU" type="com.mika.credit.common.core.mybatis.cache.redis.sharded.MybatiesRedisCache" />
+  <resultMap id="BaseResultMap" type="com.mika.credit.common.entity.report.cn.RegistrationInfos" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <id column="crefo_no" property="crefoNo" jdbcType="VARCHAR" />
+    <result column="central_tax" property="centralTax" jdbcType="VARCHAR" />
+    <result column="chn_code" property="chnCode" jdbcType="VARCHAR" />
+    <result column="competition_id" property="competitionId" jdbcType="INTEGER" />
+    <result column="city_cn" property="cityCN" jdbcType="VARCHAR" />
+    <result column="city_code" property="cityCode" jdbcType="INTEGER" />
+    <result column="city_en" property="cityEN" jdbcType="VARCHAR" />
+    <result column="country_cn" property="countryCN" jdbcType="VARCHAR" />
+    <result column="country_en" property="countryEN" jdbcType="VARCHAR" />
+    <result column="company_properties_id" property="companyPropertiesId" jdbcType="INTEGER" />
+    <result column="credit_code" property="creditCode" jdbcType="VARCHAR" />
+    <result column="company_status_id" property="companyStatusId" jdbcType="INTEGER" />
+    <result column="company_status" property="companyStatus" jdbcType="VARCHAR" />
+    <result column="company_status_en" property="companyStatusEN" jdbcType="VARCHAR" />
+    <result column="company_types_id" property="companyTypesId" jdbcType="INTEGER" />
+    <result column="company_type" property="companyType" jdbcType="VARCHAR" />
+    <result column="company_type_en" property="companyTypeEN" jdbcType="VARCHAR" />
+    <result column="competitiveness" property="competitiveness" jdbcType="VARCHAR" />
+    <result column="competitiveness_en" property="competitivenessEN" jdbcType="VARCHAR" />
+    <result column="deadline" property="deadline" jdbcType="VARCHAR" />
+    <result column="deadline_en" property="deadlineEN" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="VARCHAR" />
+    <result column="delist_date" property="delistDate" jdbcType="VARCHAR" />
+    <result column="district_code" property="districtCode" jdbcType="INTEGER" />
+    <result column="establish_date" property="establishDate" jdbcType="VARCHAR" />
+    <result column="eu_code" property="euCode" jdbcType="VARCHAR" />
+    <result column="ent_ownership" property="entOwnership" jdbcType="VARCHAR" />
+    <result column="ent_ownership_en" property="entOwnershipEN" jdbcType="VARCHAR" />
+    <result column="int_code" property="intCode" jdbcType="VARCHAR" />
+    <result column="is_market" property="isMarket" jdbcType="VARCHAR" />
+    <result column="land_tax" property="landTax" jdbcType="VARCHAR" />
+    <result column="legal_name_cn" property="legalNameCN" jdbcType="VARCHAR" />
+    <result column="legal_name_en" property="legalNameEN" jdbcType="VARCHAR" />
+    <result column="legal_position_cn" property="legalPositionCN" jdbcType="VARCHAR" />
+    <result column="legal_position_en" property="legalPositionEN" jdbcType="VARCHAR" />
+    <result column="market_code" property="marketCode" jdbcType="VARCHAR" />
+    <result column="market_date" property="marketDate" jdbcType="VARCHAR" />
+    <result column="market_cities_id" property="marketCitiesId" jdbcType="INTEGER" />
+    <result column="market_address" property="marketAddress" jdbcType="VARCHAR" />
+    <result column="market_address_en" property="marketAddressEN" jdbcType="VARCHAR" />
+    <result column="org" property="org" jdbcType="VARCHAR" />
+    <result column="paid_capital" property="paidCapital" jdbcType="VARCHAR" />
+    <result column="paid_capitalnote" property="paidCapitalnote" jdbcType="VARCHAR" />
+    <result column="paid_currency" property="paidCurrency" jdbcType="VARCHAR" />
+    <result column="paid_currency_en" property="paidCurrencyEN" jdbcType="VARCHAR" />
+    <result column="paid_rate" property="paidRate" jdbcType="VARCHAR" />
+    <result column="paid_real_capital" property="paidRealCapital" jdbcType="DOUBLE" />
+    <result column="paid_currency_id" property="paidCurrencyId" jdbcType="INTEGER" />
+    <result column="province_cn" property="provinceCN" jdbcType="VARCHAR" />
+    <result column="province_code" property="provinceCode" jdbcType="INTEGER" />
+    <result column="province_en" property="provinceEN" jdbcType="VARCHAR" />
+    <result column="reg_currency_id" property="regCurrencyId" jdbcType="INTEGER" />
+    <result column="reg" property="reg" jdbcType="VARCHAR" />
+    <result column="reg_capital" property="regCapital" jdbcType="VARCHAR" />
+    <result column="reg_capital_en" property="regCapitalEN" jdbcType="VARCHAR" />
+    <result column="reg_capitalnote" property="regCapitalnote" jdbcType="VARCHAR" />
+    <result column="reg_city_code" property="regCityCode" jdbcType="INTEGER" />
+    <result column="reg_currency" property="regCurrency" jdbcType="VARCHAR" />
+    <result column="reg_currency_en" property="regCurrencyEN" jdbcType="VARCHAR" />
+    <result column="reg_district_code" property="regDistrictCode" jdbcType="INTEGER" />
+    <result column="reg_province_code" property="regProvinceCode" jdbcType="INTEGER" />
+    <result column="reg_rate" property="regRate" jdbcType="VARCHAR" />
+    <result column="reg_real_capital" property="regRealCapital" jdbcType="DOUBLE" />
+    <result column="registration_cn" property="registrationCN" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+    <result column="us_code" property="usCode" jdbcType="VARCHAR" />
+    <result column="zip" property="zip" jdbcType="VARCHAR" />
+    <result column="building_cn" property="buildingCN" jdbcType="LONGVARCHAR" />
+    <result column="building_en" property="buildingEN" jdbcType="LONGVARCHAR" />
+    <result column="business_scope_cn" property="businessScopeCN" jdbcType="LONGVARCHAR" />
+    <result column="business_scope_en" property="businessScopeEN" jdbcType="LONGVARCHAR" />
+    <result column="district_cn" property="districtCN" jdbcType="LONGVARCHAR" />
+    <result column="district_en" property="districtEN" jdbcType="LONGVARCHAR" />
+    <result column="registration_en" property="registrationEN" jdbcType="LONGVARCHAR" />
+    <result column="street_cn" property="streetCN" jdbcType="LONGVARCHAR" />
+    <result column="street_en" property="streetEN" jdbcType="LONGVARCHAR" />
+    <result column="full_report_id" property="fullReportId" jdbcType="INTEGER" />
+    <result column="name_cn" property="nameCN" jdbcType="VARCHAR" />
+    <result column="name_en" property="nameEN" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="table"> registration_infos </sql>
+
+  <sql id="Base_Column_List" >
+    id, crefo_no, central_tax, chn_code, competition_id, city_cn, city_code, city_en, country_cn, country_en, 
+    company_properties_id, credit_code, company_status_id,company_status,company_status_en, company_types_id,company_type,
+    company_type_en,competitiveness,competitiveness_en, deadline, deadline_en, del_flag, delist_date, district_code,
+    establish_date, eu_code,ent_ownership,ent_ownership_en, int_code, is_market, land_tax, legal_name_cn, legal_name_en,
+    legal_position_cn, legal_position_en, market_code, market_date, market_cities_id,market_address,
+     market_address_en,org, paid_capital,
+    paid_capitalnote, paid_currency,paid_currency_en, paid_rate, paid_real_capital, paid_currency_id, province_cn,
+    province_code, province_en, reg_currency_id, reg, reg_capital, reg_capitalnote, reg_city_code, 
+    reg_currency,reg_currency_en, reg_district_code, reg_province_code, reg_rate, reg_real_capital, registration_cn,
+    update_time, us_code, zip,
+    building_cn, building_en, business_scope_cn, business_scope_en, district_cn, district_en, 
+    registration_en, street_cn, street_en,full_report_id,reg_capital_en,name_cn,name_en
+  </sql>
+
+  <sql id="condition_sql">
+    <if test="id != null" >
+      and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="crefoNo != null" >
+      and crefo_no = #{crefoNo,jdbcType=VARCHAR}
+    </if>
+    <if test="centralTax != null" >
+      and central_tax = #{centralTax,jdbcType=VARCHAR}
+    </if>
+    <if test="chnCode != null" >
+      and chn_code = #{chnCode,jdbcType=VARCHAR}
+    </if>
+    <if test="competitionId != null" >
+      and competition_id = #{competitionId,jdbcType=INTEGER}
+    </if>
+    <if test="cityCN != null" >
+      and city_cn = #{cityCN,jdbcType=VARCHAR}
+    </if>
+    <if test="cityCode != null" >
+      and city_code = #{cityCode,jdbcType=INTEGER}
+    </if>
+    <if test="cityEN != null" >
+      and city_en = #{cityEN,jdbcType=VARCHAR}
+    </if>
+    <if test="countryCN != null" >
+      and country_cn = #{countryCN,jdbcType=VARCHAR}
+    </if>
+    <if test="countryEN != null" >
+      and country_en = #{countryEN,jdbcType=VARCHAR}
+    </if>
+    <if test="companyPropertiesId != null" >
+      and company_properties_id = #{companyPropertiesId,jdbcType=INTEGER}
+    </if>
+    <if test="creditCode != null" >
+      and credit_code = #{creditCode,jdbcType=VARCHAR}
+    </if>
+    <if test="companyStatusId != null" >
+      and company_status_id = #{companyStatusId,jdbcType=INTEGER}
+    </if>
+    <if test="companyStatus != null" >
+      and company_status = #{companyStatus,jdbcType=VARCHAR}
+    </if>
+    <if test="companyStatusEN != null" >
+      and company_status_en = #{companyStatusEN,jdbcType=VARCHAR}
+    </if>
+    <if test="companyTypesId != null" >
+      and company_types_id = #{companyTypesId,jdbcType=INTEGER}
+    </if>
+    <if test="companyType != null" >
+      and company_type = #{companyType,jdbcType=VARCHAR}
+    </if>
+    <if test="companyTypeEN != null" >
+      and company_type_en = #{companyTypeEN,jdbcType=VARCHAR}
+    </if>
+    <if test="competitiveness != null" >
+      and competitiveness = #{competitiveness,jdbcType=VARCHAR}
+    </if>
+    <if test="competitivenessEN != null" >
+      and competitiveness_en = #{competitivenessEN,jdbcType=VARCHAR}
+    </if>
+    <if test="deadline != null" >
+      and deadline = #{deadline,jdbcType=VARCHAR}
+    </if>
+    <if test="deadlineEN != null" >
+      and deadline_en = #{deadlineEN,jdbcType=VARCHAR}
+    </if>
+    <if test="delFlag != null" >
+      and del_flag = #{delFlag,jdbcType=VARCHAR}
+    </if>
+    <if test="delistDate != null" >
+      and delist_date = #{delistDate,jdbcType=VARCHAR}
+    </if>
+    <if test="districtCode != null" >
+      and district_code = #{districtCode,jdbcType=INTEGER}
+    </if>
+    <if test="establishDate != null" >
+      and establish_date = #{establishDate,jdbcType=VARCHAR}
+    </if>
+    <if test="euCode != null" >
+      and eu_code = #{euCode,jdbcType=VARCHAR}
+    </if>
+    <if test="entOwnership != null" >
+      and ent_ownership = #{entOwnership,jdbcType=VARCHAR}
+    </if>
+    <if test="entOwnershipEN != null" >
+      and ent_ownership_en = #{entOwnershipEN,jdbcType=VARCHAR}
+    </if>
+    <if test="intCode != null" >
+      and int_code = #{intCode,jdbcType=VARCHAR}
+    </if>
+    <if test="isMarket != null" >
+      and is_market = #{isMarket,jdbcType=VARCHAR}
+    </if>
+    <if test="landTax != null" >
+      and land_tax = #{landTax,jdbcType=VARCHAR}
+    </if>
+    <if test="legalNameCN != null" >
+      and legal_name_cn = #{legalNameCN,jdbcType=VARCHAR}
+    </if>
+    <if test="legalNameEN != null" >
+      and legal_name_en = #{legalNameEN,jdbcType=VARCHAR}
+    </if>
+    <if test="legalPositionCN != null" >
+      and legal_position_cn = #{legalPositionCN,jdbcType=VARCHAR}
+    </if>
+    <if test="legalPositionEN != null" >
+      and legal_position_en = #{legalPositionEN,jdbcType=VARCHAR}
+    </if>
+    <if test="marketCode != null" >
+      and market_code = #{marketCode,jdbcType=VARCHAR}
+    </if>
+    <if test="marketDate != null" >
+      and market_date = #{marketDate,jdbcType=VARCHAR}
+    </if>
+    <if test="marketCitiesId != null" >
+      and market_cities_id = #{marketCitiesId,jdbcType=INTEGER}
+    </if>
+    <if test="marketAddress != null" >
+      and market_address = #{marketAddress,jdbcType=VARCHAR}
+    </if>
+    <if test="marketAddressEN != null" >
+      and market_address_en = #{marketAddressEN,jdbcType=VARCHAR}
+    </if>
+    <if test="org != null" >
+      and org = #{org,jdbcType=VARCHAR}
+    </if>
+    <if test="paidCapital != null" >
+      and paid_capital = #{paidCapital,jdbcType=VARCHAR}
+    </if>
+    <if test="paidCapitalnote != null" >
+      and paid_capitalnote = #{paidCapitalnote,jdbcType=VARCHAR}
+    </if>
+    <if test="paidCurrency != null" >
+      and paid_currency = #{paidCurrency,jdbcType=VARCHAR}
+    </if>
+    <if test="paidCurrencyEN != null" >
+      and paid_currency_en = #{paidCurrencyEN,jdbcType=VARCHAR}
+    </if>
+    <if test="paidRate != null" >
+      and paid_rate = #{paidRate,jdbcType=VARCHAR}
+    </if>
+    <if test="paidRealCapital != null" >
+      and paid_real_capital = #{paidRealCapital,jdbcType=DOUBLE}
+    </if>
+    <if test="paidCurrencyId != null" >
+      and paid_currency_id = #{paidCurrencyId,jdbcType=INTEGER}
+    </if>
+    <if test="provinceCN != null" >
+      and province_cn = #{provinceCN,jdbcType=VARCHAR}
+    </if>
+    <if test="provinceCode != null" >
+      and province_code = #{provinceCode,jdbcType=INTEGER}
+    </if>
+    <if test="provinceEN != null" >
+      and province_en = #{provinceEN,jdbcType=VARCHAR}
+    </if>
+    <if test="regCurrencyId != null" >
+      and reg_currency_id = #{regCurrencyId,jdbcType=INTEGER}
+    </if>
+    <if test="reg != null" >
+      and reg = #{reg,jdbcType=VARCHAR}
+    </if>
+    <if test="regCapital != null" >
+      and reg_capital = #{regCapital,jdbcType=VARCHAR}
+    </if>
+    <if test="regCapitalnote != null" >
+      and reg_capitalnote = #{regCapitalnote,jdbcType=VARCHAR}
+    </if>
+    <if test="regCityCode != null" >
+      and reg_city_code = #{regCityCode,jdbcType=INTEGER}
+    </if>
+    <if test="regCurrency != null" >
+      and reg_currency = #{regCurrency,jdbcType=VARCHAR}
+    </if>
+    <if test="regCurrencyEN != null" >
+      and reg_currency_en = #{regCurrencyEN,jdbcType=VARCHAR}
+    </if>
+    <if test="regDistrictCode != null" >
+      and reg_district_code = #{regDistrictCode,jdbcType=INTEGER}
+    </if>
+    <if test="regProvinceCode != null" >
+      and reg_province_code = #{regProvinceCode,jdbcType=INTEGER}
+    </if>
+    <if test="regRate != null" >
+      and reg_rate = #{regRate,jdbcType=VARCHAR}
+    </if>
+    <if test="regRealCapital != null" >
+      and reg_real_capital = #{regRealCapital,jdbcType=DOUBLE}
+    </if>
+    <if test="registrationCN != null" >
+      and registration_cn = #{registrationCN,jdbcType=VARCHAR}
+    </if>
+    <if test="updateTime != null" >
+      and update_time = #{updateTime,jdbcType=VARCHAR}
+    </if>
+    <if test="usCode != null" >
+      and us_code = #{usCode,jdbcType=VARCHAR}
+    </if>
+    <if test="zip != null" >
+      and zip = #{zip,jdbcType=VARCHAR}
+    </if>
+    <if test="buildingCN != null" >
+      and building_cn = #{buildingCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="buildingEN != null" >
+      and building_en = #{buildingEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="businessScopeCN != null" >
+      and business_scope_cn = #{businessScopeCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="businessScopeEN != null" >
+      and business_scope_en = #{businessScopeEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="districtCN != null" >
+      and district_cn = #{districtCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="districtEN != null" >
+      and district_en = #{districtEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="registrationEN != null" >
+      and registration_en = #{registrationEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="streetCN != null" >
+      and street_cn = #{streetCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="streetEN != null" >
+      and street_en = #{streetEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="fullReportId != null" >
+      and full_report_id = #{fullReportId,jdbcType=INTEGER}
+    </if>
+    <if test="regCapitalEN != null" >
+      and reg_capital_en = #{regCapitalEN,jdbcType=VARCHAR}
+    </if>
+    <if test="nameCN != null" >
+      and name_cn = #{nameCN,jdbcType=VARCHAR}
+    </if>
+    <if test="NameEN != null" >
+      and name_en = #{nameEN,jdbcType=VARCHAR}
+    </if>
+  </sql>
+
+  <select id="getById" parameterType="Integer" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    where id = #{id}
+  </select>
+
+  <select id="listBy" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <select id="listPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+    <![CDATA[ order by id desc]]>
+  </select>
+
+  <select id="listPageCount" parameterType="java.util.Map" resultType="Integer">
+    select count(1) from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <insert id="insert" parameterType="com.mika.credit.common.entity.report.cn.RegistrationInfos" keyProperty="id" useGeneratedKeys="true">
+    insert into
+    <include refid="table" />
+    (id, crefo_no, central_tax,
+    chn_code, competition_id, city_cn,
+    city_code, city_en, country_cn,
+    country_en, company_properties_id, credit_code,
+    company_status_id,company_status,company_status_en, company_types_id,company_type,company_type_en,
+    competitiveness,competitiveness_en,deadline,deadline_en, del_flag, delist_date,
+    district_code, establish_date, eu_code,ent_ownership,ent_ownership_en,
+    int_code, is_market, land_tax,
+    legal_name_cn, legal_name_en, legal_position_cn,
+    legal_position_en, market_code, market_date,
+    market_cities_id,market_address,market_address_en, org, paid_capital,
+    paid_capitalnote, paid_currency, paid_currency_en, paid_rate,
+    paid_real_capital, paid_currency_id, province_cn,
+    province_code, province_en, reg_currency_id,
+    reg, reg_capital, reg_capitalnote,
+    reg_city_code, reg_currency, reg_currency_en, reg_district_code,
+    reg_province_code, reg_rate, reg_real_capital,
+    registration_cn, update_time, us_code,
+    zip, building_cn, building_en,
+    business_scope_cn, business_scope_en,
+    district_cn, district_en, registration_en,
+    street_cn, street_en,full_report_id,reg_capital_en,name_cn,name_en)
+    values (#{id,jdbcType=INTEGER}, #{crefoNo,jdbcType=VARCHAR}, #{centralTax,jdbcType=VARCHAR},
+    #{chnCode,jdbcType=VARCHAR}, #{competitionId,jdbcType=INTEGER}, #{cityCN,jdbcType=VARCHAR},
+    #{cityCode,jdbcType=INTEGER}, #{cityEN,jdbcType=VARCHAR}, #{countryCN,jdbcType=VARCHAR},
+    #{countryEN,jdbcType=VARCHAR}, #{companyPropertiesId,jdbcType=INTEGER}, #{creditCode,jdbcType=VARCHAR},
+    #{companyStatusId,jdbcType=INTEGER},#{companyStatus,jdbcType=VARCHAR},#{companyStatusEN,jdbcType=VARCHAR},
+    #{companyTypesId,jdbcType=INTEGER}, #{companyType,jdbcType=VARCHAR},
+    #{companyTypeEN,jdbcType=VARCHAR},#{competitiveness,jdbcType=VARCHAR},
+    #{competitivenessEN,jdbcType=VARCHAR},#{deadline,jdbcType=VARCHAR},
+    #{deadlineEN,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR}, #{delistDate,jdbcType=VARCHAR},
+    #{districtCode,jdbcType=INTEGER}, #{establishDate,jdbcType=VARCHAR}, #{euCode,jdbcType=VARCHAR},
+    #{entOwnership,jdbcType=VARCHAR}, #{entOwnershipEN,jdbcType=VARCHAR},
+    #{intCode,jdbcType=VARCHAR}, #{isMarket,jdbcType=VARCHAR}, #{landTax,jdbcType=VARCHAR},
+    #{legalNameCN,jdbcType=VARCHAR}, #{legalNameEN,jdbcType=VARCHAR}, #{legalPositionCN,jdbcType=VARCHAR},
+    #{legalPositionEN,jdbcType=VARCHAR}, #{marketCode,jdbcType=VARCHAR}, #{marketDate,jdbcType=VARCHAR},
+    #{marketCitiesId,jdbcType=INTEGER},#{marketAddress,jdbcType=VARCHAR},#{marketAddressEN,jdbcType=VARCHAR},
+    #{org,jdbcType=VARCHAR}, #{paidCapital,jdbcType=VARCHAR},
+    #{paidCapitalnote,jdbcType=VARCHAR}, #{paidCurrency,jdbcType=VARCHAR},
+    #{paidCurrencyEN,jdbcType=VARCHAR}, #{paidRate,jdbcType=VARCHAR},
+    #{paidRealCapital,jdbcType=DOUBLE}, #{paidCurrencyId,jdbcType=INTEGER}, #{provinceCN,jdbcType=VARCHAR},
+    #{provinceCode,jdbcType=INTEGER}, #{provinceEN,jdbcType=VARCHAR}, #{regCurrencyId,jdbcType=INTEGER},
+    #{reg,jdbcType=VARCHAR}, #{regCapital,jdbcType=VARCHAR}, #{regCapitalnote,jdbcType=VARCHAR},
+    #{regCityCode,jdbcType=INTEGER}, #{regCurrency,jdbcType=VARCHAR},
+    #{regCurrencyEN,jdbcType=VARCHAR}, #{regDistrictCode,jdbcType=INTEGER},
+    #{regProvinceCode,jdbcType=INTEGER}, #{regRate,jdbcType=VARCHAR}, #{regRealCapital,jdbcType=DOUBLE},
+    #{registrationCN,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, #{usCode,jdbcType=VARCHAR},
+    #{zip,jdbcType=VARCHAR}, #{buildingCN,jdbcType=LONGVARCHAR}, #{buildingEN,jdbcType=LONGVARCHAR},
+    #{businessScopeCN,jdbcType=LONGVARCHAR}, #{businessScopeEN,jdbcType=LONGVARCHAR},
+    #{districtCN,jdbcType=LONGVARCHAR}, #{districtEN,jdbcType=LONGVARCHAR}, #{registrationEN,jdbcType=LONGVARCHAR},
+    #{streetCN,jdbcType=LONGVARCHAR}, #{streetEN,jdbcType=LONGVARCHAR},#{fullReportId,jdbcType=INTEGER}, #{regCapitalEN,jdbcType=VARCHAR},
+    #{nameCN,jdbcType=VARCHAR}, #{nameEN,jdbcType=VARCHAR})
+  </insert>
+
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from
+    <include refid="table" />
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <update id="update" parameterType="com.mika.credit.common.entity.report.cn.RegistrationInfos" >
+    update registration_infos
+    set crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      central_tax = #{centralTax,jdbcType=VARCHAR},
+      chn_code = #{chnCode,jdbcType=VARCHAR},
+      competition_id = #{competitionId,jdbcType=INTEGER},
+      city_cn = #{cityCN,jdbcType=VARCHAR},
+      city_code = #{cityCode,jdbcType=INTEGER},
+      city_en = #{cityEN,jdbcType=VARCHAR},
+      country_cn = #{countryCN,jdbcType=VARCHAR},
+      country_en = #{countryEN,jdbcType=VARCHAR},
+      company_properties_id = #{companyPropertiesId,jdbcType=INTEGER},
+      credit_code = #{creditCode,jdbcType=VARCHAR},
+      company_status_id = #{companyStatusId,jdbcType=INTEGER},
+      company_status = #{companyStatus,jdbcType=VARCHAR},
+      company_status_en = #{companyStatusEN,jdbcType=VARCHAR},
+      company_types_id = #{companyTypesId,jdbcType=INTEGER},
+      company_type = #{companyType,jdbcType=VARCHAR},
+      company_type_en = #{companyTypeEN,jdbcType=VARCHAR},
+      competitiveness = #{competitiveness,jdbcType=VARCHAR},
+      competitiveness_en = #{competitivenessEN,jdbcType=VARCHAR},
+      deadline = #{deadline,jdbcType=VARCHAR},
+      deadline_en = #{deadlineEN,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=VARCHAR},
+      delist_date = #{delistDate,jdbcType=VARCHAR},
+      district_code = #{districtCode,jdbcType=INTEGER},
+      establish_date = #{establishDate,jdbcType=VARCHAR},
+      eu_code = #{euCode,jdbcType=VARCHAR},
+      ent_ownership = #{entOwnership,jdbcType=VARCHAR},
+      ent_ownership_en = #{entOwnershipEN,jdbcType=VARCHAR},
+      int_code = #{intCode,jdbcType=VARCHAR},
+      is_market = #{isMarket,jdbcType=VARCHAR},
+      land_tax = #{landTax,jdbcType=VARCHAR},
+      legal_name_cn = #{legalNameCN,jdbcType=VARCHAR},
+      legal_name_en = #{legalNameEN,jdbcType=VARCHAR},
+      legal_position_cn = #{legalPositionCN,jdbcType=VARCHAR},
+      legal_position_en = #{legalPositionEN,jdbcType=VARCHAR},
+      market_code = #{marketCode,jdbcType=VARCHAR},
+      market_date = #{marketDate,jdbcType=VARCHAR},
+      market_cities_id = #{marketCitiesId,jdbcType=INTEGER},
+      market_address = #{marketAddress,jdbcType=VARCHAR},
+      market_address_en = #{marketAddressEN,jdbcType=VARCHAR},
+      org = #{org,jdbcType=VARCHAR},
+      paid_capital = #{paidCapital,jdbcType=VARCHAR},
+      paid_capitalnote = #{paidCapitalnote,jdbcType=VARCHAR},
+      paid_currency = #{paidCurrency,jdbcType=VARCHAR},
+      paid_currency_en = #{paidCurrencyEN,jdbcType=VARCHAR},
+      paid_rate = #{paidRate,jdbcType=VARCHAR},
+      paid_real_capital = #{paidRealCapital,jdbcType=DOUBLE},
+      paid_currency_id = #{paidCurrencyId,jdbcType=INTEGER},
+      province_cn = #{provinceCN,jdbcType=VARCHAR},
+      province_code = #{provinceCode,jdbcType=INTEGER},
+      province_en = #{provinceEN,jdbcType=VARCHAR},
+      reg_currency_id = #{regCurrencyId,jdbcType=INTEGER},
+      reg = #{reg,jdbcType=VARCHAR},
+      reg_capital = #{regCapital,jdbcType=VARCHAR},
+      reg_capitalnote = #{regCapitalnote,jdbcType=VARCHAR},
+      reg_city_code = #{regCityCode,jdbcType=INTEGER},
+      reg_currency = #{regCurrency,jdbcType=VARCHAR},
+      reg_currency_en = #{regCurrencyEN,jdbcType=VARCHAR},
+      reg_district_code = #{regDistrictCode,jdbcType=INTEGER},
+      reg_province_code = #{regProvinceCode,jdbcType=INTEGER},
+      reg_rate = #{regRate,jdbcType=VARCHAR},
+      reg_real_capital = #{regRealCapital,jdbcType=DOUBLE},
+      registration_cn = #{registrationCN,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      us_code = #{usCode,jdbcType=VARCHAR},
+      zip = #{zip,jdbcType=VARCHAR},
+      full_report_id = #{fullReportId,jdbcType=INTEGER},
+      reg_capital_en = #{regCapitalEN,jdbcType=VARCHAR},
+      name_cn = #{nameCN,jdbcType=VARCHAR},
+      name_en = #{nameEN,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <insert id="insertSelective" parameterType="com.mika.credit.common.entity.report.cn.RegistrationInfos" >
+    insert into registration_infos
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="crefoNo != null" >
+        crefo_no,
+      </if>
+      <if test="centralTax != null" >
+        central_tax,
+      </if>
+      <if test="chnCode != null" >
+        chn_code,
+      </if>
+      <if test="competitionId != null" >
+        competition_id,
+      </if>
+      <if test="cityCN != null" >
+        city_cn,
+      </if>
+      <if test="cityCode != null" >
+        city_code,
+      </if>
+      <if test="cityEN != null" >
+        city_en,
+      </if>
+      <if test="countryCN != null" >
+        country_cn,
+      </if>
+      <if test="countryEN != null" >
+        country_en,
+      </if>
+      <if test="companyPropertiesId != null" >
+        company_properties_id,
+      </if>
+      <if test="creditCode != null" >
+        credit_code,
+      </if>
+      <if test="companyStatusId != null" >
+        company_status_id,
+      </if>
+      <if test="companyStatus != null" >
+        company_status,
+      </if>
+      <if test="companyStatusEN != null" >
+        company_status_en,
+      </if>
+      <if test="companyTypesId != null" >
+        company_types_id,
+      </if>
+      <if test="companyType != null" >
+        company_type,
+      </if>
+      <if test="companyTypeEN != null" >
+        company_type_en,
+      </if>
+      <if test="competitiveness != null" >
+        competitiveness,
+      </if>
+      <if test="competitivenessEN != null" >
+        competitiveness_en,
+      </if>
+      <if test="deadline != null" >
+        deadline,
+      </if>
+      <if test="deadlineEN != null" >
+        deadline_en,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="delistDate != null" >
+        delist_date,
+      </if>
+      <if test="districtCode != null" >
+        district_code,
+      </if>
+      <if test="establishDate != null" >
+        establish_date,
+      </if>
+      <if test="euCode != null" >
+        eu_code,
+      </if>
+      <if test="entOwnership != null" >
+        ent_ownership,
+      </if>
+      <if test="entOwnershipEN != null" >
+        ent_ownership_en,
+      </if>
+      <if test="intCode != null" >
+        int_code,
+      </if>
+      <if test="isMarket != null" >
+        is_market,
+      </if>
+      <if test="landTax != null" >
+        land_tax,
+      </if>
+      <if test="legalNameCN != null" >
+        legal_name_cn,
+      </if>
+      <if test="legalNameEN != null" >
+        legal_name_en,
+      </if>
+      <if test="legalPositionCN != null" >
+        legal_position_cn,
+      </if>
+      <if test="legalPositionEN != null" >
+        legal_position_en,
+      </if>
+      <if test="marketCode != null" >
+        market_code,
+      </if>
+      <if test="marketDate != null" >
+        market_date,
+      </if>
+      <if test="marketCitiesId != null" >
+        market_cities_id,
+      </if>
+      <if test="marketAddress != null" >
+        market_address,
+      </if>
+      <if test="marketAddressEN != null" >
+        market_address_en,
+      </if>
+      <if test="org != null" >
+        org,
+      </if>
+      <if test="paidCapital != null" >
+        paid_capital,
+      </if>
+      <if test="paidCapitalnote != null" >
+        paid_capitalnote,
+      </if>
+      <if test="paidCurrency != null" >
+        paid_currency,
+      </if>
+      <if test="paidCurrencyEN != null" >
+        paid_currency_en,
+      </if>
+      <if test="paidRate != null" >
+        paid_rate,
+      </if>
+      <if test="paidRealCapital != null" >
+        paid_real_capital,
+      </if>
+      <if test="paidCurrencyId != null" >
+        paid_currency_id,
+      </if>
+      <if test="provinceCN != null" >
+        province_cn,
+      </if>
+      <if test="provinceCode != null" >
+        province_code,
+      </if>
+      <if test="provinceEN != null" >
+        province_en,
+      </if>
+      <if test="regCurrencyId != null" >
+        reg_currency_id,
+      </if>
+      <if test="reg != null" >
+        reg,
+      </if>
+      <if test="regCapital != null" >
+        reg_capital,
+      </if>
+      <if test="regCapitalnote != null" >
+        reg_capitalnote,
+      </if>
+      <if test="regCityCode != null" >
+        reg_city_code,
+      </if>
+      <if test="regCurrency != null" >
+        reg_currency,
+      </if>
+      <if test="regCurrencyEN != null" >
+        reg_currency_en,
+      </if>
+      <if test="regDistrictCode != null" >
+        reg_district_code,
+      </if>
+      <if test="regProvinceCode != null" >
+        reg_province_code,
+      </if>
+      <if test="regRate != null" >
+        reg_rate,
+      </if>
+      <if test="regRealCapital != null" >
+        reg_real_capital,
+      </if>
+      <if test="registrationCN != null" >
+        registration_cn,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="usCode != null" >
+        us_code,
+      </if>
+      <if test="zip != null" >
+        zip,
+      </if>
+      <if test="buildingCN != null" >
+        building_cn,
+      </if>
+      <if test="buildingEN != null" >
+        building_en,
+      </if>
+      <if test="businessScopeCN != null" >
+        business_scope_cn,
+      </if>
+      <if test="businessScopeEN != null" >
+        business_scope_en,
+      </if>
+      <if test="districtCN != null" >
+        district_cn,
+      </if>
+      <if test="districtEN != null" >
+        district_en,
+      </if>
+      <if test="registrationEN != null" >
+        registration_en,
+      </if>
+      <if test="streetCN != null" >
+        street_cn,
+      </if>
+      <if test="streetEN != null" >
+        street_en,
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id,
+      </if>
+      <if test="regCapitalEN != null" >
+        reg_capital_en,
+      </if>
+      <if test="nameCN != null" >
+        name_cn,
+      </if>
+      <if test="nameEN != null" >
+        name_en,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="crefoNo != null" >
+        #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="centralTax != null" >
+        #{centralTax,jdbcType=VARCHAR},
+      </if>
+      <if test="chnCode != null" >
+        #{chnCode,jdbcType=VARCHAR},
+      </if>
+      <if test="competitionId != null" >
+        #{competitionId,jdbcType=INTEGER},
+      </if>
+      <if test="cityCN != null" >
+        #{cityCN,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null" >
+        #{cityCode,jdbcType=INTEGER},
+      </if>
+      <if test="cityEN != null" >
+        #{cityEN,jdbcType=VARCHAR},
+      </if>
+      <if test="countryCN != null" >
+        #{countryCN,jdbcType=VARCHAR},
+      </if>
+      <if test="countryEN != null" >
+        #{countryEN,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPropertiesId != null" >
+        #{companyPropertiesId,jdbcType=INTEGER},
+      </if>
+      <if test="creditCode != null" >
+        #{creditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyStatusId != null" >
+        #{companyStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="companyStatus != null" >
+        #{companyStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="companyStatusEN != null" >
+        #{companyStatusEN,jdbcType=VARCHAR},
+      </if>
+      <if test="companyTypesId != null" >
+        #{companyTypesId,jdbcType=INTEGER},
+      </if>
+      <if test="companyType != null" >
+        #{companyType,jdbcType=VARCHAR},
+      </if>
+      <if test="companyTypeEN != null" >
+        #{companyTypeEN,jdbcType=VARCHAR},
+      </if>
+      <if test="competitiveness != null" >
+        #{competitiveness,jdbcType=VARCHAR},
+      </if>
+      <if test="competitivenessEN != null" >
+        #{competitivenessEN,jdbcType=VARCHAR},
+      </if>
+      <if test="deadline != null" >
+        #{deadline,jdbcType=VARCHAR},
+      </if>
+      <if test="deadlineEN != null" >
+        #{deadlineEN,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="delistDate != null" >
+        #{delistDate,jdbcType=VARCHAR},
+      </if>
+      <if test="districtCode != null" >
+        #{districtCode,jdbcType=INTEGER},
+      </if>
+      <if test="establishDate != null" >
+        #{establishDate,jdbcType=VARCHAR},
+      </if>
+      <if test="euCode != null" >
+        #{euCode,jdbcType=VARCHAR},
+      </if>
+      <if test="entOwnership != null" >
+        #{entOwnership,jdbcType=VARCHAR},
+      </if>
+      <if test="entOwnershipEN != null" >
+        #{entOwnershipEN,jdbcType=VARCHAR},
+      </if>
+      <if test="intCode != null" >
+        #{intCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isMarket != null" >
+        #{isMarket,jdbcType=VARCHAR},
+      </if>
+      <if test="landTax != null" >
+        #{landTax,jdbcType=VARCHAR},
+      </if>
+      <if test="legalNameCN != null" >
+        #{legalNameCN,jdbcType=VARCHAR},
+      </if>
+      <if test="legalNameEN != null" >
+        #{legalNameEN,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPositionCN != null" >
+        #{legalPositionCN,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPositionEN != null" >
+        #{legalPositionEN,jdbcType=VARCHAR},
+      </if>
+      <if test="marketCode != null" >
+        #{marketCode,jdbcType=VARCHAR},
+      </if>
+      <if test="marketDate != null" >
+        #{marketDate,jdbcType=VARCHAR},
+      </if>
+      <if test="marketCitiesId != null" >
+        #{marketCitiesId,jdbcType=INTEGER},
+      </if>
+      <if test="marketAddress != null" >
+        #{marketAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="marketAddressEN != null" >
+        #{marketAddressEN,jdbcType=VARCHAR},
+      </if>
+      <if test="org != null" >
+        #{org,jdbcType=VARCHAR},
+      </if>
+      <if test="paidCapital != null" >
+        #{paidCapital,jdbcType=VARCHAR},
+      </if>
+      <if test="paidCapitalnote != null" >
+        #{paidCapitalnote,jdbcType=VARCHAR},
+      </if>
+      <if test="paidCurrency != null" >
+        #{paidCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="paidCurrencyEN != null" >
+        #{paidCurrencyEN,jdbcType=VARCHAR},
+      </if>
+      <if test="paidRate != null" >
+        #{paidRate,jdbcType=VARCHAR},
+      </if>
+      <if test="paidRealCapital != null" >
+        #{paidRealCapital,jdbcType=DOUBLE},
+      </if>
+      <if test="paidCurrencyId != null" >
+        #{paidCurrencyId,jdbcType=INTEGER},
+      </if>
+      <if test="provinceCN != null" >
+        #{provinceCN,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceCode != null" >
+        #{provinceCode,jdbcType=INTEGER},
+      </if>
+      <if test="provinceEN != null" >
+        #{provinceEN,jdbcType=VARCHAR},
+      </if>
+      <if test="regCurrencyId != null" >
+        #{regCurrencyId,jdbcType=INTEGER},
+      </if>
+      <if test="reg != null" >
+        #{reg,jdbcType=VARCHAR},
+      </if>
+      <if test="regCapital != null" >
+        #{regCapital,jdbcType=VARCHAR},
+      </if>
+      <if test="regCapitalnote != null" >
+        #{regCapitalnote,jdbcType=VARCHAR},
+      </if>
+      <if test="regCityCode != null" >
+        #{regCityCode,jdbcType=INTEGER},
+      </if>
+      <if test="regCurrency != null" >
+        #{regCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="regCurrencyEN != null" >
+        #{regCurrencyEN,jdbcType=VARCHAR},
+      </if>
+      <if test="regDistrictCode != null" >
+        #{regDistrictCode,jdbcType=INTEGER},
+      </if>
+      <if test="regProvinceCode != null" >
+        #{regProvinceCode,jdbcType=INTEGER},
+      </if>
+      <if test="regRate != null" >
+        #{regRate,jdbcType=VARCHAR},
+      </if>
+      <if test="regRealCapital != null" >
+        #{regRealCapital,jdbcType=DOUBLE},
+      </if>
+      <if test="registrationCN != null" >
+        #{registrationCN,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="usCode != null" >
+        #{usCode,jdbcType=VARCHAR},
+      </if>
+      <if test="zip != null" >
+        #{zip,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingCN != null" >
+        #{buildingCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="buildingEN != null" >
+        #{buildingEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="businessScopeCN != null" >
+        #{businessScopeCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="businessScopeEN != null" >
+        #{businessScopeEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="districtCN != null" >
+        #{districtCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="districtEN != null" >
+        #{districtEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="registrationEN != null" >
+        #{registrationEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="streetCN != null" >
+        #{streetCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="streetEN != null" >
+        #{streetEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        #{fullReportId,jdbcType=INTEGER},
+      </if>
+      <if test="regCapitalEN != null" >
+        #{regCapitalEN,jdbcType=VARCHAR},
+      </if>
+      <if test="nameCN != null" >
+        #{nameCN,jdbcType=VARCHAR},
+      </if>
+      <if test="nameEN != null" >
+        #{NameEN,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateSelective" parameterType="com.mika.credit.common.entity.report.cn.RegistrationInfos" >
+    update registration_infos
+    <set >
+      <if test="crefoNo != null" >
+        crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="centralTax != null" >
+        central_tax = #{centralTax,jdbcType=VARCHAR},
+      </if>
+      <if test="chnCode != null" >
+        chn_code = #{chnCode,jdbcType=VARCHAR},
+      </if>
+      <if test="competitionId != null" >
+        competition_id = #{competitionId,jdbcType=INTEGER},
+      </if>
+      <if test="cityCN != null" >
+        city_cn = #{cityCN,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null" >
+        city_code = #{cityCode,jdbcType=INTEGER},
+      </if>
+      <if test="cityEN != null" >
+        city_en = #{cityEN,jdbcType=VARCHAR},
+      </if>
+      <if test="countryCN != null" >
+        country_cn = #{countryCN,jdbcType=VARCHAR},
+      </if>
+      <if test="countryEN != null" >
+        country_en = #{countryEN,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPropertiesId != null" >
+        company_properties_id = #{companyPropertiesId,jdbcType=INTEGER},
+      </if>
+      <if test="creditCode != null" >
+        credit_code = #{creditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyStatusId != null" >
+        company_status_id = #{companyStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="companyStatus != null" >
+        company_status = #{companyStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="companyStatusEN != null" >
+        company_status_en = #{companyStatusEN,jdbcType=VARCHAR},
+      </if>
+      <if test="companyTypesId != null" >
+        company_types_id = #{companyTypesId,jdbcType=INTEGER},
+      </if>
+      <if test="companyType != null" >
+        company_type = #{companyType,jdbcType=INTEGER},
+      </if>
+      <if test="companyTypeEN != null" >
+        company_type_en = #{companyTypeEN,jdbcType=INTEGER},
+      </if>
+      <if test="competitiveness != null" >
+        competitiveness = #{competitiveness,jdbcType=VARCHAR},
+      </if>
+      <if test="competitivenessEN != null" >
+        competitiveness_en = #{competitivenessEN,jdbcType=VARCHAR},
+      </if>
+      <if test="deadline != null" >
+        deadline = #{deadline,jdbcType=VARCHAR},
+      </if>
+      <if test="deadlineEN != null" >
+        deadline_en = #{deadlineEN,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="delistDate != null" >
+        delist_date = #{delistDate,jdbcType=VARCHAR},
+      </if>
+      <if test="districtCode != null" >
+        district_code = #{districtCode,jdbcType=INTEGER},
+      </if>
+      <if test="establishDate != null" >
+        establish_date = #{establishDate,jdbcType=VARCHAR},
+      </if>
+      <if test="euCode != null" >
+        eu_code = #{euCode,jdbcType=VARCHAR},
+      </if>
+      <if test="entOwnership != null" >
+        ent_ownership = #{entOwnership,jdbcType=VARCHAR},
+      </if>
+      <if test="entOwnershipEN != null" >
+        ent_ownership_en = #{entOwnershipEN,jdbcType=VARCHAR},
+      </if>
+      <if test="intCode != null" >
+        int_code = #{intCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isMarket != null" >
+        is_market = #{isMarket,jdbcType=VARCHAR},
+      </if>
+      <if test="landTax != null" >
+        land_tax = #{landTax,jdbcType=VARCHAR},
+      </if>
+      <if test="legalNameCN != null" >
+        legal_name_cn = #{legalNameCN,jdbcType=VARCHAR},
+      </if>
+      <if test="legalNameEN != null" >
+        legal_name_en = #{legalNameEN,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPositionCN != null" >
+        legal_position_cn = #{legalPositionCN,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPositionEN != null" >
+        legal_position_en = #{legalPositionEN,jdbcType=VARCHAR},
+      </if>
+      <if test="marketCode != null" >
+        market_code = #{marketCode,jdbcType=VARCHAR},
+      </if>
+      <if test="marketDate != null" >
+        market_date = #{marketDate,jdbcType=VARCHAR},
+      </if>
+      <if test="marketCitiesId != null" >
+        market_cities_id = #{marketCitiesId,jdbcType=INTEGER},
+      </if>
+      <if test="marketAddress != null" >
+        market_address = #{marketAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="marketAddress != null" >
+        market_address_en = #{marketAddressEN,jdbcType=VARCHAR},
+      </if>
+      <if test="org != null" >
+        org = #{org,jdbcType=VARCHAR},
+      </if>
+      <if test="paidCapital != null" >
+        paid_capital = #{paidCapital,jdbcType=VARCHAR},
+      </if>
+      <if test="paidCapitalnote != null" >
+        paid_capitalnote = #{paidCapitalnote,jdbcType=VARCHAR},
+      </if>
+      <if test="paidCurrency != null" >
+        paid_currency = #{paidCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="paidCurrencyEN != null" >
+        paid_currency_en = #{paidCurrencyEN,jdbcType=VARCHAR},
+      </if>
+      <if test="paidRate != null" >
+        paid_rate = #{paidRate,jdbcType=VARCHAR},
+      </if>
+      <if test="paidRealCapital != null" >
+        paid_real_capital = #{paidRealCapital,jdbcType=DOUBLE},
+      </if>
+      <if test="paidCurrencyId != null" >
+        paid_currency_id = #{paidCurrencyId,jdbcType=INTEGER},
+      </if>
+      <if test="provinceCN != null" >
+        province_cn = #{provinceCN,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceCode != null" >
+        province_code = #{provinceCode,jdbcType=INTEGER},
+      </if>
+      <if test="provinceEN != null" >
+        province_en = #{provinceEN,jdbcType=VARCHAR},
+      </if>
+      <if test="regCurrencyId != null" >
+        reg_currency_id = #{regCurrencyId,jdbcType=INTEGER},
+      </if>
+      <if test="reg != null" >
+        reg = #{reg,jdbcType=VARCHAR},
+      </if>
+      <if test="regCapital != null" >
+        reg_capital = #{regCapital,jdbcType=VARCHAR},
+      </if>
+      <if test="regCapitalnote != null" >
+        reg_capitalnote = #{regCapitalnote,jdbcType=VARCHAR},
+      </if>
+      <if test="regCityCode != null" >
+        reg_city_code = #{regCityCode,jdbcType=INTEGER},
+      </if>
+      <if test="regCurrency != null" >
+        reg_currency = #{regCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="regCurrencyEN != null" >
+        reg_currency_en = #{regCurrencyEN,jdbcType=VARCHAR},
+      </if>
+      <if test="regDistrictCode != null" >
+        reg_district_code = #{regDistrictCode,jdbcType=INTEGER},
+      </if>
+      <if test="regProvinceCode != null" >
+        reg_province_code = #{regProvinceCode,jdbcType=INTEGER},
+      </if>
+      <if test="regRate != null" >
+        reg_rate = #{regRate,jdbcType=VARCHAR},
+      </if>
+      <if test="regRealCapital != null" >
+        reg_real_capital = #{regRealCapital,jdbcType=DOUBLE},
+      </if>
+      <if test="registration_cn != null" >
+        registration_cn = #{registration_cn,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="usCode != null" >
+        us_code = #{usCode,jdbcType=VARCHAR},
+      </if>
+      <if test="zip != null" >
+        zip = #{zip,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingCN != null" >
+        building_cn = #{buildingCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="buildingEN != null" >
+        building_en = #{buildingEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="businessScopeCN != null" >
+        business_scope_cn = #{businessScopeCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="businessScopeEN != null" >
+        business_scope_en = #{businessScopeEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="districtCN != null" >
+        district_cn = #{districtCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="districtEN != null" >
+        district_en = #{districtEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="registrationEN != null" >
+        registration_en = #{registrationEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="streetCN != null" >
+        street_cn = #{streetCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="streetEN != null" >
+        street_en = #{streetEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id = #{fullReportId,jdbcType=INTEGER},
+      </if>
+      <if test="regCapitalEN != null" >
+        reg_capital_en = #{regCapitalEN,jdbcType=VARCHAR},
+      </if>
+      <if test="nameCN != null" >
+        name_cn = #{nameCN,jdbcType=VARCHAR},
+      </if>
+      <if test="nameEN != null" >
+        name_en = #{nameEN,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

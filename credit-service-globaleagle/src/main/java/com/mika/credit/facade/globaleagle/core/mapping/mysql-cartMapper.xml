@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.globaleagle.core.dao.CartMapper" >
+  <cache eviction="LRU" type="com.mika.credit.common.core.mybatis.cache.redis.sharded.MybatiesRedisCache" />
+  <resultMap id="BaseResultMap" type="com.mika.credit.facade.globaleagle.core.model.Cart" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="crefo_no" property="crefoNo" jdbcType="VARCHAR" />
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+    <result column="company_no" property="companyNo" jdbcType="VARCHAR" />
+    <result column="order_level" property="orderLevel" jdbcType="VARCHAR" />
+    <result column="currency" property="currency" jdbcType="VARCHAR" />
+    <result column="online_price" property="onlinePrice" jdbcType="REAL" />
+    <result column="online_express_price" property="onlineExpressPrice" jdbcType="REAL" />
+    <result column="online_normail_delivery_days" property="onlineNormailDeliveryDays" jdbcType="INTEGER" />
+    <result column="online_express_delivery_days" property="onlineExpressDeliveryDays" jdbcType="INTEGER" />
+    <result column="offline_price" property="offlinePrice" jdbcType="REAL" />
+    <result column="offline_express_price" property="offlineExpressPrice" jdbcType="REAL" />
+    <result column="offline_normail_delivery_days" property="offlineNormailDeliveryDays" jdbcType="INTEGER" />
+    <result column="offline_express_delivery_days" property="offlineExpressDeliveryDays" jdbcType="INTEGER" />
+    <result column="total_price" property="totalPrice" jdbcType="REAL" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="customer_id" property="customerId" jdbcType="INTEGER" />
+    <result column="company_info_id" property="companyInfoId" jdbcType="INTEGER" />
+    <result column="country_id" property="countryId" jdbcType="INTEGER" />
+    <result column="country_name" property="countryName" jdbcType="VARCHAR" />
+    <result column="is_custom_order" property="isCustomOrder" jdbcType="VARCHAR" />
+    <result column="upload_pic_path" property="uploadPicPath" jdbcType="VARCHAR" />
+    <result column="is_china_order" property="isChinaOrder" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, company_name, company_no, order_level, currency, online_price, online_express_price, 
+    online_normail_delivery_days, online_express_delivery_days, offline_price, offline_express_price, 
+    offline_normail_delivery_days, offline_express_delivery_days, create_date, update_date, 
+    customer_id, company_info_id, country_id, is_custom_order,total_price,upload_pic_path,crefo_no,is_china_order,
+    (select cn_name from country c where c.id=country_id) as country_name
+  </sql>
+  <select id="selectCountSelective" resultType="java.lang.Integer" parameterType="com.mika.credit.facade.globaleagle.core.model.Cart" >
+    select
+    count(1)
+    from cart
+    <where>
+      <if test="id != null" >
+        and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="companyNo != null" >
+        and company_no = #{companyNo,jdbcType=VARCHAR}
+      </if>
+      <if test="companyName != null" >
+        and company_name= #{companyName,jdbcType=VARCHAR}
+      </if>
+      <if test="orderLevel != null" >
+        and order_level= #{orderLevel,jdbcType=VARCHAR}
+      </if>
+      <if test="createDate != null" >
+        and create_date = #{createDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateDate != null" >
+        and update_date = #{updateDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="customerId != null" >
+        and customer_id = #{customerId,jdbcType=INTEGER}
+      </if>
+      <if test="countryId != null" >
+        and country_id = #{countryId,jdbcType=INTEGER}
+      </if>
+      <if test="companyInfoId != null" >
+        and company_info_id = #{companyInfoId,jdbcType=INTEGER}
+      </if>
+      <if test="isCustomOrder != null" >
+        and is_custom_order = #{isCustomOrder,jdbcType=VARCHAR}
+      </if>
+      <if test="uploadPicPath != null" >
+        and upload_pic_path = #{uploadPicPath,jdbcType=VARCHAR}
+      </if>
+      <if test="crefoNo != null" >
+        and crefo_no=#{crefoNo,jdbcType=VARCHAR}
+      </if>
+      <if test="isChinaOrder != null" >
+        and is_china_order=#{isChinaOrder,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  <select id="selectSelective" resultMap="BaseResultMap" parameterType="com.mika.credit.facade.globaleagle.core.model.Cart" >
+    select
+    <include refid="Base_Column_List" />
+    from cart
+    <where>
+      <if test="id != null" >
+        and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="companyNo != null" >
+        and company_no = #{companyNo,jdbcType=VARCHAR}
+      </if>
+      <if test="companyName != null" >
+        and company_name= #{companyName,jdbcType=VARCHAR}
+      </if>
+      <if test="orderLevel != null" >
+        and order_level= #{orderLevel,jdbcType=VARCHAR}
+      </if>
+      <if test="createDate != null" >
+        and create_date = #{createDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateDate != null" >
+        and update_date = #{updateDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="customerId != null" >
+        and customer_id = #{customerId,jdbcType=INTEGER}
+      </if>
+      <if test="countryId != null" >
+        and country_id = #{countryId,jdbcType=INTEGER}
+      </if>
+      <if test="companyInfoId != null" >
+        and company_info_id = #{companyInfoId,jdbcType=INTEGER}
+      </if>
+      <if test="isCustomOrder != null" >
+        and is_custom_order = #{isCustomOrder,jdbcType=VARCHAR}
+      </if>
+      <if test="uploadPicPath != null" >
+        and upload_pic_path = #{uploadPicPath,jdbcType=VARCHAR}
+      </if>
+      <if test="crefoNo != null" >
+        and crefo_no=#{crefoNo,jdbcType=VARCHAR}
+      </if>
+      <if test="isChinaOrder != null" >
+        and is_china_order=#{isChinaOrder,jdbcType=VARCHAR}
+      </if>
+    </where>
+    order by id desc
+  </select>
+  <select id="selectInIds" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from cart
+    where id in
+    <foreach item="ids" index="index" collection="list" open="(" separator="," close=")">
+      #{ids}
+    </foreach>
+  </select>
+  <select id="selectLastRecord" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from cart
+    order by id DESC
+    limit 1
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cart
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cart
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mika.credit.facade.globaleagle.core.model.Cart" useGeneratedKeys="true" keyProperty="id">
+    insert into cart (id, company_name, company_no, 
+      order_level, currency, online_price, 
+      online_express_price, online_normail_delivery_days, 
+      online_express_delivery_days, offline_price, offline_express_price, 
+      offline_normail_delivery_days, offline_express_delivery_days, 
+      create_date, update_date, customer_id, 
+      company_info_id, country_id, is_custom_order,total_price,upload_pic_path,crefo_no,is_china_order
+      )
+    values (#{id,jdbcType=INTEGER}, #{companyName,jdbcType=VARCHAR}, #{companyNo,jdbcType=VARCHAR}, 
+      #{orderLevel,jdbcType=VARCHAR}, #{currency,jdbcType=VARCHAR}, #{onlinePrice,jdbcType=REAL}, 
+      #{onlineExpressPrice,jdbcType=REAL}, #{onlineNormailDeliveryDays,jdbcType=INTEGER}, 
+      #{onlineExpressDeliveryDays,jdbcType=INTEGER}, #{offlinePrice,jdbcType=REAL}, #{offlineExpressPrice,jdbcType=REAL}, 
+      #{offlineNormailDeliveryDays,jdbcType=INTEGER}, #{offlineExpressDeliveryDays,jdbcType=INTEGER}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{customerId,jdbcType=INTEGER}, 
+      #{companyInfoId,jdbcType=INTEGER}, #{countryId,jdbcType=INTEGER}, #{isCustomOrder,jdbcType=VARCHAR},
+      #{totalPrice,jdbcType=REAL}, #{uploadPicPath,jdbcType=VARCHAR}, #{crefoNo,jdbcType=VARCHAR},#{isChinaOrder,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mika.credit.facade.globaleagle.core.model.Cart" useGeneratedKeys="true" keyProperty="id">
+    insert into cart
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="companyName != null" >
+        company_name,
+      </if>
+      <if test="companyNo != null" >
+        company_no,
+      </if>
+      <if test="orderLevel != null" >
+        order_level,
+      </if>
+      <if test="currency != null" >
+        currency,
+      </if>
+      <if test="onlinePrice != null" >
+        online_price,
+      </if>
+      <if test="onlineExpressPrice != null" >
+        online_express_price,
+      </if>
+      <if test="onlineNormailDeliveryDays != null" >
+        online_normail_delivery_days,
+      </if>
+      <if test="onlineExpressDeliveryDays != null" >
+        online_express_delivery_days,
+      </if>
+      <if test="offlinePrice != null" >
+        offline_price,
+      </if>
+      <if test="offlineExpressPrice != null" >
+        offline_express_price,
+      </if>
+      <if test="offlineNormailDeliveryDays != null" >
+        offline_normail_delivery_days,
+      </if>
+      <if test="offlineExpressDeliveryDays != null" >
+        offline_express_delivery_days,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="companyInfoId != null" >
+        company_info_id,
+      </if>
+      <if test="countryId != null" >
+        country_id,
+      </if>
+      <if test="isCustomOrder != null" >
+        is_custom_order,
+      </if>
+      <if test="totalPrice != null" >
+        total_price,
+      </if>
+      <if test="uploadPicPath != null" >
+        upload_pic_path,
+      </if>
+      <if test="crefoNo != null" >
+        crefo_no,
+      </if>
+      <if test="isChinaOrder != null" >
+        is_china_order,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyNo != null" >
+        #{companyNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderLevel != null" >
+        #{orderLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="currency != null" >
+        #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="onlinePrice != null" >
+        #{onlinePrice,jdbcType=REAL},
+      </if>
+      <if test="onlineExpressPrice != null" >
+        #{onlineExpressPrice,jdbcType=REAL},
+      </if>
+      <if test="onlineNormailDeliveryDays != null" >
+        #{onlineNormailDeliveryDays,jdbcType=INTEGER},
+      </if>
+      <if test="onlineExpressDeliveryDays != null" >
+        #{onlineExpressDeliveryDays,jdbcType=INTEGER},
+      </if>
+      <if test="offlinePrice != null" >
+        #{offlinePrice,jdbcType=REAL},
+      </if>
+      <if test="offlineExpressPrice != null" >
+        #{offlineExpressPrice,jdbcType=REAL},
+      </if>
+      <if test="offlineNormailDeliveryDays != null" >
+        #{offlineNormailDeliveryDays,jdbcType=INTEGER},
+      </if>
+      <if test="offlineExpressDeliveryDays != null" >
+        #{offlineExpressDeliveryDays,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="companyInfoId != null" >
+        #{companyInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="countryId != null" >
+        #{countryId,jdbcType=INTEGER},
+      </if>
+      <if test="isCustomOrder != null" >
+        #{isCustomOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="totalPrice != null" >
+        #{totalPrice,jdbcType=REAL},
+      </if>
+      <if test="uploadPicPath != null" >
+        #{uploadPicPath,jdbcType=VARCHAR},
+      </if>
+      <if test="crefoNo != null" >
+        #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isChinaOrder != null" >
+        #{isChinaOrder,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mika.credit.facade.globaleagle.core.model.Cart" >
+    update cart
+    <set >
+      <if test="companyName != null" >
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyNo != null" >
+        company_no = #{companyNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderLevel != null" >
+        order_level = #{orderLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="currency != null" >
+        currency = #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="onlinePrice != null" >
+        online_price = #{onlinePrice,jdbcType=REAL},
+      </if>
+      <if test="onlineExpressPrice != null" >
+        online_express_price = #{onlineExpressPrice,jdbcType=REAL},
+      </if>
+      <if test="onlineNormailDeliveryDays != null" >
+        online_normail_delivery_days = #{onlineNormailDeliveryDays,jdbcType=INTEGER},
+      </if>
+      <if test="onlineExpressDeliveryDays != null" >
+        online_express_delivery_days = #{onlineExpressDeliveryDays,jdbcType=INTEGER},
+      </if>
+      <if test="offlinePrice != null" >
+        offline_price = #{offlinePrice,jdbcType=REAL},
+      </if>
+      <if test="offlineExpressPrice != null" >
+        offline_express_price = #{offlineExpressPrice,jdbcType=REAL},
+      </if>
+      <if test="offlineNormailDeliveryDays != null" >
+        offline_normail_delivery_days = #{offlineNormailDeliveryDays,jdbcType=INTEGER},
+      </if>
+      <if test="offlineExpressDeliveryDays != null" >
+        offline_express_delivery_days = #{offlineExpressDeliveryDays,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="companyInfoId != null" >
+        company_info_id = #{companyInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="countryId != null" >
+        country_id = #{countryId,jdbcType=INTEGER},
+      </if>
+      <if test="isCustomOrder != null" >
+        is_custom_order = #{isCustomOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="totalPrice != null" >
+        total_price = #{totalPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadPicPath != null" >
+        upload_pic_path = #{uploadPicPath,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null" >
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isChinaOrder != null" >
+        is_china_order = #{isChinaOrder,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mika.credit.facade.globaleagle.core.model.Cart" >
+    update cart
+    set company_name = #{companyName,jdbcType=VARCHAR},
+      company_no = #{companyNo,jdbcType=VARCHAR},
+      order_level = #{orderLevel,jdbcType=VARCHAR},
+      currency = #{currency,jdbcType=VARCHAR},
+      online_price = #{onlinePrice,jdbcType=REAL},
+      online_express_price = #{onlineExpressPrice,jdbcType=REAL},
+      online_normail_delivery_days = #{onlineNormailDeliveryDays,jdbcType=INTEGER},
+      online_express_delivery_days = #{onlineExpressDeliveryDays,jdbcType=INTEGER},
+      offline_price = #{offlinePrice,jdbcType=REAL},
+      offline_express_price = #{offlineExpressPrice,jdbcType=REAL},
+      offline_normail_delivery_days = #{offlineNormailDeliveryDays,jdbcType=INTEGER},
+      offline_express_delivery_days = #{offlineExpressDeliveryDays,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      customer_id = #{customerId,jdbcType=INTEGER},
+      company_info_id = #{companyInfoId,jdbcType=INTEGER},
+      country_id = #{countryId,jdbcType=INTEGER},
+      is_custom_order = #{isCustomOrder,jdbcType=VARCHAR},
+       total_price = #{totalPrice,jdbcType=VARCHAR},
+       upload_pic_path = #{uploadPicPath,jdbcType=VARCHAR},
+       crefo_no = #{crefoNo,jdbcType=VARCHAR},
+       is_china_order = #{isChinaOrder,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

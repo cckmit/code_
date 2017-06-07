@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://www.osoa.org/xmlns/sca/1.0"
+	targetNamespace="http://tuscany.demo.kth.org"
+	xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.0"
+	xmlns:dbsdo="http://tuscany.apache.org/xmlns/sca/databinding/sdo/1.0"
+	name="InvokeDemoComposite">
+	<!--<component name="StockPEComponent">-->
+	  <!--<implementation.Java class="org.kth.demo.impl.StockPEImpl"/>-->
+	  <!--<reference name="stockQuote">-->
+		  <!--<interface.wsdl-->
+		  <!--interface="http://ws.demo.kth.org#wsdl.interface(StockQuote)"/>-->
+		   <!--<binding.ws-->
+			 <!--uri="http://localhost:8085/services/StockQuoteService"/>-->
+		<!--</reference>-->
+		<!--<reference name="earningPerShare">-->
+			<!--<tuscany:binding.rmi host="localhost" port="8099"-->
+				<!--serviceName="EarningPerShareService" />-->
+		<!--</reference>-->
+	<!--</component>-->
+	<!--<service name="StockPE" promote="StockPEComponent/StockPE">-->
+		<!--<interface.Java interface="org.kth.demo.StockPE"/>-->
+		<!--<tuscany:binding.jsonrpc />-->
+	<!--</service>-->
+</composite>

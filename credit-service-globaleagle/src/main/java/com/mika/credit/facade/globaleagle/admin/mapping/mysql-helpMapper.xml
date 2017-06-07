@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.globaleagle.admin.dao.HelpMapper" >
+    <resultMap id="helpMap" type="com.mika.credit.facade.globaleagle.admin.model.Help" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="content" property="content" jdbcType="VARCHAR" />
+
+        <association property="cate" fetchType="eager" column="cate_id" select="com.mika.credit.facade.globaleagle.admin.dao.HelpCateMapper.queryById"/>
+    </resultMap>
+
+    <select id="queryById" resultMap="helpMap" parameterType="java.lang.Integer" >
+    select *
+    from s_help
+    where id = #{id}
+  </select>
+    <select id="queryByCondition" resultMap="helpMap" parameterType="com.mika.credit.facade.globaleagle.admin.model.Help" >
+        select *
+        from s_help
+        where 1=1
+        <if test="title != null and title != ''">
+            and title like concat('%', #{title}, '%')
+        </if>
+        <if test="cate != null and cate.id != null and cate.id != 0">
+            and cate_id = #{cate.id}
+        </if>
+    </select>
+    <select id="queryCountByCondition" resultType="java.lang.Integer" parameterType="com.mika.credit.facade.globaleagle.admin.model.Help" >
+        select count(1)
+        from s_help
+        where 1=1
+        <if test="title != null and title != ''">
+            and title like concat('%', #{title}, '%')
+        </if>
+        <if test="cate != null and cate.id != null and cate.id != 0">
+            and cate_id = #{cate.id}
+        </if>
+    </select>
+    <select id="queryAll" resultMap="helpMap" >
+   select * from s_help
+  </select>
+    <select id="queryAllByCate" resultMap="helpMap" parameterType="java.lang.Integer">
+    select *
+    from s_help
+    where cate_id=#{cateId}
+  </select>
+
+    <insert id="add" parameterType="com.mika.credit.facade.globaleagle.admin.model.Help">
+        insert into s_help(cate_id,title,content)
+        values(#{cate.id},#{title},#{content})
+    </insert>
+
+    <update id="mod" parameterType="com.mika.credit.facade.globaleagle.admin.model.Help">
+  	update s_help set
+  	cate_id=#{cate.id},
+  	title=#{title},
+  	content=#{content}
+  	where id = #{id}
+  </update>
+
+    <delete id="del" parameterType="java.lang.Integer">
+  	delete from s_help where id=#{id}
+  </delete>
+
+    <select id="selectCountByCate" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(1) from s_help c where c.cate_id = #{id}
+    </select>
+</mapper>

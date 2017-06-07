@@ -1,0 +1,1093 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.front.cn.dao.impl.OperatingsDaoImpl" >
+  <cache eviction="LRU" type="com.mika.credit.common.core.mybatis.cache.redis.sharded.MybatiesRedisCache" />
+  <resultMap id="BaseResultMap" type="com.mika.credit.common.entity.report.cn.Operatings" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="company_size_id" property="companySizeId" jdbcType="INTEGER" />
+    <result column="location_type_id" property="locationTypeId" jdbcType="INTEGER" />
+    <result column="ownership_id" property="ownershipId" jdbcType="INTEGER" />
+    <result column="operational_status_id" property="operationalStatusId" jdbcType="INTEGER" />
+    <result column="activity_one_cn" property="activityOneCN" jdbcType="LONGVARCHAR" />
+    <result column="activity_one_en" property="activityOneEN" jdbcType="LONGVARCHAR" />
+    <result column="activity_three_cn" property="activityThreeCN" jdbcType="LONGVARCHAR" />
+    <result column="activity_three_en" property="activityThreeEN" jdbcType="LONGVARCHAR" />
+    <result column="activity_two_cn" property="activityTwoCN" jdbcType="LONGVARCHAR" />
+    <result column="activity_two_en" property="activityTwoEN" jdbcType="LONGVARCHAR" />
+    <result column="certification_cn" property="certificationCN" jdbcType="LONGVARCHAR" />
+    <result column="certification_en" property="certificationEN" jdbcType="LONGVARCHAR" />
+    <result column="dealership_cn" property="dealershipCN" jdbcType="LONGVARCHAR" />
+    <result column="dealership_en" property="dealershipEN" jdbcType="LONGVARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="LONGVARCHAR" />
+    <result column="discription_web" property="discriptionWeb" jdbcType="LONGVARCHAR" />
+    <result column="employee" property="employee" jdbcType="LONGVARCHAR" />
+    <result column="export_area_cn" property="exportAreaCN" jdbcType="LONGVARCHAR" />
+    <result column="export_area_en" property="exportAreaEN" jdbcType="LONGVARCHAR" />
+    <result column="exports" property="exports" jdbcType="LONGVARCHAR" />
+    <result column="import_area_cn" property="importAreaCN" jdbcType="LONGVARCHAR" />
+    <result column="import_area_en" property="importAreaEN" jdbcType="LONGVARCHAR" />
+    <result column="imports" property="imports" jdbcType="LONGVARCHAR" />
+    <result column="industry_certification_cn" property="industryCertificationCN" jdbcType="LONGVARCHAR" />
+    <result column="industry_certification_en" property="industryCertificationEN" jdbcType="LONGVARCHAR" />
+    <result column="info_cn" property="infoCN" jdbcType="LONGVARCHAR" />
+    <result column="info_en" property="infoEN" jdbcType="LONGVARCHAR" />
+    <result column="location_cn" property="locationCN" jdbcType="LONGVARCHAR" />
+    <result column="location_en" property="locationEN" jdbcType="LONGVARCHAR" />
+    <result column="location_type" property="locationType" jdbcType="LONGVARCHAR" />
+    <result column="location_type_en" property="locationTypeEN" jdbcType="LONGVARCHAR" />
+    <result column="main_brand_cn" property="mainBrandCN" jdbcType="LONGVARCHAR" />
+    <result column="main_brand_en" property="mainBrandEN" jdbcType="LONGVARCHAR" />
+    <result column="main_discription_cn" property="mainDiscriptionCN" jdbcType="LONGVARCHAR" />
+    <result column="main_discription_en" property="mainDiscriptionEN" jdbcType="LONGVARCHAR" />
+    <result column="main_patent_cn" property="mainPatentCN" jdbcType="LONGVARCHAR" />
+    <result column="main_patent_en" property="mainPatentEN" jdbcType="LONGVARCHAR" />
+    <result column="main_product_cn" property="mainProductCN" jdbcType="LONGVARCHAR" />
+    <result column="main_product_en" property="mainProductEN" jdbcType="LONGVARCHAR" />
+    <result column="ownership" property="ownership" jdbcType="LONGVARCHAR" />
+    <result column="ownership_en" property="ownershipEN" jdbcType="LONGVARCHAR" />
+    <result column="premise_cn" property="premiseCN" jdbcType="LONGVARCHAR" />
+    <result column="premise_en" property="premiseEN" jdbcType="LONGVARCHAR" />
+    <result column="production_cn" property="productionCN" jdbcType="LONGVARCHAR" />
+    <result column="production_en" property="productionEN" jdbcType="LONGVARCHAR" />
+    <result column="purchase_domestic_cn" property="purchaseDomesticCN" jdbcType="LONGVARCHAR" />
+    <result column="purchase_domestic_en" property="purchaseDomesticEN" jdbcType="LONGVARCHAR" />
+    <result column="purchase_internationl_cn" property="purchaseInternationlCN" jdbcType="LONGVARCHAR" />
+    <result column="purchase_internationl_en" property="purchaseInternationlEN" jdbcType="LONGVARCHAR" />
+    <result column="purchase_term_cn" property="purchaseTermCN" jdbcType="LONGVARCHAR" />
+    <result column="purchase_term_en" property="purchaseTermEN" jdbcType="LONGVARCHAR" />
+    <result column="sale_domestic_cn" property="saleDomesticCN" jdbcType="LONGVARCHAR" />
+    <result column="sale_domestic_en" property="saleDomesticEN" jdbcType="LONGVARCHAR" />
+    <result column="sale_internationl_cn" property="saleInternationlCN" jdbcType="LONGVARCHAR" />
+    <result column="sale_internationl_en" property="saleInternationlEN" jdbcType="LONGVARCHAR" />
+    <result column="sale_term_cn" property="saleTermCN" jdbcType="LONGVARCHAR" />
+    <result column="sale_term_en" property="saleTermEN" jdbcType="LONGVARCHAR" />
+    <result column="size" property="size" jdbcType="LONGVARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="LONGVARCHAR" />
+    <result column="year" property="year" jdbcType="LONGVARCHAR" />
+    <result column="full_report_id" property="fullReportId" jdbcType="INTEGER" />
+    <result column="company_status" property="companyStatus" jdbcType="VARCHAR" />
+    <result column="company_status_en" property="companyStatusEN" jdbcType="VARCHAR" />
+    <result column="company_size_cn" property="companySizeCN" jdbcType="VARCHAR" />
+    <result column="company_size_en" property="companySizeEN" jdbcType="VARCHAR" />
+    <result column="position" property="position" jdbcType="VARCHAR" />
+    <result column="position_en" property="positionEN" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="table"> operatings </sql>
+
+  <sql id="Base_Column_List" >
+    id, company_size_id, location_type_id, ownership_id,  operational_status_id,
+    activity_one_cn, activity_one_en, activity_three_cn, activity_three_en, activity_two_cn,
+    activity_two_en,  certification_cn, certification_en,
+    dealership_cn, dealership_en, del_flag,
+    discription_web, employee, export_area_cn, export_area_en, exports,  import_area_cn,
+    import_area_en, imports, industry_certification_cn, industry_certification_en, info_cn,
+    info_en,  local_gdp_en, location_cn, location_en,location_type,location_type_en, main_brand_cn, main_brand_en,
+    main_discription_cn, main_discription_en, main_patent_cn, main_patent_en, main_product_cn,
+    main_product_en,ownership,ownership_en, premise_cn, premise_en, production_cn, production_en,
+    purchase_domestic_cn, purchase_domestic_en, purchase_internationl_cn, purchase_internationl_en,
+    purchase_term_cn, purchase_term_en, sale_domestic_cn, sale_domestic_en,
+    sale_internationl_cn, sale_internationl_en, sale_term_cn, sale_term_en, size, update_time,
+    year,full_report_id,company_status,position,position_en,company_status_en,company_size_cn,company_size_en
+  </sql>
+
+  <sql id="condition_sql">
+    <if test="id != null" >
+      and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="companySizeId != null" >
+      and company_size_id = #{companySizeId,jdbcType=INTEGER}
+    </if>
+    <if test="locationTypeId != null" >
+      and location_type_id = #{locationTypeId,jdbcType=INTEGER}
+    </if>
+    <if test="ownershipId != null" >
+      and ownership_id = #{ownershipId,jdbcType=INTEGER}
+    </if>
+    <if test="operationalStatusId != null" >
+      and operational_status_id = #{operationalStatusId,jdbcType=INTEGER}
+    </if>
+    <if test="activityOneCN != null" >
+      and activity_one_cn = #{activityOneCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="activityOneEN != null" >
+      and activity_one_en = #{activityOneEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="activityThreeCN != null" >
+      and activity_three_cn = #{activityThreeCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="activityThreeEN != null" >
+      and activity_three_en = #{activityThreeEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="activityTwoCN != null" >
+      and activity_two_cn = #{activityTwoCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="activityTwoEN != null" >
+      and activity_two_en = #{activityTwoEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="certificationCN != null" >
+      and certification_cn = #{certificationCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="certificationEN != null" >
+      and certification_en = #{certificationEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="dealershipCN != null" >
+      and dealership_cn = #{dealershipCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="dealershipEN != null" >
+      and dealership_en = #{dealershipEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="delFlag != null" >
+      and del_flag = #{delFlag,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="discriptionWeb != null" >
+      and discription_web = #{discriptionWeb,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="employee != null" >
+      and employee = #{employee,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="exportAreaCN != null" >
+      and export_area_cn = #{exportAreaCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="exportAreaEN != null" >
+      and export_area_en = #{exportAreaEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="exports != null" >
+      and exports = #{exports,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="importAreaCN != null" >
+      and import_area_cn = #{importAreaCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="importAreaEN != null" >
+      and import_area_en = #{importAreaEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="imports != null" >
+      and imports = #{imports,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="industryCertificationCN != null" >
+      and industry_certification_cn = #{industryCertificationCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="industryCertificationEN != null" >
+      and industry_certification_en = #{industryCertificationEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="infoCN != null" >
+      and info_cn = #{infoCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="infoEN != null" >
+      and info_en = #{infoEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="locationCN != null" >
+      and location_cn = #{locationCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="locationEN != null" >
+      and location_en = #{locationEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="locationType != null" >
+      and location_type = #{locationType,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="locationTypeEN != null" >
+      and location_type_en = #{locationTypeEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="mainBrandCN != null" >
+      and main_brand_cn = #{mainBrandCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="mainBrandEN != null" >
+      and main_brand_en = #{mainBrandEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="mainDiscriptionCN != null" >
+      and main_discription_cn = #{mainDiscriptionCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="mainDiscriptionEN != null" >
+      and main_discription_en = #{mainDiscriptionEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="mainPatentCN != null" >
+      and main_patent_cn = #{mainPatentCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="mainPatentEN != null" >
+      and main_patent_en = #{mainPatentEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="mainProductCN != null" >
+      and main_product_cn = #{mainProductCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="mainProductEN != null" >
+      and main_product_en = #{mainProductEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="ownership != null" >
+      and ownership = #{ownership,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="ownershipEN != null" >
+      and ownership_en = #{ownershipEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="premiseCN != null" >
+      and premise_cn = #{premiseCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="premiseEN != null" >
+      and premise_en = #{premiseEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="productionCN != null" >
+      and production_cn = #{productionCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="productionEN != null" >
+      and production_en = #{productionEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="purchaseDomesticCN != null" >
+      and purchase_domestic_cn = #{purchaseDomesticCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="purchaseDomesticEN != null" >
+      and purchase_domestic_en = #{purchaseDomesticEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="purchaseInternationlCN != null" >
+      and purchase_internationl_cn = #{purchaseInternationlCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="purchaseInternationlEN != null" >
+      and purchase_internationl_en = #{purchaseInternationlEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="purchaseTermCN != null" >
+      and purchase_term_cn = #{purchaseTermCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="purchaseTermEN != null" >
+      and purchase_term_en = #{purchaseTermEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="saleDomesticCN != null" >
+      and sale_domestic_cn = #{saleDomesticCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="saleDomesticEN != null" >
+      and sale_domestic_en = #{saleDomesticEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="saleInternationlCN != null" >
+      and sale_internationl_cn = #{saleInternationlCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="saleInternationlEN != null" >
+      and sale_internationl_en = #{saleInternationlEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="saleTermCN != null" >
+      and sale_term_cn = #{saleTermCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="saleTermEN != null" >
+      and sale_term_en = #{saleTermEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="size != null" >
+      and size = #{size,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="updateTime != null" >
+      and update_time = #{updateTime,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="year != null" >
+      and year = #{year,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="fullReportId != null" >
+      and full_report_id = #{fullReportId,jdbcType=INTEGER}
+    </if>
+    <if test="companyStatus != null" >
+      and company_status = #{companyStatus,jdbcType=VARCHAR}
+    </if>
+    <if test="position != null" >
+      and position = #{position,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="positionEN != null" >
+      and position_en = #{positionEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="companyStatusEN != null" >
+      and company_status_en = #{companyStatusEN,jdbcType=VARCHAR}
+    </if>
+    <if test="companySizeCN != null" >
+      and company_size_cn = #{companySizeCN,jdbcType=VARCHAR}
+    </if>
+    <if test="companySizeEN != null" >
+      and company_size_en = #{companySizeEN,jdbcType=VARCHAR}
+    </if>
+  </sql>
+
+  <select id="getById" parameterType="Integer" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    where id = #{id}
+  </select>
+
+  <select id="listBy" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <select id="listPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+    <![CDATA[ order by id desc]]>
+  </select>
+
+  <select id="listPageCount" parameterType="java.util.Map" resultType="Integer">
+    select count(1) from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <insert id="insert" parameterType="com.mika.credit.common.entity.report.cn.Operatings" keyProperty="id" useGeneratedKeys="true">
+    insert into
+    <include refid="table" />
+    (id, company_size_id,
+    location_type_id, ownership_id,  operational_status_id,
+      activity_one_cn, activity_one_en, activity_three_cn,
+      activity_three_en, activity_two_cn,
+      activity_two_en,  certification_cn,
+      certification_en,
+      dealership_cn,
+      dealership_en, del_flag, discription_web,
+      employee, export_area_cn, export_area_en,
+      exports,  import_area_cn,
+      import_area_en, imports, industry_certification_cn,
+      industry_certification_en, info_cn,
+      info_en,location_cn,
+       location_en,location_type,location_type_en, main_brand_cn,
+      main_brand_en, main_discription_cn,
+      main_discription_en, main_patent_cn,
+      main_patent_en, main_product_cn, main_product_en,
+      ownership,ownership_en,premise_cn, premise_en, production_cn,
+      production_en,
+      purchase_domestic_cn, purchase_domestic_en,
+      purchase_internationl_cn,purchase_internationl_en,
+      purchase_term_cn, purchase_term_en,
+      sale_domestic_cn,
+      sale_domestic_en, sale_internationl_cn,
+      sale_internationl_en, sale_term_cn,
+      sale_term_en, size, update_time,
+      year,full_report_id,company_status,position,position_en,
+      company_status_en,company_size_cn,company_size_en)
+    values (#{id,jdbcType=INTEGER}, #{companySizeId,jdbcType=INTEGER},
+      #{locationTypeId,jdbcType=INTEGER}, #{ownershipId,jdbcType=INTEGER},  #{operationalStatusId,jdbcType=INTEGER},
+      #{activityOneCN,jdbcType=LONGVARCHAR}, #{activityOneEN,jdbcType=LONGVARCHAR}, #{activityThreeCN,jdbcType=LONGVARCHAR},
+      #{activityThreeEN,jdbcType=LONGVARCHAR}, #{activityTwoCN,jdbcType=LONGVARCHAR},
+      #{activityTwoEN,jdbcType=LONGVARCHAR},  #{certificationCN,jdbcType=LONGVARCHAR},
+      #{certificationEN,jdbcType=LONGVARCHAR},
+      #{dealershipCN,jdbcType=LONGVARCHAR},
+      #{dealershipEN,jdbcType=LONGVARCHAR}, #{delFlag,jdbcType=LONGVARCHAR}, #{discriptionWeb,jdbcType=LONGVARCHAR},
+      #{employee,jdbcType=LONGVARCHAR}, #{exportAreaCN,jdbcType=LONGVARCHAR}, #{exportAreaEN,jdbcType=LONGVARCHAR},
+      #{exports,jdbcType=LONGVARCHAR}, #{importAreaCN,jdbcType=LONGVARCHAR},
+      #{importAreaEN,jdbcType=LONGVARCHAR}, #{imports,jdbcType=LONGVARCHAR}, #{industryCertificationCN,jdbcType=LONGVARCHAR},
+      #{industryCertificationEN,jdbcType=LONGVARCHAR}, #{infoCN,jdbcType=LONGVARCHAR},
+      #{infoEN,jdbcType=LONGVARCHAR},
+      #{locationCN,jdbcType=LONGVARCHAR}, #{locationEN,jdbcType=LONGVARCHAR}, #{locationType,jdbcType=LONGVARCHAR},
+      #{locationTypeEN,jdbcType=LONGVARCHAR},#{mainBrandCN,jdbcType=LONGVARCHAR},
+      #{mainBrandEN,jdbcType=LONGVARCHAR}, #{mainDiscriptionCN,jdbcType=LONGVARCHAR},
+      #{mainDiscriptionEN,jdbcType=LONGVARCHAR}, #{mainPatentCN,jdbcType=LONGVARCHAR},
+      #{mainPatentEN,jdbcType=LONGVARCHAR}, #{mainProductCN,jdbcType=LONGVARCHAR}, #{mainProductEN,jdbcType=LONGVARCHAR},
+      #{ownership,jdbcType=LONGVARCHAR},#{ownershipEN,jdbcType=LONGVARCHAR},
+      #{premiseCN,jdbcType=LONGVARCHAR}, #{premiseEN,jdbcType=LONGVARCHAR}, #{productionCN,jdbcType=LONGVARCHAR},
+      #{productionEN,jdbcType=LONGVARCHAR},
+      #{purchaseDomesticCN,jdbcType=LONGVARCHAR}, #{purchaseDomesticEN,jdbcType=LONGVARCHAR},
+      #{purchaseInternationlCN,jdbcType=LONGVARCHAR}, #{purchaseInternationlEN,jdbcType=LONGVARCHAR},
+      #{purchaseTermCN,jdbcType=LONGVARCHAR}, #{purchaseTermEN,jdbcType=LONGVARCHAR},
+       #{saleDomesticCN,jdbcType=LONGVARCHAR},
+      #{saleDomesticEN,jdbcType=LONGVARCHAR}, #{saleInternationlCN,jdbcType=LONGVARCHAR},
+      #{saleInternationlEN,jdbcType=LONGVARCHAR}, #{saleTermCN,jdbcType=LONGVARCHAR},
+      #{saleTermEN,jdbcType=LONGVARCHAR}, #{size,jdbcType=LONGVARCHAR}, #{updateTime,jdbcType=LONGVARCHAR},
+      #{year,jdbcType=LONGVARCHAR},#{fullReportId,jdbcType=INTEGER}, #{companyStatus,jdbcType=VARCHAR},
+      #{position,jdbcType=VARCHAR},#{positionEN,jdbcType=VARCHAR},#{companyStatusEN,jdbcType=VARCHAR},
+      #{companySizeCN,jdbcType=VARCHAR},#{companySizeEN,jdbcType=VARCHAR})
+  </insert>
+
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from
+    <include refid="table" />
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <update id="update" parameterType="com.mika.credit.common.entity.report.cn.Operatings" >
+    update operatings
+    set company_size_id = #{companySizeId,jdbcType=INTEGER},
+      location_type_id = #{locationTypeId,jdbcType=INTEGER},
+      ownership_id = #{ownershipId,jdbcType=INTEGER},
+      operational_status_id = #{operationalStatusId,jdbcType=INTEGER},
+      activity_one_cn = #{activityOneCN,jdbcType=LONGVARCHAR},
+      activity_one_en = #{activityOneEN,jdbcType=LONGVARCHAR},
+      activity_three_cn = #{activityThreeCN,jdbcType=LONGVARCHAR},
+      activity_three_en = #{activityThreeEN,jdbcType=LONGVARCHAR},
+      activity_two_cn = #{activityTwoCN,jdbcType=LONGVARCHAR},
+      activity_two_en = #{activityTwoEN,jdbcType=LONGVARCHAR},
+      certification_cn = #{certificationCN,jdbcType=LONGVARCHAR},
+      certification_en = #{certificationEN,jdbcType=LONGVARCHAR},
+      dealership_cn = #{dealershipCN,jdbcType=LONGVARCHAR},
+      dealership_en = #{dealershipEN,jdbcType=LONGVARCHAR},
+      del_flag = #{delFlag,jdbcType=LONGVARCHAR},
+      discription_web = #{discriptionWeb,jdbcType=LONGVARCHAR},
+      employee = #{employee,jdbcType=LONGVARCHAR},
+      export_area_cn = #{exportAreaCN,jdbcType=LONGVARCHAR},
+      export_area_en = #{exportAreaEN,jdbcType=LONGVARCHAR},
+      exports = #{exports,jdbcType=LONGVARCHAR},
+      import_area_cn = #{importAreaCN,jdbcType=LONGVARCHAR},
+      import_area_en = #{importAreaEN,jdbcType=LONGVARCHAR},
+      imports = #{imports,jdbcType=LONGVARCHAR},
+      location_cn = #{locationCN,jdbcType=LONGVARCHAR},
+      location_en = #{locationEN,jdbcType=LONGVARCHAR},
+      location_type = #{locationType,jdbcType=LONGVARCHAR},
+      location_type_en = #{locationTypeEN,jdbcType=LONGVARCHAR},
+      main_brand_cn = #{mainBrandCN,jdbcType=LONGVARCHAR},
+      main_brand_en = #{mainBrandEN,jdbcType=LONGVARCHAR},
+      main_discription_cn = #{mainDiscriptionCN,jdbcType=LONGVARCHAR},
+      main_discription_en = #{mainDiscriptionEN,jdbcType=LONGVARCHAR},
+      main_patent_cn = #{mainPatentCN,jdbcType=LONGVARCHAR},
+      main_patent_en = #{mainPatentEN,jdbcType=LONGVARCHAR},
+      main_product_cn = #{mainProductCN,jdbcType=LONGVARCHAR},
+      main_product_en = #{mainProductEN,jdbcType=LONGVARCHAR},
+      ownership = #{ownership,jdbcType=LONGVARCHAR},
+      ownership_en = #{ownershipEN,jdbcType=LONGVARCHAR},
+      premise_cn = #{premiseCN,jdbcType=LONGVARCHAR},
+      premise_en = #{premiseEN,jdbcType=LONGVARCHAR},
+      production_cn = #{productionCN,jdbcType=LONGVARCHAR},
+      production_en = #{productionEN,jdbcType=LONGVARCHAR},
+      purchase_domestic_cn = #{purchaseDomesticCN,jdbcType=LONGVARCHAR},
+      purchase_domestic_en = #{purchaseDomesticEN,jdbcType=LONGVARCHAR},
+      purchase_internationl_cn = #{purchaseInternationlCN,jdbcType=LONGVARCHAR},
+      purchase_internationl_en = #{purchaseInternationlEN,jdbcType=LONGVARCHAR},
+      purchase_term_cn = #{purchaseTermCN,jdbcType=LONGVARCHAR},
+      purchase_term_en = #{purchaseTermEN,jdbcType=LONGVARCHAR},
+      sale_domestic_cn = #{saleDomesticCN,jdbcType=LONGVARCHAR},
+      sale_domestic_en = #{saleDomesticEN,jdbcType=LONGVARCHAR},
+      sale_internationl_cn = #{saleInternationlCN,jdbcType=LONGVARCHAR},
+      sale_internationl_en = #{saleInternationlEN,jdbcType=LONGVARCHAR},
+      sale_term_cn = #{saleTermCN,jdbcType=LONGVARCHAR},
+      sale_term_en = #{saleTermEN,jdbcType=LONGVARCHAR},
+      size = #{size,jdbcType=LONGVARCHAR},
+      update_time = #{updateTime,jdbcType=LONGVARCHAR},
+      year = #{year,jdbcType=LONGVARCHAR},
+	  full_report_id = #{fullReportId,jdbcType=INTEGER},
+      company_status = #{companyStatus,jdbcType=VARCHAR},
+      position = #{position,jdbcType=LONGVARCHAR},
+      position_en = #{positionEN,jdbcType=VARCHAR},
+      company_status_en = #{companyStatusEN,jdbcType=VARCHAR},
+      company_size_cn = #{companySizeCN,jdbcType=VARCHAR},
+      company_size_en = #{companySizeEN,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <insert id="insertSelective" parameterType="com.mika.credit.common.entity.report.cn.Operatings" >
+    insert into operatings
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="companySizeId != null" >
+        company_size_id,
+      </if>
+      <if test="locationTypeId != null" >
+        location_type_id,
+      </if>
+      <if test="ownershipId != null" >
+        ownership_id,
+      </if>
+      <if test="operationalStatusId != null" >
+        operational_status_id,
+      </if>
+      <if test="activityOneCN != null" >
+        activity_one_cn,
+      </if>
+      <if test="activityOneEN != null" >
+        activity_one_en,
+      </if>
+      <if test="activityThreeCN != null" >
+        activity_three_cn,
+      </if>
+      <if test="activityThreeEN != null" >
+        activity_three_en,
+      </if>
+      <if test="activityTwoCN != null" >
+        activity_two_cn,
+      </if>
+      <if test="activityTwoEN != null" >
+        activity_two_en,
+      </if>
+      <if test="certificationCN != null" >
+        certification_cn,
+      </if>
+      <if test="certificationEN != null" >
+        certification_en,
+      </if>
+      <if test="dealershipCN != null" >
+        dealership_cn,
+      </if>
+      <if test="dealershipEN != null" >
+        dealership_en,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="discriptionWeb != null" >
+        discription_web,
+      </if>
+      <if test="employee != null" >
+        employee,
+      </if>
+      <if test="exportAreaCN != null" >
+        export_area_cn,
+      </if>
+      <if test="exportAreaEN != null" >
+        export_area_en,
+      </if>
+      <if test="exports != null" >
+        exports,
+      </if>
+      <if test="importAreaCN != null" >
+        import_area_cn,
+      </if>
+      <if test="importAreaEN != null" >
+        import_area_en,
+      </if>
+      <if test="imports != null" >
+        imports,
+      </if>
+      <if test="industryCertificationCN != null" >
+        industry_certification_cn,
+      </if>
+      <if test="industryCertificationEN != null" >
+        industry_certification_en,
+      </if>
+      <if test="infoCN != null" >
+        info_cn,
+      </if>
+      <if test="infoEN != null" >
+        info_en,
+      </if>
+      <if test="locationCN != null" >
+        location_cn,
+      </if>
+      <if test="locationEN != null" >
+        location_en,
+      </if>
+      <if test="locationType != null" >
+        location_type,
+      </if>
+      <if test="locationTypeEN != null" >
+        location_type_en,
+      </if>
+      <if test="mainBrandCN != null" >
+        main_brand_cn,
+      </if>
+      <if test="mainBrandEN != null" >
+        main_brand_en,
+      </if>
+      <if test="mainDiscriptionCN != null" >
+        main_discription_cn,
+      </if>
+      <if test="mainDiscriptionEN != null" >
+        main_discription_en,
+      </if>
+      <if test="mainPatentCN != null" >
+        main_patent_cn,
+      </if>
+      <if test="mainPatentEN != null" >
+        main_patent_en,
+      </if>
+      <if test="mainProductCN != null" >
+        main_product_cn,
+      </if>
+      <if test="mainProductEN != null" >
+        main_product_en,
+      </if>
+      <if test="ownership != null" >
+        ownership,
+      </if>
+      <if test="ownershipEN != null" >
+        ownership_en,
+      </if>
+      <if test="premiseCN != null" >
+        premise_cn,
+      </if>
+      <if test="premiseEN != null" >
+        premise_en,
+      </if>
+      <if test="productionCN != null" >
+        production_cn,
+      </if>
+      <if test="productionEN != null" >
+        production_en,
+      </if>
+      <if test="purchaseDomesticCN != null" >
+        purchase_domestic_cn,
+      </if>
+      <if test="purchaseDomesticEN != null" >
+        purchase_domestic_en,
+      </if>
+      <if test="purchaseInternationlCN != null" >
+        purchase_internationl_cn,
+      </if>
+      <if test="purchaseInternationlEN != null" >
+        purchase_internationl_en,
+      </if>
+      <if test="purchaseTermCN != null" >
+        purchase_term_cn,
+      </if>
+      <if test="purchaseTermEN != null" >
+        purchase_term_en,
+      </if>
+      <if test="saleDomesticCN != null" >
+        sale_domestic_cn,
+      </if>
+      <if test="saleDomesticEN != null" >
+        sale_domestic_en,
+      </if>
+      <if test="saleInternationlCN != null" >
+        sale_internationl_cn,
+      </if>
+      <if test="saleInternationlEN != null" >
+        sale_internationl_en,
+      </if>
+      <if test="saleTermCN != null" >
+        sale_term_cn,
+      </if>
+      <if test="saleTermEN != null" >
+        sale_term_en,
+      </if>
+      <if test="size != null" >
+        size,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="year != null" >
+        year,
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id,
+      </if>
+      <if test="companyStatus != null" >
+        company_status,
+      </if>
+      <if test="position != null" >
+        position,
+      </if>
+      <if test="positionEN != null" >
+        position_en,
+      </if>
+      <if test="companyStatusEN != null" >
+        company_status_en,
+      </if>
+      <if test="companySizeCN != null" >
+        company_size_cn,
+      </if>
+      <if test="companySizeEN != null" >
+        company_size_en,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="companySizeId != null" >
+        #{companySizeId,jdbcType=INTEGER},
+      </if>
+      <if test="locationTypeId != null" >
+        #{locationTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="ownershipId != null" >
+        #{ownershipId,jdbcType=INTEGER},
+      </if>
+      <if test="operationalStatusId != null" >
+        #{operationalStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="activityOneCN != null" >
+        #{activityOneCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="activityOneEN != null" >
+        #{activityOneEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="activityThreeCN != null" >
+        #{activityThreeCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="activityThreeEN != null" >
+        #{activityThreeEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="activityTwoCN != null" >
+        #{activityTwoCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="activityTwoEN != null" >
+        #{activityTwoEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="certificationCN != null" >
+        #{certificationCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="certificationEN != null" >
+        #{certificationEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="dealershipCN != null" >
+        #{dealershipCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="dealershipEN != null" >
+        #{dealershipEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="discriptionWeb != null" >
+        #{discriptionWeb,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="employee != null" >
+        #{employee,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="exportAreaCN != null" >
+        #{exportAreaCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="exportAreaEN != null" >
+        #{exportAreaEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="exports != null" >
+        #{exports,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="importAreaCN != null" >
+        #{importAreaCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="importAreaEN != null" >
+        #{importAreaEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="imports != null" >
+        #{imports,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="industryCertificationCN != null" >
+        #{industryCertificationCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="industryCertificationEN != null" >
+        #{industryCertificationEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="infoCN != null" >
+        #{infoCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="infoEN != null" >
+        #{infoEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="locationCN != null" >
+        #{locationCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="locationEN != null" >
+        #{locationEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="locationType != null" >
+        #{locationType,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="locationTypeEN != null" >
+        #{locationTypeEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="mainBrandCN != null" >
+        #{mainBrandCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="mainBrandEN != null" >
+        #{mainBrandEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="mainDiscriptionCN != null" >
+        #{mainDiscriptionCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="mainDiscriptionEN != null" >
+        #{mainDiscriptionEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="mainPatentCN != null" >
+        #{mainPatentCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="mainPatentEN != null" >
+        #{mainPatentEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="mainProductCN != null" >
+        #{mainProductCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="mainProductEN != null" >
+        #{mainProductEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ownership != null" >
+        #{ownership,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ownershipEN != null" >
+        #{ownershipEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="premiseCN != null" >
+        #{premiseCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="premiseEN != null" >
+        #{premiseEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="productionCN != null" >
+        #{productionCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="productionEN != null" >
+        #{productionEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="purchaseDomesticCN != null" >
+        #{purchaseDomesticCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="purchaseDomesticEN != null" >
+        #{purchaseDomesticEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="purchaseInternationlCN != null" >
+        #{purchaseInternationlCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="purchaseInternationlEN != null" >
+        #{purchaseInternationlEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="purchaseTermCN != null" >
+        #{purchaseTermCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="purchaseTermEN != null" >
+        #{purchaseTermEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="saleDomesticCN != null" >
+        #{saleDomesticCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="saleDomesticEN != null" >
+        #{saleDomesticEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="saleInternationlCN != null" >
+        #{saleInternationlCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="saleInternationlEN != null" >
+        #{saleInternationlEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="saleTermCN != null" >
+        #{saleTermCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="saleTermEN != null" >
+        #{saleTermEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="size != null" >
+        #{size,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        #{fullReportId,jdbcType=INTEGER},
+      </if>
+      <if test="companyStatus != null" >
+        #{companyStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="positionEN != null" >
+        #{positionEN,jdbcType=VARCHAR},
+      </if>
+      <if test="companyStatusEN != null" >
+        #{companyStatusEN,jdbcType=VARCHAR},
+      </if>
+      <if test="companySizeCN != null" >
+        #{companySizeCN,jdbcType=VARCHAR},
+      </if>
+      <if test="companySizeEN != null" >
+        #{companySizeEN,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateSelective" parameterType="com.mika.credit.common.entity.report.cn.Operatings" >
+    update operatings
+    <set >
+      <if test="companySizeId != null" >
+        company_size_id = #{companySizeId,jdbcType=INTEGER},
+      </if>
+      <if test="locationTypeId != null" >
+        location_type_id = #{locationTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="ownershipId != null" >
+        ownership_id = #{ownershipId,jdbcType=INTEGER},
+      </if>
+      <if test="operational_status_id != null" >
+        operational_status_id = #{operationalStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="activityOneCN != null" >
+        activity_one_cn = #{activityOneCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="activityOneEN != null" >
+        activity_one_en = #{activityOneEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="activityThreeCN != null" >
+        activity_three_cn = #{activityThreeCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="activityThreeEN != null" >
+        activity_three_en = #{activityThreeEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="activityTwoCN != null" >
+        activity_two_cn = #{activityTwoCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="activityTwoEN != null" >
+        activity_two_en = #{activityTwoEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="certificationCN != null" >
+        certification_cn = #{certificationCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="certificationEN != null" >
+        certification_en = #{certificationEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="dealershipCN != null" >
+        dealership_cn = #{dealershipCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="dealershipEN != null" >
+        dealership_en = #{dealershipEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="discriptionWeb != null" >
+        discription_web = #{discriptionWeb,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="employee != null" >
+        employee = #{employee,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="exportAreaCN != null" >
+        export_area_cn = #{exportAreaCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="exportAreaEN != null" >
+        export_area_en = #{exportAreaEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="exports != null" >
+        exports = #{exports,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="importAreaCN != null" >
+        import_area_cn = #{importAreaCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="importAreaEN != null" >
+        import_area_en = #{importAreaEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="imports != null" >
+        imports = #{imports,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="industryCertificationCN != null" >
+        industry_certification_cn = #{industryCertificationCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="industryCertificationEN != null" >
+        industry_certification_en = #{industryCertificationEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="infoCN != null" >
+        info_cn = #{infoCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="infoEN != null" >
+        info_en = #{infoEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="locationCN != null" >
+        location_cn = #{locationCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="locationEN != null" >
+        location_en = #{locationEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="locationType != null" >
+        location_type = #{locationType,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="locationTypeEN != null" >
+        location_type_en = #{locationTypeEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="mainBrandCN != null" >
+        main_brand_cn = #{mainBrandCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="mainBrandEN != null" >
+        main_brand_en = #{mainBrandEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="mainDiscriptionCN != null" >
+        main_discription_cn = #{mainDiscriptionCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="mainDiscriptionEN != null" >
+        main_discription_en = #{mainDiscriptionEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="mainPatentCN != null" >
+        main_patent_cn = #{mainPatentCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="mainPatentEN != null" >
+        main_patent_en = #{mainPatentEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="mainProductCN != null" >
+        main_product_cn = #{mainProductCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="mainProductEN != null" >
+        main_product_en = #{mainProductEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ownership != null" >
+        ownership = #{ownership,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ownershipEN != null" >
+        ownership_en = #{ownershipEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="premiseCN != null" >
+        premise_cn = #{premiseCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="premiseEN != null" >
+        premise_en = #{premiseEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="productionCN != null" >
+        production_cn = #{productionCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="productionEN != null" >
+        production_en = #{productionEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="purchaseDomesticCN != null" >
+        purchase_domestic_cn = #{purchaseDomesticCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="purchaseDomesticEN != null" >
+        purchase_domestic_en = #{purchaseDomesticEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="purchaseInternationlCN != null" >
+        purchase_internationl_cn = #{purchaseInternationlCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="purchaseInternationlEN != null" >
+        purchase_internationl_en = #{purchaseInternationlEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="purchaseTermCN != null" >
+        purchase_term_cn = #{purchaseTermCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="purchaseTermEN != null" >
+        purchase_term_en = #{purchaseTermEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="saleDomesticCN != null" >
+        sale_domestic_cn = #{saleDomesticCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="saleDomesticEN != null" >
+        sale_domestic_en = #{saleDomesticEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="saleInternationlCN != null" >
+        sale_internationl_cn = #{saleInternationlCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="saleInternationlEN != null" >
+        sale_internationl_en = #{saleInternationlEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="saleTermCN != null" >
+        sale_term_cn = #{saleTermCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="saleTermEN != null" >
+        sale_term_en = #{saleTermEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="size != null" >
+        size = #{size,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="year != null" >
+        year = #{year,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id = #{fullReportId,jdbcType=INTEGER},
+      </if>
+      <if test="companyStatus != null" >
+        company_status = #{companyStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        position = #{position,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="positionEN != null" >
+        position_en = #{positionEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="companyStatusEN != null" >
+        company_status_en = #{companyStatusEN,jdbcType=VARCHAR},
+      </if>
+      <if test="companySizeCN != null" >
+        company_size_cn = #{companySizeCN,jdbcType=VARCHAR},
+      </if>
+      <if test="companySizeEN != null" >
+        company_size_en = #{companySizeEN,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

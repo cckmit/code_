@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.globaleagle.admin.dao.MenuMapper" >
+  <resultMap id="menuMap" type="com.mika.credit.facade.globaleagle.admin.model.Menu" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="form_url" property="formURL" jdbcType="VARCHAR" />
+    <result column="query_sql" property="querySQL" jdbcType="VARCHAR" />
+    <result column="enable" property="enable" jdbcType="BIT" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="is_sys" property="isSYS" jdbcType="BIT" />
+
+    <association property="cate" javaType="com.mika.credit.facade.globaleagle.admin.model.Cate">
+      <id column="category_id" property="id"/>
+      <result column="c_name" property="name"/>
+    </association>
+  </resultMap>
+  
+  <select id="queryById" resultMap="menuMap" parameterType="java.lang.String" >
+    select m.*,c.name c_name
+    from s_menu m
+    left join s_category c
+    on m.category_id = c.id
+    where id = #{id}
+    order by m.sort
+  </select>
+    <select id="queryAll" resultMap="menuMap" >
+   select m.*,c.name c_name
+    from s_menu m
+    left join s_category c
+    on m.category_id = c.id
+    order by m.sort
+  </select>
+  <select id="queryAllByCate" resultMap="menuMap" parameterType="java.lang.String">
+    select m.*,c.name c_name
+    from s_menu m
+    left join s_category c
+    on m.category_id = c.id
+    where m.category_id=#{cateId}
+    order by m.sort
+  </select>
+  
+  <insert id="add" parameterType="com.mika.credit.facade.globaleagle.admin.model.Menu">
+  	insert into s_menu(category_id,id,name,sort,url,icon,enable,form_url,query_sql,is_sys)
+  	values(#{cate.id},#{id},#{name},#{sort},#{url},#{icon},#{enable},#{formURL},#{querySQL},0)
+  </insert>
+  
+  <update id="mod" parameterType="com.mika.credit.facade.globaleagle.admin.model.Menu">
+  	update s_menu set
+  	category_id=#{cate.id},
+  	name=#{name},
+  	form_url=#{formURL},
+  	query_sql=#{querySQL},
+  	sort=#{sort},
+  	url=#{url},
+  	icon=#{icon},
+  	enable=#{enable}
+  	where id = #{id}
+  	and is_sys != 1
+  </update>
+  
+  <delete id="del" parameterType="java.lang.String">
+  	delete from s_menu where id=#{id} and is_sys != 1
+  </delete>
+  
+</mapper>

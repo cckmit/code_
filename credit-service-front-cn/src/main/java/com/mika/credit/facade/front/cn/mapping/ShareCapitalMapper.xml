@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.front.cn.dao.impl.ShareCapitalDaoImpl" >
+  <cache eviction="LRU" type="com.mika.credit.common.core.mybatis.cache.redis.sharded.MybatiesRedisCache" />
+  <resultMap id="BaseResultMap" type="com.mika.credit.common.entity.report.cn.ShareCapital" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="crefo_no" property="crefoNo" jdbcType="VARCHAR" />
+    <result column="subscribed_capital_date" property="subscribedCapitalDate" jdbcType="VARCHAR" />
+    <result column="subscribed_capital_value" property="subscribedCapitalValue" jdbcType="VARCHAR" />
+    <result column="subscribed_capital_currency_code" property="subscribedCapitalCurrencyCode" jdbcType="VARCHAR" />
+    <result column="paidUp_capital_date" property="paidupCapitalDate" jdbcType="VARCHAR" />
+    <result column="paidUp_capital_value" property="paidupCapitalValue" jdbcType="VARCHAR" />
+    <result column="paidUp_capital_currency_code" property="paidupCapitalCurrencyCode" jdbcType="VARCHAR" />
+    <result column="nominal_share_capital_date" property="nominalShareCapitalDate" jdbcType="VARCHAR" />
+    <result column="nominal_share_capital_value" property="nominalShareCapitalValue" jdbcType="VARCHAR" />
+    <result column="nominal_share_capital_currency_code" property="nominalShareCapitalCurrencyCode" jdbcType="VARCHAR" />
+    <result column="amount_per_share_date" property="amountPerShareDate" jdbcType="VARCHAR" />
+    <result column="amount_per_value" property="amountPerValue" jdbcType="VARCHAR" />
+    <result column="amount_per_currency_code" property="amountPerCurrencyCode" jdbcType="VARCHAR" />
+    <result column="total_number_of_shares_date" property="totalNumberOfSharesDate" jdbcType="VARCHAR" />
+    <result column="total_number_of_shares_value" property="totalNumberOfSharesValue" jdbcType="VARCHAR" />
+    <result column="total_number_of_shares_currency_code" property="totalNumberOfSharesCurrencyCode" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="VARCHAR" />
+    <result column="full_report_id" property="fullReportId" jdbcType="INTEGER" />
+  </resultMap>
+
+  <sql id="table"> share_capital </sql>
+
+  <sql id="Base_Column_List" >
+    id, crefo_no, subscribed_capital_date, subscribed_capital_value, subscribed_capital_currency_code, 
+    paidUp_capital_date, paidUp_capital_value, paidUp_capital_currency_code, nominal_share_capital_date, 
+    nominal_share_capital_value, nominal_share_capital_currency_code, amount_per_share_date, 
+    amount_per_value, amount_per_currency_code, total_number_of_shares_date, total_number_of_shares_value, 
+    total_number_of_shares_currency_code, update_time, del_flag, full_report_id
+  </sql>
+
+  <sql id="condition_sql">
+    <if test="id != null" >
+      and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="crefoNo != null" >
+      and crefo_no = #{crefoNo,jdbcType=VARCHAR}
+    </if>
+    <if test="subscribedCapitalDate != null" >
+      and subscribed_capital_date = #{subscribedCapitalDate,jdbcType=VARCHAR}
+    </if>
+    <if test="subscribedCapitalValue != null" >
+      and subscribed_capital_value = #{subscribedCapitalValue,jdbcType=VARCHAR}
+    </if>
+    <if test="subscribedCapitalCurrencyCode != null" >
+      and subscribed_capital_currency_code = #{subscribedCapitalCurrencyCode,jdbcType=VARCHAR}
+    </if>
+    <if test="paidupCapitalDate != null" >
+      and paidUp_capital_date = #{paidupCapitalDate,jdbcType=VARCHAR}
+    </if>
+    <if test="paidupCapitalValue != null" >
+      and paidUp_capital_value = #{paidupCapitalValue,jdbcType=VARCHAR}
+    </if>
+    <if test="paidupCapitalCurrencyCode != null" >
+      and paidUp_capital_currency_code = #{paidupCapitalCurrencyCode,jdbcType=VARCHAR}
+    </if>
+    <if test="nominalShareCapitalDate != null" >
+      and nominal_share_capital_date = #{nominalShareCapitalDate,jdbcType=VARCHAR}
+    </if>
+    <if test="nominalShareCapitalValue != null" >
+      and nominal_share_capital_value = #{nominalShareCapitalValue,jdbcType=VARCHAR}
+    </if>
+    <if test="nominalShareCapitalCurrencyCode != null" >
+      and nominal_share_capital_currency_code = #{nominalShareCapitalCurrencyCode,jdbcType=VARCHAR}
+    </if>
+    <if test="amountPerShareDate != null" >
+      and amount_per_share_date = #{amountPerShareDate,jdbcType=VARCHAR}
+    </if>
+    <if test="amountPerValue != null" >
+      and amount_per_value = #{amountPerValue,jdbcType=VARCHAR}
+    </if>
+    <if test="amountPerCurrencyCode != null" >
+      and amount_per_currency_code = #{amountPerCurrencyCode,jdbcType=VARCHAR}
+    </if>
+    <if test="totalNumberOfSharesDate != null" >
+      and total_number_of_shares_date = #{totalNumberOfSharesDate,jdbcType=VARCHAR}
+    </if>
+    <if test="totalNumberOfSharesValue != null" >
+      and total_number_of_shares_value = #{totalNumberOfSharesValue,jdbcType=VARCHAR}
+    </if>
+    <if test="totalNumberOfSharesCurrencyCode != null" >
+      and total_number_of_shares_currency_code = #{totalNumberOfSharesCurrencyCode,jdbcType=VARCHAR}
+    </if>
+    <if test="updateTime != null" >
+      and update_time = #{updateTime,jdbcType=VARCHAR}
+    </if>
+    <if test="delFlag != null" >
+      and del_flag = #{delFlag,jdbcType=VARCHAR}
+    </if>
+    <if test="fullReportId != null" >
+      and full_report_id = #{fullReportId,jdbcType=INTEGER}
+    </if>
+  </sql>
+
+  <select id="getById" parameterType="Integer" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    where id = #{id}
+  </select>
+
+  <select id="listBy" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <select id="listPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+    <![CDATA[ order by id desc]]>
+  </select>
+
+  <select id="listPageCount" parameterType="java.util.Map" resultType="Integer">
+    select count(1) from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <insert id="insert" parameterType="com.mika.credit.common.entity.report.cn.ShareCapital" keyProperty="id" useGeneratedKeys="true">
+    insert into
+    <include refid="table" />
+    (id, crefo_no, subscribed_capital_date,
+    subscribed_capital_value, subscribed_capital_currency_code,
+    paidUp_capital_date, paidUp_capital_value,
+    paidUp_capital_currency_code, nominal_share_capital_date,
+    nominal_share_capital_value, nominal_share_capital_currency_code,
+    amount_per_share_date, amount_per_value, amount_per_currency_code,
+    total_number_of_shares_date, total_number_of_shares_value,
+    total_number_of_shares_currency_code, update_time,
+    del_flag, full_report_id)
+    values (#{id,jdbcType=INTEGER}, #{crefoNo,jdbcType=VARCHAR}, #{subscribedCapitalDate,jdbcType=VARCHAR},
+    #{subscribedCapitalValue,jdbcType=VARCHAR}, #{subscribedCapitalCurrencyCode,jdbcType=VARCHAR},
+    #{paidupCapitalDate,jdbcType=VARCHAR}, #{paidupCapitalValue,jdbcType=VARCHAR},
+    #{paidupCapitalCurrencyCode,jdbcType=VARCHAR}, #{nominalShareCapitalDate,jdbcType=VARCHAR},
+    #{nominalShareCapitalValue,jdbcType=VARCHAR}, #{nominalShareCapitalCurrencyCode,jdbcType=VARCHAR},
+    #{amountPerShareDate,jdbcType=VARCHAR}, #{amountPerValue,jdbcType=VARCHAR}, #{amountPerCurrencyCode,jdbcType=VARCHAR},
+    #{totalNumberOfSharesDate,jdbcType=VARCHAR}, #{totalNumberOfSharesValue,jdbcType=VARCHAR},
+    #{totalNumberOfSharesCurrencyCode,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR},
+    #{delFlag,jdbcType=VARCHAR}, #{fullReportId,jdbcType=INTEGER})
+  </insert>
+
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from
+    <include refid="table" />
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <update id="update" parameterType="com.mika.credit.common.entity.report.cn.ShareCapital" >
+    update share_capital
+    set crefo_no = #{crefoNo,jdbcType=VARCHAR},
+    subscribed_capital_date = #{subscribedCapitalDate,jdbcType=VARCHAR},
+    subscribed_capital_value = #{subscribedCapitalValue,jdbcType=VARCHAR},
+    subscribed_capital_currency_code = #{subscribedCapitalCurrencyCode,jdbcType=VARCHAR},
+    paidUp_capital_date = #{paidupCapitalDate,jdbcType=VARCHAR},
+    paidUp_capital_value = #{paidupCapitalValue,jdbcType=VARCHAR},
+    paidUp_capital_currency_code = #{paidupCapitalCurrencyCode,jdbcType=VARCHAR},
+    nominal_share_capital_date = #{nominalShareCapitalDate,jdbcType=VARCHAR},
+    nominal_share_capital_value = #{nominalShareCapitalValue,jdbcType=VARCHAR},
+    nominal_share_capital_currency_code = #{nominalShareCapitalCurrencyCode,jdbcType=VARCHAR},
+    amount_per_share_date = #{amountPerShareDate,jdbcType=VARCHAR},
+    amount_per_value = #{amountPerValue,jdbcType=VARCHAR},
+    amount_per_currency_code = #{amountPerCurrencyCode,jdbcType=VARCHAR},
+    total_number_of_shares_date = #{totalNumberOfSharesDate,jdbcType=VARCHAR},
+    total_number_of_shares_value = #{totalNumberOfSharesValue,jdbcType=VARCHAR},
+    total_number_of_shares_currency_code = #{totalNumberOfSharesCurrencyCode,jdbcType=VARCHAR},
+    update_time = #{updateTime,jdbcType=VARCHAR},
+    del_flag = #{delFlag,jdbcType=VARCHAR},
+    full_report_id = #{fullReportId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <insert id="insertSelective" parameterType="com.mika.credit.common.entity.report.cn.ShareCapital" >
+    insert into share_capital
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="crefoNo != null" >
+        crefo_no,
+      </if>
+      <if test="subscribedCapitalDate != null" >
+        subscribed_capital_date,
+      </if>
+      <if test="subscribedCapitalValue != null" >
+        subscribed_capital_value,
+      </if>
+      <if test="subscribedCapitalCurrencyCode != null" >
+        subscribed_capital_currency_code,
+      </if>
+      <if test="paidupCapitalDate != null" >
+        paidUp_capital_date,
+      </if>
+      <if test="paidupCapitalValue != null" >
+        paidUp_capital_value,
+      </if>
+      <if test="paidupCapitalCurrencyCode != null" >
+        paidUp_capital_currency_code,
+      </if>
+      <if test="nominalShareCapitalDate != null" >
+        nominal_share_capital_date,
+      </if>
+      <if test="nominalShareCapitalValue != null" >
+        nominal_share_capital_value,
+      </if>
+      <if test="nominalShareCapitalCurrencyCode != null" >
+        nominal_share_capital_currency_code,
+      </if>
+      <if test="amountPerShareDate != null" >
+        amount_per_share_date,
+      </if>
+      <if test="amountPerValue != null" >
+        amount_per_value,
+      </if>
+      <if test="amountPerCurrencyCode != null" >
+        amount_per_currency_code,
+      </if>
+      <if test="totalNumberOfSharesDate != null" >
+        total_number_of_shares_date,
+      </if>
+      <if test="totalNumberOfSharesValue != null" >
+        total_number_of_shares_value,
+      </if>
+      <if test="totalNumberOfSharesCurrencyCode != null" >
+        total_number_of_shares_currency_code,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="crefoNo != null" >
+        #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="subscribedCapitalDate != null" >
+        #{subscribedCapitalDate,jdbcType=VARCHAR},
+      </if>
+      <if test="subscribedCapitalValue != null" >
+        #{subscribedCapitalValue,jdbcType=VARCHAR},
+      </if>
+      <if test="subscribedCapitalCurrencyCode != null" >
+        #{subscribedCapitalCurrencyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="paidupCapitalDate != null" >
+        #{paidupCapitalDate,jdbcType=VARCHAR},
+      </if>
+      <if test="paidupCapitalValue != null" >
+        #{paidupCapitalValue,jdbcType=VARCHAR},
+      </if>
+      <if test="paidupCapitalCurrencyCode != null" >
+        #{paidupCapitalCurrencyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="nominalShareCapitalDate != null" >
+        #{nominalShareCapitalDate,jdbcType=VARCHAR},
+      </if>
+      <if test="nominalShareCapitalValue != null" >
+        #{nominalShareCapitalValue,jdbcType=VARCHAR},
+      </if>
+      <if test="nominalShareCapitalCurrencyCode != null" >
+        #{nominalShareCapitalCurrencyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="amountPerShareDate != null" >
+        #{amountPerShareDate,jdbcType=VARCHAR},
+      </if>
+      <if test="amountPerValue != null" >
+        #{amountPerValue,jdbcType=VARCHAR},
+      </if>
+      <if test="amountPerCurrencyCode != null" >
+        #{amountPerCurrencyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="totalNumberOfSharesDate != null" >
+        #{totalNumberOfSharesDate,jdbcType=VARCHAR},
+      </if>
+      <if test="totalNumberOfSharesValue != null" >
+        #{totalNumberOfSharesValue,jdbcType=VARCHAR},
+      </if>
+      <if test="totalNumberOfSharesCurrencyCode != null" >
+        #{totalNumberOfSharesCurrencyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        #{fullReportId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateSelective" parameterType="com.mika.credit.common.entity.report.cn.ShareCapital" >
+    update share_capital
+    <set >
+      <if test="crefoNo != null" >
+        crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="subscribedCapitalDate != null" >
+        subscribed_capital_date = #{subscribedCapitalDate,jdbcType=VARCHAR},
+      </if>
+      <if test="subscribedCapitalValue != null" >
+        subscribed_capital_value = #{subscribedCapitalValue,jdbcType=VARCHAR},
+      </if>
+      <if test="subscribedCapitalCurrencyCode != null" >
+        subscribed_capital_currency_code = #{subscribedCapitalCurrencyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="paidupCapitalDate != null" >
+        paidUp_capital_date = #{paidupCapitalDate,jdbcType=VARCHAR},
+      </if>
+      <if test="paidupCapitalValue != null" >
+        paidUp_capital_value = #{paidupCapitalValue,jdbcType=VARCHAR},
+      </if>
+      <if test="paidupCapitalCurrencyCode != null" >
+        paidUp_capital_currency_code = #{paidupCapitalCurrencyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="nominalShareCapitalDate != null" >
+        nominal_share_capital_date = #{nominalShareCapitalDate,jdbcType=VARCHAR},
+      </if>
+      <if test="nominalShareCapitalValue != null" >
+        nominal_share_capital_value = #{nominalShareCapitalValue,jdbcType=VARCHAR},
+      </if>
+      <if test="nominalShareCapitalCurrencyCode != null" >
+        nominal_share_capital_currency_code = #{nominalShareCapitalCurrencyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="amountPerShareDate != null" >
+        amount_per_share_date = #{amountPerShareDate,jdbcType=VARCHAR},
+      </if>
+      <if test="amountPerValue != null" >
+        amount_per_value = #{amountPerValue,jdbcType=VARCHAR},
+      </if>
+      <if test="amountPerCurrencyCode != null" >
+        amount_per_currency_code = #{amountPerCurrencyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="totalNumberOfSharesDate != null" >
+        total_number_of_shares_date = #{totalNumberOfSharesDate,jdbcType=VARCHAR},
+      </if>
+      <if test="totalNumberOfSharesValue != null" >
+        total_number_of_shares_value = #{totalNumberOfSharesValue,jdbcType=VARCHAR},
+      </if>
+      <if test="totalNumberOfSharesCurrencyCode != null" >
+        total_number_of_shares_currency_code = #{totalNumberOfSharesCurrencyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id = #{fullReportId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+</mapper>

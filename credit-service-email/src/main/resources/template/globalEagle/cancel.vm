@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{margin: 0;padding: 0;border: 0;list-style: none;color: #494949;font-family: "微软雅黑";}
+        img{vertical-align: middle}
+	</style>
+</head>
+<body>
+<!-- 整个页面 background: #fcfcfb-->
+<div  style="width: 580px;height: auto;background: #FAF9F9;margin: 0 auto;padding-bottom:70px">
+    <!-- top + banner -->
+    <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;width: 580px;margin:0 auto;">
+        <tr style="background: #171616;">
+            <td style="height:28px;overflow: hidden;padding-left: 10px;background: #444444;">
+                <a href="http://192.168.1.183:8081" style="text-decoration: none;display:block;color:#fff;font-size: 14px;margin-left: 10px">Global Eagle 全球鹰</a>
+            </td>
+            <td style="text-align:right;font-size:12px;line-height: 40px;padding-right: 10px;background: #444444;">
+                <img src="$emailImagesPath/fxq-phone.png" alt="电话" style="vertical-align:middle;width: 16px;height: 16px">
+                <span style="margin-right:16px;color: #fff">热线电话：4007 729 029</span>
+                <img src="$emailImagesPath/fxq-email.png" alt="邮箱" style="vertical-align:middle;width: 16px;height: 16px">
+                <a href="mailto:info@global-eagle.cn" style="text-decoration: none;color: #fff;font-size: 12px">邮箱：info@global-eagle.cn</a>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="width:580px;height:175px;background: #288FC9;overflow: hidden">
+                <img src="$emailImagesPath/fxq-banner.png" alt="banner" style="width: 100%;height: 100%;border: 0;vertical-align:middle;">
+            </td>
+        </tr>
+    </table>
+	<!-- content -->
+	<div style="padding: 40px 60px 10px;">
+		<div>
+			<div style="color: #0872b0;font-size: 22px;font-weight: bold;">
+                <a style="text-decoration: none;color: #0872b0;font-size: 22px">$toAddress</a>
+				<span style="color: #0872b0">欢迎使用全球鹰</span>
+			</div>
+			<div style="color: #b72a2a;font-size: 16px;margin-top: 15px">您已取消订单成功，请及时查看！</div>
+			<div style="font-size: 12px;margin:20px 0;line-height: 20px">
+			    <div>订购日期：<span>$creatTime</span></div>
+				<div>订单号：&nbsp;<span>$no</span></div>
+			</div>
+		</div>
+		<!-- table -->
+		<table  style="width: 460px;border: 2px solid #e5e5e5;border-collapse: collapse;" cellpadding="10px" cellspacing="0">
+			<tr style="border: 2px solid #e5e5e5;height: 60px;line-height:30px;text-align: center;">
+				<td   style="border: 2px solid #e5e5e5;height: 60px;line-height:30px;text-align: center;width: 150px">实付金额</td>
+				<td style="border: 2px solid #e5e5e5;height: 60px;line-height:30px;text-align: center;">$amountActual</td>
+			</tr>
+			<tr>
+				<td  style="border: 2px solid #e5e5e5;height: 60px;line-height:30px;text-align: center;width: 150px">备注</td>
+				<td style="border: 2px solid #e5e5e5;height: 60px;line-height:30px;text-align: center;padding:10px;">$remark</td>
+			</tr>
+		</table>
+		<div style="color: #b72a2a;font-size: 12px;margin:20px 0">（这是一封自动产生的email，请勿回复哦。）</div>
+	</div>
+    <!-- 四个模块 -->
+    <div  style="width:94%;background:#fff;margin:0 auto">
+        <div style="width: 50%;height:175px;text-align:center;float: left;padding-top:40px">
+            <img src="$emailImagesPath/fxq-1.png" alt="">
+            <h5 style="font-size: 14px;margin: 20px 0 10px 0;letter-spacing: 2px">信用信息</h5>
+            <p style="word-break:break-all;font-size: 12px;color: #888888;padding:0 20px;line-height: 20px">全球鹰整合全球多个实地认证机构及当地运营公司，提供专业的商业认证服务。</p>
+        </div>
+        <div  style="width: 50%;height:175px;text-align:center;float: left;padding-top:40px">
+            <img src="$emailImagesPath/fxq-2.png" alt="">
+            <h5 style="font-size: 14px;margin: 20px 0 10px 0;letter-spacing: 2px">应收账管理</h5>
+            <p style="word-break:break-all;font-size: 12px;color: #888888;padding:0 20px;line-height: 20px">全球鹰整合全球多个实地认证机构及当地运营公司，提供专业的商业认证服务。</p>
+        </div>
+        <div  style="width: 50%;height:185px;text-align:center;float: left;padding-top: 20px;">
+            <img src="$emailImagesPath/fxq-3.png" alt="">
+            <h5 style="font-size: 14px;margin: 20px 0 10px 0;letter-spacing: 2px">信用认证</h5>
+            <p style="word-break:break-all;font-size: 12px;color: #888888;padding:0 20px;line-height: 20px">全球鹰整合全球多个实地认证机构及当地运营公司，提供专业的商业认证服务。</p>
+        </div>
+        <div  style="width: 50%;height:185px;text-align:center;float: left;padding-top: 20px;">
+            <img src="$emailImagesPath/fxq-4.png" alt="">
+            <h5 style="font-size: 14px;margin: 20px 0 10px 0;letter-spacing: 2px">全球鹰</h5>
+            <p style="word-break:break-all;font-size: 12px;color: #888888;padding:0 20px;line-height: 20px">全球鹰整合全球多个实地认证机构及当地运营公司，提供专业的商业认证服务。</p>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+</div>
+</body>
+</html>

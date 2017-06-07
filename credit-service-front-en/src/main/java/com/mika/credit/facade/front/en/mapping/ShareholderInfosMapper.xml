@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.front.en.dao.impl.ShareholderInfosDaoImpl" >
+  <cache eviction="LRU" type="com.mika.credit.common.core.mybatis.cache.redis.sharded.MybatiesRedisCache" />
+  <resultMap id="BaseResultMap" type="com.mika.credit.common.entity.report.en.ShareholderInfos" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="crefo_no" property="crefoNo" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="VARCHAR" />
+    <result column="share_address" property="shareAddress" jdbcType="VARCHAR" />
+    <result column="share_issued_capital" property="shareIssuedCapital" jdbcType="VARCHAR" />
+    <result column="share_name" property="shareName" jdbcType="VARCHAR" />
+    <result column="share_nominal_capital" property="shareNominalCapital" jdbcType="VARCHAR" />
+    <result column="share_percent" property="sharePercent" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+    <result column="share_note" property="shareNote" jdbcType="LONGVARCHAR" />
+    <result column="full_report_id" property="fullReportId" jdbcType="INTEGER" />
+  </resultMap>
+
+  <sql id="table"> shareholder_infos </sql>
+
+  <sql id="Base_Column_List" >
+    id, crefo_no, del_flag, share_address, share_issued_capital, share_name, share_nominal_capital, 
+    share_percent, update_time,
+    share_note,full_report_id
+  </sql>
+
+  <sql id="condition_sql">
+  <if test="id != null" >
+    and id = #{id,jdbcType=INTEGER}
+  </if>
+    <if test="crefoNo != null" >
+      and crefo_no = #{crefoNo,jdbcType=VARCHAR}
+    </if>
+    <if test="delFlag != null" >
+      and del_flag = #{delFlag,jdbcType=VARCHAR}
+    </if>
+    <if test="shareAddress != null" >
+      and share_address = #{shareAddress,jdbcType=VARCHAR}
+    </if>
+    <if test="shareIssuedCapital != null" >
+      and share_issued_capital = #{shareIssuedCapital,jdbcType=VARCHAR}
+    </if>
+    <if test="shareName != null" >
+      and share_name = #{shareName,jdbcType=VARCHAR}
+    </if>
+    <if test="shareNominalCapital != null" >
+      and share_nominal_capital = #{shareNominalCapital,jdbcType=VARCHAR}
+    </if>
+    <if test="sharePercent != null" >
+      and share_percent = #{sharePercent,jdbcType=VARCHAR}
+    </if>
+    <if test="updateTime != null" >
+      and update_time = #{updateTime,jdbcType=VARCHAR}
+    </if>
+    <if test="shareNote != null" >
+      and share_note = #{shareNote,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="fullReportId != null" >
+      and full_report_id = #{fullReportId,jdbcType=INTEGER}
+    </if>
+  </sql>
+
+  <select id="getById" parameterType="Integer" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    where id = #{id}
+  </select>
+
+  <select id="listBy" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <select id="listPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+    <![CDATA[ order by ID desc]]>
+  </select>
+
+  <select id="listPageCount" parameterType="java.util.Map" resultType="Integer">
+    select count(1) from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <insert id="insert" parameterType="com.mika.credit.common.entity.report.en.ShareholderInfos" keyProperty="id" useGeneratedKeys="true">
+    insert into
+    <include refid="table" />
+    (id, crefo_no, del_flag,
+    share_address, share_issued_capital, share_name,
+    share_nominal_capital, share_percent, update_time,
+    share_note,full_report_id)
+    values (#{id,jdbcType=INTEGER}, #{crefoNo,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR},
+    #{shareAddress,jdbcType=VARCHAR}, #{shareIssuedCapital,jdbcType=VARCHAR}, #{shareName,jdbcType=VARCHAR},
+    #{shareNominalCapital,jdbcType=VARCHAR}, #{sharePercent,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR},
+    #{shareNote,jdbcType=LONGVARCHAR},#{fullReportId,jdbcType=INTEGER})
+  </insert>
+
+  <insert id="batchInsert" parameterType="java.util.List">
+    insert into
+    <include refid="table" />
+    (id, crefo_no, del_flag,
+    share_address, share_issued_capital, share_name,
+    share_nominal_capital, share_percent, update_time,
+    share_note,full_report_id)
+    values
+    <foreach collection ="list" item="shareholderInfos" index= "index" separator =",">
+      (#{shareholderInfos.id,jdbcType=INTEGER}, #{shareholderInfos.crefoNo,jdbcType=VARCHAR}, #{shareholderInfos.delFlag,jdbcType=VARCHAR},
+      #{shareholderInfos.shareAddress,jdbcType=VARCHAR}, #{shareholderInfos.shareIssuedCapital,jdbcType=VARCHAR}, #{shareholderInfos.shareName,jdbcType=VARCHAR},
+      #{shareholderInfos.shareNominalCapital,jdbcType=VARCHAR}, #{shareholderInfos.sharePercent,jdbcType=VARCHAR}, #{shareholderInfos.updateTime,jdbcType=VARCHAR},
+      #{shareholderInfos.shareNote,jdbcType=LONGVARCHAR},#{shareholderInfos.fullReportId,jdbcType=INTEGER})
+    </foreach >
+  </insert>
+
+  <delete id="deleteById" parameterType="Integer" >
+    delete from
+    <include refid="table" />
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <update id="update" parameterType="com.mika.credit.common.entity.report.en.ShareholderInfos" >
+    update shareholder_infos
+    set crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=VARCHAR},
+      share_address = #{shareAddress,jdbcType=VARCHAR},
+      share_issued_capital = #{shareIssuedCapital,jdbcType=VARCHAR},
+      share_name = #{shareName,jdbcType=VARCHAR},
+      share_nominal_capital = #{shareNominalCapital,jdbcType=VARCHAR},
+      share_percent = #{sharePercent,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      share_note = #{shareNote,jdbcType=LONGVARCHAR},
+	full_report_id = #{fullReportId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <insert id="insertSelective" parameterType="com.mika.credit.common.entity.report.en.ShareholderInfos" >
+    insert into shareholder_infos
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="crefoNo != null" >
+        crefo_no,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="shareAddress != null" >
+        share_address,
+      </if>
+      <if test="shareIssuedCapital != null" >
+        share_issued_capital,
+      </if>
+      <if test="shareName != null" >
+        share_name,
+      </if>
+      <if test="shareNominalCapital != null" >
+        share_nominal_capital,
+      </if>
+      <if test="sharePercent != null" >
+        share_percent,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="shareNote != null" >
+        share_note,
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="crefoNo != null" >
+        #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="shareAddress != null" >
+        #{shareAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="shareIssuedCapital != null" >
+        #{shareIssuedCapital,jdbcType=VARCHAR},
+      </if>
+      <if test="shareName != null" >
+        #{shareName,jdbcType=VARCHAR},
+      </if>
+      <if test="shareNominalCapital != null" >
+        #{shareNominalCapital,jdbcType=VARCHAR},
+      </if>
+      <if test="sharePercent != null" >
+        #{sharePercent,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="shareNote != null" >
+        #{shareNote,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        #{fullReportId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateSelective" parameterType="com.mika.credit.common.entity.report.en.ShareholderInfos" >
+    update shareholder_infos
+    <set >
+      <if test="crefoNo != null" >
+        crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="shareAddress != null" >
+        share_address = #{shareAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="shareIssuedCapital != null" >
+        share_issued_capital = #{shareIssuedCapital,jdbcType=VARCHAR},
+      </if>
+      <if test="shareName != null" >
+        share_name = #{shareName,jdbcType=VARCHAR},
+      </if>
+      <if test="shareNominalCapital != null" >
+        share_nominal_capital = #{shareNominalCapital,jdbcType=VARCHAR},
+      </if>
+      <if test="sharePercent != null" >
+        share_percent = #{sharePercent,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="shareNote != null" >
+        share_note = #{shareNote,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id = #{fullReportId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

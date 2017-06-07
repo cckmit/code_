@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.front.cn.dao.impl.OperationAbnormalInfosDaoImpl" >
+  <cache eviction="LRU" type="com.mika.credit.common.core.mybatis.cache.redis.sharded.MybatiesRedisCache" />
+  <resultMap id="BaseResultMap" type="com.mika.credit.common.entity.report.cn.OperationAbnormalInfos" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="crefo_no" property="crefoNo" jdbcType="VARCHAR" />
+    <result column="include_date" property="includeDate" jdbcType="VARCHAR" />
+    <result column="include_reasons" property="includeReasons" jdbcType="VARCHAR" />
+    <result column="org_decision" property="orgDecision" jdbcType="VARCHAR" />
+    <result column="remove_date" property="removeDate" jdbcType="VARCHAR" />
+    <result column="remove_reason" property="removeReason" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+    <result column="full_report_id" property="fullReportId" jdbcType="INTEGER" />
+  </resultMap>
+
+  <sql id="table"> operation_abnormal_infos </sql>
+
+  <sql id="Base_Column_List" >
+    id, crefo_no, include_date, include_reasons, org_decision, remove_date, remove_reason, 
+    update_time,full_report_id
+  </sql>
+
+  <sql id="condition_sql">
+    <if test="id != null" >
+      and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="crefoNo != null" >
+      and crefo_no = #{crefoNo,jdbcType=VARCHAR}
+    </if>
+    <if test="includeDate != null" >
+      and include_date = #{includeDate,jdbcType=VARCHAR}
+    </if>
+    <if test="includeReasons != null" >
+      and include_reasons = #{includeReasons,jdbcType=VARCHAR}
+    </if>
+    <if test="orgDecision != null" >
+      and org_decision = #{orgDecision,jdbcType=VARCHAR}
+    </if>
+    <if test="removeDate != null" >
+      and remove_date = #{removeDate,jdbcType=VARCHAR}
+    </if>
+    <if test="removeReason != null" >
+      and remove_reason = #{removeReason,jdbcType=VARCHAR}
+    </if>
+    <if test="updateTime != null" >
+      and update_time = #{updateTime,jdbcType=VARCHAR}
+    </if>
+    <if test="fullReportId != null" >
+      and full_report_id = #{fullReportId,jdbcType=INTEGER}
+    </if>
+  </sql>
+
+  <select id="getById" parameterType="Integer" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    where id = #{id}
+  </select>
+
+  <select id="listBy" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <select id="listPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+    <![CDATA[ order by id desc]]>
+  </select>
+
+  <select id="listPageCount" parameterType="java.util.Map" resultType="Integer">
+    select count(1) from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <insert id="insert" parameterType="com.mika.credit.common.entity.report.cn.OperationAbnormalInfos" keyProperty="id" useGeneratedKeys="true">
+    insert into
+    <include refid="table" />
+    (id, crefo_no, include_date,
+    include_reasons, org_decision, remove_date,
+    remove_reason, update_time,full_report_id)
+    values (#{id,jdbcType=INTEGER}, #{crefoNo,jdbcType=VARCHAR}, #{includeDate,jdbcType=VARCHAR},
+    #{includeReasons,jdbcType=VARCHAR}, #{orgDecision,jdbcType=VARCHAR}, #{removeDate,jdbcType=VARCHAR},
+    #{removeReason,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR},#{fullReportId,jdbcType=INTEGER})
+  </insert>
+
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from
+    <include refid="table" />
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <update id="update" parameterType="com.mika.credit.common.entity.report.cn.OperationAbnormalInfos" >
+    update operation_abnormal_infos
+    set crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      include_date = #{includeDate,jdbcType=VARCHAR},
+      include_reasons = #{includeReasons,jdbcType=VARCHAR},
+      org_decision = #{orgDecision,jdbcType=VARCHAR},
+      remove_date = #{removeDate,jdbcType=VARCHAR},
+      remove_reason = #{removeReason,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+	  full_report_id = #{fullReportId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <insert id="insertSelective" parameterType="com.mika.credit.common.entity.report.cn.OperationAbnormalInfos" >
+    insert into operation_abnormal_infos
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="crefoNo != null" >
+        crefo_no,
+      </if>
+      <if test="includeDate != null" >
+        include_date,
+      </if>
+      <if test="includeReasons != null" >
+        include_reasons,
+      </if>
+      <if test="orgDecision != null" >
+        org_decision,
+      </if>
+      <if test="removeDate != null" >
+        remove_date,
+      </if>
+      <if test="removeReason != null" >
+        remove_reason,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="crefoNo != null" >
+        #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="includeDate != null" >
+        #{includeDate,jdbcType=VARCHAR},
+      </if>
+      <if test="includeReasons != null" >
+        #{includeReasons,jdbcType=VARCHAR},
+      </if>
+      <if test="orgDecision != null" >
+        #{orgDecision,jdbcType=VARCHAR},
+      </if>
+      <if test="removeDate != null" >
+        #{removeDate,jdbcType=VARCHAR},
+      </if>
+      <if test="removeReason != null" >
+        #{removeReason,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        #{fullReportId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateSelective" parameterType="com.mika.credit.common.entity.report.cn.OperationAbnormalInfos" >
+    update operation_abnormal_infos
+    <set >
+      <if test="crefoNo != null" >
+        crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="includeDate != null" >
+        include_date = #{includeDate,jdbcType=VARCHAR},
+      </if>
+      <if test="includeReasons != null" >
+        include_reasons = #{includeReasons,jdbcType=VARCHAR},
+      </if>
+      <if test="orgDecision != null" >
+        org_decision = #{orgDecision,jdbcType=VARCHAR},
+      </if>
+      <if test="removeDate != null" >
+        remove_date = #{removeDate,jdbcType=VARCHAR},
+      </if>
+      <if test="removeReason != null" >
+        remove_reason = #{removeReason,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id = #{fullReportId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

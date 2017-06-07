@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mika.credit.facade.order.dao.BusinessOrderMapper">
+    <resultMap id="BaseResultMap" type="com.mika.credit.facade.order.entity.BusinessOrder">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="no" jdbcType="VARCHAR" property="no"/>
+        <!--<result column="entry_id" property="entryId"/>-->
+        <result column="source" jdbcType="TINYINT" property="source"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="subject" jdbcType="VARCHAR" property="subject"/>
+        <result column="product_id" jdbcType="INTEGER" property="productId"/>
+        <result column="country_code" jdbcType="VARCHAR" property="countryCode"/>
+        <result column="crefo_no" jdbcType="VARCHAR" property="crefoNo"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="finish_time" jdbcType="TIMESTAMP" property="finishTime"/>
+        <result column="path_data" jdbcType="VARCHAR" property="pathData"/>
+        <result column="expect_hour" jdbcType="INTEGER" property="expectHour"/>
+        <result column="remark" property="remark"/>
+        <result column="legitimate_interest_code" property="legitimateInterestCode"/>
+        <result column="permit_outdated_report" property="permitOutdatedReport"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, `no`, subject, status, product_id, country_code, source, crefo_no, create_time,
+    finish_time, path_data, expect_hour, remark,legitimate_interest_code,permit_outdated_report
+  </sql>
+    <sql id="conditionWithOrderQuery">
+        <where>
+            <if test="id != null">
+                AND id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="no != null and no!=''">
+                AND `no` = #{no,jdbcType=VARCHAR}
+            </if>
+            <!--<if test="entryId != null">-->
+                <!--and entry_id=#{entryId}-->
+            <!--</if>-->
+            <if test="source != null">
+                AND source = #{source,jdbcType=TINYINT}
+            </if>
+            <if test="status != null">
+                AND status = #{status,jdbcType=TINYINT}
+            </if>
+            <if test="subject != null">
+                AND subject = #{subject,jdbcType=VARCHAR}
+            </if>
+            <if test="productId != null">
+                AND product_id = #{productId,jdbcType=INTEGER}
+            </if>
+            <if test="countryCode != null">
+                AND country_code = #{countryCode,jdbcType=VARCHAR}
+            </if>
+            <if test="crefoNo != null">
+                AND crefo_no = #{crefoNo,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null">
+                AND create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="createDateFrom != null">
+                AND create_time &gt; #{createDateFrom,jdbcType=TIMESTAMP}
+            </if>
+            <if test="createDateTo != null">
+                AND create_time &lt; #{createDateTo,jdbcType=TIMESTAMP}
+            </if>
+            <if test="finishTime != null">
+                AND finish_time = #{finishTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="pathData != null and pathData!=''">
+                AND path_data = #{pathData,jdbcType=VARCHAR}
+            </if>
+            <if test="expectHour != null">
+                AND expect_hour = #{expectHour,jdbcType=INTEGER}
+            </if>
+            <if test="legitimateInterestCode != null">
+                AND legitimate_interest_code = #{legitimateInterestCode}
+            </if>
+            <if test="permitOutdatedReport != null">
+                AND permit_outdated_report = #{permitOutdatedReport}
+            </if>
+        </where>
+    </sql>
+    <sql id="condition">
+        <where>
+            <if test="id != null">
+                AND id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="no != null and no!=''">
+                AND `no` = #{no,jdbcType=VARCHAR}
+            </if>
+            <!--<if test="entryId != null">-->
+                <!--and entry_id=#{entryId}-->
+            <!--</if>-->
+            <if test="source != null">
+                AND source = #{source,jdbcType=TINYINT}
+            </if>
+            <if test="status != null">
+                AND status = #{status,jdbcType=TINYINT}
+            </if>
+            <if test="subject != null">
+                AND subject = #{subject,jdbcType=VARCHAR}
+            </if>
+            <if test="productId != null">
+                AND product_id = #{productId,jdbcType=INTEGER}
+            </if>
+            <if test="countryCode != null">
+                AND country_code = #{countryCode,jdbcType=VARCHAR}
+            </if>
+            <if test="crefoNo != null">
+                AND crefo_no = #{crefoNo,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null">
+                AND create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="finishTime != null">
+                AND finish_time = #{finishTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="pathData != null and pathData!=''">
+                AND path_data = #{pathData,jdbcType=VARCHAR}
+            </if>
+            <if test="expectHour != null">
+                AND expect_hour = #{expectHour,jdbcType=INTEGER}
+            </if>
+            <if test="legitimateInterestCode != null">
+                AND legitimate_interest_code = #{legitimateInterestCode}
+            </if>
+            <if test="permitOutdatedReport != null">
+                AND permit_outdated_report = #{permitOutdatedReport}
+            </if>
+        </where>
+    </sql>
+    <sql id="conditionWithOutStatus">
+        <where>
+            <if test="id != null">
+                AND id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="no != null and no!=''">
+                AND `no` = #{no,jdbcType=VARCHAR}
+            </if>
+            <!--<if test="entryId != null">-->
+                <!--and entry_id=#{entryId}-->
+            <!--</if>-->
+            <if test="source != null">
+                AND source = #{source,jdbcType=TINYINT}
+            </if>
+            <if test="subject != null">
+                AND subject = #{subject,jdbcType=VARCHAR}
+            </if>
+            <if test="productId != null">
+                AND product_id = #{productId,jdbcType=INTEGER}
+            </if>
+            <if test="countryCode != null">
+                AND country_code = #{countryCode,jdbcType=VARCHAR}
+            </if>
+            <if test="crefoNo != null">
+                AND crefo_no = #{crefoNo,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null">
+                AND create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="finishTime != null">
+                AND finish_time = #{finishTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="pathData != null and pathData!=''">
+                AND path_data = #{pathData,jdbcType=VARCHAR}
+            </if>
+            <if test="expectHour != null">
+                AND expect_hour = #{expectHour,jdbcType=INTEGER}
+            </if>
+            <if test="legitimateInterestCode != null">
+                AND legitimate_interest_code = #{legitimateInterestCode}
+            </if>
+            <if test="permitOutdatedReport != null">
+                AND permit_outdated_report = #{permitOutdatedReport}
+            </if>
+        </where>
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from business_order
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectByNO" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from business_order
+        where `no` = #{no,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectByQuery" parameterType="com.mika.credit.facade.order.entity.BusinessOrderQuery" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from business_order
+        <include refid="conditionWithOrderQuery"/>
+    </select>
+    <select id="select" parameterType="com.mika.credit.facade.order.entity.BusinessOrder" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from business_order
+        <include refid="condition"/>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from business_order
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <delete id="delete" parameterType="com.mika.credit.facade.order.entity.BusinessOrder">
+    delete from business_order
+    <include refid="condition"/>
+  </delete>
+    <insert id="insert" parameterType="com.mika.credit.facade.order.entity.BusinessOrder" useGeneratedKeys="true"
+            keyProperty="id">
+    insert into business_order (id, `no`, subject, status,
+      product_id, country_code, source, 
+      crefo_no,
+      create_time, finish_time, path_data, 
+      expect_hour, remark,legitimate_interest_code,permit_outdated_report)
+    values (#{id,jdbcType=BIGINT}, #{no,jdbcType=VARCHAR}, #{subject,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT},
+      #{productId,jdbcType=INTEGER}, #{countryCode,jdbcType=VARCHAR}, #{source,jdbcType=TINYINT}, 
+      #{crefoNo,jdbcType=VARCHAR}, #{sourceId,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP}, #{finishTime,jdbcType=TIMESTAMP}, #{pathData,jdbcType=VARCHAR}, 
+      #{expectHour,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR},#{legitimateInterestCode},#{permitOutdatedReport})
+  </insert>
+    <insert id="insertSelective" parameterType="com.mika.credit.facade.order.entity.BusinessOrder" useGeneratedKeys="true" keyProperty="id">
+        insert into business_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="no != null">
+                `no`,
+            </if>
+            <!--<if test="entryId!=null">-->
+                <!--entry_id,-->
+            <!--</if>-->
+            <if test="subject != null">
+                subject,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="productId != null">
+                product_id,
+            </if>
+            <if test="countryCode != null">
+                country_code,
+            </if>
+            <if test="source != null">
+                source,
+            </if>
+            <if test="crefoNo != null">
+                crefo_no,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="finishTime != null">
+                finish_time,
+            </if>
+            <if test="pathData != null">
+                path_data,
+            </if>
+            <if test="expectHour != null">
+                expect_hour,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="legitimateInterestCode != null">
+                legitimate_interest_code,
+            </if>
+            <if test="permitOutdatedReport != null">
+                permit_outdated_report,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="no != null">
+                #{no,jdbcType=VARCHAR},
+            </if>
+            <!--<if test="entryId != null">-->
+                <!--#{entryId},-->
+            <!--</if>-->
+            <if test="subject != null">
+                #{subject,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="productId != null">
+                #{productId,jdbcType=INTEGER},
+            </if>
+            <if test="countryCode != null">
+                #{countryCode,jdbcType=VARCHAR},
+            </if>
+            <if test="source != null">
+                #{source,jdbcType=TINYINT},
+            </if>
+            <if test="crefoNo != null">
+                #{crefoNo,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="finishTime != null">
+                #{finishTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="pathData != null">
+                #{pathData,jdbcType=VARCHAR},
+            </if>
+            <if test="expectHour != null">
+                #{expectHour,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="legitimateInterestCode != null">
+                #{legitimateInterestCode},
+            </if>
+            <if test="permitOutdatedReport != null">
+                #{permitOutdatedReport},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mika.credit.facade.order.entity.BusinessOrder">
+        update business_order
+        <set>
+            <if test="no != null">
+                `no` = #{no,jdbcType=VARCHAR},
+            </if>
+            <!--<if test="entryId">-->
+                <!--entry_id=#{entryId},-->
+            <!--</if>-->
+            <if test="subject != null">
+                subject = #{subject,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="productId != null">
+                product_id = #{productId,jdbcType=INTEGER},
+            </if>
+            <if test="countryCode != null">
+                country_code = #{countryCode,jdbcType=VARCHAR},
+            </if>
+            <if test="source != null">
+                source = #{source,jdbcType=TINYINT},
+            </if>
+            <if test="crefoNo != null">
+                crefo_no = #{crefoNo,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="finishTime != null">
+                finish_time = #{finishTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="pathData != null">
+                path_data = #{pathData,jdbcType=VARCHAR},
+            </if>
+            <if test="expectHour != null">
+                expect_hour = #{expectHour,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="legitimateInterestCode != null">
+                legitimate_interest_code= #{legitimateInterestCode},
+            </if>
+            <if test="permitOutdatedReport != null">
+                permit_outdated_report= #{permitOutdatedReport},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mika.credit.facade.order.entity.BusinessOrder">
+    update business_order
+    set subject = #{subject,jdbcType=VARCHAR},
+      `no` = #{no,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      product_id = #{productId,jdbcType=INTEGER},
+      country_code = #{countryCode,jdbcType=VARCHAR},
+      source = #{source,jdbcType=TINYINT},
+      crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      path_data = #{pathData,jdbcType=VARCHAR},
+      expect_hour = #{expectHour,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      legitimate_interest_code= #{legitimateInterestCode},
+      permit_outdated_report= #{permitOutdatedReport}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <update id="updateURLByPrimaryKey" parameterType="com.mika.credit.facade.order.entity.BusinessOrder">
+    update business_order
+    set path_data = #{pathData,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateURLByNO" parameterType="com.mika.credit.facade.order.entity.BusinessOrder">
+    update business_order
+    set path_data = #{pathData,jdbcType=VARCHAR}
+    where `no` = #{no,jdbcType=VARCHAR}
+    </update>
+    <!--<select id="findOrderByEntryId" parameterType="java.math.BigInteger" resultMap="BaseResultMap">-->
+        <!--select-->
+        <!--<include refid="Base_Column_List"/>-->
+        <!--from business_order-->
+        <!--where entry_id = #{entryId,jdbcType=BIGINT}-->
+    <!--</select>-->
+    <update id="updateStatus" parameterType="com.mika.credit.facade.order.entity.BusinessOrder">
+        update business_order
+        <set>
+            <if test="status!=null">
+                status=#{status},
+            </if>
+        </set>
+        <include refid="conditionWithOutStatus"/>
+    </update>
+    <!--<update id="updateEntryId" parameterType="com.mika.credit.facade.order.entity.BusinessOrder">-->
+        <!--update business_order-->
+        <!--<set>-->
+            <!--<if test="entryId!=null">-->
+                <!--entry_id=#{entryId},-->
+            <!--</if>-->
+        <!--</set>-->
+        <!--<where>-->
+            <!--<if test="id!=null">-->
+                <!--and id=#{id}-->
+            <!--</if>-->
+            <!--<if test="no!=null">-->
+                <!--and `no`=#{no}-->
+            <!--</if>-->
+        <!--</where>-->
+    <!--</update>-->
+    <!--<select id="findOrderListByEntryId" parameterType="java.math.BigInteger" resultMap="BaseResultMap">-->
+        <!--select-->
+        <!--<include refid="Base_Column_List"/>-->
+        <!--from business_order-->
+        <!--where entry_id &gt; #{entryId,jdbcType=BIGINT}-->
+        <!--order by entry_id-->
+    <!--</select>-->
+    <!--<select id="findLastEntryId" parameterType="java.lang.Byte" resultType="java.math.BigInteger">-->
+        <!--select max(entry_id) FROM business_order-->
+        <!--<where>-->
+            <!--<if test="status!=null">-->
+                <!--status=#{status}-->
+            <!--</if>-->
+        <!--</where>-->
+    <!--</select>-->
+</mapper>

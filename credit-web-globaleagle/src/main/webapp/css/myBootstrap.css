@@ -1,0 +1,19 @@
+/*gxlt*/
+.gxlt-orangey {
+  border-color: #414354;
+}
+.gxlt-orangey > .panel-heading {
+  color: #fff;
+  background-color: #414354;
+  border-color: #414354;
+}
+.gxlt-orangey > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #414354;
+}
+.gxlt-orangey > .panel-heading .badge {
+  color: #414354;
+  background-color: #fff;
+}
+.gxlt-orangey > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #414354;
+}

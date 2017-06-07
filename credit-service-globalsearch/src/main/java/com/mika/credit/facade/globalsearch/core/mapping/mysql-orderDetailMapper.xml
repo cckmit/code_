@@ -1,0 +1,682 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.globalsearch.core.dao.OrderDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.mika.credit.facade.globalsearch.core.model.OrderDetail" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="crefo_no" property="crefoNo" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="order_level" property="orderLevel" jdbcType="VARCHAR" />
+    <result column="company_no" property="companyNo" jdbcType="VARCHAR" />
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+    <result column="upload_file_path" property="uploadFilePath" jdbcType="VARCHAR" />
+    <result column="currency" property="currency" jdbcType="VARCHAR" />
+    <result column="online_price" property="onlinePrice" jdbcType="REAL" />
+    <result column="online_express_price" property="onlineExpressPrice" jdbcType="REAL" />
+    <result column="online_normail_delivery_days" property="onlineNormailDeliveryDays" jdbcType="INTEGER" />
+    <result column="online_express_delivery_days" property="onlineExpressDeliveryDays" jdbcType="INTEGER" />
+    <result column="offline_price" property="offlinePrice" jdbcType="REAL" />
+    <result column="offline_express_price" property="offlineExpressPrice" jdbcType="REAL" />
+    <result column="offline_normail_delivery_days" property="offlineNormailDeliveryDays" jdbcType="INTEGER" />
+    <result column="offline_express_delivery_days" property="offlineExpressDeliveryDays" jdbcType="INTEGER" />
+    <result column="total_price" property="totalPrice" jdbcType="REAL" />
+    <result column="country_id" property="countryId" jdbcType="INTEGER" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="customer_id" property="customerId" jdbcType="INTEGER" />
+    <result column="manager_id" property="managerId" jdbcType="INTEGER" />
+    <result column="order_status_id" property="orderStatusId" jdbcType="INTEGER" />
+    <result column="is_custom_order" property="isCustomOrder" jdbcType="VARCHAR" />
+    <result column="is_read" property="isRead" jdbcType="VARCHAR" />
+    <result column="is_finished" property="isFinished" jdbcType="VARCHAR" />
+    <result column="company_info_id" property="companyInfoId" jdbcType="INTEGER" />
+    <result column="online_data_json" property="onlineDataJson" jdbcType="VARCHAR" />
+    <result column="offline_data_json" property="offlineDataJson" jdbcType="VARCHAR" />
+    <result column="upload_pic_path" property="uploadPicPath" jdbcType="VARCHAR" />
+    <result column="customerName" property="customerName" jdbcType="VARCHAR" />
+    <result column="countryCnName" property="countryCnName" jdbcType="VARCHAR" />
+    <result column="countryEnName" property="countryEnName" jdbcType="VARCHAR" />
+    <result column="is_china_order" property="isChinaOrder" jdbcType="VARCHAR" />
+    <result column="isPay" property="isPay" jdbcType="VARCHAR" />
+    <result column="orderNo" property="orderNo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, create_date, update_date, order_level, company_no, company_name, upload_file_path, 
+    currency, online_price, online_express_price, online_normail_delivery_days, online_express_delivery_days, 
+    offline_price, offline_express_price, offline_normail_delivery_days, offline_express_delivery_days, 
+    total_price, country_id, order_id, customer_id, manager_id, order_status_id, is_custom_order, is_read,
+    company_info_id,is_finished,upload_pic_path,crefo_no,is_china_order,
+    (select email from customer where id=customer_id) as customerName,
+    (select cn_name from country where id=country_id) as countryCnName,
+    (select order_no from `order` o where order_id=o.id) as orderNo,
+    (select is_pay from `order` o where order_id=o.id) as isPay
+  </sql>
+  <select id="selectOnLineDataJsonById" resultType="java.lang.String" parameterType="java.lang.Integer">
+    select online_data_json from `order_detail` where id=#{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectOffLineDataJsonById" resultType="java.lang.String" parameterType="java.lang.Integer">
+    select offline_data_json from `order_detail` where id=#{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectCountSelective" resultType="java.lang.Integer" parameterType="com.mika.credit.facade.globalsearch.core.model.OrderDetail" >
+    select
+    count(1)
+    from (select
+    <include refid="Base_Column_List" />
+    from `order_detail`
+    where 1=1
+    <if test="id != null" >
+      and id=#{id,jdbcType=INTEGER}
+    </if>
+    <if test="orderId != null" >
+      and order_id=#{orderId,jdbcType=VARCHAR}
+    </if>
+    <if test="createDate != null" >
+      and create_date=#{createDate,jdbcType=DATETIME}
+    </if>
+    <if test="updateDate != null" >
+      and update_date =#{updateDate,jdbcType=DATETIME}
+    </if>
+    <if test="orderLevel != null and orderLevel!=''" >
+      and order_level=#{orderLevel,jdbcType=VARCHAR}
+    </if>
+    <if test="companyNo != null" >
+      and company_no=#{companyNo,jdbcType=VARCHAR}
+    </if>
+    <if test="companyName != null and companyName!=''" >
+      and company_name= #{companyName,jdbcType=VARCHAR}
+    </if>
+    <if test="uploadFilePath != null" >
+      and upload_file_path = #{uploadFilePath,jdbcType=VARCHAR}
+    </if>
+    <if test="countryId != null" >
+      and country_id= #{countryId,jdbcType=INTEGER}
+    </if>
+    <if test="customerId != null" >
+      and customer_id = #{customerId,jdbcType=INTEGER}
+    </if>
+    <if test="managerId != null" >
+      and manager_id = #{customerId,jdbcType=INTEGER}
+    </if>
+    <if test="orderStatusId != null" >
+      and order_status_id = #{orderStatusId,jdbcType=INTEGER}
+    </if>
+    <if test="companyInfoId != null" >
+      and company_info_id = #{companyInfoId,jdbcType=INTEGER}
+    </if>
+    <if test="isCustomOrder != null" >
+      and is_custom_order = #{isCustomOrder,jdbcType=VARCHAR}
+    </if>
+    <if test="isFinished != null" >
+      and is_finished = #{isFinished,jdbcType=VARCHAR}
+    </if>
+    <if test="isRead != null" >
+      and is_read=#{isRead,jdbcType=VARCHAR}
+    </if>
+    <if test="onlineDataJson != null" >
+      and online_data_json=#{onlineDataJson,jdbcType=VARCHAR}
+    </if>
+    <if test="offlineDataJson != null" >
+      and offline_data_json=#{offlineDataJson,jdbcType=VARCHAR}
+    </if>
+    <if test="uploadPicPath != null" >
+      and upload_pic_path = #{uploadPicPath,jdbcType=VARCHAR}
+    </if>
+    <if test="crefoNo != null" >
+      and crefo_no=#{crefoNo,jdbcType=VARCHAR}
+    </if>
+    <if test="isChinaOrder != null" >
+      and is_china_order=#{isChinaOrder,jdbcType=VARCHAR}
+    </if>
+    <if test="createDateFrom != null" >
+      and create_date &gt;= #{createDateFrom,jdbcType=TIMESTAMP}
+    </if>
+    <if test="createDateTo != null" >
+      and create_date &lt;= #{createDateTo,jdbcType=TIMESTAMP}
+    </if>
+    ) as od
+    <if test="isPay != null" >
+      where isPay=#{isPay,jdbcType=VARCHAR}
+    </if>
+  </select>
+  <select id="selectSelective" resultMap="BaseResultMap" parameterType="com.mika.credit.facade.globalsearch.core.model.OrderDetail" >
+    select
+    id, create_date, update_date, order_level, company_no, company_name, upload_file_path,
+    currency, online_price, online_express_price, online_normail_delivery_days, online_express_delivery_days,
+    offline_price, offline_express_price, offline_normail_delivery_days, offline_express_delivery_days,
+    total_price, country_id, order_id, customer_id, manager_id, order_status_id, is_custom_order, is_read,
+    company_info_id,is_finished,upload_pic_path,crefo_no,is_china_order,
+    customerName,countryCnName,orderNo
+    from (select
+    <include refid="Base_Column_List" />
+    from `order_detail`
+    where 1=1
+    <if test="id != null" >
+      and id=#{id,jdbcType=INTEGER}
+    </if>
+    <if test="orderId != null" >
+      and order_id=#{orderId,jdbcType=VARCHAR}
+    </if>
+    <if test="createDate != null" >
+      and create_date=#{createDate,jdbcType=DATETIME}
+    </if>
+    <if test="updateDate != null" >
+      and update_date =#{updateDate,jdbcType=DATETIME}
+    </if>
+    <if test="orderLevel != null and orderLevel!=''" >
+      and order_level=#{orderLevel,jdbcType=VARCHAR}
+    </if>
+    <if test="companyNo != null" >
+      and company_no=#{companyNo,jdbcType=VARCHAR}
+    </if>
+    <if test="companyName != null and companyName!=''" >
+      and company_name= #{companyName,jdbcType=VARCHAR}
+    </if>
+    <if test="uploadFilePath != null" >
+      and upload_file_path = #{uploadFilePath,jdbcType=VARCHAR}
+    </if>
+    <if test="countryId != null" >
+      and country_id= #{countryId,jdbcType=INTEGER}
+    </if>
+    <if test="customerId != null" >
+      and customer_id = #{customerId,jdbcType=INTEGER}
+    </if>
+    <if test="managerId != null" >
+      and manager_id = #{customerId,jdbcType=INTEGER}
+    </if>
+    <if test="orderStatusId != null" >
+      and order_status_id = #{orderStatusId,jdbcType=INTEGER}
+    </if>
+    <if test="companyInfoId != null" >
+      and company_info_id = #{companyInfoId,jdbcType=INTEGER}
+    </if>
+    <if test="isCustomOrder != null" >
+      and is_custom_order = #{isCustomOrder,jdbcType=VARCHAR}
+    </if>
+    <if test="isFinished != null" >
+      and is_finished = #{isFinished,jdbcType=VARCHAR}
+    </if>
+    <if test="isRead != null" >
+      and is_read=#{isRead,jdbcType=VARCHAR}
+    </if>
+    <if test="onlineDataJson != null" >
+      and online_data_json=#{onlineDataJson,jdbcType=VARCHAR}
+    </if>
+    <if test="offlineDataJson != null" >
+      and offline_data_json=#{offlineDataJson,jdbcType=VARCHAR}
+    </if>
+    <if test="uploadPicPath != null" >
+      and upload_pic_path = #{uploadPicPath,jdbcType=VARCHAR}
+    </if>
+    <if test="crefoNo != null" >
+      and crefo_no=#{crefoNo,jdbcType=VARCHAR}
+    </if>
+    <if test="isChinaOrder != null" >
+      and is_china_order=#{isChinaOrder,jdbcType=VARCHAR}
+    </if>
+    <if test="createDateFrom != null" >
+      and create_date &gt;= #{createDateFrom,jdbcType=TIMESTAMP}
+    </if>
+    <if test="createDateTo != null" >
+      and create_date &lt;= #{createDateTo,jdbcType=TIMESTAMP}
+    </if>
+    order by create_date desc) as od
+    <if test="isPay != null" >
+      where isPay=#{isPay,jdbcType=VARCHAR}
+    </if>
+  </select>
+  <select id="selectSelectiveIsPayAndNoCancel" resultMap="BaseResultMap" parameterType="com.mika.credit.facade.globalsearch.core.model.OrderDetail" >
+    select
+    id, create_date, update_date, order_level, company_no, company_name, upload_file_path,
+    currency, online_price, online_express_price, online_normail_delivery_days, online_express_delivery_days,
+    offline_price, offline_express_price, offline_normail_delivery_days, offline_express_delivery_days,
+    total_price, country_id, order_id, customer_id, manager_id, order_status_id, is_custom_order, is_read,
+    company_info_id,is_finished,upload_pic_path,crefo_no,is_china_order,
+    customerName,countryCnName,orderNo
+    from (select
+    <include refid="Base_Column_List" />
+    from `order_detail`
+    where 1=1
+    <if test="id != null" >
+      and id=#{id,jdbcType=INTEGER}
+    </if>
+    <if test="orderId != null" >
+      and order_id=#{orderId,jdbcType=VARCHAR}
+    </if>
+    <if test="createDate != null" >
+      and create_date=#{createDate,jdbcType=DATETIME}
+    </if>
+    <if test="updateDate != null" >
+      and update_date =#{updateDate,jdbcType=DATETIME}
+    </if>
+    <if test="orderLevel != null and orderLevel!=''" >
+      and order_level=#{orderLevel,jdbcType=VARCHAR}
+    </if>
+    <if test="companyNo != null" >
+      and company_no=#{companyNo,jdbcType=VARCHAR}
+    </if>
+    <if test="companyName != null and companyName!=''" >
+      and company_name= #{companyName,jdbcType=VARCHAR}
+    </if>
+    <if test="uploadFilePath != null" >
+      and upload_file_path = #{uploadFilePath,jdbcType=VARCHAR}
+    </if>
+    <if test="countryId != null" >
+      and country_id= #{countryId,jdbcType=INTEGER}
+    </if>
+    <if test="customerId != null" >
+      and customer_id = #{customerId,jdbcType=INTEGER}
+    </if>
+    <if test="managerId != null" >
+      and manager_id = #{customerId,jdbcType=INTEGER}
+    </if>
+    <if test="orderStatusId != null" >
+      and order_status_id = #{orderStatusId,jdbcType=INTEGER}
+    </if>
+    <if test="companyInfoId != null" >
+      and company_info_id = #{companyInfoId,jdbcType=INTEGER}
+    </if>
+    <if test="isCustomOrder != null" >
+      and is_custom_order = #{isCustomOrder,jdbcType=VARCHAR}
+    </if>
+    <if test="isFinished != null" >
+      and is_finished = #{isFinished,jdbcType=VARCHAR}
+    </if>
+    <if test="isRead != null" >
+      and is_read=#{isRead,jdbcType=VARCHAR}
+    </if>
+    <if test="onlineDataJson != null" >
+      and online_data_json=#{onlineDataJson,jdbcType=VARCHAR}
+    </if>
+    <if test="offlineDataJson != null" >
+      and offline_data_json=#{offlineDataJson,jdbcType=VARCHAR}
+    </if>
+    <if test="uploadPicPath != null" >
+      and upload_pic_path = #{uploadPicPath,jdbcType=VARCHAR}
+    </if>
+    <if test="crefoNo != null" >
+      and crefo_no=#{crefoNo,jdbcType=VARCHAR}
+    </if>
+    <if test="isChinaOrder != null" >
+      and is_china_order=#{isChinaOrder,jdbcType=VARCHAR}
+    </if>
+    <if test="createDateFrom != null" >
+      and create_date &gt; =#{createDateFrom,jdbcType=TIMESTAMP}
+    </if>
+    <if test="createDateTo != null" >
+      and create_date &lt; =#{createDateTo,jdbcType=TIMESTAMP}
+    </if>
+    order by create_date desc) as od
+      where isPay='是' and order_status_id!=0
+
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from order_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByOrderId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from order_detail
+    where order_id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByOrderId" parameterType="java.lang.Integer" >
+    delete from order_detail
+    where order_id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from order_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mika.credit.facade.globalsearch.core.model.OrderDetail" useGeneratedKeys="true" keyProperty="id">
+    insert into order_detail (id, create_date, update_date, 
+      order_level, company_no, company_name, 
+      upload_file_path, currency, online_price, 
+      online_express_price, online_normail_delivery_days, 
+      online_express_delivery_days, offline_price, offline_express_price, 
+      offline_normail_delivery_days, offline_express_delivery_days, 
+      total_price, country_id, order_id, 
+      customer_id, manager_id, order_status_id, 
+      is_custom_order, company_info_id,is_finished,is_read,
+      online_data_json,offline_data_json,upload_pic_path,crefo_no,is_china_order)
+    values (#{id,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{orderLevel,jdbcType=VARCHAR}, #{companyNo,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, 
+      #{uploadFilePath,jdbcType=VARCHAR}, #{currency,jdbcType=VARCHAR}, #{onlinePrice,jdbcType=REAL}, 
+      #{onlineExpressPrice,jdbcType=REAL}, #{onlineNormailDeliveryDays,jdbcType=INTEGER}, 
+      #{onlineExpressDeliveryDays,jdbcType=INTEGER}, #{offlinePrice,jdbcType=REAL}, #{offlineExpressPrice,jdbcType=REAL}, 
+      #{offlineNormailDeliveryDays,jdbcType=INTEGER}, #{offlineExpressDeliveryDays,jdbcType=INTEGER}, 
+      #{totalPrice,jdbcType=REAL}, #{countryId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, 
+      #{customerId,jdbcType=INTEGER}, #{managerId,jdbcType=INTEGER}, #{orderStatusId,jdbcType=INTEGER}, 
+      #{isCustomOrder,jdbcType=VARCHAR}, #{companyInfoId,jdbcType=INTEGER},#{isFinished,jdbcType=VARCHAR},#{isFinished,jdbcType=VARCHAR},
+      #{onlineDataJson,jdbcType=VARCHAR}, #{offlineDataJson,jdbcType=VARCHAR}, #{uploadPicPath,jdbcType=VARCHAR},
+       #{crefoNo,jdbcType=VARCHAR},#{isChinaOrder,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mika.credit.facade.globalsearch.core.model.OrderDetail" useGeneratedKeys="true" keyProperty="id">
+    insert into order_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="orderLevel != null" >
+        order_level,
+      </if>
+      <if test="companyNo != null" >
+        company_no,
+      </if>
+      <if test="companyName != null" >
+        company_name,
+      </if>
+      <if test="uploadFilePath != null" >
+        upload_file_path,
+      </if>
+      <if test="currency != null" >
+        currency,
+      </if>
+      <if test="onlinePrice != null" >
+        online_price,
+      </if>
+      <if test="onlineExpressPrice != null" >
+        online_express_price,
+      </if>
+      <if test="onlineNormailDeliveryDays != null" >
+        online_normail_delivery_days,
+      </if>
+      <if test="onlineExpressDeliveryDays != null" >
+        online_express_delivery_days,
+      </if>
+      <if test="offlinePrice != null" >
+        offline_price,
+      </if>
+      <if test="offlineExpressPrice != null" >
+        offline_express_price,
+      </if>
+      <if test="offlineNormailDeliveryDays != null" >
+        offline_normail_delivery_days,
+      </if>
+      <if test="offlineExpressDeliveryDays != null" >
+        offline_express_delivery_days,
+      </if>
+      <if test="totalPrice != null" >
+        total_price,
+      </if>
+      <if test="countryId != null" >
+        country_id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="managerId != null" >
+        manager_id,
+      </if>
+      <if test="orderStatusId != null" >
+        order_status_id,
+      </if>
+      <if test="isCustomOrder != null" >
+        is_custom_order,
+      </if>
+      <if test="companyInfoId != null" >
+        company_info_id,
+      </if>
+      <if test="isFinished != null" >
+        is_finished,
+      </if>
+      <if test="isRead != null" >
+      is_read,
+    </if>
+      <if test="onlineDataJson != null" >
+        online_data_json,
+      </if>
+      <if test="offlineDataJson != null" >
+        offline_data_json,
+      </if>
+      <if test="uploadPicPath != null" >
+        upload_pic_path,
+      </if>
+      <if test="crefoNo != null" >
+        crefo_no,
+      </if>
+      <if test="isChinaOrder != null" >
+        is_china_order,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderLevel != null" >
+        #{orderLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="companyNo != null" >
+        #{companyNo,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadFilePath != null" >
+        #{uploadFilePath,jdbcType=VARCHAR},
+      </if>
+      <if test="currency != null" >
+        #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="onlinePrice != null" >
+        #{onlinePrice,jdbcType=REAL},
+      </if>
+      <if test="onlineExpressPrice != null" >
+        #{onlineExpressPrice,jdbcType=REAL},
+      </if>
+      <if test="onlineNormailDeliveryDays != null" >
+        #{onlineNormailDeliveryDays,jdbcType=INTEGER},
+      </if>
+      <if test="onlineExpressDeliveryDays != null" >
+        #{onlineExpressDeliveryDays,jdbcType=INTEGER},
+      </if>
+      <if test="offlinePrice != null" >
+        #{offlinePrice,jdbcType=REAL},
+      </if>
+      <if test="offlineExpressPrice != null" >
+        #{offlineExpressPrice,jdbcType=REAL},
+      </if>
+      <if test="offlineNormailDeliveryDays != null" >
+        #{offlineNormailDeliveryDays,jdbcType=INTEGER},
+      </if>
+      <if test="offlineExpressDeliveryDays != null" >
+        #{offlineExpressDeliveryDays,jdbcType=INTEGER},
+      </if>
+      <if test="totalPrice != null" >
+        #{totalPrice,jdbcType=REAL},
+      </if>
+      <if test="countryId != null" >
+        #{countryId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="managerId != null" >
+        #{managerId,jdbcType=INTEGER},
+      </if>
+      <if test="orderStatusId != null" >
+        #{orderStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="isCustomOrder != null" >
+        #{isCustomOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="companyInfoId != null" >
+        #{companyInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="isFinished != null" >
+        #{isFinished,jdbcType=VARCHAR},
+      </if>
+      <if test="isRead != null" >
+        #{isRead,jdbcType=VARCHAR},
+      </if>
+      <if test="onlineDataJson != null" >
+        #{onlineDataJson,jdbcType=VARCHAR},
+      </if>
+      <if test="offlineDataJson != null" >
+        #{offlineDataJson,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadPicPath != null" >
+        #{uploadPicPath,jdbcType=VARCHAR},
+      </if>
+      <if test="crefoNo != null" >
+        #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isChinaOrder != null" >
+        #{isChinaOrder,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mika.credit.facade.globalsearch.core.model.OrderDetail" >
+    update order_detail
+    <set >
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderLevel != null" >
+        order_level = #{orderLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="companyNo != null" >
+        company_no = #{companyNo,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadFilePath != null" >
+        upload_file_path = #{uploadFilePath,jdbcType=VARCHAR},
+      </if>
+      <if test="currency != null" >
+        currency = #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="onlinePrice != null" >
+        online_price = #{onlinePrice,jdbcType=REAL},
+      </if>
+      <if test="onlineExpressPrice != null" >
+        online_express_price = #{onlineExpressPrice,jdbcType=REAL},
+      </if>
+      <if test="onlineNormailDeliveryDays != null" >
+        online_normail_delivery_days = #{onlineNormailDeliveryDays,jdbcType=INTEGER},
+      </if>
+      <if test="onlineExpressDeliveryDays != null" >
+        online_express_delivery_days = #{onlineExpressDeliveryDays,jdbcType=INTEGER},
+      </if>
+      <if test="offlinePrice != null" >
+        offline_price = #{offlinePrice,jdbcType=REAL},
+      </if>
+      <if test="offlineExpressPrice != null" >
+        offline_express_price = #{offlineExpressPrice,jdbcType=REAL},
+      </if>
+      <if test="offlineNormailDeliveryDays != null" >
+        offline_normail_delivery_days = #{offlineNormailDeliveryDays,jdbcType=INTEGER},
+      </if>
+      <if test="offlineExpressDeliveryDays != null" >
+        offline_express_delivery_days = #{offlineExpressDeliveryDays,jdbcType=INTEGER},
+      </if>
+      <if test="totalPrice != null" >
+        total_price = #{totalPrice,jdbcType=REAL},
+      </if>
+      <if test="countryId != null" >
+        country_id = #{countryId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="managerId != null" >
+        manager_id = #{managerId,jdbcType=INTEGER},
+      </if>
+      <if test="orderStatusId != null" >
+        order_status_id = #{orderStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="isCustomOrder != null" >
+        is_custom_order = #{isCustomOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="companyInfoId != null" >
+        company_info_id = #{companyInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="isFinished != null" >
+        is_finished = #{isFinished,jdbcType=VARCHAR},
+      </if>
+      <if test="isRead != null" >
+        is_read = #{isRead,jdbcType=VARCHAR},
+      </if>
+      <if test="onlineDataJson != null" >
+        online_data_json = #{onlineDataJson,jdbcType=VARCHAR},
+      </if>
+      <if test="offlineDataJson != null" >
+        offline_data_json = #{offlineDataJson,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadPicPath != null" >
+        upload_pic_path = #{uploadPicPath,jdbcType=VARCHAR},
+      </if>
+      <if test="isChinaOrder != null" >
+        is_china_order = #{isChinaOrder,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mika.credit.facade.globalsearch.core.model.OrderDetail" >
+    update order_detail
+    set create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      order_level = #{orderLevel,jdbcType=VARCHAR},
+      company_no = #{companyNo,jdbcType=VARCHAR},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      upload_file_path = #{uploadFilePath,jdbcType=VARCHAR},
+      currency = #{currency,jdbcType=VARCHAR},
+      online_price = #{onlinePrice,jdbcType=REAL},
+      online_express_price = #{onlineExpressPrice,jdbcType=REAL},
+      online_normail_delivery_days = #{onlineNormailDeliveryDays,jdbcType=INTEGER},
+      online_express_delivery_days = #{onlineExpressDeliveryDays,jdbcType=INTEGER},
+      offline_price = #{offlinePrice,jdbcType=REAL},
+      offline_express_price = #{offlineExpressPrice,jdbcType=REAL},
+      offline_normail_delivery_days = #{offlineNormailDeliveryDays,jdbcType=INTEGER},
+      offline_express_delivery_days = #{offlineExpressDeliveryDays,jdbcType=INTEGER},
+      total_price = #{totalPrice,jdbcType=REAL},
+      country_id = #{countryId,jdbcType=INTEGER},
+      order_id = #{orderId,jdbcType=INTEGER},
+      customer_id = #{customerId,jdbcType=INTEGER},
+      manager_id = #{managerId,jdbcType=INTEGER},
+      order_status_id = #{orderStatusId,jdbcType=INTEGER},
+      is_custom_order = #{isCustomOrder,jdbcType=VARCHAR},
+      company_info_id = #{companyInfoId,jdbcType=INTEGER},
+      is_finished = #{isFinished,jdbcType=VARCHAR},
+      is_read = #{isRead,jdbcType=VARCHAR},
+      online_data_json = #{onlineDataJson,jdbcType=VARCHAR},
+      offline_data_json = #{offlineDataJson,jdbcType=VARCHAR},
+      upload_pic_path = #{uploadPicPath,jdbcType=VARCHAR},
+       crefo_no = #{crefoNo,jdbcType=VARCHAR},
+        is_china_order = #{isChinaOrder,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectUnfinishedCountByOrderId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select count(1) from order_detail od where od.order_status_id = 1 and order_id = (select order_id from order_detail where id = #{id})
+  </select>
+  <update id="updateOrderStatusById">
+    update `order` set order_status_id = #{statusId} where id = (select order_id from order_detail where id = #{id})
+  </update>
+</mapper>

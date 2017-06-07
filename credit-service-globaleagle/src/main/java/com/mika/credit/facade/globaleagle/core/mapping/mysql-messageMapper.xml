@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.globaleagle.core.dao.MessageMapper" >
+    <!--<cache eviction="LRU" type="com.mika.credit.common.core.mybatis.cache.redis.MybatiesRedisCache" />-->
+  <resultMap id="BaseResultMap" type="com.mika.credit.facade.globaleagle.core.model.Message" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="url_id" property="url" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="from_id" property="fromId" jdbcType="INTEGER" />
+    <result column="to_id" property="toId" jdbcType="INTEGER" />
+    <result column="is_read" property="isRead" jdbcType="VARCHAR" />
+    <result column="is_delete" property="isDelete" jdbcType="VARCHAR" />
+    <result column="send_time" property="sendTime" jdbcType="TIMESTAMP" />
+    <result column="receive_time" property="receiveTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <resultMap id="mesCautionMap" type="java.util.Map" >
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="url_id" property="url" jdbcType="VARCHAR" />
+    <result column="from_id" property="fromId" jdbcType="INTEGER" />
+    <result column="to_id" property="toId" jdbcType="INTEGER" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, url_id, content, from_id, to_id, is_read, is_delete, send_time, receive_time, status
+  </sql>
+  <!--查询未读消息数内容-->
+  <select id="mesCaution" resultMap="mesCautionMap">
+      SELECT
+          t2.email,
+          t1.url_id,
+          t1.from_id,
+          t1.to_id,
+          count(*) as count
+      FROM
+          message t1,
+          customer t2
+      WHERE
+          t1.from_id = t2.id
+      AND t1.to_id = #{0}
+      AND t1.is_read = #{1}
+      GROUP BY
+          t1.from_id;
+  </select>
+
+
+  <!-- 插入内容 -->
+  <insert id="insMessage" parameterType="com.mika.credit.facade.globaleagle.core.model.Message">
+    insert into message
+    (url_id,content,from_id,to_id,is_read,is_delete,send_time,receive_time,status)
+    values(#{url,jdbcType=VARCHAR},#{content,jdbcType=VARCHAR},#{fromId,jdbcType=VARCHAR},#{toId,jdbcType=VARCHAR},#{isRead,jdbcType=VARCHAR},
+    #{isDelete,jdbcType=VARCHAR}, #{sendTime,jdbcType=TIMESTAMP},#{receiveTime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR})
+  </insert>
+  <!-- 按主键修改 -->
+  <update id="updateByFromId" parameterType="java.util.Map" >
+    update message set
+     is_read = #{isRead},
+     receive_time = now()
+     where from_id = #{fromId}
+  </update>
+  <!-- 按照主键查询 -->
+  <select id="queryMessage" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select
+    <include refid="Base_Column_List" />
+    from message
+    where from_id = #{fromId} AND to_id = #{toId} OR from_id = #{toId} AND to_id = #{fromId} ORDER BY send_time ASC
+  </select>
+
+
+  <!--<select id="selectCountSelective" resultType="java.lang.Integer" parameterType="com.mika.credit.facade.globaleagle.core.model.Cart" >-->
+  <!--select-->
+  <!--count(1)-->
+  <!--from cart-->
+  <!--<where>-->
+  <!--<if test="id != null" >-->
+  <!--and id = #{id,jdbcType=INTEGER}-->
+  <!--</if>-->
+  <!--<if test="companyNo != null" >-->
+  <!--and company_no = #{companyNo,jdbcType=VARCHAR}-->
+  <!--</if>-->
+  <!--<if test="companyName != null" >-->
+  <!--and company_name= #{companyName,jdbcType=VARCHAR}-->
+  <!--</if>-->
+  <!--<if test="orderLevel != null" >-->
+  <!--and order_level= #{orderLevel,jdbcType=VARCHAR}-->
+  <!--</if>-->
+  <!--<if test="createDate != null" >-->
+  <!--and create_date = #{createDate,jdbcType=TIMESTAMP}-->
+  <!--</if>-->
+  <!--<if test="updateDate != null" >-->
+  <!--and update_date = #{updateDate,jdbcType=TIMESTAMP}-->
+  <!--</if>-->
+  <!--<if test="customerId != null" >-->
+  <!--and customer_id = #{customerId,jdbcType=INTEGER}-->
+  <!--</if>-->
+  <!--<if test="countryId != null" >-->
+  <!--and country_id = #{countryId,jdbcType=INTEGER}-->
+  <!--</if>-->
+  <!--<if test="companyInfoId != null" >-->
+  <!--and company_info_id = #{companyInfoId,jdbcType=INTEGER}-->
+  <!--</if>-->
+  <!--<if test="isCustomOrder != null" >-->
+  <!--and is_custom_order = #{isCustomOrder,jdbcType=VARCHAR}-->
+  <!--</if>-->
+  <!--<if test="uploadPicPath != null" >-->
+  <!--and upload_pic_path = #{uploadPicPath,jdbcType=VARCHAR}-->
+  <!--</if>-->
+  <!--<if test="crefoNo != null" >-->
+  <!--and crefo_no=#{crefoNo,jdbcType=VARCHAR}-->
+  <!--</if>-->
+  <!--<if test="isChinaOrder != null" >-->
+  <!--and is_china_order=#{isChinaOrder,jdbcType=VARCHAR}-->
+  <!--</if>-->
+  <!--</where>-->
+  <!--</select>-->
+  <!--<select id="selectSelective" resultMap="BaseResultMap" parameterType="com.mika.credit.facade.globaleagle.core.model.Cart" >-->
+  <!--select-->
+  <!--<include refid="Base_Column_List" />-->
+  <!--from cart-->
+  <!--<where>-->
+  <!--<if test="id != null" >-->
+  <!--and id = #{id,jdbcType=INTEGER}-->
+  <!--</if>-->
+  <!--<if test="companyNo != null" >-->
+  <!--and company_no = #{companyNo,jdbcType=VARCHAR}-->
+  <!--</if>-->
+  <!--<if test="companyName != null" >-->
+  <!--and company_name= #{companyName,jdbcType=VARCHAR}-->
+  <!--</if>-->
+  <!--<if test="orderLevel != null" >-->
+  <!--and order_level= #{orderLevel,jdbcType=VARCHAR}-->
+  <!--</if>-->
+  <!--<if test="createDate != null" >-->
+  <!--and create_date = #{createDate,jdbcType=TIMESTAMP}-->
+  <!--</if>-->
+  <!--<if test="updateDate != null" >-->
+  <!--and update_date = #{updateDate,jdbcType=TIMESTAMP}-->
+  <!--</if>-->
+  <!--<if test="customerId != null" >-->
+  <!--and customer_id = #{customerId,jdbcType=INTEGER}-->
+  <!--</if>-->
+  <!--<if test="countryId != null" >-->
+  <!--and country_id = #{countryId,jdbcType=INTEGER}-->
+  <!--</if>-->
+  <!--<if test="companyInfoId != null" >-->
+  <!--and company_info_id = #{companyInfoId,jdbcType=INTEGER}-->
+  <!--</if>-->
+  <!--<if test="isCustomOrder != null" >-->
+  <!--and is_custom_order = #{isCustomOrder,jdbcType=VARCHAR}-->
+  <!--</if>-->
+  <!--<if test="uploadPicPath != null" >-->
+  <!--and upload_pic_path = #{uploadPicPath,jdbcType=VARCHAR}-->
+  <!--</if>-->
+  <!--<if test="crefoNo != null" >-->
+  <!--and crefo_no=#{crefoNo,jdbcType=VARCHAR}-->
+  <!--</if>-->
+  <!--<if test="isChinaOrder != null" >-->
+  <!--and is_china_order=#{isChinaOrder,jdbcType=VARCHAR}-->
+  <!--</if>-->
+  <!--</where>-->
+  <!--order by id desc-->
+  <!--</select>-->
+  <!--<select id="selectInIds" resultMap="BaseResultMap">-->
+  <!--select-->
+  <!--<include refid="Base_Column_List" />-->
+  <!--from cart-->
+  <!--where id in-->
+  <!--<foreach item="ids" index="index" collection="list" open="(" separator="," close=")">-->
+  <!--#{ids}-->
+  <!--</foreach>-->
+  <!--</select>-->
+  <!--<select id="selectLastRecord" resultMap="BaseResultMap" >-->
+  <!--select-->
+  <!--<include refid="Base_Column_List" />-->
+  <!--from cart-->
+  <!--order by id DESC-->
+  <!--limit 1-->
+  <!--</select>-->
+
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >-->
+  <!--delete from cart-->
+  <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</delete>-->
+  <!--<insert id="insert" parameterType="com.mika.credit.facade.globaleagle.core.model.Cart" useGeneratedKeys="true" keyProperty="id">-->
+  <!--insert into cart (id, company_name, company_no,-->
+  <!--order_level, currency, online_price,-->
+  <!--online_express_price, online_normail_delivery_days,-->
+  <!--online_express_delivery_days, offline_price, offline_express_price,-->
+  <!--offline_normail_delivery_days, offline_express_delivery_days,-->
+  <!--create_date, update_date, customer_id,-->
+  <!--company_info_id, country_id, is_custom_order,total_price,upload_pic_path,crefo_no,is_china_order-->
+  <!--)-->
+  <!--values (#{id,jdbcType=INTEGER}, #{companyName,jdbcType=VARCHAR}, #{companyNo,jdbcType=VARCHAR},-->
+  <!--#{orderLevel,jdbcType=VARCHAR}, #{currency,jdbcType=VARCHAR}, #{onlinePrice,jdbcType=REAL},-->
+  <!--#{onlineExpressPrice,jdbcType=REAL}, #{onlineNormailDeliveryDays,jdbcType=INTEGER},-->
+  <!--#{onlineExpressDeliveryDays,jdbcType=INTEGER}, #{offlinePrice,jdbcType=REAL}, #{offlineExpressPrice,jdbcType=REAL},-->
+  <!--#{offlineNormailDeliveryDays,jdbcType=INTEGER}, #{offlineExpressDeliveryDays,jdbcType=INTEGER},-->
+  <!--#{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{customerId,jdbcType=INTEGER},-->
+  <!--#{companyInfoId,jdbcType=INTEGER}, #{countryId,jdbcType=INTEGER}, #{isCustomOrder,jdbcType=VARCHAR},-->
+  <!--#{totalPrice,jdbcType=REAL}, #{uploadPicPath,jdbcType=VARCHAR}, #{crefoNo,jdbcType=VARCHAR},#{isChinaOrder,jdbcType=VARCHAR}-->
+  <!--)-->
+  <!--</insert>-->
+
+  <!--<update id="updateByPrimaryKey" parameterType="com.mika.credit.facade.globaleagle.core.model.Cart" >-->
+  <!--update cart-->
+  <!--set company_name = #{companyName,jdbcType=VARCHAR},-->
+  <!--company_no = #{companyNo,jdbcType=VARCHAR},-->
+  <!--order_level = #{orderLevel,jdbcType=VARCHAR},-->
+  <!--currency = #{currency,jdbcType=VARCHAR},-->
+  <!--online_price = #{onlinePrice,jdbcType=REAL},-->
+  <!--online_express_price = #{onlineExpressPrice,jdbcType=REAL},-->
+  <!--online_normail_delivery_days = #{onlineNormailDeliveryDays,jdbcType=INTEGER},-->
+  <!--online_express_delivery_days = #{onlineExpressDeliveryDays,jdbcType=INTEGER},-->
+  <!--offline_price = #{offlinePrice,jdbcType=REAL},-->
+  <!--offline_express_price = #{offlineExpressPrice,jdbcType=REAL},-->
+  <!--offline_normail_delivery_days = #{offlineNormailDeliveryDays,jdbcType=INTEGER},-->
+  <!--offline_express_delivery_days = #{offlineExpressDeliveryDays,jdbcType=INTEGER},-->
+  <!--create_date = #{createDate,jdbcType=TIMESTAMP},-->
+  <!--update_date = #{updateDate,jdbcType=TIMESTAMP},-->
+  <!--customer_id = #{customerId,jdbcType=INTEGER},-->
+  <!--company_info_id = #{companyInfoId,jdbcType=INTEGER},-->
+  <!--country_id = #{countryId,jdbcType=INTEGER},-->
+  <!--is_custom_order = #{isCustomOrder,jdbcType=VARCHAR},-->
+  <!--total_price = #{totalPrice,jdbcType=VARCHAR},-->
+  <!--upload_pic_path = #{uploadPicPath,jdbcType=VARCHAR},-->
+  <!--crefo_no = #{crefoNo,jdbcType=VARCHAR},-->
+  <!--is_china_order = #{isChinaOrder,jdbcType=VARCHAR}-->
+  <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</update>-->
+</mapper>

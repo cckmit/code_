@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.globalsearch.core.dao.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.mika.credit.facade.globalsearch.core.model.Order" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="crefo_no" property="crefoNo" jdbcType="INTEGER" />
+    <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="send_date" property="sendDate" jdbcType="TIMESTAMP" />
+    <result column="price" property="price" jdbcType="REAL" />
+    <result column="is_send" property="isSend" jdbcType="VARCHAR" />
+    <result column="is_read" property="isRead" jdbcType="VARCHAR" />
+    <result column="send_email" property="sendEmail" jdbcType="VARCHAR" />
+    <result column="is_finished" property="isFinished" jdbcType="VARCHAR" />
+    <result column="is_pay" property="isPay" jdbcType="VARCHAR" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="customer_id" property="customerId" jdbcType="INTEGER" />
+    <result column="confirm_manager_id" property="confirmManagerId" jdbcType="INTEGER" />
+    <result column="order_status_id" property="orderStatusId" jdbcType="INTEGER" />
+    <result column="order_detail_count" property="orderDetailCount" jdbcType="VARCHAR" />
+    <!--<collection property="orderDetails" javaType="ArrayList" fetchType="lazy" ofType="com.IT3acredit.GlobalEagle.core.model.OrderDetail" column="id" select="com.IT3acredit.GlobalEagle.core.dao.OrderDetailMapper.selectByOrderId"/>-->
+
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, crefo_no, order_no,create_date, update_date, send_date,price, is_send,is_read, send_email, is_finished, is_pay,
+    ip, customer_id, confirm_manager_id,order_status_id,order_detail_count,
+    (select email from customer where id=customer_id) as customerName
+  </sql>
+  <select id="selectCountSelective" resultType="java.lang.Integer" parameterType="com.mika.credit.facade.globalsearch.core.model.OrderQuery" >
+    select
+    count(1)
+    from `order`
+    where 1=1
+    <if test="id != null" >
+      and id=#{id,jdbcType=INTEGER}
+    </if>
+    <if test="isSend != null" >
+      and is_send=#{isSend,jdbcType=VARCHAR}
+    </if>
+    <if test="isRead != null" >
+      and is_read=#{isRead,jdbcType=VARCHAR}
+    </if>
+    <if test="sendEmail != null" >
+      and send_email=#{sendEmail,jdbcType=VARCHAR}
+    </if>
+    <if test="isFinished != null" >
+      and is_finished=#{isFinished,jdbcType=VARCHAR}
+    </if>
+    <if test="isPay != null and isPay !=''" >
+      and is_pay=#{isPay,jdbcType=VARCHAR}
+    </if>
+    <if test="crefoNo != null" >
+      and crefo_no=#{crefoNo,jdbcType=INTEGER}
+    </if>
+    <if test="orderNo != null and orderNo != ''">
+      and order_no like CONCAT('%',#{orderNo,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="createDate != null" >
+      and create_date=#{createDate,jdbcType=TIMESTAMP}
+    </if>
+      <if test="createDateFrom != null" >
+          and create_date &gt; #{createDateFrom,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createDateTo != null" >
+          and create_date &lt; #{createDateTo,jdbcType=TIMESTAMP}
+      </if>
+    <if test="updateDate != null" >
+      and update_date =#{updateDate,jdbcType=TIMESTAMP}
+    </if>
+    <if test="sendDate != null" >
+      and send_date =#{sendDate,jdbcType=TIMESTAMP}
+    </if>
+    <if test="customerId != null" >
+      and customer_id = #{customerId,jdbcType=INTEGER}
+    </if>
+    <if test="confirmManagerId != null" >
+      and confirm_manager_id = #{confirmManagerId,jdbcType=INTEGER}
+    </if>
+    <if test="orderStatusId != null" >
+      and order_status_id = #{orderStatusId,jdbcType=INTEGER}
+    </if>
+    <if test="orderDetailCount != null" >
+      and order_detail_count = #{orderDetailCount,jdbcType=INTEGER}
+    </if>
+     order by id desc
+  </select>
+  <select id="selectSelective" resultMap="BaseResultMap" parameterType="com.mika.credit.facade.globalsearch.core.model.OrderQuery" >
+    select
+    <include refid="Base_Column_List" />
+    from `order`
+    where 1=1
+    <if test="id != null" >
+      and id=#{id,jdbcType=INTEGER}
+    </if>
+    <if test="isSend != null" >
+      and is_send=#{isSend,jdbcType=VARCHAR}
+    </if>
+    <if test="isRead != null" >
+      and is_read=#{isRead,jdbcType=VARCHAR}
+    </if>
+    <if test="sendEmail != null" >
+      and send_email=#{sendEmail,jdbcType=VARCHAR}
+    </if>
+    <if test="isFinished != null" >
+      and is_finished=#{isFinished,jdbcType=VARCHAR}
+    </if>
+    <if test="isPay != null and isPay !=''" >
+      and is_pay=#{isPay,jdbcType=VARCHAR}
+    </if>
+    <if test="crefoNo != null" >
+      and crefo_no=#{crefoNo,jdbcType=INTEGER}
+    </if>
+    <if test="orderNo != null and orderNo != ''">
+      and order_no like CONCAT('%',#{orderNo,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="createDate != null" >
+      and create_date=#{createDate,jdbcType=TIMESTAMP}
+    </if>
+    <if test="createDateFrom != null" >
+      and create_date &gt; #{createDateFrom,jdbcType=TIMESTAMP}
+    </if>
+    <if test="createDateTo != null" >
+      and create_date &lt; #{createDateTo,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updateDate != null" >
+      and update_date =#{updateDate,jdbcType=TIMESTAMP}
+    </if>
+    <if test="sendDate != null" >
+      and send_date =#{sendDate,jdbcType=TIMESTAMP}
+    </if>
+    <if test="customerId != null" >
+      and customer_id = #{customerId,jdbcType=INTEGER}
+    </if>
+    <if test="confirmManagerId != null" >
+      and confirm_manager_id = #{confirmManagerId,jdbcType=INTEGER}
+    </if>
+    <if test="orderStatusId != null" >
+      and order_status_id = #{orderStatusId,jdbcType=INTEGER}
+    </if>
+    <if test="orderDetailCount != null" >
+      and order_detail_count = #{orderDetailCount,jdbcType=INTEGER}
+    </if>
+    order by id desc
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from `order`
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from `order`
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mika.credit.facade.globalsearch.core.model.Order" useGeneratedKeys="true" keyProperty="id">
+    insert into `order` (id, crefo_no,order_no, create_date,
+      update_date,send_date, price, is_send,is_read,
+      send_email, is_finished, is_pay,ip,
+      customer_id, confirm_manager_id,order_status_id,order_detail_count)
+    values (#{id,jdbcType=INTEGER}, #{crefoNo,jdbcType=INTEGER},#{orderNo,jdbcType=INTEGER},  #{createDate,jdbcType=TIMESTAMP},
+      #{updateDate,jdbcType=TIMESTAMP}, #{sendDate,jdbcType=TIMESTAMP}, #{price,jdbcType=REAL}, #{isSend,jdbcType=VARCHAR}, #{isRead,jdbcType=VARCHAR},
+      #{sendEmail,jdbcType=VARCHAR}, #{isFinished,jdbcType=VARCHAR},#{isPay,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR},
+      #{customerId,jdbcType=INTEGER}, #{confirmManagerId,jdbcType=INTEGER},#{orderStatusId,jdbcType=INTEGER}, #{orderDetailCount,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mika.credit.facade.globalsearch.core.model.Order" useGeneratedKeys="true" keyProperty="id">
+    insert into `order`
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="crefoNo != null" >
+        crefo_no,
+      </if>
+      <if test="orderNo != null">
+        order_no,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="sendDate != null" >
+        send_date,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="isSend != null" >
+        is_send,
+      </if>
+      <if test="isRead != null" >
+        is_read,
+      </if>
+      <if test="sendEmail != null" >
+        send_email,
+      </if>
+      <if test="isFinished != null" >
+        is_finished,
+      </if>
+      <if test="isPay != null" >
+        is_pay,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="confirmManagerId != null" >
+        confirm_manager_id,
+      </if>
+      <if test="orderStatusId != null" >
+        order_status_id,
+      </if>
+      <if test="orderDetailCount != null" >
+        order_detail_count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="crefoNo != null" >
+        #{crefoNo,jdbcType=INTEGER},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendDate != null" >
+        #{sendDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=REAL},
+      </if>
+      <if test="isSend != null" >
+        #{isSend,jdbcType=VARCHAR},
+      </if>
+      <if test="isRead != null" >
+        #{isRead,jdbcType=VARCHAR},
+      </if>
+      <if test="sendEmail != null" >
+        #{sendEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="isFinished != null" >
+        #{isFinished,jdbcType=VARCHAR},
+      </if>
+      <if test="isPay != null" >
+        #{isPay,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="confirmManagerId != null" >
+      #{confirmManagerId,jdbcType=INTEGER},
+    </if>
+      <if test="orderStatusId != null" >
+        #{orderStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="orderDetailCount != null" >
+        #{orderDetailCount,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mika.credit.facade.globalsearch.core.model.Order" >
+    update `order`
+    <set >
+      <if test="crefoNo != null" >
+        crefo_no = #{crefoNo,jdbcType=INTEGER},
+      </if>
+      <if test="orderNo != null" >
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendDate != null" >
+        send_date = #{sendDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=REAL},
+      </if>
+      <if test="isSend != null" >
+        is_send = #{isSend,jdbcType=VARCHAR},
+      </if>
+      <if test="isRead != null" >
+        is_read = #{isRead,jdbcType=VARCHAR},
+      </if>
+      <if test="sendEmail != null" >
+        send_email = #{sendEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="isFinished != null" >
+        is_finished = #{isFinished,jdbcType=VARCHAR},
+      </if>
+      <if test="isPay != null" >
+        is_pay = #{isPay,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="confirmManagerId != null" >
+        confirm_manager_id = #{confirmManagerId,jdbcType=INTEGER},
+      </if>
+      <if test="orderStatusId != null" >
+        order_status_id = #{orderStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="orderDetailCount != null" >
+        order_detail_count = #{orderDetailCount,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mika.credit.facade.globalsearch.core.model.Order" >
+    update `order`
+    set crefo_no = #{crefoNo,jdbcType=INTEGER},
+    order_no = #{orderNo,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      send_date = #{sendDate,jdbcType=TIMESTAMP},
+      price = #{price,jdbcType=REAL},
+      is_send = #{isSend,jdbcType=VARCHAR},
+      is_read = #{isRead,jdbcType=VARCHAR},
+      send_email = #{sendEmail,jdbcType=VARCHAR},
+      is_finished = #{isFinished,jdbcType=VARCHAR},
+      is_pay = #{isPay,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      customer_id = #{customerId,jdbcType=INTEGER},
+      confirm_manager_id = #{confirmManagerId,jdbcType=INTEGER},
+      order_status_id = #{orderStatusId,jdbcType=INTEGER},
+      order_detail_count = #{orderDetailCount,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateStatusById">
+    update `order` set order_status_id = #{statusId} where id = #{orderId}
+  </update>
+
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from `order`
+    order by id desc
+  </select>
+
+  <select id="selectByOrderNo" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from `order`
+    where order_no = #{orderNo,jdbcType=VARCHAR}
+  </select>
+</mapper>

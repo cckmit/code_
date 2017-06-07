@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.globalsearch.core.dao.CreditServiceMapper" >
+  <resultMap id="BaseResultMap" type="com.mika.credit.facade.globalsearch.core.model.CreditService" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="keyword" property="keyword" jdbcType="VARCHAR" />
+    <result column="demand" property="demand" jdbcType="VARCHAR" />
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="REAL" />
+    <result column="industry_name" property="industryName" jdbcType="VARCHAR" />
+    <result column="region" property="region" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="customer_id" property="customerId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, keyword, demand, company_name, province, city, amount, industry_name, region, 
+    type,customer_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from credit_service
+    where customer_id = #{customerId,jdbcType=INTEGER}
+  </select>
+  <select id="selectCountSelective" resultType="java.lang.Integer"
+          parameterType="com.mika.credit.facade.globalsearch.core.model.Collection">
+    select
+    count(1)
+    from credit_service
+    where 1=1
+    <if test="id != null">
+      and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="keyword != null" >
+      and keyword = #{keyword,jdbcType=VARCHAR}
+    </if>
+    <if test="demand != null" >
+      and demand = #{demand,jdbcType=VARCHAR}
+    </if>
+    <if test="companyName != null" >
+      and company_name = #{companyName,jdbcType=VARCHAR}
+    </if>
+    <if test="province != null" >
+      and province = #{province,jdbcType=VARCHAR}
+    </if>
+    <if test="city != null" >
+      and city = #{city,jdbcType=VARCHAR}
+    </if>
+    <if test="amount != null" >
+      and amount = #{amount,jdbcType=REAL}
+    </if>
+    <if test="industryName != null" >
+      and industry_name = #{industryName,jdbcType=VARCHAR}
+    </if>
+    <if test="region != null" >
+      and region = #{region,jdbcType=VARCHAR}
+    </if>
+    <if test="type != null" >
+      and type = #{type,jdbcType=VARCHAR}
+    </if>
+    <if test="customerId != null and customerId!=0">
+      and customer_id = #{customerId,jdbcType=INTEGER}
+    </if>
+
+  </select>
+  <select id="selectSelective" resultMap="BaseResultMap"
+          parameterType="com.mika.credit.facade.globalsearch.core.model.Collection">
+    select
+    <include refid="Base_Column_List"/>
+    from credit_service
+    where 1=1
+    <if test="id != null and id != 0">
+      and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="keyword != null" >
+      and keyword = #{keyword,jdbcType=VARCHAR}
+    </if>
+    <if test="demand != null" >
+      and demand = #{demand,jdbcType=VARCHAR}
+    </if>
+    <if test="companyName != null" >
+      and company_name = #{companyName,jdbcType=VARCHAR}
+    </if>
+    <if test="province != null" >
+      and province = #{province,jdbcType=VARCHAR}
+    </if>
+    <if test="city != null" >
+      and city = #{city,jdbcType=VARCHAR}
+    </if>
+    <if test="amount != null" >
+      and amount = #{amount,jdbcType=REAL}
+    </if>
+    <if test="industryName != null" >
+      and industry_name = #{industryName,jdbcType=VARCHAR}
+    </if>
+    <if test="region != null" >
+      and region = #{region,jdbcType=VARCHAR}
+    </if>
+    <if test="type != null" >
+      and type = #{type,jdbcType=VARCHAR}
+    </if>
+    <if test="customerId != null and customerId!=0">
+      and customer_id = #{customerId,jdbcType=INTEGER}
+    </if>
+    order by id
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from credit_service
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mika.credit.facade.globalsearch.core.model.CreditService" >
+    insert into credit_service (id, keyword, demand, 
+      company_name, province, city, 
+      amount, industry_name, region, 
+      type,customer_id)
+    values (#{id,jdbcType=INTEGER}, #{keyword,jdbcType=VARCHAR}, #{demand,jdbcType=VARCHAR}, 
+      #{companyName,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{amount,jdbcType=REAL}, #{industryName,jdbcType=VARCHAR}, #{region,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR},#{customerId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mika.credit.facade.globalsearch.core.model.CreditService" >
+    insert into credit_service
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="keyword != null" >
+        keyword,
+      </if>
+      <if test="demand != null" >
+        demand,
+      </if>
+      <if test="companyName != null" >
+        company_name,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="industryName != null" >
+        industry_name,
+      </if>
+      <if test="region != null" >
+        region,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="keyword != null" >
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="demand != null" >
+        #{demand,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=REAL},
+      </if>
+      <if test="industryName != null" >
+        #{industryName,jdbcType=VARCHAR},
+      </if>
+      <if test="region != null" >
+        #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mika.credit.facade.globalsearch.core.model.CreditService" >
+    update credit_service
+    <set >
+      <if test="keyword != null" >
+        keyword = #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="demand != null" >
+        demand = #{demand,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=REAL},
+      </if>
+      <if test="industryName != null" >
+        industry_name = #{industryName,jdbcType=VARCHAR},
+      </if>
+      <if test="region != null" >
+        region = #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mika.credit.facade.globalsearch.core.model.CreditService" >
+    update credit_service
+    set keyword = #{keyword,jdbcType=VARCHAR},
+      demand = #{demand,jdbcType=VARCHAR},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=REAL},
+      industry_name = #{industryName,jdbcType=VARCHAR},
+      region = #{region,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      customer_id = #{customerId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

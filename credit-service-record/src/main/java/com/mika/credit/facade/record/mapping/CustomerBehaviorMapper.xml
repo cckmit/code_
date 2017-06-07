@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mika.credit.facade.record.dao.CustomerBehaviorMapper">
+  <resultMap id="BaseResultMap" type="com.mika.credit.facade.record.model.CustomerBehavior">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="customer_id" jdbcType="INTEGER" property="customerId" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="action" jdbcType="VARCHAR" property="action" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+  </resultMap>
+
+  <resultMap id="BaseResultMapQuery" type="com.mika.credit.facade.record.model.CustomerBehavior">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="customer_id" jdbcType="INTEGER" property="customerId" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="action" jdbcType="VARCHAR" property="action" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+
+    <result column="time" jdbcType="TIMESTAMP" property="createDateTo"/>
+    <result column="time" jdbcType="TIMESTAMP" property="createDateFrom"/>
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, customer_id, ip, action, time
+  </sql>
+
+  <sql id="condition">
+    <where>
+      <if test="id != null and id != 0">
+        and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="time != null">
+        and time = #{time,jdbcType=TIMESTAMP}
+      </if>
+      <if test="action != null">
+        and action = #{action,jdbcType=VARCHAR}
+      </if>
+      <if test="customerId != null">
+        and customer_id = #{customerId,jdbcType=VARCHAR}
+      </if>
+      <if test="ip != null">
+        and ip = #{ip,jdbcType=VARCHAR}
+      </if>
+
+    </where>
+  </sql>
+
+
+  <sql id="conditionQuery">
+    <where>
+      <if test="id != null and id != 0">
+        and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="time != null">
+        and time = #{time,jdbcType=TIMESTAMP}
+      </if>
+      <if test="action != null">
+        and action = #{action,jdbcType=VARCHAR}
+      </if>
+      <if test="customerId != null">
+        and customer_id = #{customerId,jdbcType=VARCHAR}
+      </if>
+      <if test="ip != null">
+        and ip = #{ip,jdbcType=VARCHAR}
+      </if>
+      <if test="createDateFrom != null">
+        and time &gt; #{createDateFrom,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createDateTo != null">
+        and time &lt; #{createDateTo,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+  </sql>
+
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from customer_behavior
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByPrimaryKeySelectiveQuery" parameterType="com.mika.credit.facade.record.model.CustomerBehaviorQuery"
+          resultMap="BaseResultMapQuery">
+    select
+    <include refid="Base_Column_List"/>
+    from customer_behavior
+    <include refid="conditionQuery"/>
+
+  </select>
+
+  <select id="selectByPrimaryKeySelective" parameterType="com.mika.credit.facade.record.model.CustomerBehavior"
+          resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from customer_behavior
+    <include refid="condition"/>
+
+  </select>
+
+
+  <select id="selectCountSelective" resultType="java.lang.Integer"
+          parameterType="com.mika.credit.facade.record.model.CustomerBehaviorQuery">
+    select
+    count(1)
+    from customer_behavior
+    where 1=1
+    <include refid="conditionQuery"/>
+  </select>
+
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from customer_behavior
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mika.credit.facade.record.model.CustomerBehavior" useGeneratedKeys="true" keyProperty="id">
+    insert into customer_behavior (id, customer_id, ip, 
+      action, time)
+    values (#{id,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR}, 
+      #{action,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mika.credit.facade.record.model.CustomerBehavior" useGeneratedKeys="true" keyProperty="id">
+    insert into customer_behavior
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="action != null">
+        action,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="customerId != null">
+        #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="action != null">
+        #{action,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mika.credit.facade.record.model.CustomerBehavior">
+    update customer_behavior
+    <set>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="action != null">
+        action = #{action,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mika.credit.facade.record.model.CustomerBehavior">
+    update customer_behavior
+    set customer_id = #{customerId,jdbcType=INTEGER},
+      ip = #{ip,jdbcType=VARCHAR},
+      action = #{action,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

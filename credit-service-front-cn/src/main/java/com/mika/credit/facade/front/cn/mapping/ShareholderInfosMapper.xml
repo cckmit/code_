@@ -1,0 +1,693 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.front.cn.dao.impl.ShareholderInfosDaoImpl" >
+  <cache eviction="LRU" type="com.mika.credit.common.core.mybatis.cache.redis.sharded.MybatiesRedisCache" />
+  <resultMap id="BaseResultMap" type="com.mika.credit.common.entity.report.cn.ShareholderInfos" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="address_cn" property="addressCN" jdbcType="VARCHAR" />
+    <result column="address_en" property="addressEN" jdbcType="VARCHAR" />
+    <result column="business_scope_cn" property="businessScopeCN" jdbcType="LONGVARCHAR" />
+    <result column="business_scope_en" property="businessScopeEN" jdbcType="LONGVARCHAR" />
+    <result column="com_crefo_no" property="comCrefoNo" jdbcType="VARCHAR" />
+    <result column="contribution_date" property="contributionDate" jdbcType="VARCHAR" />
+    <result column="contribution_from" property="contributionFrom" jdbcType="VARCHAR" />
+    <result column="country_cn" property="countryCN" jdbcType="VARCHAR" />
+    <result column="country_en" property="countryEN" jdbcType="VARCHAR" />
+    <result column="company_properties_id" property="companyPropertiesId" jdbcType="INTEGER" />
+    <result column="crefo_no" property="crefoNo" jdbcType="VARCHAR" />
+    <result column="company_status_id" property="companyStatusId" jdbcType="INTEGER" />
+    <result column="currency" property="currency" jdbcType="VARCHAR" />
+    <result column="currency_en" property="currencyEN" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="VARCHAR" />
+    <result column="establish_date" property="establishDate" jdbcType="VARCHAR" />
+    <result column="flag" property="flag" jdbcType="VARCHAR" />
+    <result column="id_card" property="idCard" jdbcType="VARCHAR" />
+    <result column="name_cn" property="nameCN" jdbcType="VARCHAR" />
+    <result column="name_en" property="nameEN" jdbcType="VARCHAR" />
+    <result column="note_cn" property="noteCN" jdbcType="LONGVARCHAR" />
+    <result column="note_en" property="noteEN" jdbcType="LONGVARCHAR" />
+    <result column="register_id" property="registerId" jdbcType="INTEGER" />
+    <result column="reg" property="reg" jdbcType="VARCHAR" />
+    <result column="reg_capital" property="regCapital" jdbcType="VARCHAR" />
+    <result column="contribution_id" property="contributionId" jdbcType="INTEGER" />
+    <result column="shares" property="shares" jdbcType="VARCHAR" />
+    <result column="subconam" property="subconam" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+    <result column="full_report_id" property="fullReportId" jdbcType="INTEGER" />
+    <result column="entstatus" property="entstatus" jdbcType="VARCHAR" />
+    <result column="entstatus_en" property="entstatusEN" jdbcType="VARCHAR" />
+    <result column="enterprisenature" property="enterprisenature" jdbcType="VARCHAR" />
+    <result column="enterprisenature_en" property="enterprisenatureEN" jdbcType="VARCHAR" />
+    <result column="reg_currency" property="regCurrency" jdbcType="VARCHAR" />
+    <result column="reg_currency_en" property="regCurrencyEN" jdbcType="VARCHAR" />
+    <result column="capital_contribution" property="capitalContribution" jdbcType="VARCHAR" />
+    <result column="capital_contribution_en" property="capitalContributionEN" jdbcType="VARCHAR" />
+    <result column="type_cn" property="typeCN" jdbcType="VARCHAR" />
+    <result column="type_en" property="typeEN" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="table"> shareholder_infos </sql>
+
+  <sql id="Base_Column_List" >
+    id, address_cn, address_en, business_scope_cn, business_scope_en, com_crefo_no, contribution_date, 
+    contribution_from, country_cn, country_en, company_properties_id, crefo_no, company_status_id, currency,currency_en, del_flag, establish_date,
+    flag, id_card, name_cn, name_en, note_cn, note_en, register_id, reg, reg_capital, contribution_id, shares, 
+    subconam, type, update_time,full_report_id,entstatus,entstatus_en,enterprisenature,enterprisenature_en,reg_currency,reg_currency_en,
+    capital_contribution,capital_contribution_en,type_cn,type_en
+  </sql>
+
+  <sql id="condition_sql">
+  <if test="id != null" >
+    and id = #{id,jdbcType=INTEGER}
+  </if>
+    <if test="addressCN != null" >
+      and address_cn = #{addressCN,jdbcType=VARCHAR}
+    </if>
+    <if test="addressEN != null" >
+      and address_en = #{addressEN,jdbcType=VARCHAR}
+    </if>
+    <if test="businessScopeCN != null" >
+      and business_scope_cn = #{businessScopeCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="businessScopeEN != null" >
+      and business_scope_en = #{businessScopeEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="comCrefoNo != null" >
+      and com_crefo_no = #{comCrefoNo,jdbcType=VARCHAR}
+    </if>
+    <if test="contributionDate != null" >
+      and contribution_date = #{contributionDate,jdbcType=VARCHAR}
+    </if>
+    <if test="contributionFrom != null" >
+      and contribution_from = #{contributionFrom,jdbcType=VARCHAR}
+    </if>
+    <if test="countryCN != null" >
+      and country_cn = #{countryCN,jdbcType=VARCHAR}
+    </if>
+    <if test="countryEN != null" >
+      and country_en = #{countryEN,jdbcType=VARCHAR}
+    </if>
+    <if test="companyPropertiesId != null" >
+      and company_properties_id = #{companyPropertiesId,jdbcType=INTEGER}
+    </if>
+    <if test="crefoNo != null" >
+      and crefo_no = #{crefoNo,jdbcType=VARCHAR}
+    </if>
+    <if test="companyStatusId != null" >
+      and company_status_id = #{companyStatusId,jdbcType=INTEGER}
+    </if>
+    <if test="currency != null" >
+      and currency = #{currency,jdbcType=VARCHAR}
+    </if>
+    <if test="currencyEN != null" >
+      and currency_en = #{currencyEN,jdbcType=VARCHAR}
+    </if>
+    <if test="delFlag != null" >
+      and del_flag = #{delFlag,jdbcType=VARCHAR}
+    </if>
+    <if test="establishDate != null" >
+      and establish_date = #{establishDate,jdbcType=VARCHAR}
+    </if>
+    <if test="flag != null" >
+      and flag = #{flag,jdbcType=VARCHAR}
+    </if>
+    <if test="idCard != null" >
+      and id_card = #{idCard,jdbcType=VARCHAR}
+    </if>
+    <if test="nameCN != null" >
+      and name_cn = #{nameCN,jdbcType=VARCHAR}
+    </if>
+    <if test="nameEN != null" >
+      and name_en = #{nameEN,jdbcType=VARCHAR}
+    </if>
+    <if test="noteCN != null" >
+      and note_cn = #{noteCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="noteEN != null" >
+      and note_en = #{noteEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="registerId != null" >
+      and register_id = #{registerId,jdbcType=INTEGER}
+    </if>
+    <if test="reg != null" >
+      and reg = #{reg,jdbcType=VARCHAR}
+    </if>
+    <if test="regCapital != null" >
+      and reg_capital = #{regCapital,jdbcType=VARCHAR}
+    </if>
+    <if test="contributionId != null" >
+      and contribution_id = #{contributionId,jdbcType=INTEGER}
+    </if>
+    <if test="shares != null" >
+      and shares = #{shares,jdbcType=VARCHAR}
+    </if>
+    <if test="subconam != null" >
+      and subconam = #{subconam,jdbcType=VARCHAR}
+    </if>
+    <if test="type != null" >
+      and type = #{type,jdbcType=VARCHAR}
+    </if>
+    <if test="updateTime != null" >
+      and update_time = #{updateTime,jdbcType=VARCHAR}
+    </if>
+    <if test="fullReportId != null" >
+      and full_report_id = #{fullReportId,jdbcType=INTEGER}
+    </if>
+    <if test="entstatus != null" >
+      and entstatus = #{entstatus,jdbcType=VARCHAR}
+    </if>
+    <if test="entstatusEN != null" >
+      and entstatus_en = #{entstatusEN,jdbcType=VARCHAR}
+    </if>
+    <if test="enterprisenature != null" >
+      and enterprisenature = #{enterprisenature,jdbcType=VARCHAR}
+    </if>
+    <if test="enterprisenatureEN != null" >
+      and enterprisenature_en = #{enterprisenatureEN,jdbcType=VARCHAR}
+    </if>
+    <if test="regCurrency != null" >
+      and reg_currency = #{regCurrency,jdbcType=VARCHAR}
+    </if>
+    <if test="regCurrencyEN != null" >
+      and reg_currency_en = #{regCurrencyEN,jdbcType=VARCHAR}
+    </if>
+    <if test="capitalContribution != null" >
+      and capital_contribution = #{capitalContribution,jdbcType=VARCHAR}
+    </if>
+    <if test="capitalContributionEN != null" >
+      and capital_contribution_en = #{capitalContributionEN,jdbcType=VARCHAR}
+    </if>
+    <if test="typeCN != null" >
+      and type_cn = #{typeCN,jdbcType=VARCHAR}
+    </if>
+    <if test="typeEN != null" >
+      and type_en = #{typeEN,jdbcType=VARCHAR}
+    </if>
+  </sql>
+
+  <select id="getById" parameterType="Integer" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    where id = #{id}
+  </select>
+
+  <select id="listBy" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+    ORDER BY shares*1 DESC
+  </select>
+
+  <select id="listPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+    <![CDATA[ order by id desc]]>
+  </select>
+
+  <select id="listPageCount" parameterType="java.util.Map" resultType="Integer">
+    select count(1) from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <insert id="insert" parameterType="com.mika.credit.common.entity.report.cn.ShareholderInfos" keyProperty="id" useGeneratedKeys="true">
+    insert into
+    <include refid="table" />
+    (id, address_cn, address_en,
+    business_scope_cn, business_scope_en, com_crefo_no,
+    contribution_date, contribution_from, country_cn,
+    country_en, company_properties_id, crefo_no,
+    company_status_id, currency,currency_en, del_flag,
+    establish_date, flag, id_card,
+    name_cn, name_en, note_cn,
+    note_en, register_id, reg,
+    reg_capital, contribution_id, shares,
+    subconam, type, update_time,full_report_id,entstatus,entstatus_en,enterprisenature,
+    enterprisenature_en,reg_currency,reg_currency_en,capital_contribution,capital_contribution_en,type_cn,type_en)
+    values (#{id,jdbcType=INTEGER}, #{addressCN,jdbcType=VARCHAR}, #{addressEN,jdbcType=VARCHAR},
+    #{businessScopeCN,jdbcType=LONGVARCHAR}, #{businessScopeEN,jdbcType=LONGVARCHAR}, #{comCrefoNo,jdbcType=VARCHAR},
+    #{contributionDate,jdbcType=VARCHAR}, #{contributionFrom,jdbcType=VARCHAR}, #{countryCN,jdbcType=VARCHAR},
+    #{countryEN,jdbcType=VARCHAR}, #{companyPropertiesId,jdbcType=INTEGER}, #{crefoNo,jdbcType=VARCHAR},
+    #{companyStatusId,jdbcType=INTEGER}, #{currency,jdbcType=VARCHAR}, #{currencyEN,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR},
+    #{establishDate,jdbcType=VARCHAR}, #{flag,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR},
+    #{nameCN,jdbcType=VARCHAR}, #{nameEN,jdbcType=VARCHAR}, #{noteCN,jdbcType=LONGVARCHAR},
+    #{noteEN,jdbcType=LONGVARCHAR}, #{registerId,jdbcType=INTEGER}, #{reg,jdbcType=VARCHAR},
+    #{regCapital,jdbcType=VARCHAR}, #{contributionId,jdbcType=INTEGER}, #{shares,jdbcType=VARCHAR},
+    #{subconam,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR},#{fullReportId,jdbcType=INTEGER},
+    #{entstatus,jdbcType=VARCHAR},#{entstatusEN,jdbcType=VARCHAR},#{enterprisenature,jdbcType=VARCHAR},
+    #{enterprisenatureEN,jdbcType=VARCHAR},#{regCurrency,jdbcType=VARCHAR},#{regCurrencyEN,jdbcType=VARCHAR},
+    #{capitalContribution,jdbcType=VARCHAR},#{capitalContributionEN,jdbcType=VARCHAR},#{typeCN,jdbcType=VARCHAR},
+    #{typeEN,jdbcType=VARCHAR}
+    )
+  </insert>
+
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from
+    <include refid="table" />
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <update id="update" parameterType="com.mika.credit.common.entity.report.cn.ShareholderInfos" >
+    update shareholder_infos
+    set address_cn = #{addressCN,jdbcType=VARCHAR},
+      address_en = #{addressEN,jdbcType=VARCHAR},
+      business_scope_cn = #{businessScopeCN,jdbcType=LONGVARCHAR},
+      business_scope_en = #{businessScopeEN,jdbcType=LONGVARCHAR},
+      com_crefo_no = #{comCrefoNo,jdbcType=VARCHAR},
+      contribution_date = #{contributionDate,jdbcType=VARCHAR},
+      contribution_from = #{contributionFrom,jdbcType=VARCHAR},
+      country_cn = #{countryCN,jdbcType=VARCHAR},
+      country_en = #{countryEN,jdbcType=VARCHAR},
+      company_properties_id = #{companyPropertiesId,jdbcType=INTEGER},
+      crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      company_status_id = #{companyStatusId,jdbcType=INTEGER},
+      currency = #{currency,jdbcType=VARCHAR},
+      currency_en = #{currencyEN,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=VARCHAR},
+      establish_date = #{establishDate,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=VARCHAR},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      name_cn = #{nameCN,jdbcType=VARCHAR},
+      name_en = #{nameEN,jdbcType=VARCHAR},
+      note_cn = #{noteCN,jdbcType=LONGVARCHAR},
+      note_en = #{noteEN,jdbcType=LONGVARCHAR},
+      register_id = #{registerId,jdbcType=INTEGER},
+      reg = #{reg,jdbcType=VARCHAR},
+      reg_capital = #{regCapital,jdbcType=VARCHAR},
+      contribution_id = #{contributionId,jdbcType=INTEGER},
+      shares = #{shares,jdbcType=VARCHAR},
+      subconam = #{subconam,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      full_report_id = #{fullReportId,jdbcType=INTEGER},
+      entstatus = #{entstatus,jdbcType=VARCHAR},
+      entstatus_en = #{entstatusEN,jdbcType=VARCHAR},
+      enterprisenature = #{enterprisenature,jdbcType=VARCHAR},
+      enterprisenature_en = #{enterprisenatureEN,jdbcType=VARCHAR},
+      reg_currency = #{regCurrency,jdbcType=VARCHAR},
+      reg_currency_en = #{regCurrencyEN,jdbcType=VARCHAR},
+      capital_contribution = #{capitalContribution,jdbcType=VARCHAR},
+      capital_contribution_en = #{capitalContributionEN,jdbcType=VARCHAR},
+      type_cn = #{typeCN,jdbcType=VARCHAR},
+      type_en = #{typeEN,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <insert id="insertSelective" parameterType="com.mika.credit.common.entity.report.cn.ShareholderInfos" >
+    insert into shareholder_infos
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="addressCN != null" >
+        address_cn,
+      </if>
+      <if test="addressEN != null" >
+        address_en,
+      </if>
+      <if test="businessScopeCN != null" >
+        business_scope_cn,
+      </if>
+      <if test="businessScopeEN != null" >
+        business_scope_en,
+      </if>
+      <if test="comCrefoNo != null" >
+        com_crefo_no,
+      </if>
+      <if test="contributionDate != null" >
+        contribution_date,
+      </if>
+      <if test="contributionFrom != null" >
+        contribution_from,
+      </if>
+      <if test="countryCN != null" >
+        country_cn,
+      </if>
+      <if test="countryEN != null" >
+        country_en,
+      </if>
+      <if test="companyPropertiesId != null" >
+        company_properties_id,
+      </if>
+      <if test="crefoNo != null" >
+        crefo_no,
+      </if>
+      <if test="companyStatusId != null" >
+        company_status_id,
+      </if>
+      <if test="currency != null" >
+        currency,
+      </if>
+      <if test="currencyEN != null" >
+        currency_en,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="establishDate != null" >
+        establish_date,
+      </if>
+      <if test="flag != null" >
+        flag,
+      </if>
+      <if test="idCard != null" >
+        id_card,
+      </if>
+      <if test="nameCN != null" >
+        name_cn,
+      </if>
+      <if test="nameEN != null" >
+        name_en,
+      </if>
+      <if test="noteCN != null" >
+        note_cn,
+      </if>
+      <if test="noteEN != null" >
+        note_en,
+      </if>
+      <if test="registerId != null" >
+        register_id,
+      </if>
+      <if test="reg != null" >
+        reg,
+      </if>
+      <if test="regCapital != null" >
+        reg_capital,
+      </if>
+      <if test="contributionId != null" >
+        contribution_id,
+      </if>
+      <if test="shares != null" >
+        shares,
+      </if>
+      <if test="subconam != null" >
+        subconam,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id,
+      </if>
+      <if test="entstatus != null" >
+        entstatus,
+      </if>
+      <if test="entstatusEN != null" >
+        entstatus_en,
+      </if>
+      <if test="enterprisenature != null" >
+        enterprisenature,
+      </if>
+      <if test="enterprisenatureEN != null" >
+        enterprisenature_en,
+      </if>
+      <if test="regCurrency != null" >
+        reg_currency,
+      </if>
+      <if test="regCurrencyEN != null" >
+        reg_currency_en,
+      </if>
+      <if test="capitalContribution != null" >
+        capital_contribution,
+      </if>
+      <if test="capitalContributionEN != null" >
+        capital_contribution_en,
+      </if>
+      <if test="typeCN != null" >
+        type_cn,
+      </if>
+      <if test="typeEN != null" >
+        type_en,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="addressCN != null" >
+        #{addressCN,jdbcType=VARCHAR},
+      </if>
+      <if test="addressEN != null" >
+        #{addressEN,jdbcType=VARCHAR},
+      </if>
+      <if test="businessScopeCN != null" >
+        #{businessScopeCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="businessScopeEN != null" >
+        #{businessScopeEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="comCrefoNo != null" >
+        #{comCrefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="contributionDate != null" >
+        #{contributionDate,jdbcType=VARCHAR},
+      </if>
+      <if test="contributionFrom != null" >
+        #{contributionFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="countryCN != null" >
+        #{countryCN,jdbcType=VARCHAR},
+      </if>
+      <if test="countryEN != null" >
+        #{countryEN,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPropertiesId != null" >
+        #{companyPropertiesId,jdbcType=INTEGER},
+      </if>
+      <if test="crefoNo != null" >
+        #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="companyStatusId != null" >
+        #{companyStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="currency != null" >
+        #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="currencyEN != null" >
+        #{currencyEN,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="establishDate != null" >
+        #{establishDate,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="nameCN != null" >
+        #{nameCN,jdbcType=VARCHAR},
+      </if>
+      <if test="nameEN != null" >
+        #{nameEN,jdbcType=VARCHAR},
+      </if>
+      <if test="noteCN != null" >
+        #{noteCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="noteEN != null" >
+        #{noteEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="registerId != null" >
+        #{registerId,jdbcType=INTEGER},
+      </if>
+      <if test="reg != null" >
+        #{reg,jdbcType=VARCHAR},
+      </if>
+      <if test="regCapital != null" >
+        #{regCapital,jdbcType=VARCHAR},
+      </if>
+      <if test="contributionId != null" >
+        #{contributionId,jdbcType=INTEGER},
+      </if>
+      <if test="shares != null" >
+        #{shares,jdbcType=VARCHAR},
+      </if>
+      <if test="subconam != null" >
+        #{subconam,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        #{fullReportId,jdbcType=INTEGER},
+      </if>
+      <if test="entstatus != null" >
+        #{entstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="entstatusEN != null" >
+        #{entstatusEN,jdbcType=VARCHAR},
+      </if>
+      <if test="enterprisenature != null" >
+        #{enterprisenature,jdbcType=VARCHAR},
+      </if>
+      <if test="enterprisenatureEN != null" >
+        #{enterprisenatureEN,jdbcType=VARCHAR},
+      </if>
+      <if test="regCurrency != null" >
+        #{regCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="regCurrencyEN != null" >
+        #{regCurrencyEN,jdbcType=VARCHAR},
+      </if>
+      <if test="capitalContribution != null" >
+        #{capitalContribution,jdbcType=VARCHAR},
+      </if>
+      <if test="capitalContributionEN != null" >
+        #{capitalContributionEN,jdbcType=VARCHAR},
+      </if>
+      <if test="typeCN != null" >
+        #{typeCN,jdbcType=VARCHAR},
+      </if>
+      <if test="typeEN != null" >
+        #{typeEN,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateSelective" parameterType="com.mika.credit.common.entity.report.cn.BankInfos" >
+    update shareholder_infos
+    <set >
+      <if test="addressCN != null" >
+        address_cn = #{addressCN,jdbcType=VARCHAR},
+      </if>
+      <if test="addressEN != null" >
+        address_en = #{addressEN,jdbcType=VARCHAR},
+      </if>
+      <if test="businessScopeCN != null" >
+        business_scope_cn = #{businessScopeCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="businessScopeEN != null" >
+        business_scope_en = #{businessScopeEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="comCrefoNo != null" >
+        com_crefo_no = #{comCrefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="contributionDate != null" >
+        contribution_date = #{contributionDate,jdbcType=VARCHAR},
+      </if>
+      <if test="contributionFrom != null" >
+        contribution_from = #{contributionFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="countryCN != null" >
+        country_cn = #{countryCN,jdbcType=VARCHAR},
+      </if>
+      <if test="countryEN != null" >
+        country_en = #{countryEN,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPropertiesId != null" >
+        company_properties_id = #{companyPropertiesId,jdbcType=INTEGER},
+      </if>
+      <if test="crefoNo != null" >
+        crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="companyStatusId != null" >
+        company_status_id = #{companyStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="currency != null" >
+        currency = #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="currencyEN != null" >
+        currency_en = #{currencyEN,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="establishDate != null" >
+        establish_date = #{establishDate,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        id_card = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="nameCN != null" >
+        name_cn = #{nameCN,jdbcType=VARCHAR},
+      </if>
+      <if test="nameEN != null" >
+        name_en = #{nameEN,jdbcType=VARCHAR},
+      </if>
+      <if test="noteCN != null" >
+        note_cn = #{noteCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="noteEN != null" >
+        note_en = #{noteEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="registerId != null" >
+        register_id = #{registerId,jdbcType=INTEGER},
+      </if>
+      <if test="reg != null" >
+        reg = #{reg,jdbcType=VARCHAR},
+      </if>
+      <if test="regCapital != null" >
+        reg_capital = #{regCapital,jdbcType=VARCHAR},
+      </if>
+      <if test="contributionId != null" >
+        contribution_id = #{contributionId,jdbcType=INTEGER},
+      </if>
+      <if test="shares != null" >
+        shares = #{shares,jdbcType=VARCHAR},
+      </if>
+      <if test="subconam != null" >
+        subconam = #{subconam,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id = #{fullReportId,jdbcType=INTEGER},
+      </if>
+      <if test="entstatus != null" >
+        entstatus = #{entstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="entstatusEN != null" >
+        entstatus_en = #{entstatusEN,jdbcType=VARCHAR},
+      </if>
+      <if test="enterprisenature != null" >
+        enterprisenature = #{enterprisenature,jdbcType=VARCHAR},
+      </if>
+      <if test="enterprisenatureEN != null" >
+        enterprisenature_en = #{enterprisenatureEN,jdbcType=VARCHAR},
+      </if>
+      <if test="regCurrency != null" >
+        reg_currency = #{regCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="regCurrencyEN != null" >
+        reg_currency_en = #{regCurrencyEN,jdbcType=VARCHAR},
+      </if>
+      <if test="capitalContribution != null" >
+        capital_contribution = #{capitalContribution,jdbcType=VARCHAR},
+      </if>
+      <if test="capitalContributionEN != null" >
+        capital_contribution_en = #{capitalContributionEN,jdbcType=VARCHAR},
+      </if>
+      <if test="typeCN != null" >
+        type_cn = #{typeCN,jdbcType=VARCHAR},
+      </if>
+      <if test="typeEN != null" >
+        type_en = #{typeEN,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

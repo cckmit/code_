@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.front.cn.dao.impl.ExecutiveDaoImpl" >
+  <cache eviction="LRU" type="com.mika.credit.common.core.mybatis.cache.redis.sharded.MybatiesRedisCache" />
+  <resultMap id="BaseResultMap" type="com.mika.credit.common.entity.report.cn.Executive" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="currency_id" property="currencyId" jdbcType="VARCHAR" />
+    <result column="crefo_no" property="crefoNo" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="VARCHAR" />
+    <result column="docket_no_en" property="docketNoEN" jdbcType="VARCHAR" />
+    <result column="sort_time" property="sortTime" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+    <result column="zxgg_id" property="zxggId" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="LONGVARCHAR" />
+    <result column="apply_name" property="applyName" jdbcType="LONGVARCHAR" />
+    <result column="body" property="body" jdbcType="LONGVARCHAR" />
+    <result column="body_en" property="bodyEN" jdbcType="LONGVARCHAR" />
+    <result column="case_status_cn" property="caseStatusCN" jdbcType="LONGVARCHAR" />
+    <result column="case_status_en" property="caseStatusEN" jdbcType="LONGVARCHAR" />
+    <result column="child_check" property="childCheck" jdbcType="LONGVARCHAR" />
+    <result column="docket_no_cn" property="docketNoCN" jdbcType="LONGVARCHAR" />
+    <result column="enforce_name_cn" property="enforceNameCN" jdbcType="LONGVARCHAR" />
+    <result column="enforce_name_en" property="enforceNameEN" jdbcType="LONGVARCHAR" />
+    <result column="enterprise_court_name_cn" property="enterpriseCourtNameCN" jdbcType="LONGVARCHAR" />
+    <result column="enterprise_court_name_en" property="enterpriseCourtNameEN" jdbcType="LONGVARCHAR" />
+    <result column="enterprise_name_cn" property="enterpriseNameCN" jdbcType="LONGVARCHAR" />
+    <result column="enterprise_name_en" property="enterpriseNameEN" jdbcType="LONGVARCHAR" />
+    <result column="organizer_code" property="organizerCode" jdbcType="LONGVARCHAR" />
+    <result column="status" property="status" jdbcType="LONGVARCHAR" />
+    <result column="title" property="title" jdbcType="LONGVARCHAR" />
+    <result column="full_report_id" property="fullReportId" jdbcType="INTEGER" />
+    <result column="currency_unit_cn" property="currencyUnitCN" jdbcType="VARCHAR" />
+    <result column="currency_unit_en" property="currencyUnitEN" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="table"> executive </sql>
+
+  <sql id="Base_Column_List" >
+    id, currency_id, crefo_no, del_flag, docket_no_en, sort_time, update_time, zxgg_id,
+    amount, apply_name, body,body_en, case_status_cn, case_status_en, child_check, docket_no_cn,
+    enforce_name_cn, enforce_name_en, enterprise_court_name_cn, enterprise_court_name_en, enterprise_name_cn,
+    enterprise_name_en, organizer_code, status, title,full_report_id,currency_unit_cn,currency_unit_en
+  </sql>
+
+  <sql id="condition_sql">
+    <if test="id != null" >
+      and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="currencyId != null" >
+      and currency_id = #{currencyId,jdbcType=VARCHAR}
+    </if>
+    <if test="crefoNo != null" >
+      and crefo_no = #{crefoNo,jdbcType=VARCHAR}
+    </if>
+    <if test="delFlag != null" >
+      and del_flag = #{delFlag,jdbcType=VARCHAR}
+    </if>
+    <if test="docketNoEN != null" >
+      and docket_no_en = #{docketNoEN,jdbcType=VARCHAR}
+    </if>
+    <if test="sortTime != null" >
+      and sort_time = #{sortTime,jdbcType=VARCHAR}
+    </if>
+    <if test="updateTime != null" >
+      and update_time = #{updateTime,jdbcType=VARCHAR}
+    </if>
+    <if test="zxggId != null" >
+      and zxgg_id = #{zxggId,jdbcType=VARCHAR}
+    </if>
+    <if test="amount != null" >
+      and amount = #{amount,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="applyName != null" >
+      and apply_name = #{applyName,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="body != null" >
+      and body = #{body,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="bodyEN != null" >
+      and body_en = #{bodyEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="caseStatusCN != null" >
+      and case_status_cn = #{caseStatusCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="caseStatusEN != null" >
+      and case_status_en = #{caseStatusEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="childCheck != null" >
+     and child_check = #{childCheck,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="docketNoCN != null" >
+      and docket_no_cn = #{docketNoCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="enforceNameCN != null" >
+      and enforce_name_cn = #{enforceNameCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="enforceNameEN != null" >
+      and enforce_name_en = #{enforceNameEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="enterpriseCourtNameCN != null" >
+      and enterprise_court_name_cn = #{enterpriseCourtNameCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="enterpriseCourtNameEN != null" >
+      and enterprise_court_name_en = #{enterpriseCourtNameEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="enterpriseNameCN != null" >
+      and enterprise_name_cn = #{enterpriseNameCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="enterpriseNameEN != null" >
+      and enterprise_name_en = #{enterpriseNameEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="organizerCode != null" >
+      and organizer_code = #{organizerCode,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="status != null" >
+      and status = #{status,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="title != null" >
+      and title = #{title,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="fullReportId != null" >
+      and full_report_id = #{fullReportId,jdbcType=INTEGER}
+    </if>
+    <if test="currencyUnitCN != null" >
+      and currency_unit_cn = #{currencyUnitCN,jdbcType=VARCHAR}
+    </if>
+    <if test="currencyUnitEN != null" >
+      and currency_unit_en = #{currencyUnitEN,jdbcType=VARCHAR}
+    </if>
+  </sql>
+
+  <select id="getById" parameterType="Integer" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    where ID = #{id}
+  </select>
+
+  <select id="listBy" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <select id="listPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+    <![CDATA[ order by ID desc]]>
+  </select>
+
+  <select id="listPageCount" parameterType="java.util.Map" resultType="Integer">
+    select count(1) from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <insert id="insert" parameterType="com.mika.credit.common.entity.report.cn.Executive" keyProperty="id" useGeneratedKeys="true">
+    insert into
+    <include refid="table" />
+    (id, currency_id, crefo_no,
+    del_flag, docket_no_en, sort_time,
+    update_time, zxgg_id, amount,
+    apply_name, body,body_en, case_status_cn,
+    case_status_en, child_check, docket_no_cn,
+    enforce_name_cn, enforce_name_en,
+    enterprise_court_name_cn, enterprise_court_name_en,
+    enterprise_name_cn, enterprise_name_en, organizer_code,
+    status, title,full_report_id,currency_unit_cn,currency_unit_en)
+    values (#{id,jdbcType=INTEGER}, #{currencyId,jdbcType=VARCHAR}, #{crefoNo,jdbcType=VARCHAR},
+    #{delFlag,jdbcType=VARCHAR}, #{docketNoEN,jdbcType=VARCHAR}, #{sortTime,jdbcType=VARCHAR},
+    #{updateTime,jdbcType=VARCHAR}, #{zxggId,jdbcType=VARCHAR}, #{amount,jdbcType=LONGVARCHAR},
+    #{applyName,jdbcType=LONGVARCHAR}, #{body,jdbcType=LONGVARCHAR}, #{bodyEN,jdbcType=LONGVARCHAR}, #{caseStatusCN,jdbcType=LONGVARCHAR},
+    #{caseStatusEN,jdbcType=LONGVARCHAR}, #{childCheck,jdbcType=LONGVARCHAR}, #{docketNoCN,jdbcType=LONGVARCHAR},
+    #{enforceNameCN,jdbcType=LONGVARCHAR}, #{enforceNameEN,jdbcType=LONGVARCHAR},
+    #{enterpriseCourtNameCN,jdbcType=LONGVARCHAR}, #{enterpriseCourtNameEN,jdbcType=LONGVARCHAR},
+    #{enterpriseNameCN,jdbcType=LONGVARCHAR}, #{enterpriseNameEN,jdbcType=LONGVARCHAR}, #{organizerCode,jdbcType=LONGVARCHAR},
+    #{status,jdbcType=LONGVARCHAR}, #{title,jdbcType=LONGVARCHAR},#{fullReportId,jdbcType=INTEGER},
+    #{currencyUnitCN,jdbcType=VARCHAR},#{currencyUnitEN,jdbcType=VARCHAR})
+  </insert>
+
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from
+    <include refid="table" />
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <update id="update" parameterType="com.mika.credit.common.entity.report.cn.Executive" >
+    update executive
+    set currency_id = #{currencyId,jdbcType=VARCHAR},
+      crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=VARCHAR},
+      docket_no_en = #{docketNoEN,jdbcType=VARCHAR},
+      sort_time = #{sortTime,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      zxgg_id = #{zxggId,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=LONGVARCHAR},
+      apply_name = #{applyName,jdbcType=LONGVARCHAR},
+      body = #{body,jdbcType=LONGVARCHAR},
+      body_en = #{bodyEN,jdbcType=LONGVARCHAR},
+      case_status_cn = #{caseStatusCN,jdbcType=LONGVARCHAR},
+      case_status_en = #{caseStatusEN,jdbcType=LONGVARCHAR},
+      child_check = #{childCheck,jdbcType=LONGVARCHAR},
+      docket_no_cn = #{docketNoCN,jdbcType=LONGVARCHAR},
+      enforce_name_cn = #{enforceNameCN,jdbcType=LONGVARCHAR},
+      enforce_name_en = #{enforceNameEN,jdbcType=LONGVARCHAR},
+      enterprise_court_name_cn = #{enterpriseCourtNameCN,jdbcType=LONGVARCHAR},
+      enterprise_court_name_en = #{enterpriseCourtNameEN,jdbcType=LONGVARCHAR},
+      enterprise_name_cn = #{enterpriseNameCN,jdbcType=LONGVARCHAR},
+      enterprise_name_en = #{enterpriseNameEN,jdbcType=LONGVARCHAR},
+      organizer_code = #{organizerCode,jdbcType=LONGVARCHAR},
+      status = #{status,jdbcType=LONGVARCHAR},
+      title = #{title,jdbcType=LONGVARCHAR},
+      full_report_id = #{fullReportId,jdbcType=INTEGER},
+      currency_unit_cn = #{currencyUnitCN,jdbcType=VARCHAR},
+      currency_unit_en = #{currencyUnitEN,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <insert id="insertSelective" parameterType="com.mika.credit.common.entity.report.cn.Executive" >
+    insert into executive
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="crefoNo != null" >
+        crefo_no,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="docketNoEN != null" >
+        docket_no_en,
+      </if>
+      <if test="sortTime != null" >
+        sort_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="zxggId != null" >
+        zxgg_id,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="applyName != null" >
+        apply_name,
+      </if>
+      <if test="body != null" >
+        body,
+      </if>
+      <if test="bodyEN != null" >
+        body_en,
+      </if>
+      <if test="caseStatusCN != null" >
+        case_status_cn,
+      </if>
+      <if test="caseStatusEN != null" >
+        case_status_en,
+      </if>
+      <if test="childCheck != null" >
+        child_check,
+      </if>
+      <if test="docketNoCN != null" >
+        docket_no_cn,
+      </if>
+      <if test="enforceNameCN != null" >
+        enforce_name_cn,
+      </if>
+      <if test="enforceNameEN != null" >
+        enforce_name_en,
+      </if>
+      <if test="enterpriseCourtNameCN != null" >
+        enterprise_court_name_cn,
+      </if>
+      <if test="enterpriseCourtNameEN != null" >
+        enterprise_court_name_en,
+      </if>
+      <if test="enterpriseNameCN != null" >
+        enterprise_name_cn,
+      </if>
+      <if test="enterpriseNameEN != null" >
+        enterprise_name_en,
+      </if>
+      <if test="organizerCode != null" >
+        organizer_code,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id,
+      </if>
+      <if test="currencyUnitCN != null" >
+        currency_unit_cn,
+      </if>
+      <if test="currencyUnitEN != null" >
+        currency_unit_en,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="currencyId != null" >
+        #{currencyId,jdbcType=VARCHAR},
+      </if>
+      <if test="crefoNo != null" >
+        #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="docketNoEN != null" >
+        #{docketNoEN,jdbcType=VARCHAR},
+      </if>
+      <if test="sortTime != null" >
+        #{sortTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="zxggId != null" >
+        #{zxggId,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="applyName != null" >
+        #{applyName,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="body != null" >
+        #{body,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bodyEN != null" >
+        #{bodyEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="caseStatusCN != null" >
+        #{caseStatusCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="caseStatusEN != null" >
+        #{caseStatusEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="childCheck != null" >
+        #{childCheck,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="docketNoCN != null" >
+        #{docketNoCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enforceNameCN != null" >
+        #{enforceNameCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enforceNameEN != null" >
+        #{enforceNameEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enterpriseCourtNameCN != null" >
+        #{enterpriseCourtNameCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enterpriseCourtNameEN != null" >
+        #{enterpriseCourtNameEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enterpriseNameCN != null" >
+        #{enterpriseNameCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enterpriseNameEN != null" >
+        #{enterpriseNameEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="organizerCode != null" >
+        #{organizerCode,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        #{fullReportId,jdbcType=INTEGER},
+      </if>
+      <if test="currencyUnitCN != null" >
+        #{currencyUnitCN,jdbcType=VARCHAR},
+      </if>
+      <if test="currencyUnitEN != null" >
+        #{currencyUnitEN,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateSelective" parameterType="com.mika.credit.common.entity.report.cn.Executive" >
+    update executive
+    <set >
+      <if test="currencyId != null" >
+        currency_id = #{currencyId,jdbcType=VARCHAR},
+      </if>
+      <if test="crefoNo != null" >
+        crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="docketNoEN != null" >
+        docket_no_en = #{docketNoEN,jdbcType=VARCHAR},
+      </if>
+      <if test="sortTime != null" >
+        sort_time = #{sortTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="zxggId != null" >
+        zxgg_id = #{zxggId,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="applyName != null" >
+        apply_name = #{applyName,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="body != null" >
+        body = #{body,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bodyEN != null" >
+        body_en = #{bodyEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="caseStatusCN != null" >
+        case_status_cn = #{caseStatusCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="caseStatusEN != null" >
+        case_status_en = #{caseStatusEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="childCheck != null" >
+        child_check = #{childCheck,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="docketNoCN != null" >
+        docket_no_cn = #{docketNoCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enforceNameCN != null" >
+        enforce_name_cn = #{enforceNameCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enforceNameEN != null" >
+        enforceNameEN = #{enforceNameEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enforceNameEN != null" >
+        enforce_name_en = #{enforceNameEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enterpriseCourtNameCN != null" >
+        enterprise_court_name_cn = #{enterpriseCourtNameCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enterpriseCourtNameEN != null" >
+        enterprise_court_name_en = #{enterpriseCourtNameEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enterpriseNameCN != null" >
+        enterprise_name_cn = #{enterpriseNameCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enterpriseNameEN != null" >
+        enterprise_name_en = #{enterpriseNameEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="organizerCode != null" >
+        organizer_code = #{organizerCode,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id = #{fullReportId,jdbcType=INTEGER},
+      </if>
+      <if test="currencyUnitCN != null" >
+        currency_unit_cn = #{currencyUnitCN,jdbcType=VARCHAR},
+      </if>
+      <if test="currencyUnitEN != null" >
+        currency_unit_en = #{currencyUnitEN,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+
+
+
+</mapper>

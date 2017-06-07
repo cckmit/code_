@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.front.en.dao.impl.ChangeInfosDaoImpl" >
+  <cache eviction="LRU" type="com.mika.credit.common.core.mybatis.cache.redis.sharded.MybatiesRedisCache" />
+  <resultMap id="BaseResultMap" type="com.mika.credit.common.entity.report.en.ChangeInfos" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="crefo_no" property="crefoNo" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="VARCHAR" />
+    <result column="form_change_date" property="formChangeDate" jdbcType="VARCHAR" />
+    <result column="name_change_date" property="nameChangeDate" jdbcType="VARCHAR" />
+    <result column="previous_common_code" property="previousCommonCode" jdbcType="VARCHAR" />
+    <result column="previous_form" property="previousForm" jdbcType="VARCHAR" />
+    <result column="previous_name" property="previousName" jdbcType="VARCHAR" />
+    <result column="previous_provider_code" property="previousProviderCode" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+    <result column="change_date" property="changeDate" jdbcType="VARCHAR" />
+    <result column="change_type" property="changeType" jdbcType="INTEGER" />
+    <result column="previous_address" property="previousAddress" jdbcType="LONGVARCHAR" />
+    <result column="full_report_id" property="fullReportId" jdbcType="INTEGER" />
+  </resultMap>
+
+  <sql id="table"> change_infos </sql>
+
+  <sql id="Base_Column_List" >
+    id, crefo_no, del_flag, form_change_date, name_change_date, previous_common_code, previous_form, 
+    previous_name, previous_provider_code, update_time, change_date, change_type,
+    previous_address,full_report_id
+  </sql>
+
+  <sql id="condition_sql">
+    <if test="id != null" >
+      and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="crefoNo != null" >
+      and crefo_no = #{crefoNo,jdbcType=VARCHAR}
+    </if>
+    <if test="delFlag != null" >
+      and del_flag = #{delFlag,jdbcType=VARCHAR}
+    </if>
+    <if test="formChangeDate != null" >
+      and form_change_date = #{formChangeDate,jdbcType=VARCHAR}
+    </if>
+    <if test="nameChangeDate != null" >
+      and name_change_date = #{nameChangeDate,jdbcType=VARCHAR}
+    </if>
+    <if test="previousCommonCode != null" >
+      and previous_common_code = #{previousCommonCode,jdbcType=VARCHAR}
+    </if>
+    <if test="previousForm != null" >
+      and previous_form = #{previousForm,jdbcType=VARCHAR}
+    </if>
+    <if test="previousName != null" >
+      and previous_name = #{previousName,jdbcType=VARCHAR}
+    </if>
+    <if test="previousProviderCode != null" >
+      and previous_provider_code = #{previousProviderCode,jdbcType=VARCHAR}
+    </if>
+    <if test="updateTime != null" >
+      and update_time = #{updateTime,jdbcType=VARCHAR}
+    </if>
+    <if test="changeDate != null" >
+      and change_date = #{changeDate,jdbcType=VARCHAR}
+    </if>
+    <if test="changeType != null" >
+      and change_type = #{changeType,jdbcType=INTEGER}
+    </if>
+    <if test="previousAddress != null" >
+      and previous_address = #{previousAddress,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="fullReportId != null" >
+      and full_report_id = #{fullReportId,jdbcType=INTEGER}
+    </if>
+  </sql>
+
+  <select id="getById" parameterType="Integer" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    where id = #{id}
+  </select>
+
+  <select id="listBy" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <select id="listPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+    <![CDATA[ order by ID desc]]>
+  </select>
+
+  <select id="listPageCount" parameterType="java.util.Map" resultType="Integer">
+    select count(1) from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <insert id="insert" parameterType="com.mika.credit.common.entity.report.en.ChangeInfos" keyProperty="id" useGeneratedKeys="true">
+    insert into
+    <include refid="table" />
+    (id, crefo_no, del_flag,
+    form_change_date, name_change_date, previous_common_code,
+    previous_form, previous_name, previous_provider_code,
+    update_time, change_date, change_type,
+    previous_address,full_report_id)
+    values (#{id,jdbcType=INTEGER}, #{crefoNo,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR},
+    #{formChangeDate,jdbcType=VARCHAR}, #{nameChangeDate,jdbcType=VARCHAR}, #{previousCommonCode,jdbcType=VARCHAR},
+    #{previousForm,jdbcType=VARCHAR}, #{previousName,jdbcType=VARCHAR}, #{previousProviderCode,jdbcType=VARCHAR},
+    #{updateTime,jdbcType=VARCHAR}, #{changeDate,jdbcType=VARCHAR}, #{changeType,jdbcType=INTEGER},
+    #{previousAddress,jdbcType=LONGVARCHAR},#{fullReportId,jdbcType=INTEGER})
+  </insert>
+
+  <insert id="batchInsert" parameterType="java.util.List">
+    insert into
+    <include refid="table" />
+    (id, crefo_no, del_flag,
+    form_change_date, name_change_date, previous_common_code,
+    previous_form, previous_name, previous_provider_code,
+    update_time, change_date, change_type,
+    previous_address,full_report_id)
+    values
+    <foreach collection ="list" item="changeInfos" index= "index" separator =",">
+      (#{changeInfos.id,jdbcType=INTEGER}, #{changeInfos.crefoNo,jdbcType=VARCHAR}, #{changeInfos.delFlag,jdbcType=VARCHAR},
+      #{changeInfos.formChangeDate,jdbcType=VARCHAR}, #{changeInfos.nameChangeDate,jdbcType=VARCHAR}, #{changeInfos.previousCommonCode,jdbcType=VARCHAR},
+      #{changeInfos.previousForm,jdbcType=VARCHAR}, #{changeInfos.previousName,jdbcType=VARCHAR}, #{changeInfos.previousProviderCode,jdbcType=VARCHAR},
+      #{changeInfos.updateTime,jdbcType=VARCHAR}, #{changeInfos.changeDate,jdbcType=VARCHAR}, #{changeInfos.changeType,jdbcType=INTEGER},
+      #{changeInfos.previousAddress,jdbcType=LONGVARCHAR},#{changeInfos.fullReportId,jdbcType=INTEGER})
+    </foreach >
+  </insert>
+
+
+  <delete id="deleteById" parameterType="Integer" >
+    delete from
+    <include refid="table" />
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <update id="update" parameterType="com.mika.credit.common.entity.report.en.ChangeInfos" >
+    update change_infos
+    set crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=VARCHAR},
+      form_change_date = #{formChangeDate,jdbcType=VARCHAR},
+      name_change_date = #{nameChangeDate,jdbcType=VARCHAR},
+      previous_common_code = #{previousCommonCode,jdbcType=VARCHAR},
+      previous_form = #{previousForm,jdbcType=VARCHAR},
+      previous_name = #{previousName,jdbcType=VARCHAR},
+      previous_provider_code = #{previousProviderCode,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      change_date = #{changeDate,jdbcType=VARCHAR},
+      change_type = #{changeType,jdbcType=INTEGER},
+	full_report_id = #{fullReportId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <insert id="insertSelective" parameterType="com.mika.credit.common.entity.report.en.ChangeInfos" >
+    insert into change_infos
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="crefoNo != null" >
+        crefo_no,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="formChangeDate != null" >
+        form_change_date,
+      </if>
+      <if test="nameChangeDate != null" >
+        name_change_date,
+      </if>
+      <if test="previousCommonCode != null" >
+        previous_common_code,
+      </if>
+      <if test="previousForm != null" >
+        previous_form,
+      </if>
+      <if test="previousName != null" >
+        previous_name,
+      </if>
+      <if test="previousProviderCode != null" >
+        previous_provider_code,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="changeDate != null" >
+        change_date,
+      </if>
+      <if test="changeType != null" >
+        change_type,
+      </if>
+      <if test="previousAddress != null" >
+        previous_address,
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="crefoNo != null" >
+        #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="formChangeDate != null" >
+        #{formChangeDate,jdbcType=VARCHAR},
+      </if>
+      <if test="nameChangeDate != null" >
+        #{nameChangeDate,jdbcType=VARCHAR},
+      </if>
+      <if test="previousCommonCode != null" >
+        #{previousCommonCode,jdbcType=VARCHAR},
+      </if>
+      <if test="previousForm != null" >
+        #{previousForm,jdbcType=VARCHAR},
+      </if>
+      <if test="previousName != null" >
+        #{previousName,jdbcType=VARCHAR},
+      </if>
+      <if test="previousProviderCode != null" >
+        #{previousProviderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="changeDate != null" >
+        #{changeDate,jdbcType=VARCHAR},
+      </if>
+      <if test="changeType != null" >
+        #{changeType,jdbcType=INTEGER},
+      </if>
+      <if test="previousAddress != null" >
+        #{previousAddress,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        #{fullReportId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateSelective" parameterType="com.mika.credit.common.entity.report.en.ChangeInfos" >
+    update change_infos
+    <set >
+      <if test="crefoNo != null" >
+        crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="formChangeDate != null" >
+        form_change_date = #{formChangeDate,jdbcType=VARCHAR},
+      </if>
+      <if test="nameChangeDate != null" >
+        name_change_date = #{nameChangeDate,jdbcType=VARCHAR},
+      </if>
+      <if test="previousCommonCode != null" >
+        previous_common_code = #{previousCommonCode,jdbcType=VARCHAR},
+      </if>
+      <if test="previousForm != null" >
+        previous_form = #{previousForm,jdbcType=VARCHAR},
+      </if>
+      <if test="previousName != null" >
+        previous_name = #{previousName,jdbcType=VARCHAR},
+      </if>
+      <if test="previousProviderCode != null" >
+        previous_provider_code = #{previousProviderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="changeDate != null" >
+        change_date = #{changeDate,jdbcType=VARCHAR},
+      </if>
+      <if test="changeType != null" >
+        change_type = #{changeType,jdbcType=INTEGER},
+      </if>
+      <if test="previousAddress != null" >
+        previous_address = #{previousAddress,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id = #{fullReportId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

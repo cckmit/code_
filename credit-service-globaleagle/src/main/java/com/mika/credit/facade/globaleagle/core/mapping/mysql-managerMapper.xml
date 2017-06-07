@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.globaleagle.core.dao.ManagerMapper">
+    <!--<cache eviction="LRU" type="com.mika.credit.common.core.mybatis.cache.redis.MybatiesRedisCache" />-->
+    <resultMap id="managerMap" type="com.mika.credit.facade.globaleagle.core.model.Manager">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="passwd" property="passwd" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="VARCHAR"/>
+        <result column="birthday" property="birthday"/>
+        <result column="theme" property="theme" jdbcType="VARCHAR"/>
+        <result column="idcard" property="idcard" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="other_contact" property="otherContact" jdbcType="VARCHAR"/>
+        <result column="sos_person" property="sosPerson" jdbcType="VARCHAR"/>
+        <result column="sos_mobile" property="sosMobile" jdbcType="VARCHAR"/>
+        <result column="addr" property="addr" jdbcType="VARCHAR"/>
+        <result column="born_place" property="bornPlace" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime"/>
+        <result column="login_count" property="loginCount" jdbcType="INTEGER"/>
+        <result column="last_time" property="lastTime"/>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+        <result column="enable" property="enable" jdbcType="BIT"/>
+        <result column="dept_id" property="deptId" jdbcType="VARCHAR"/>
+        <result column="corp_id" property="corpId" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, dept_id, corp_id, code, passwd, name, theme, idcard, phone, addr, email, create_time,
+        login_count, last_time, enable, create_by, sex, birthday, mobile, other_contact,
+        sos_person, sos_mobile, born_place
+    </sql>
+
+    <select id="selectCountSelective" resultType="java.lang.Integer"
+            parameterType="com.mika.credit.facade.globaleagle.core.model.Manager">
+        select
+        count(1)
+        from `manager`
+        where 1=1
+        <if test="id != null">
+            and id=#{id,jdbcType=INTEGER}
+        </if>
+        <if test="corpId != null">
+            and corp_id = #{corpId,jdbcType=VARCHAR}
+        </if>
+        <if test="deptId != null">
+            and dept_id = #{deptId,jdbcType=VARCHAR}
+        </if>
+        <if test="code != null and code != ''">
+            and code = #{code,jdbcType=VARCHAR}
+        </if>
+        <if test="passwd != null">
+            and passwd = #{passwd,jdbcType=VARCHAR}
+        </if>
+        <if test="name != null">
+            and name = #{name,jdbcType=VARCHAR}
+        </if>
+        <if test="theme != null">
+            and theme = #{theme,jdbcType=VARCHAR}
+        </if>
+        <if test="idcard != null">
+            and idcard = #{idcard,jdbcType=VARCHAR}
+        </if>
+        <if test="phone != null">
+            and phone = #{phone,jdbcType=VARCHAR}
+        </if>
+        <if test="addr != null">
+            and addr = #{addr,jdbcType=VARCHAR}
+        </if>
+        <if test="email != null">
+            and email = #{email,jdbcType=VARCHAR}
+        </if>
+        <if test="createTime != null">
+            and create_time = #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="loginCount != null">
+            and login_count = #{loginCount,jdbcType=INTEGER}
+        </if>
+        <if test="lastTime != null">
+            and last_time = #{lastTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="enable != null">
+            and enable = #{enable,jdbcType=VARCHAR}
+        </if>
+        <if test="createBy != null">
+            and create_by = #{createBy,jdbcType=VARCHAR}
+        </if>
+        <if test="sex != null">
+            and sex = #{sex,jdbcType=CHAR}
+        </if>
+        <if test="birthday != null">
+            and birthday = #{birthday,jdbcType=DATE}
+        </if>
+        <if test="mobile != null">
+            and mobile = #{mobile,jdbcType=VARCHAR}
+        </if>
+        <if test="otherContact != null">
+            and other_contact = #{otherContact,jdbcType=VARCHAR}
+        </if>
+        <if test="sosPerson != null">
+            and sos_person = #{sosPerson,jdbcType=VARCHAR}
+        </if>
+        <if test="sosMobile != null">
+            and sos_mobile = #{sosMobile,jdbcType=VARCHAR}
+        </if>
+        <if test="bornPlace != null">
+            and born_place = #{bornPlace,jdbcType=VARCHAR}
+        </if>
+        order by id desc
+    </select>
+
+    <select id="selectSelective" resultMap="managerMap"
+            parameterType="com.mika.credit.facade.globaleagle.core.model.Manager">
+        select
+        <include refid="Base_Column_List"/>
+        from `manager`
+        where 1=1
+        <if test="id != null">
+            and id=#{id,jdbcType=INTEGER}
+        </if>
+        <if test="corpId != null">
+            and corp_id = #{corpId,jdbcType=VARCHAR}
+        </if>
+        <if test="deptId != null">
+            and dept_id = #{deptId,jdbcType=VARCHAR}
+        </if>
+        <if test="code != null and code != ''">
+            and code = #{code,jdbcType=VARCHAR}
+        </if>
+        <if test="passwd != null">
+            and passwd = #{passwd,jdbcType=VARCHAR}
+        </if>
+        <if test="name != null">
+            and name = #{name,jdbcType=VARCHAR}
+        </if>
+        <if test="theme != null">
+            and theme = #{theme,jdbcType=VARCHAR}
+        </if>
+        <if test="idcard != null">
+            and idcard = #{idcard,jdbcType=VARCHAR}
+        </if>
+        <if test="phone != null">
+            and phone = #{phone,jdbcType=VARCHAR}
+        </if>
+        <if test="addr != null">
+            and addr = #{addr,jdbcType=VARCHAR}
+        </if>
+        <if test="email != null">
+            and email = #{email,jdbcType=VARCHAR}
+        </if>
+        <if test="createTime != null">
+            and create_time = #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="loginCount != null">
+            and login_count = #{loginCount,jdbcType=INTEGER}
+        </if>
+        <if test="lastTime != null">
+            and last_time = #{lastTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="enable != null">
+            and enable = #{enable,jdbcType=VARCHAR}
+        </if>
+        <if test="createBy != null">
+            and create_by = #{createBy,jdbcType=VARCHAR}
+        </if>
+        <if test="sex != null">
+            and sex = #{sex,jdbcType=CHAR}
+        </if>
+        <if test="birthday != null">
+            and birthday = #{birthday,jdbcType=DATE}
+        </if>
+        <if test="mobile != null">
+            and mobile = #{mobile,jdbcType=VARCHAR}
+        </if>
+        <if test="otherContact != null">
+            and other_contact = #{otherContact,jdbcType=VARCHAR}
+        </if>
+        <if test="sosPerson != null">
+            and sos_person = #{sosPerson,jdbcType=VARCHAR}
+        </if>
+        <if test="sosMobile != null">
+            and sos_mobile = #{sosMobile,jdbcType=VARCHAR}
+        </if>
+        <if test="bornPlace != null">
+            and born_place = #{bornPlace,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <insert id="addManger" parameterType="com.mika.credit.facade.globaleagle.core.model.Manager">
+  	insert into manager(name,passwd,code,sex,theme,idcard,phone,mobile,other_contact,sos_person,sos_mobile,addr,born_place,email,enable,create_time,login_count,last_time,create_by,dept_id , corp_id)
+  	values( #{name},#{passwd},#{code},#{sex},#{theme},#{idcard},#{phone},#{mobile},#{otherContact},#{sosPerson},#{sosMobile},#{addr},#{bornPlace},#{email},#{enable},#{createTime},#{loginCount},#{lastTime},#{createBy},#{deptId},#{corpId})
+  </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.mika.credit.facade.globaleagle.core.model.Manager">
+        update manager
+        <set>
+            <if test="corpId != null">
+                corp_id = #{corpId,jdbcType=VARCHAR},
+            </if>
+            <if test="deptId != null">
+                dept_id = #{deptId,jdbcType=VARCHAR},
+            </if>
+            <if test="code != null">
+                code = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="passwd != null">
+                passwd = #{passwd,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="theme != null">
+                theme = #{theme,jdbcType=VARCHAR},
+            </if>
+            <if test="idcard != null">
+                idcard = #{idcard,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="addr != null">
+                addr = #{addr,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="loginCount != null">
+                login_count = #{loginCount,jdbcType=INTEGER},
+            </if>
+            <if test="lastTime != null">
+                last_time = #{lastTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="enable != null">
+                enable = #{enable,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=CHAR},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday,jdbcType=DATE},
+            </if>
+            <if test="mobile != null">
+                mobile = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="otherContact != null">
+                other_contact = #{otherContact,jdbcType=VARCHAR},
+            </if>
+            <if test="sosPerson != null">
+                sos_person = #{sosPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="sosMobile != null">
+                sos_mobile = #{sosMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="bornPlace != null">
+                born_place = #{bornPlace,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <delete id="delManager" parameterType="java.lang.Integer">
+  	delete from manager where id=#{id}
+  </delete>
+</mapper>

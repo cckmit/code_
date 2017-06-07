@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mika.credit.facade.gugu.dao.PublicizePhotoMapper">
+  <resultMap id="BaseResultMap" type="com.mika.credit.facade.gugu.model.PublicizePhoto">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="publicize_id" jdbcType="INTEGER" property="publicizeId" />
+    <result column="photo_path" jdbcType="VARCHAR" property="photoPath" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="del_flag" jdbcType="VARCHAR" property="delFlag" />
+    <result column="order_by" jdbcType="VARCHAR" property="orderBy" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, publicize_id, photo_path, update_time, del_flag, order_by
+  </sql>
+  <sql id="condition">
+    <where>
+      <if test="id != null and id != 0">
+        and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="publicizeId != null and publicizeId != 0">
+        and publicize_id = #{publicizeId,jdbcType=INTEGER}
+      </if>
+      <if test="photoPath != null">
+        and photo_path = #{photoPath,jdbcType=VARCHAR}
+      </if>
+      <if test="updateTime != null">
+        and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="delFlag != null">
+        and del_flag = #{delFlag,jdbcType=VARCHAR}
+      </if>
+      <if test="orderBy != null">
+        and order_by = #{orderBy,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from publicize_photo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPrimaryKeySelective" parameterType="com.mika.credit.facade.gugu.model.PublicizePhoto" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from publicize_photo
+    <include refid="condition" />
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from publicize_photo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mika.credit.facade.gugu.model.PublicizePhoto" useGeneratedKeys="true" keyProperty="id">
+    insert into publicize_photo (id, publicize_id, photo_path, 
+      update_time, del_flag, order_by
+      )
+    values (#{id,jdbcType=INTEGER}, #{publicizeId,jdbcType=INTEGER}, #{photoPath,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=VARCHAR}, #{orderBy,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mika.credit.facade.gugu.model.PublicizePhoto" useGeneratedKeys="true" keyProperty="id">
+    insert into publicize_photo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="publicizeId != null">
+        publicize_id,
+      </if>
+      <if test="photoPath != null">
+        photo_path,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="orderBy != null">
+        order_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="publicizeId != null">
+        #{publicizeId,jdbcType=INTEGER},
+      </if>
+      <if test="photoPath != null">
+        #{photoPath,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="orderBy != null">
+        #{orderBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mika.credit.facade.gugu.model.PublicizePhoto">
+    update publicize_photo
+    <set>
+      <if test="publicizeId != null">
+        publicize_id = #{publicizeId,jdbcType=INTEGER},
+      </if>
+      <if test="photoPath != null">
+        photo_path = #{photoPath,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="orderBy != null">
+        order_by = #{orderBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mika.credit.facade.gugu.model.PublicizePhoto">
+    update publicize_photo
+    set publicize_id = #{publicizeId,jdbcType=INTEGER},
+      photo_path = #{photoPath,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      del_flag = #{delFlag,jdbcType=VARCHAR},
+      order_by = #{orderBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

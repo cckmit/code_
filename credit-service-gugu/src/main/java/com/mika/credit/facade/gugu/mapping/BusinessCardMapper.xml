@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mika.credit.facade.gugu.dao.BusinessCardMapper">
+  <resultMap id="BaseResultMap" type="com.mika.credit.facade.gugu.model.BusinessCard">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="area_code" jdbcType="VARCHAR" property="areaCode" />
+    <result column="card_address" jdbcType="VARCHAR" property="cardAddress" />
+    <result column="card_company" jdbcType="VARCHAR" property="cardCompany" />
+    <result column="card_email" jdbcType="VARCHAR" property="cardEmail" />
+    <result column="card_fax" jdbcType="VARCHAR" property="cardFax" />
+    <result column="card_name" jdbcType="VARCHAR" property="cardName" />
+    <result column="card_note" jdbcType="VARCHAR" property="cardNote" />
+    <result column="card_phone" jdbcType="VARCHAR" property="cardPhone" />
+    <result column="card_position" jdbcType="VARCHAR" property="cardPosition" />
+    <result column="card_tel" jdbcType="VARCHAR" property="cardTel" />
+    <result column="card_website" jdbcType="VARCHAR" property="cardWebsite" />
+    <result column="card_zip" jdbcType="VARCHAR" property="cardZip" />
+    <result column="business_card_no" jdbcType="VARCHAR" property="businessCardNo" />
+    <result column="del_flag" jdbcType="VARCHAR" property="delFlag" />
+    <result column="photo_path" jdbcType="VARCHAR" property="photoPath" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="credit_certification" jdbcType="VARCHAR" property="creditCertification" />
+    <result column="credit_verification" jdbcType="VARCHAR" property="creditVerification" />
+    <result column="monitor" jdbcType="VARCHAR" property="monitor" />
+    <result column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="verification_score" jdbcType="INTEGER" property="verificationScore" />
+    <result column="verification_update_time" jdbcType="TIMESTAMP" property="verificationUpdateTime" />
+    <result column="verfication_id" jdbcType="INTEGER" property="verficationId" />
+    <result column="certification_id" jdbcType="INTEGER" property="certificationId" />
+    <result column="monitor_id" jdbcType="INTEGER" property="monitorId" />
+    <result column="card_common" jdbcType="VARCHAR" property="cardCommon" />
+    <result column="card_partner" jdbcType="VARCHAR" property="cardPartner" />
+    <result column="show_photo_path" jdbcType="VARCHAR" property="showPhotoPath" />
+    <result column="binding_card_id" jdbcType="VARCHAR" property="bindingCardId" />
+    <result column="update_flag" jdbcType="VARCHAR" property="updateFlag" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="credit_certification_id" jdbcType="INTEGER" property="creditCertificationId" />
+    <result column="repayment_index" jdbcType="VARCHAR" property="repaymentIndex" />
+    <result column="credit_risk_evaluation" jdbcType="VARCHAR" property="creditRiskEvaluation" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, area_code, card_address, card_company, card_email, card_fax, card_name, card_note, 
+    card_phone, card_position, card_tel, card_website, card_zip, business_card_no, del_flag, 
+    photo_path, update_time, user_id, credit_certification, credit_verification, monitor, 
+    order_id, verification_score, verification_update_time, verfication_id, certification_id,monitor_id,
+    card_common, card_partner, show_photo_path, binding_card_id, update_flag, create_date, 
+    credit_certification_id, repayment_index, credit_risk_evaluation
+  </sql>
+  <sql id="condition">
+    <where>
+      <if test="id != null and id != 0">
+        and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="areaCode != null">
+        and area_code = #{areaCode,jdbcType=VARCHAR}
+      </if>
+      <if test="cardAddress != null">
+        and card_address  like concat('%', #{cardAddress,jdbcType=VARCHAR}, '%')
+      </if>
+      <if test="cardCompany != null">
+        and card_company like concat('%', #{cardCompany,jdbcType=VARCHAR}, '%')
+      </if>
+      <if test="cardEmail != null">
+        and card_email = #{cardEmail,jdbcType=VARCHAR}
+      </if>
+      <if test="cardFax != null">
+        and card_fax = #{cardFax,jdbcType=VARCHAR}
+      </if>
+      <if test="cardName != null">
+        and card_name  like concat('%', #{cardName,jdbcType=VARCHAR}, '%')
+      </if>
+      <if test="cardNote != null">
+        and card_note = #{cardNote,jdbcType=VARCHAR}
+      </if>
+      <if test="cardPhone != null">
+        and card_phone = #{cardPhone,jdbcType=VARCHAR}
+      </if>
+      <if test="cardPosition != null">
+        and card_position = #{cardPosition,jdbcType=VARCHAR}
+      </if>
+      <if test="cardTel != null">
+        and card_tel = #{cardTel,jdbcType=VARCHAR}
+      </if>
+      <if test="cardWebsite != null">
+        and card_website = #{cardWebsite,jdbcType=VARCHAR}
+      </if>
+      <if test="cardZip != null">
+        and  card_zip = #{cardZip,jdbcType=VARCHAR}
+      </if>
+      <if test="businessCardNo != null">
+        and  business_card_no = #{businessCardNo,jdbcType=VARCHAR}
+      </if>
+      <if test="delFlag != null">
+        and  del_flag = #{delFlag,jdbcType=VARCHAR}
+      </if>
+      <if test="photoPath != null">
+        and  photo_path = #{photoPath,jdbcType=VARCHAR}
+      </if>
+      <if test="updateTime != null">
+        and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="userId != null and userId != 0">
+        and  user_id = #{userId,jdbcType=INTEGER}
+      </if>
+      <if test="creditCertification != null">
+        and credit_certification = #{creditCertification,jdbcType=VARCHAR}
+      </if>
+      <if test="creditVerification != null">
+        and credit_verification = #{creditVerification,jdbcType=VARCHAR}
+      </if>
+      <if test="monitor != null">
+        and monitor = #{monitor,jdbcType=VARCHAR}
+      </if>
+      <if test="orderId != null and orderId != 0">
+        and order_id = #{orderId,jdbcType=INTEGER}
+      </if>
+      <if test="verificationScore != null and verificationScore != 0">
+        and verification_score = #{verificationScore,jdbcType=INTEGER}
+      </if>
+      <if test="verificationUpdateTime != null">
+        and  verification_update_time = #{verificationUpdateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="verficationId != null and verficationId != 0">
+        and verfication_id = #{verficationId,jdbcType=INTEGER}
+      </if>
+      <if test="certificationId != null and certificationId != 0">
+        and certification_id = #{certificationId,jdbcType=INTEGER}
+      </if>
+      <if test="monitorId != null">
+        and monitor_id = #{monitorId,jdbcType=INTEGER}
+      </if>
+      <if test="cardCommon != null">
+        and card_common = #{cardCommon,jdbcType=VARCHAR}
+      </if>
+      <if test="cardPartner != null">
+        and card_partner = #{cardPartner,jdbcType=VARCHAR}
+      </if>
+      <if test="showPhotoPath != null">
+        and show_photo_path = #{showPhotoPath,jdbcType=VARCHAR}
+      </if>
+      <if test="bindingCardId != null">
+        and  binding_card_id = #{bindingCardId,jdbcType=VARCHAR}
+      </if>
+      <if test="updateFlag != null">
+        and update_flag = #{updateFlag,jdbcType=VARCHAR}
+      </if>
+      <if test="createDate != null">
+        and create_date = #{createDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="creditCertificationId != null and creditCertificationId != 0">
+        and credit_certification_id = #{creditCertificationId,jdbcType=INTEGER}
+      </if>
+      <if test="repaymentIndex != null">
+        and  repayment_index = #{repaymentIndex,jdbcType=VARCHAR}
+      </if>
+      <if test="creditRiskEvaluation != null">
+        and credit_risk_evaluation = #{creditRiskEvaluation,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from business_card
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPrimaryKeySelective" parameterType="com.mika.credit.facade.gugu.model.BusinessCard" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from business_card
+    <include refid="condition" />
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from business_card
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mika.credit.facade.gugu.model.BusinessCard" useGeneratedKeys="true" keyProperty="id">
+    insert into business_card (id, area_code, card_address, 
+      card_company, card_email, card_fax, 
+      card_name, card_note, card_phone, 
+      card_position, card_tel, card_website, 
+      card_zip, business_card_no, del_flag, 
+      photo_path, update_time, user_id, 
+      credit_certification, credit_verification, 
+      monitor, order_id, verification_score, 
+      verification_update_time, verfication_id, certification_id,
+      monitor_id, card_common, card_partner, 
+      show_photo_path, binding_card_id, update_flag, 
+      create_date, credit_certification_id, repayment_index, 
+      credit_risk_evaluation)
+    values (#{id,jdbcType=INTEGER}, #{areaCode,jdbcType=VARCHAR}, #{cardAddress,jdbcType=VARCHAR}, 
+      #{cardCompany,jdbcType=VARCHAR}, #{cardEmail,jdbcType=VARCHAR}, #{cardFax,jdbcType=VARCHAR}, 
+      #{cardName,jdbcType=VARCHAR}, #{cardNote,jdbcType=VARCHAR}, #{cardPhone,jdbcType=VARCHAR}, 
+      #{cardPosition,jdbcType=VARCHAR}, #{cardTel,jdbcType=VARCHAR}, #{cardWebsite,jdbcType=VARCHAR}, 
+      #{cardZip,jdbcType=VARCHAR}, #{businessCardNo,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR}, 
+      #{photoPath,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{userId,jdbcType=INTEGER}, 
+      #{creditCertification,jdbcType=VARCHAR}, #{creditVerification,jdbcType=VARCHAR}, 
+      #{monitor,jdbcType=VARCHAR}, #{orderId,jdbcType=INTEGER}, #{verificationScore,jdbcType=INTEGER}, 
+      #{verificationUpdateTime,jdbcType=TIMESTAMP}, #{verficationId,jdbcType=INTEGER}, #{certificationId,jdbcType=INTEGER},
+      #{monitorId,jdbcType=INTEGER}, #{cardCommon,jdbcType=VARCHAR}, #{cardPartner,jdbcType=VARCHAR}, 
+      #{showPhotoPath,jdbcType=VARCHAR}, #{bindingCardId,jdbcType=VARCHAR}, #{updateFlag,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{creditCertificationId,jdbcType=INTEGER}, #{repaymentIndex,jdbcType=VARCHAR}, 
+      #{creditRiskEvaluation,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mika.credit.facade.gugu.model.BusinessCard" useGeneratedKeys="true" keyProperty="id">
+    insert into business_card
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="areaCode != null">
+        area_code,
+      </if>
+      <if test="cardAddress != null">
+        card_address,
+      </if>
+      <if test="cardCompany != null">
+        card_company,
+      </if>
+      <if test="cardEmail != null">
+        card_email,
+      </if>
+      <if test="cardFax != null">
+        card_fax,
+      </if>
+      <if test="cardName != null">
+        card_name,
+      </if>
+      <if test="cardNote != null">
+        card_note,
+      </if>
+      <if test="cardPhone != null">
+        card_phone,
+      </if>
+      <if test="cardPosition != null">
+        card_position,
+      </if>
+      <if test="cardTel != null">
+        card_tel,
+      </if>
+      <if test="cardWebsite != null">
+        card_website,
+      </if>
+      <if test="cardZip != null">
+        card_zip,
+      </if>
+      <if test="businessCardNo != null">
+        business_card_no,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="photoPath != null">
+        photo_path,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="creditCertification != null">
+        credit_certification,
+      </if>
+      <if test="creditVerification != null">
+        credit_verification,
+      </if>
+      <if test="monitor != null">
+        monitor,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="verificationScore != null">
+        verification_score,
+      </if>
+      <if test="verificationUpdateTime != null">
+        verification_update_time,
+      </if>
+      <if test="verficationId != null">
+        verfication_id,
+      </if>
+      <if test="certificationId != null">
+        certification_id,
+      </if>
+      <if test="monitorId != null">
+        monitor_id,
+      </if>
+      <if test="cardCommon != null">
+        card_common,
+      </if>
+      <if test="cardPartner != null">
+        card_partner,
+      </if>
+      <if test="showPhotoPath != null">
+        show_photo_path,
+      </if>
+      <if test="bindingCardId != null">
+        binding_card_id,
+      </if>
+      <if test="updateFlag != null">
+        update_flag,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="creditCertificationId != null">
+        credit_certification_id,
+      </if>
+      <if test="repaymentIndex != null">
+        repayment_index,
+      </if>
+      <if test="creditRiskEvaluation != null">
+        credit_risk_evaluation,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="areaCode != null">
+        #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cardAddress != null">
+        #{cardAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="cardCompany != null">
+        #{cardCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="cardEmail != null">
+        #{cardEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="cardFax != null">
+        #{cardFax,jdbcType=VARCHAR},
+      </if>
+      <if test="cardName != null">
+        #{cardName,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNote != null">
+        #{cardNote,jdbcType=VARCHAR},
+      </if>
+      <if test="cardPhone != null">
+        #{cardPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="cardPosition != null">
+        #{cardPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="cardTel != null">
+        #{cardTel,jdbcType=VARCHAR},
+      </if>
+      <if test="cardWebsite != null">
+        #{cardWebsite,jdbcType=VARCHAR},
+      </if>
+      <if test="cardZip != null">
+        #{cardZip,jdbcType=VARCHAR},
+      </if>
+      <if test="businessCardNo != null">
+        #{businessCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="photoPath != null">
+        #{photoPath,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="creditCertification != null">
+        #{creditCertification,jdbcType=VARCHAR},
+      </if>
+      <if test="creditVerification != null">
+        #{creditVerification,jdbcType=VARCHAR},
+      </if>
+      <if test="monitor != null">
+        #{monitor,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="verificationScore != null">
+        #{verificationScore,jdbcType=INTEGER},
+      </if>
+      <if test="verificationUpdateTime != null">
+        #{verificationUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="verficationId != null">
+        #{verficationId,jdbcType=INTEGER},
+      </if>
+      <if test="certificationId != null">
+        #{certificationId,jdbcType=INTEGER},
+      </if>
+      <if test="monitorId != null">
+        #{monitorId,jdbcType=INTEGER},
+      </if>
+      <if test="cardCommon != null">
+        #{cardCommon,jdbcType=VARCHAR},
+      </if>
+      <if test="cardPartner != null">
+        #{cardPartner,jdbcType=VARCHAR},
+      </if>
+      <if test="showPhotoPath != null">
+        #{showPhotoPath,jdbcType=VARCHAR},
+      </if>
+      <if test="bindingCardId != null">
+        #{bindingCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateFlag != null">
+        #{updateFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creditCertificationId != null">
+        #{creditCertificationId,jdbcType=INTEGER},
+      </if>
+      <if test="repaymentIndex != null">
+        #{repaymentIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="creditRiskEvaluation != null">
+        #{creditRiskEvaluation,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mika.credit.facade.gugu.model.BusinessCard">
+    update business_card
+    <set>
+      <if test="areaCode != null">
+        area_code = #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cardAddress != null">
+        card_address = #{cardAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="cardCompany != null">
+        card_company = #{cardCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="cardEmail != null">
+        card_email = #{cardEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="cardFax != null">
+        card_fax = #{cardFax,jdbcType=VARCHAR},
+      </if>
+      <if test="cardName != null">
+        card_name = #{cardName,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNote != null">
+        card_note = #{cardNote,jdbcType=VARCHAR},
+      </if>
+      <if test="cardPhone != null">
+        card_phone = #{cardPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="cardPosition != null">
+        card_position = #{cardPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="cardTel != null">
+        card_tel = #{cardTel,jdbcType=VARCHAR},
+      </if>
+      <if test="cardWebsite != null">
+        card_website = #{cardWebsite,jdbcType=VARCHAR},
+      </if>
+      <if test="cardZip != null">
+        card_zip = #{cardZip,jdbcType=VARCHAR},
+      </if>
+      <if test="businessCardNo != null">
+        business_card_no = #{businessCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="photoPath != null">
+        photo_path = #{photoPath,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="creditCertification != null">
+        credit_certification = #{creditCertification,jdbcType=VARCHAR},
+      </if>
+      <if test="creditVerification != null">
+        credit_verification = #{creditVerification,jdbcType=VARCHAR},
+      </if>
+      <if test="monitor != null">
+        monitor = #{monitor,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="verificationScore != null">
+        verification_score = #{verificationScore,jdbcType=INTEGER},
+      </if>
+      <if test="verificationUpdateTime != null">
+        verification_update_time = #{verificationUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="verficationId != null">
+        verfication_id = #{verficationId,jdbcType=INTEGER},
+      </if>
+      <if test="certificationId != null">
+        certification_id = #{certificationId,jdbcType=INTEGER},
+      </if>
+      <if test="monitorId != null">
+        monitor_id = #{monitorId,jdbcType=INTEGER},
+      </if>
+      <if test="cardCommon != null">
+        card_common = #{cardCommon,jdbcType=VARCHAR},
+      </if>
+      <if test="cardPartner != null">
+        card_partner = #{cardPartner,jdbcType=VARCHAR},
+      </if>
+      <if test="showPhotoPath != null">
+        show_photo_path = #{showPhotoPath,jdbcType=VARCHAR},
+      </if>
+      <if test="bindingCardId != null">
+        binding_card_id = #{bindingCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateFlag != null">
+        update_flag = #{updateFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creditCertificationId != null">
+        credit_certification_id = #{creditCertificationId,jdbcType=INTEGER},
+      </if>
+      <if test="repaymentIndex != null">
+        repayment_index = #{repaymentIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="creditRiskEvaluation != null">
+        credit_risk_evaluation = #{creditRiskEvaluation,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mika.credit.facade.gugu.model.BusinessCard">
+    update business_card
+    set area_code = #{areaCode,jdbcType=VARCHAR},
+      card_address = #{cardAddress,jdbcType=VARCHAR},
+      card_company = #{cardCompany,jdbcType=VARCHAR},
+      card_email = #{cardEmail,jdbcType=VARCHAR},
+      card_fax = #{cardFax,jdbcType=VARCHAR},
+      card_name = #{cardName,jdbcType=VARCHAR},
+      card_note = #{cardNote,jdbcType=VARCHAR},
+      card_phone = #{cardPhone,jdbcType=VARCHAR},
+      card_position = #{cardPosition,jdbcType=VARCHAR},
+      card_tel = #{cardTel,jdbcType=VARCHAR},
+      card_website = #{cardWebsite,jdbcType=VARCHAR},
+      card_zip = #{cardZip,jdbcType=VARCHAR},
+      business_card_no = #{businessCardNo,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=VARCHAR},
+      photo_path = #{photoPath,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      user_id = #{userId,jdbcType=INTEGER},
+      credit_certification = #{creditCertification,jdbcType=VARCHAR},
+      credit_verification = #{creditVerification,jdbcType=VARCHAR},
+      monitor = #{monitor,jdbcType=VARCHAR},
+      order_id = #{orderId,jdbcType=INTEGER},
+      verification_score = #{verificationScore,jdbcType=INTEGER},
+      verification_update_time = #{verificationUpdateTime,jdbcType=TIMESTAMP},
+      verfication_id = #{verficationId,jdbcType=INTEGER},
+      certification_id = #{certificationId,jdbcType=INTEGER},
+      monitor_id = #{monitorId,jdbcType=INTEGER},
+      card_common = #{cardCommon,jdbcType=VARCHAR},
+      card_partner = #{cardPartner,jdbcType=VARCHAR},
+      show_photo_path = #{showPhotoPath,jdbcType=VARCHAR},
+      binding_card_id = #{bindingCardId,jdbcType=VARCHAR},
+      update_flag = #{updateFlag,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      credit_certification_id = #{creditCertificationId,jdbcType=INTEGER},
+      repayment_index = #{repaymentIndex,jdbcType=VARCHAR},
+      credit_risk_evaluation = #{creditRiskEvaluation,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

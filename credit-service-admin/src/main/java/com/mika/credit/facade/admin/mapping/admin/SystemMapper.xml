@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.admin.dao.admin.SystemMapper">
+    <resultMap id="systemMap" type="com.mika.credit.facade.admin.model.System">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, name
+    </sql>
+    <sql id="condition">
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id,jdbcType=VARCHAR}
+            </if>
+            <if test="name !=null and name!= ''">
+                and name= #{name,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </sql>
+    <select id="queryAll" resultMap="systemMap">
+        select *
+        from s_system
+    </select>
+    <select id="querySelective" parameterType="com.mika.credit.facade.admin.model.System" resultMap="systemMap">
+        select
+        <include refid="Base_Column_List" />
+        from s_system
+        <include refid="condition"/>
+    </select>
+    <select id="queryById" resultMap="systemMap" parameterType="java.lang.String">
+        select *
+        from s_system
+        where id = #{id}
+    </select>
+    <insert id="save" parameterType="com.mika.credit.facade.admin.model.System">
+        insert into s_system(id,name)
+        values(#{id,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.mika.credit.facade.admin.model.System">
+        insert into s_system
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.mika.credit.facade.admin.model.System">
+        update s_system set
+        name=#{name,jdbcType=VARCHAR}
+      where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByIdSelective" parameterType="com.mika.credit.facade.admin.model.System">
+        update s_system
+        <set>
+            <if test="name !=null and name != ''">
+                name= #{name,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <delete id="deleteById" parameterType="java.lang.String">
+        delete from s_system
+        where id=#{id}
+    </delete>
+    <delete id="delete" parameterType="com.mika.credit.facade.admin.model.System">
+        delete from s_system
+        <include refid="condition"/>
+    </delete>
+</mapper>

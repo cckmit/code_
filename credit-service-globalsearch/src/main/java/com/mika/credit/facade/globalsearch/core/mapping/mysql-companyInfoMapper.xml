@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.globalsearch.core.dao.CompanyInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.mika.credit.facade.globalsearch.core.model.CompanyInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+    <result column="company_address" property="companyAddress" jdbcType="VARCHAR" />
+    <result column="company_country" property="companyCountry" jdbcType="VARCHAR" />
+    <result column="company_phone" property="companyPhone" jdbcType="VARCHAR" />
+    <result column="company_website" property="companyWebsite" jdbcType="VARCHAR" />
+    <result column="company_fax" property="companyFax" jdbcType="VARCHAR" />
+    <result column="company_email" property="companyEmail" jdbcType="VARCHAR" />
+    <result column="company_contact" property="companyContact" jdbcType="VARCHAR" />
+    <result column="bank" property="bank" jdbcType="VARCHAR" />
+    <result column="bank_account" property="bankAccount" jdbcType="VARCHAR" />
+    <result column="bank_address" property="bankAddress" jdbcType="VARCHAR" />
+    <result column="bank_contact" property="bankContact" jdbcType="VARCHAR" />
+    <result column="bank_phone" property="bankPhone" jdbcType="VARCHAR" />
+    <result column="trade_ref" property="tradeRef" jdbcType="VARCHAR" />
+    <result column="trade_ref_contact" property="tradeRefContact" jdbcType="VARCHAR" />
+    <result column="trade_ref_phone" property="tradeRefPhone" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, company_name, company_address, company_country, company_phone, company_website, 
+    company_fax, company_email, company_contact, bank, bank_account, bank_address, bank_contact, 
+    bank_phone, trade_ref, trade_ref_contact, trade_ref_phone
+  </sql>
+  <select id="selectSelective" resultMap="BaseResultMap" parameterType="com.mika.credit.facade.globalsearch.core.model.CompanyInfo" >
+    select
+    <include refid="Base_Column_List" />
+    <where>
+      <if test="companyName != null" >
+        and company_name = #{companyName,jdbcType=VARCHAR}
+      </if>
+      <if test="companyAddress != null" >
+        and company_address = #{companyAddress,jdbcType=VARCHAR}
+      </if>
+      <if test="companyCountry != null" >
+        and company_country = #{companyCountry,jdbcType=VARCHAR}
+      </if>
+      <if test="companyPhone != null" >
+        and company_phonev= #{companyPhone,jdbcType=VARCHAR}
+      </if>
+      <if test="companyWebsite != null" >
+        and company_website = #{companyWebsite,jdbcType=VARCHAR}
+      </if>
+      <if test="companyFax != null" >
+        and company_fax = #{companyFax,jdbcType=VARCHAR}
+      </if>
+      <if test="companyEmail != null" >
+        and company_email = #{companyEmail,jdbcType=VARCHAR}
+      </if>
+      <if test="companyContact != null" >
+        and company_contact = #{companyContact,jdbcType=VARCHAR}
+      </if>
+      <if test="bank != null" >
+        and bank = #{bank,jdbcType=VARCHAR}
+      </if>
+      <if test="bankAccount != null" >
+        and bank_account = #{bankAccount,jdbcType=VARCHAR}
+      </if>
+      <if test="bankAddress != null" >
+        and bank_address = #{bankAddress,jdbcType=VARCHAR}
+      </if>
+      <if test="bankContact != null" >
+        and bank_contact = #{bankContact,jdbcType=VARCHAR}
+      </if>
+      <if test="bankPhone != null" >
+        and bank_phone = #{bankPhone,jdbcType=VARCHAR}
+      </if>
+      <if test="tradeRef != null" >
+        and trade_ref= #{tradeRef,jdbcType=VARCHAR}
+      </if>
+      <if test="tradeRefContact != null" >
+        and trade_ref_contact= #{tradeRefContact,jdbcType=VARCHAR}
+      </if>
+      <if test="tradeRefPhone != null" >
+        and trade_ref_phone= #{tradeRefPhone,jdbcType=VARCHAR}
+      </if>
+      <if test="uploadFilePath != null" >
+        and upload_file_path= #{uploadFilePath,jdbcType=VARCHAR}
+</if>
+    </where>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from company_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from company_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mika.credit.facade.globalsearch.core.model.CompanyInfo" useGeneratedKeys="true" keyProperty="id">
+    insert into company_info (id, company_name, company_address, 
+      company_country, company_phone, company_website, 
+      company_fax, company_email, company_contact, 
+      bank, bank_account, bank_address, 
+      bank_contact, bank_phone, trade_ref, 
+      trade_ref_contact, trade_ref_phone)
+    values (#{id,jdbcType=INTEGER}, #{companyName,jdbcType=VARCHAR}, #{companyAddress,jdbcType=VARCHAR}, 
+      #{companyCountry,jdbcType=VARCHAR}, #{companyPhone,jdbcType=VARCHAR}, #{companyWebsite,jdbcType=VARCHAR}, 
+      #{companyFax,jdbcType=VARCHAR}, #{companyEmail,jdbcType=VARCHAR}, #{companyContact,jdbcType=VARCHAR}, 
+      #{bank,jdbcType=VARCHAR}, #{bankAccount,jdbcType=VARCHAR}, #{bankAddress,jdbcType=VARCHAR}, 
+      #{bankContact,jdbcType=VARCHAR}, #{bankPhone,jdbcType=VARCHAR}, #{tradeRef,jdbcType=VARCHAR}, 
+      #{tradeRefContact,jdbcType=VARCHAR}, #{tradeRefPhone,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mika.credit.facade.globalsearch.core.model.CompanyInfo" useGeneratedKeys="true" keyProperty="id">
+    insert into company_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="companyName != null" >
+        company_name,
+      </if>
+      <if test="companyAddress != null" >
+        company_address,
+      </if>
+      <if test="companyCountry != null" >
+        company_country,
+      </if>
+      <if test="companyPhone != null" >
+        company_phone,
+      </if>
+      <if test="companyWebsite != null" >
+        company_website,
+      </if>
+      <if test="companyFax != null" >
+        company_fax,
+      </if>
+      <if test="companyEmail != null" >
+        company_email,
+      </if>
+      <if test="companyContact != null" >
+        company_contact,
+      </if>
+      <if test="bank != null" >
+        bank,
+      </if>
+      <if test="bankAccount != null" >
+        bank_account,
+      </if>
+      <if test="bankAddress != null" >
+        bank_address,
+      </if>
+      <if test="bankContact != null" >
+        bank_contact,
+      </if>
+      <if test="bankPhone != null" >
+        bank_phone,
+      </if>
+      <if test="tradeRef != null" >
+        trade_ref,
+      </if>
+      <if test="tradeRefContact != null" >
+        trade_ref_contact,
+      </if>
+      <if test="tradeRefPhone != null" >
+        trade_ref_phone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddress != null" >
+        #{companyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCountry != null" >
+        #{companyCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPhone != null" >
+        #{companyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="companyWebsite != null" >
+        #{companyWebsite,jdbcType=VARCHAR},
+      </if>
+      <if test="companyFax != null" >
+        #{companyFax,jdbcType=VARCHAR},
+      </if>
+      <if test="companyEmail != null" >
+        #{companyEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="companyContact != null" >
+        #{companyContact,jdbcType=VARCHAR},
+      </if>
+      <if test="bank != null" >
+        #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAccount != null" >
+        #{bankAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAddress != null" >
+        #{bankAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="bankContact != null" >
+        #{bankContact,jdbcType=VARCHAR},
+      </if>
+      <if test="bankPhone != null" >
+        #{bankPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeRef != null" >
+        #{tradeRef,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeRefContact != null" >
+        #{tradeRefContact,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeRefPhone != null" >
+        #{tradeRefPhone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mika.credit.facade.globalsearch.core.model.CompanyInfo" >
+    update company_info
+    <set >
+      <if test="companyName != null" >
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddress != null" >
+        company_address = #{companyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCountry != null" >
+        company_country = #{companyCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPhone != null" >
+        company_phone = #{companyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="companyWebsite != null" >
+        company_website = #{companyWebsite,jdbcType=VARCHAR},
+      </if>
+      <if test="companyFax != null" >
+        company_fax = #{companyFax,jdbcType=VARCHAR},
+      </if>
+      <if test="companyEmail != null" >
+        company_email = #{companyEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="companyContact != null" >
+        company_contact = #{companyContact,jdbcType=VARCHAR},
+      </if>
+      <if test="bank != null" >
+        bank = #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAccount != null" >
+        bank_account = #{bankAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAddress != null" >
+        bank_address = #{bankAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="bankContact != null" >
+        bank_contact = #{bankContact,jdbcType=VARCHAR},
+      </if>
+      <if test="bankPhone != null" >
+        bank_phone = #{bankPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeRef != null" >
+        trade_ref = #{tradeRef,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeRefContact != null" >
+        trade_ref_contact = #{tradeRefContact,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeRefPhone != null" >
+        trade_ref_phone = #{tradeRefPhone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mika.credit.facade.globalsearch.core.model.CompanyInfo" >
+    update company_info
+    set company_name = #{companyName,jdbcType=VARCHAR},
+      company_address = #{companyAddress,jdbcType=VARCHAR},
+      company_country = #{companyCountry,jdbcType=VARCHAR},
+      company_phone = #{companyPhone,jdbcType=VARCHAR},
+      company_website = #{companyWebsite,jdbcType=VARCHAR},
+      company_fax = #{companyFax,jdbcType=VARCHAR},
+      company_email = #{companyEmail,jdbcType=VARCHAR},
+      company_contact = #{companyContact,jdbcType=VARCHAR},
+      bank = #{bank,jdbcType=VARCHAR},
+      bank_account = #{bankAccount,jdbcType=VARCHAR},
+      bank_address = #{bankAddress,jdbcType=VARCHAR},
+      bank_contact = #{bankContact,jdbcType=VARCHAR},
+      bank_phone = #{bankPhone,jdbcType=VARCHAR},
+      trade_ref = #{tradeRef,jdbcType=VARCHAR},
+      trade_ref_contact = #{tradeRefContact,jdbcType=VARCHAR},
+      trade_ref_phone = #{tradeRefPhone,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

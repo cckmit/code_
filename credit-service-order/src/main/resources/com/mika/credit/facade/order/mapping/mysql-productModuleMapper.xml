@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.order.dao.ProductModuleMapper">
+    <resultMap id="productBlockMap" type="com.mika.credit.common.entity.order.ProductModule">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="product_id" property="productId" jdbcType="INTEGER"/>
+        <result column="module_id" property="moduleId" jdbcType="INTEGER"/>
+        <result column="is_provider" property="isProvider" jdbcType="BIT"/>
+        <result column="sql" property="sql" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, product_id, module_id, is_provider,`sql`
+    </sql>
+    <select id="queryList" resultMap="productBlockMap" parameterType="com.mika.credit.common.entity.order.ProductModule">
+        select
+        <include refid="Base_Column_List"/>
+        from product_module
+        where 1=1
+        <if test="id != null">
+            and id = #{id,jdbcType=INTEGER}
+        </if>
+        <if test="productId != null">
+            and product_id = #{productId,jdbcType=INTEGER}
+        </if>
+        <if test="moduleId != null">
+            and module_id = #{moduleId,jdbcType=INTEGER}
+        </if>
+        <if test="isProvider != null">
+            and is_provider = #{isProvider,jdbcType=BIT}
+        </if>
+        <if test="sql != null and sql!=''">
+            and `sql` = #{sql,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="queryCountList" resultType="java.lang.Integer" parameterType="com.mika.credit.common.entity.order.ProductModule">
+        select
+        count(1)
+        from product_module
+        where 1=1
+        <if test="id != null">
+            and id = #{id,jdbcType=INTEGER}
+        </if>
+        <if test="productId != null">
+            and product_id = #{productId,jdbcType=INTEGER}
+        </if>
+        <if test="moduleId != null">
+            and module_id = #{moduleId,jdbcType=INTEGER}
+        </if>
+        <if test="isProvider != null">
+            and is_provider = #{isProvider,jdbcType=BIT}
+        </if>
+        <if test="sql != null and sql!=''">
+            and `sql` = #{sql,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="queryById" resultMap="productBlockMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"/>
+    from product_module
+    where id = #{id}
+  </select>
+
+    <select id="selectByProductId" resultMap="productBlockMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from product_module
+        where product_id = #{productId}
+    </select>
+
+    <insert id="saveBatch" parameterType="collection" useGeneratedKeys="true" keyProperty="id">
+        <foreach collection="list" item="productModule" index="index" separator=",">
+            insert into product_module
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="productModule.id!=null">
+                    id,
+                </if>
+                <if test="productModule.productId!=null">
+                    product_id,
+                </if>
+                <if test="productModule.moduleId!=null">
+                    module_id,
+                </if>
+                <if test="productModule.isProvider!=null">
+                    id_provider,
+                </if>
+                <if test="productModule.sql!=null and productModule.sql!=''">
+                    `sql`,
+                </if>
+            </trim>
+            <trim prefix="values(" suffix=")" suffixOverrides=",">
+                <if test="productModule.productId!=null">
+                   #{productModule.productId,jdbcType=INTEGER},
+                </if>
+                <if test="productModule.isProvider!=null">
+                    #{productModule.isProvider,jdbcType=BIT},
+                </if>
+                <if test="productModule.moduleId!=null">
+                    #{productModule.moduleId,jdbcType=INTEGER},
+                </if>
+                <if test="productModule.sql!=null and productModule.sql!=''">
+                    #{productModule.sql,jdbcType=VARCHAR},
+                </if>
+            </trim>
+        </foreach>
+    </insert>
+
+    <update id="update" parameterType="com.mika.credit.common.entity.order.ProductModule">
+  	update product_module
+  	<set>
+        <if test="productId!=null">
+            product_id=#{productId,jdbcType=INTEGER},
+        </if>
+        <if test="isProvider!=null">
+            is_provider=#{isProvider,jdbcType=BIT},
+        </if>
+        <if test="moduleId!=null">
+            module_id=#{moduleId,jdbcType=INTEGER},
+        </if>
+        <if test="sql!=null and sql!=''">
+            `sql`=#{sql,jdbcType=VARCHAR},
+        </if>
+    </set>
+  	where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+  	    delete from product_module where id=#{id}
+    </delete>
+    <delete id="deleteByProductId" parameterType="java.lang.Integer">
+        delete from product_module where product_id=#{productId}
+    </delete>
+    <delete id="delete" parameterType="com.mika.credit.common.entity.order.ProductModule">
+        delete from product_module
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="productId != null">
+                and product_id = #{productId,jdbcType=INTEGER}
+            </if>
+            <if test="moduleId != null">
+                and module_id = #{moduleId,jdbcType=INTEGER}
+            </if>
+            <if test="isProvider != null">
+                and is_provider = #{isProvider,jdbcType=BIT}
+            </if>
+            <if test="sql != null">
+                and `sql` = #{sql,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </delete>
+</mapper>

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mika.credit.facade.gugu.dao.InformMapper">
+  <resultMap id="BaseResultMap" type="com.mika.credit.facade.gugu.model.Inform">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="monitor_id" jdbcType="INTEGER" property="monitorId" />
+    <result column="crefo_no" jdbcType="VARCHAR" property="crefoNo" />
+    <result column="subject_company" jdbcType="VARCHAR" property="subjectCompany" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="inform_type_id" jdbcType="INTEGER" property="informTypeId" />
+    <result column="inform_type_name" jdbcType="VARCHAR" property="informTypeName" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="is_view" jdbcType="VARCHAR" property="isView" />
+    <result column="del_flag" jdbcType="VARCHAR" property="delFlag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, order_id, monitor_id, crefo_no, subject_company, content, inform_type_id, 
+    inform_type_name, update_time, is_view, del_flag
+  </sql>
+  <sql id="condition">
+    <where>
+      <if test="id != null and id != 0">
+        and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="userId != null and userId != 0">
+        and user_id = #{userId,jdbcType=INTEGER}
+      </if>
+      <if test="orderId != null and orderId != 0">
+        and order_id = #{orderId,jdbcType=INTEGER}
+      </if>
+      <if test="monitorId != null and monitorId != 0">
+        and monitor_id = #{monitorId,jdbcType=INTEGER}
+      </if>
+      <if test="crefoNo != null">
+        and crefo_no = #{crefoNo,jdbcType=VARCHAR}
+      </if>
+      <if test="subjectCompany != null">
+        and subject_company = #{subjectCompany,jdbcType=VARCHAR}
+      </if>
+      <if test="content != null">
+        and content = #{content,jdbcType=VARCHAR}
+      </if>
+      <if test="informTypeId != null and informTypeId != 0">
+        and inform_type_id = #{informTypeId,jdbcType=INTEGER}
+      </if>
+      <if test="informTypeName != null">
+        and inform_type_name = #{informTypeName,jdbcType=VARCHAR}
+      </if>
+      <if test="updateTime != null">
+        and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="isView != null">
+        and is_view = #{isView,jdbcType=VARCHAR}
+      </if>
+      <if test="delFlag != null">
+        and del_flag = #{delFlag,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from inform
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPrimaryKeySelective" parameterType="com.mika.credit.facade.gugu.model.Inform" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from inform
+    <include refid="condition" />
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from inform
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mika.credit.facade.gugu.model.Inform" useGeneratedKeys="true" keyProperty="id">
+    insert into inform (id, user_id, order_id, 
+      monitor_id, crefo_no, subject_company, 
+      content, inform_type_id, inform_type_name, 
+      update_time, is_view, del_flag
+      )
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, 
+      #{monitorId,jdbcType=INTEGER}, #{crefoNo,jdbcType=VARCHAR}, #{subjectCompany,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{informTypeId,jdbcType=INTEGER}, #{informTypeName,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{isView,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mika.credit.facade.gugu.model.Inform" useGeneratedKeys="true" keyProperty="id">
+    insert into inform
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="monitorId != null">
+        monitor_id,
+      </if>
+      <if test="crefoNo != null">
+        crefo_no,
+      </if>
+      <if test="subjectCompany != null">
+        subject_company,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="informTypeId != null">
+        inform_type_id,
+      </if>
+      <if test="informTypeName != null">
+        inform_type_name,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="isView != null">
+        is_view,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="monitorId != null">
+        #{monitorId,jdbcType=INTEGER},
+      </if>
+      <if test="crefoNo != null">
+        #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectCompany != null">
+        #{subjectCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="informTypeId != null">
+        #{informTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="informTypeName != null">
+        #{informTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isView != null">
+        #{isView,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mika.credit.facade.gugu.model.Inform">
+    update inform
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="monitorId != null">
+        monitor_id = #{monitorId,jdbcType=INTEGER},
+      </if>
+      <if test="crefoNo != null">
+        crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectCompany != null">
+        subject_company = #{subjectCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="informTypeId != null">
+        inform_type_id = #{informTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="informTypeName != null">
+        inform_type_name = #{informTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isView != null">
+        is_view = #{isView,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mika.credit.facade.gugu.model.Inform">
+    update inform
+    set user_id = #{userId,jdbcType=INTEGER},
+      order_id = #{orderId,jdbcType=INTEGER},
+      monitor_id = #{monitorId,jdbcType=INTEGER},
+      crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      subject_company = #{subjectCompany,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      inform_type_id = #{informTypeId,jdbcType=INTEGER},
+      inform_type_name = #{informTypeName,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_view = #{isView,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mika.credit.facade.gugu.dao.VerificationCodeMapper">
+  <resultMap id="BaseResultMap" type="com.mika.credit.facade.gugu.model.VerificationCode">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="del_flag" jdbcType="VARCHAR" property="delFlag" />
+    <result column="token_code" jdbcType="VARCHAR" property="tokenCode" />
+    <result column="token_status" jdbcType="VARCHAR" property="tokenStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, del_flag, token_code, token_status, create_time, user_email, user_name, user_phone
+  </sql>
+  <sql id="condition">
+    <where>
+      <if test="id != null and id != 0">
+        and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="delFlag != null">
+        and del_flag = #{delFlag,jdbcType=VARCHAR}
+      </if>
+      <if test="tokenCode != null">
+        and token_code = #{tokenCode,jdbcType=VARCHAR}
+      </if>
+      <if test="tokenStatus != null">
+        and token_status = #{tokenStatus,jdbcType=VARCHAR}
+      </if>
+      <if test="createTime != null">
+        and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="userEmail != null">
+        and  user_email = #{userEmail,jdbcType=VARCHAR}
+      </if>
+      <if test="userName != null">
+        and user_name = #{userName,jdbcType=VARCHAR}
+      </if>
+      <if test="userPhone != null">
+        and user_phone = #{userPhone,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from verification_code
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPrimaryKeySelective" parameterType="com.mika.credit.facade.gugu.model.VerificationCode" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from verification_code
+    <include refid="condition" />
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from verification_code
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mika.credit.facade.gugu.model.VerificationCode" useGeneratedKeys="true" keyProperty="id">
+    insert into verification_code (id, del_flag, token_code, 
+      token_status, create_time, user_email, 
+      user_name, user_phone)
+    values (#{id,jdbcType=INTEGER}, #{delFlag,jdbcType=VARCHAR}, #{tokenCode,jdbcType=VARCHAR}, 
+      #{tokenStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{userEmail,jdbcType=VARCHAR}, 
+      #{userName,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mika.credit.facade.gugu.model.VerificationCode" useGeneratedKeys="true" keyProperty="id">
+    insert into verification_code
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="tokenCode != null">
+        token_code,
+      </if>
+      <if test="tokenStatus != null">
+        token_status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="userEmail != null">
+        user_email,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="userPhone != null">
+        user_phone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tokenCode != null">
+        #{tokenCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tokenStatus != null">
+        #{tokenStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userEmail != null">
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mika.credit.facade.gugu.model.VerificationCode">
+    update verification_code
+    <set>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tokenCode != null">
+        token_code = #{tokenCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tokenStatus != null">
+        token_status = #{tokenStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userEmail != null">
+        user_email = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        user_phone = #{userPhone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mika.credit.facade.gugu.model.VerificationCode">
+    update verification_code
+    set del_flag = #{delFlag,jdbcType=VARCHAR},
+      token_code = #{tokenCode,jdbcType=VARCHAR},
+      token_status = #{tokenStatus,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      user_email = #{userEmail,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_phone = #{userPhone,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

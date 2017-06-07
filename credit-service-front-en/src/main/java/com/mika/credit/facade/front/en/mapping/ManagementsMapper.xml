@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.front.en.dao.impl.ManagementsDaoImpl" >
+  <cache eviction="LRU" type="com.mika.credit.common.core.mybatis.cache.redis.sharded.MybatiesRedisCache" />
+  <resultMap id="BaseResultMap" type="com.mika.credit.common.entity.report.en.Managements" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="appointment_date" property="appointmentDate" jdbcType="VARCHAR" />
+    <result column="birth_date" property="birthDate" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="common_code" property="commonCode" jdbcType="VARCHAR" />
+    <result column="crefo_no" property="crefoNo" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="VARCHAR" />
+    <result column="house_number" property="houseNumber" jdbcType="VARCHAR" />
+    <result column="manage_type" property="manageType" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="position" property="position" jdbcType="VARCHAR" />
+    <result column="post_code" property="postCode" jdbcType="VARCHAR" />
+    <result column="provider_code" property="providerCode" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="street" property="street" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+    <result column="manage_note" property="manageNote" jdbcType="LONGVARCHAR" />
+    <result column="full_report_id" property="fullReportId" jdbcType="INTEGER" />
+  </resultMap>
+
+  <sql id="table"> managements </sql>
+
+  <sql id="Base_Column_List" >
+    id, address, appointment_date, birth_date, city, common_code, crefo_no, del_flag, 
+    gender, house_number, manage_type, name, position, post_code, provider_code, province, 
+    street, update_time,
+    manage_note,full_report_id
+  </sql>
+
+  <sql id="condition_sql">
+  <if test="id != null" >
+    and id = #{id,jdbcType=INTEGER}
+  </if>
+    <if test="address != null" >
+      and address = #{address,jdbcType=VARCHAR}
+    </if>
+    <if test="appointmentDate != null" >
+      and appointment_date = #{appointmentDate,jdbcType=VARCHAR}
+    </if>
+    <if test="birthDate != null" >
+      and birth_date = #{birthDate,jdbcType=VARCHAR}
+    </if>
+    <if test="city != null" >
+      and city = #{city,jdbcType=VARCHAR}
+    </if>
+    <if test="commonCode != null" >
+      and common_code = #{commonCode,jdbcType=VARCHAR}
+    </if>
+    <if test="crefoNo != null" >
+      and crefo_no = #{crefoNo,jdbcType=VARCHAR}
+    </if>
+    <if test="delFlag != null" >
+      and del_flag = #{delFlag,jdbcType=VARCHAR}
+    </if>
+    <if test="gender != null" >
+      and gender = #{gender,jdbcType=VARCHAR}
+    </if>
+    <if test="houseNumber != null" >
+      and house_number = #{houseNumber,jdbcType=VARCHAR}
+    </if>
+    <if test="manageType != null" >
+      and manage_type = #{manageType,jdbcType=VARCHAR}
+    </if>
+    <if test="name != null" >
+      and name = #{name,jdbcType=VARCHAR}
+    </if>
+    <if test="position != null" >
+      and position = #{position,jdbcType=VARCHAR}
+    </if>
+    <if test="postCode != null" >
+      and post_code = #{postCode,jdbcType=VARCHAR}
+    </if>
+    <if test="providerCode != null" >
+      and provider_code = #{providerCode,jdbcType=VARCHAR}
+    </if>
+    <if test="province != null" >
+      and province = #{province,jdbcType=VARCHAR}
+    </if>
+    <if test="street != null" >
+      and street = #{street,jdbcType=VARCHAR}
+    </if>
+    <if test="updateTime != null" >
+      and update_time = #{updateTime,jdbcType=VARCHAR}
+    </if>
+    <if test="manageNote != null" >
+      and manage_note = #{manageNote,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="fullReportId != null" >
+      and full_report_id = #{fullReportId,jdbcType=INTEGER}
+    </if>
+  </sql>
+
+  <select id="getById" parameterType="Integer" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    where id = #{id}
+  </select>
+
+  <select id="listBy" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <select id="listPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+    <![CDATA[ order by ID desc]]>
+  </select>
+
+  <select id="listPageCount" parameterType="java.util.Map" resultType="Integer">
+    select count(1) from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <insert id="insert" parameterType="com.mika.credit.common.entity.report.en.Managements" keyProperty="id" useGeneratedKeys="true">
+    insert into
+    <include refid="table" />
+    (id, address, appointment_date,
+    birth_date, city, common_code,
+    crefo_no, del_flag, gender,
+    house_number, manage_type, name,
+    position, post_code, provider_code,
+    province, street, update_time,
+    manage_note,full_report_id)
+    values (#{id,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{appointmentDate,jdbcType=VARCHAR},
+    #{birthDate,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{commonCode,jdbcType=VARCHAR},
+    #{crefoNo,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR},
+    #{houseNumber,jdbcType=VARCHAR}, #{manageType,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+    #{position,jdbcType=VARCHAR}, #{postCode,jdbcType=VARCHAR}, #{providerCode,jdbcType=VARCHAR},
+    #{province,jdbcType=VARCHAR}, #{street,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR},
+    #{manageNote,jdbcType=LONGVARCHAR},#{fullReportId,jdbcType=INTEGER})
+  </insert>
+
+  <insert id="batchInsert" parameterType="java.util.List">
+    insert into
+    <include refid="table" />
+    (id, address, appointment_date,
+    birth_date, city, common_code,
+    crefo_no, del_flag, gender,
+    house_number, manage_type, name,
+    position, post_code, provider_code,
+    province, street, update_time,
+    manage_note,full_report_id)
+    values
+    <foreach collection ="list" item="managements" index= "index" separator =",">
+      (#{managements.id,jdbcType=INTEGER}, #{managements.address,jdbcType=VARCHAR}, #{managements.appointmentDate,jdbcType=VARCHAR},
+      #{managements.birthDate,jdbcType=VARCHAR}, #{managements.city,jdbcType=VARCHAR}, #{managements.commonCode,jdbcType=VARCHAR},
+      #{managements.crefoNo,jdbcType=VARCHAR}, #{managements.delFlag,jdbcType=VARCHAR}, #{managements.gender,jdbcType=VARCHAR},
+      #{managements.houseNumber,jdbcType=VARCHAR}, #{managements.manageType,jdbcType=VARCHAR}, #{managements.name,jdbcType=VARCHAR},
+      #{managements.position,jdbcType=VARCHAR}, #{managements.postCode,jdbcType=VARCHAR}, #{managements.providerCode,jdbcType=VARCHAR},
+      #{managements.province,jdbcType=VARCHAR}, #{managements.street,jdbcType=VARCHAR}, #{managements.updateTime,jdbcType=VARCHAR},
+      #{managements.manageNote,jdbcType=LONGVARCHAR},#{managements.fullReportId,jdbcType=INTEGER})
+    </foreach >
+  </insert>
+
+  <delete id="deleteById" parameterType="Integer" >
+    delete from
+    <include refid="table" />
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <update id="update" parameterType="com.mika.credit.common.entity.report.en.Managements" >
+    update managements
+    set address = #{address,jdbcType=VARCHAR},
+      appointment_date = #{appointmentDate,jdbcType=VARCHAR},
+      birth_date = #{birthDate,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      common_code = #{commonCode,jdbcType=VARCHAR},
+      crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=VARCHAR},
+      house_number = #{houseNumber,jdbcType=VARCHAR},
+      manage_type = #{manageType,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      position = #{position,jdbcType=VARCHAR},
+      post_code = #{postCode,jdbcType=VARCHAR},
+      provider_code = #{providerCode,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      street = #{street,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      manage_note = #{manageNote,jdbcType=LONGVARCHAR},
+	full_report_id = #{fullReportId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <insert id="insertSelective" parameterType="com.mika.credit.common.entity.report.en.Managements" >
+    insert into managements
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="appointmentDate != null" >
+        appointment_date,
+      </if>
+      <if test="birthDate != null" >
+        birth_date,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="commonCode != null" >
+        common_code,
+      </if>
+      <if test="crefoNo != null" >
+        crefo_no,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="houseNumber != null" >
+        house_number,
+      </if>
+      <if test="manageType != null" >
+        manage_type,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="position != null" >
+        position,
+      </if>
+      <if test="postCode != null" >
+        post_code,
+      </if>
+      <if test="providerCode != null" >
+        provider_code,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="street != null" >
+        street,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="manageNote != null" >
+        manage_note,
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="appointmentDate != null" >
+        #{appointmentDate,jdbcType=VARCHAR},
+      </if>
+      <if test="birthDate != null" >
+        #{birthDate,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="commonCode != null" >
+        #{commonCode,jdbcType=VARCHAR},
+      </if>
+      <if test="crefoNo != null" >
+        #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="houseNumber != null" >
+        #{houseNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="manageType != null" >
+        #{manageType,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="postCode != null" >
+        #{postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="providerCode != null" >
+        #{providerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="street != null" >
+        #{street,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="manageNote != null" >
+        #{manageNote,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        #{fullReportId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateSelective" parameterType="com.mika.credit.common.entity.report.en.Managements" >
+    update managements
+    <set >
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="appointmentDate != null" >
+        appointment_date = #{appointmentDate,jdbcType=VARCHAR},
+      </if>
+      <if test="birthDate != null" >
+        birth_date = #{birthDate,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="commonCode != null" >
+        common_code = #{commonCode,jdbcType=VARCHAR},
+      </if>
+      <if test="crefoNo != null" >
+        crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="houseNumber != null" >
+        house_number = #{houseNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="manageType != null" >
+        manage_type = #{manageType,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="postCode != null" >
+        post_code = #{postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="providerCode != null" >
+        provider_code = #{providerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="street != null" >
+        street = #{street,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="manageNote != null" >
+        manage_note = #{manageNote,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id = #{fullReportId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

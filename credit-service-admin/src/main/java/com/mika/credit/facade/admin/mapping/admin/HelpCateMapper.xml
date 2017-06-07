@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mika.credit.facade.admin.dao.admin.HelpCateMapper">
+    <resultMap id="BaseResultMap" type="com.mika.credit.facade.admin.model.HelpCate">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="source" jdbcType="TINYINT" property="source"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, name, source
+  </sql>
+    <sql id="condition">
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name,jdbcType=VARCHAR}
+            </if>
+            <if test="source != null and source != 0">
+                and source = #{source,jdbcType=TINYINT}
+            </if>
+        </where>
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from s_help_cate
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectSelective" parameterType="com.mika.credit.facade.admin.model.HelpCate" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from s_help_cate
+        <include refid="condition"/>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from s_help_cate
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.mika.credit.facade.admin.model.HelpCate" keyProperty="id" useGeneratedKeys="true">
+    insert into s_help_cate (id, name, source
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{source,jdbcType=TINYINT}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.mika.credit.facade.admin.model.HelpCate" keyProperty="id" useGeneratedKeys="true">
+        insert into s_help_cate
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null and name != ''">
+                name,
+            </if>
+            <if test="source != null and source != 0">
+                source,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null and name != ''">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="source != null and source != 0">
+                #{source,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mika.credit.facade.admin.model.HelpCate">
+        update s_help_cate
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="source != null and source != 0">
+                source = #{source,jdbcType=TINYINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mika.credit.facade.admin.model.HelpCate">
+    update s_help_cate
+    set name = #{name,jdbcType=VARCHAR},
+      source = #{source,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

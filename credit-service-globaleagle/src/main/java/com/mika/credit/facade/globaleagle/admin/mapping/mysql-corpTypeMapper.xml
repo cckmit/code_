@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.globaleagle.admin.dao.CorpTypeMapper" >
+  <resultMap id="corpTypeMap" type="com.mika.credit.facade.globaleagle.admin.model.CorpType" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="queryById" resultMap="corpTypeMap" parameterType="java.lang.String" >
+    select *
+    from s_corp_type
+    where id = #{id}
+  </select>
+    <select id="queryAll" resultMap="corpTypeMap" >
+    select *
+    from s_corp_type
+  </select>
+  
+  <insert id="add" parameterType="com.mika.credit.facade.globaleagle.admin.model.CorpType">
+  	insert into s_corp_type(id,code,name)
+  	values(#{id},#{code},#{name})
+  </insert>
+  
+  <update id="mod" parameterType="com.mika.credit.facade.globaleagle.admin.model.CorpType">
+  	update s_corp_type set
+  	code=#{code},
+  	name=#{name}
+  	where id = #{id}
+  </update>
+  
+  <delete id="del" parameterType="java.lang.String">
+  	delete from s_corp_type where id=#{id}
+  </delete>
+  
+  
+</mapper>

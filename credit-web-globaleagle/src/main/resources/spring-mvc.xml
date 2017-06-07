@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-4.0.xsd
+http://www.springframework.org/schema/mvc
+http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+	<!-- 自动扫描controller包下的所有类，使其认为spring mvc的控制器 -->
+	<context:component-scan base-package="com.mika.credit.web.globaleagle.controller.*" />
+	<!--<context:component-scan base-package="com.IT3acredit.GlobalEagle.pdfV2.controller" />-->
+	<!--<context:component-scan base-package="com.IT3acredit.creditsafe.controller" />-->
+	<!--<context:component-scan base-package="com.IT3acredit.creditsafe2.controller" />-->
+	<!--<context:component-scan base-package="com.IT3acredit.cpm.controller" />-->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+		<property name="prefix" value="/WEB-INF/page/"/>
+		<property name="suffix" value=".jsp"/>
+	</bean>
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter" >
+				<property name="defaultCharset" value="UTF-8"/>
+				<property name = "supportedMediaTypes">
+					<list>
+						<value>text/plain;charset=UTF-8</value>
+						<value>text/html;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+			<!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
+			<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>applicaton/json;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding">
+			<value>UTF-8</value>
+		</property>
+		<property name="maxUploadSize">
+			<value>32505856</value><!-- 上传文件大小限制为31M，31*1024*1024 -->
+		</property>
+		<property name="maxInMemorySize">
+			<value>4096</value>
+		</property>
+	</bean>
+
+	<!-- SpringMVC在超出上传文件限制时，会抛出org.springframework.web.multipart.MaxUploadSizeExceededException -->
+	<!-- 该异常是SpringMVC在检查上传的文件信息时抛出来的，而且此时还没有进入到Controller方法中 -->
+	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<!-- 遇到MaxUploadSizeExceededException异常时，跳转到/page/html/errorGolbal.html页面 -->
+				<prop key="org.springframework.web.multipart.MaxUploadSizeExceededException">/page/html/errorGolbal.html</prop>
+				<prop key="java.sql.SQLException">500</prop>
+				<prop key="java.io.IOException">500</prop>
+			</props>
+		</property>
+	</bean>
+
+ 	<!-- 拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/customer/**" />
+			<bean class="com.mika.credit.web.globaleagle.common.interceptor.CustomerLoginInterceptor"></bean>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/simple/customer/**" />
+			<bean class="com.mika.credit.web.globaleagle.common.interceptor.CustomerLoginSimpleInterceptor"></bean>
+		</mvc:interceptor>
+		<!--<mvc:interceptor>-->
+			<!--<mvc:mapping path="/manager/**" />-->
+			<!--<bean class="com.mika.credit.web.globaleagle.common.interceptor.ManagerLoginInterceptor"></bean>-->
+		<!--</mvc:interceptor>-->
+	</mvc:interceptors>
+</beans>

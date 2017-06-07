@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mika.credit.facade.order.dao.QuickOrderMapper">
+    <resultMap id="BaseResultMap" type="com.mika.credit.common.entity.order.QuickOrder">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="order_no" jdbcType="VARCHAR" property="orderNo"/>
+        <result column="no" jdbcType="VARCHAR" property="no"/>
+        <result column="source" jdbcType="TINYINT" property="source"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="product_id" jdbcType="INTEGER" property="productId"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="pay_time" jdbcType="TIMESTAMP" property="payTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="expect_time" jdbcType="TIMESTAMP" property="expectTime"/>
+        <result column="finish_time" jdbcType="TIMESTAMP" property="finishTime"/>
+        <result column="customer_id" jdbcType="INTEGER" property="customerId"/>
+        <result column="customer_name" jdbcType="VARCHAR" property="customerName"/>
+        <result column="customer_no" jdbcType="VARCHAR" property="customerNo"/>
+        <result column="customer_email" jdbcType="VARCHAR" property="customerEmail"/>
+        <result column="create_user_id" jdbcType="INTEGER" property="createUserId"/>
+        <result column="create_user_name" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="amount" jdbcType="DECIMAL" property="amount"/>
+        <result column="amount_actual" jdbcType="DECIMAL" property="amountActual"/>
+        <result column="currency" jdbcType="VARCHAR" property="currency"/>
+        <result column="has_pay" jdbcType="BIT" property="hasPay"/>
+        <result column="pay_method" jdbcType="TINYINT" property="payMethod"/>
+        <result column="company_area" jdbcType="VARCHAR" property="companyArea"/>
+        <result column="company_country" jdbcType="VARCHAR" property="companyCountry"/>
+        <result column="company_name" jdbcType="VARCHAR" property="companyName"/>
+        <result column="company_address" jdbcType="VARCHAR" property="companyAddress"/>
+        <result column="company_phone" jdbcType="VARCHAR" property="companyPhone"/>
+        <result column="company_website" jdbcType="VARCHAR" property="companyWebsite"/>
+        <result column="img_url" jdbcType="VARCHAR" property="imgUrl"/>
+        <result column="other_info" jdbcType="VARCHAR" property="otherInfo"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, order_no, `no`, source, status, product_id, create_time, pay_time, update_time,
+    expect_time, finish_time, customer_id, customer_name, customer_no, customer_email, 
+    create_user_id, create_user_name, amount, amount_actual, currency, has_pay, pay_method, 
+    company_area, company_country, company_name, company_address, company_phone, company_website, 
+    img_url, other_info, remark
+  </sql>
+    <sql id="conditionWithQuery">
+        <where>
+            <if test="id != null">
+                AND id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="orderNo != null">
+                AND order_no = #{orderNo,jdbcType=BIGINT}
+            </if>
+            <if test="no != null and no!=''">
+                AND `no` = #{no,jdbcType=VARCHAR}
+            </if>
+            <if test="source != null">
+                AND source = #{source,jdbcType=TINYINT}
+            </if>
+            <if test="status != null">
+                AND status = #{status,jdbcType=TINYINT}
+            </if>
+            <if test="productId != null">
+                AND product_id = #{productId,jdbcType=INTEGER}
+            </if>
+            <if test="createTime != null">
+                AND create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="payTime != null">
+                AND pay_time = #{payTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                AND update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="expectTime != null">
+                AND expect_time = #{expectTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="finishTime != null">
+                AND finish_time = #{finishTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="customerId != null">
+                AND customer_id = #{customerId,jdbcType=INTEGER}
+            </if>
+            <if test="customerName != null and customerName!=''">
+                AND customer_name = #{customerName,jdbcType=VARCHAR}
+            </if>
+            <if test="customerNo != null and customerNo!=''">
+                AND customer_no = #{customerNo,jdbcType=VARCHAR}
+            </if>
+            <if test="customerEmail != null and customerEmail!=''">
+                AND customer_email = #{customerEmail,jdbcType=VARCHAR}
+            </if>
+            <if test="createUserId != null">
+                AND create_user_id = #{createUserId,jdbcType=INTEGER}
+            </if>
+            <if test="createUserName != null and createUserName!=''">
+                AND create_user_name = #{createUserName,jdbcType=VARCHAR}
+            </if>
+            <if test="amount != null">
+                AND amount = #{amount,jdbcType=DECIMAL}
+            </if>
+            <if test="amountActual != null">
+                AND amount_actual = #{amountActual,jdbcType=DECIMAL}
+            </if>
+            <if test="currency != null and currency!=''">
+                AND currency = #{currency,jdbcType=VARCHAR}
+            </if>
+            <if test="hasPay != null">
+                AND has_pay = #{hasPay,jdbcType=BIT}
+            </if>
+            <if test="payMethod != null">
+                AND pay_method = #{payMethod,jdbcType=TINYINT}
+            </if>
+            <if test="companyArea != null and companyArea!=''">
+                AND company_area = #{companyArea,jdbcType=VARCHAR}
+            </if>
+            <if test="companyCountry != null and companyCountry!=''">
+                AND company_country = #{companyCountry,jdbcType=VARCHAR}
+            </if>
+            <if test="companyName != null and companyName!=''">
+                AND company_name like CONCAT ('%',#{companyName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="companyAddress != null and companyAddress!=''">
+                AND company_address = #{companyAddress,jdbcType=VARCHAR}
+            </if>
+            <if test="companyPhone != null and companyPhone!=''">
+                AND company_phone = #{companyPhone,jdbcType=VARCHAR}
+            </if>
+            <if test="companyWebsite != null and companyWebsite!=''">
+                AND company_website = #{companyWebsite,jdbcType=VARCHAR}
+            </if>
+            <if test="imgUrl != null and imgUrl!=''">
+                AND img_url = #{imgUrl,jdbcType=VARCHAR}
+            </if>
+            <if test="otherInfo != null and otherInfo!=''">
+                AND other_info = #{otherInfo,jdbcType=VARCHAR}
+            </if>
+            <if test="remark != null and remark!=''">
+                AND remark = #{remark,jdbcType=VARCHAR}
+            </if>
+            <if test="createDateFrom != null" >
+                AND create_time &gt; #{createDateFrom,jdbcType=TIMESTAMP}
+            </if>
+            <if test="createDateTo != null" >
+                AND create_time &lt; #{createDateTo,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </sql>
+    <sql id="condition">
+        <where>
+            <if test="id != null">
+                AND id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="orderNo != null">
+                AND order_no = #{orderNo,jdbcType=BIGINT}
+            </if>
+            <if test="no != null and no!=''">
+                AND `no` = #{no,jdbcType=VARCHAR}
+            </if>
+            <if test="source != null">
+                AND source = #{source,jdbcType=TINYINT}
+            </if>
+            <if test="status != null">
+                AND status = #{status,jdbcType=TINYINT}
+            </if>
+            <if test="productId != null">
+                AND product_id = #{productId,jdbcType=INTEGER}
+            </if>
+            <if test="createTime != null">
+                AND create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="payTime != null">
+                AND pay_time = #{payTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                AND update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="expectTime != null">
+                AND expect_time = #{expectTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="finishTime != null">
+                AND finish_time = #{finishTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="customerId != null">
+                AND customer_id = #{customerId,jdbcType=INTEGER}
+            </if>
+            <if test="customerName != null and customerName!=''">
+                AND customer_name = #{customerName,jdbcType=VARCHAR}
+            </if>
+            <if test="customerNo != null and customerNo!=''">
+                AND customer_no = #{customerNo,jdbcType=VARCHAR}
+            </if>
+            <if test="customerEmail != null and customerEmail!=''">
+                AND customer_email = #{customerEmail,jdbcType=VARCHAR}
+            </if>
+            <if test="createUserId != null">
+                AND create_user_id = #{createUserId,jdbcType=INTEGER}
+            </if>
+            <if test="createUserName != null and createUserName!=''">
+                AND create_user_name = #{createUserName,jdbcType=VARCHAR}
+            </if>
+            <if test="amount != null">
+                AND amount = #{amount,jdbcType=DECIMAL}
+            </if>
+            <if test="amountActual != null">
+                AND amount_actual = #{amountActual,jdbcType=DECIMAL}
+            </if>
+            <if test="currency != null and currency!=''">
+                AND currency = #{currency,jdbcType=VARCHAR}
+            </if>
+            <if test="hasPay != null">
+                AND has_pay = #{hasPay,jdbcType=BIT}
+            </if>
+            <if test="payMethod != null">
+                AND pay_method = #{payMethod,jdbcType=TINYINT}
+            </if>
+            <if test="companyArea != null and companyArea!=''">
+                AND company_area = #{companyArea,jdbcType=VARCHAR}
+            </if>
+            <if test="companyCountry != null and companyCountry!=''">
+                AND company_country = #{companyCountry,jdbcType=VARCHAR}
+            </if>
+            <if test="companyName != null and companyName!=''">
+                AND company_name like CONCAT ('%',#{companyName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="companyAddress != null and companyAddress!=''">
+                AND company_address = #{companyAddress,jdbcType=VARCHAR}
+            </if>
+            <if test="companyPhone != null and companyPhone!=''">
+                AND company_phone = #{companyPhone,jdbcType=VARCHAR}
+            </if>
+            <if test="companyWebsite != null and companyWebsite!=''">
+                AND company_website = #{companyWebsite,jdbcType=VARCHAR}
+            </if>
+            <if test="imgUrl != null and imgUrl!=''">
+                AND img_url = #{imgUrl,jdbcType=VARCHAR}
+            </if>
+            <if test="otherInfo != null and otherInfo!=''">
+                AND other_info = #{otherInfo,jdbcType=VARCHAR}
+            </if>
+            <if test="remark != null and remark!=''">
+                AND remark = #{remark,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </sql>
+    <select id="queryListByOrderQuery" parameterType="com.mika.credit.common.entity.order.QuickOrder" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from quick_order
+        <include refid="conditionWithQuery"/>
+        order by create_time DESC
+    </select>
+    <select id="queryList" parameterType="com.mika.credit.common.entity.order.QuickOrder" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from quick_order
+        <include refid="condition"/>
+        order by create_time DESC
+    </select>
+    <select id="query" parameterType="com.mika.credit.common.entity.order.OrderQuery" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from orders
+        <include refid="condition"/>
+        ORDER BY create_time DESC limit 1
+    </select>
+    <select id="queryById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from quick_order
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from quick_order
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <delete id="delete" parameterType="com.mika.credit.common.entity.order.QuickOrder">
+        delete from quick_order
+        <include refid="condition"/>
+    </delete>
+    <insert id="save" parameterType="com.mika.credit.common.entity.order.QuickOrder">
+        insert into quick_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="orderNo != null and orderNo!=''">
+                order_no,
+            </if>
+            <if test="no != null and no!=''">
+                `no`,
+            </if>
+            <if test="source != null">
+                source,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="productId != null">
+                product_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="payTime != null">
+                pay_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="expectTime != null">
+                expect_time,
+            </if>
+            <if test="finishTime != null">
+                finish_time,
+            </if>
+            <if test="customerId != null">
+                customer_id,
+            </if>
+            <if test="customerName != null and customerName!=''">
+                customer_name,
+            </if>
+            <if test="customerNo != null and customerNo!=''">
+                customer_no,
+            </if>
+            <if test="customerEmail != null and customerEmail!=''">
+                customer_email,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="createUserName != null and createUserName!=''">
+                create_user_name,
+            </if>
+            <if test="amount != null">
+                amount,
+            </if>
+            <if test="amountActual != null">
+                amount_actual,
+            </if>
+            <if test="currency != null and currency!=''">
+                currency,
+            </if>
+            <if test="hasPay != null">
+                has_pay,
+            </if>
+            <if test="payMethod != null">
+                pay_method,
+            </if>
+            <if test="companyArea != null and companyArea!=''">
+                company_area,
+            </if>
+            <if test="companyCountry != null and companyCountry!=''">
+                company_country,
+            </if>
+            <if test="companyName != null and companyName!=''">
+                company_name,
+            </if>
+            <if test="companyAddress != null and companyAddress!=''">
+                company_address,
+            </if>
+            <if test="companyPhone != null and companyPhone!=''">
+                company_phone,
+            </if>
+            <if test="companyWebsite != null and companyWebsite!=''">
+                company_website,
+            </if>
+            <if test="imgUrl != null and imgUrl!=''">
+                img_url,
+            </if>
+            <if test="otherInfo != null and otherInfo!=''">
+                other_info,
+            </if>
+            <if test="remark != null and remark!=''">
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="orderNo != null and orderNo!=''">
+                #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="no != null and no!=''">
+                #{no,jdbcType=VARCHAR},
+            </if>
+            <if test="source != null">
+                #{source,jdbcType=TINYINT},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="productId != null">
+                #{productId,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="payTime != null">
+                #{payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="expectTime != null">
+                #{expectTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="finishTime != null">
+                #{finishTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="customerId != null">
+                #{customerId,jdbcType=INTEGER},
+            </if>
+            <if test="customerName != null and customerName!=''">
+                #{customerName,jdbcType=VARCHAR},
+            </if>
+            <if test="customerNo != null and customerNo!=''">
+                #{customerNo,jdbcType=VARCHAR},
+            </if>
+            <if test="customerEmail != null and customerEmail!=''">
+                #{customerEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=INTEGER},
+            </if>
+            <if test="createUserName != null and createUserName!=''">
+                #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="amount != null">
+                #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="amountActual != null">
+                #{amountActual,jdbcType=DECIMAL},
+            </if>
+            <if test="currency != null and currency!=''">
+                #{currency,jdbcType=VARCHAR},
+            </if>
+            <if test="hasPay != null">
+                #{hasPay,jdbcType=BIT},
+            </if>
+            <if test="payMethod != null">
+                #{payMethod,jdbcType=TINYINT},
+            </if>
+            <if test="companyArea != null and companyArea!=''">
+                #{companyArea,jdbcType=VARCHAR},
+            </if>
+            <if test="companyCountry != null and companyCountry!=''">
+                #{companyCountry,jdbcType=VARCHAR},
+            </if>
+            <if test="companyName != null and companyName!=''">
+                #{companyName,jdbcType=VARCHAR},
+            </if>
+            <if test="companyAddress != null and companyAddress!=''">
+                #{companyAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="companyPhone != null and companyPhone!=''">
+                #{companyPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="companyWebsite != null and companyWebsite!=''">
+                #{companyWebsite,jdbcType=VARCHAR},
+            </if>
+            <if test="imgUrl != null and imgUrl!=''">
+                #{imgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="otherInfo != null and otherInfo!=''">
+                #{otherInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null and remark!=''">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateStatus" parameterType="com.mika.credit.common.entity.order.QuickOrder">
+        update quick_order
+        <set>
+            <if test="status!=null">
+                status=#{status},
+            </if>
+            update_time=now()
+        </set>
+        <where>
+            id=#{id,jdbcType=BIGINT}
+        </where>
+    </update>
+    <update id="updatePay" parameterType="com.mika.credit.common.entity.order.QuickOrder">
+        update quick_orders
+        <set>
+            <if test="payTime!=null">
+                pay_time=#{payTime},
+            </if>
+            <if test="payMethod!=null">
+                pay_method=#{payMethod},
+            </if>
+            <if test="hasPay!=null">
+                has_pay=#{hasPay},
+            </if>
+            <if test="amountActual!=null">
+                amount_actual=#{amountActual},
+            </if>
+            update_time=now()
+        </set>
+        <where>
+            id=#{id,jdbcType=BIGINT}
+        </where>
+    </update>
+    <update id="updateSubmit" parameterType="com.mika.credit.common.entity.order.QuickOrder">
+        update quick_orders
+        <set>
+            <if test="expectTime!=null">
+                expect_time=#{expectTime},
+            </if>
+            update_time=now()
+        </set>
+        <where>
+            id=#{id,jdbcType=BIGINT}
+        </where>
+    </update>
+    <update id="updateImgUrl" parameterType="com.mika.credit.common.entity.order.QuickOrder">
+        update quick_orders
+        <set>
+            <if test="imgUrl!=null and imgUrl!=''">
+                img_url=#{imgUrl},
+            </if>
+            update_time=now()
+        </set>
+        <where>
+            id=#{id,jdbcType=BIGINT}
+        </where>
+    </update>
+    <update id="updateFinish" parameterType="com.mika.credit.common.entity.order.QuickOrder">
+        update quick_orders
+        <set>
+            <if test="finishTime!=null">
+                finish_time=#{finishTime},
+            </if>
+            status=4,
+            update_time=now()
+        </set>
+        <where>
+            id=#{id,jdbcType=BIGINT}
+        </where>
+    </update>
+    <select id="queryTotalByOrderQuery" parameterType="com.mika.credit.common.entity.order.QuickOrderQuery" resultType="java.lang.Integer">
+        select count(1) from quick_orders
+        <include refid="conditionWithQuery"/>
+    </select>
+</mapper>

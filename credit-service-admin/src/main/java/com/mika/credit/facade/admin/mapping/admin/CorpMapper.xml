@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mika.credit.facade.admin.dao.admin.CorpMapper">
+    <resultMap id="corpMap" type="com.mika.credit.facade.admin.model.Corp">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="pid" property="pid" jdbcType="VARCHAR"/>
+        <result column="lev" property="lev" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="tel" property="tel" jdbcType="VARCHAR"/>
+        <result column="addr" property="addr" jdbcType="VARCHAR"/>
+        <result column="artificial" property="artificial" jdbcType="VARCHAR"/>
+        <result column="job" property="job" jdbcType="VARCHAR"/>
+
+        <association property="corpType" column="corp_type_id" fetchType="eager" javaType="com.mika.credit.facade.admin.model.CorpType" select="com.mika.credit.facade.admin.dao.admin.CorpTypeMapper.queryById">
+        </association>
+    </resultMap>
+    <!--<resultMap id="corpDeptMap" type="com.aaaCredit.shiroServer.bean.Corp" extends="corpMap">-->
+        <!--<collection property="depts" javaType="com.aaaCredit.shiroServer.bean.Dept">-->
+            <!--<id column="id" property="id"/>-->
+            <!--<result column="corp_id" property="corpId" jdbcType="VARCHAR"/>-->
+        <!--</collection>-->
+    <!--</resultMap>-->
+    <sql id="Base_Column_List">
+        id, pid, lev, code, name, tel, addr, corp_type_id, artificial, job
+    </sql>
+    <sql id="condition">
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id,jdbcType=VARCHAR}
+            </if>
+            <if test="pid !=null and pid != ''">
+                and pid = #{pid,jdbcType=VARCHAR}
+            </if>
+            <if test="lev !=null and lev != ''">
+                and lev = #{lev,jdbcType=VARCHAR}
+            </if>
+            <if test="code !=null and code != ''">
+                and code = #{code,jdbcType=VARCHAR}
+            </if>
+            <if test="name !=null and name != ''">
+                and name= #{name,jdbcType=VARCHAR}
+            </if>
+            <if test="tel !=null and tel != ''">
+                and tel = #{tel,jdbcType=VARCHAR}
+            </if>
+            <if test="addr !=null and addr != ''">
+                and addr = #{addr,jdbcType=VARCHAR}
+            </if>
+            <if test="corpType != null and corpType.id !=null and corpType.id != ''">
+                and corp_type_id = #{corpType.id,jdbcType=VARCHAR}
+            </if>
+            <if test="artificial !=null and artificial != ''">
+                and artificial = #{artificial,jdbcType=VARCHAR}
+            </if>
+            <if test="job !=null and job != ''">
+                and job = #{job,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </sql>
+    <select id="queryList" resultMap="corpMap" parameterType="com.mika.credit.facade.admin.model.Corp">
+        select
+        <include refid="Base_Column_List"/>
+        from s_corp
+        <include refid="condition"/>
+    </select>
+    <select id="queryById" resultMap="corpMap" parameterType="java.lang.String">
+    select *
+    from s_corp
+    where id = #{id}
+   </select>
+    <select id="queryAll" resultMap="corpMap">
+    select *
+    from s_corp
+   </select>
+    <insert id="save" parameterType="com.mika.credit.facade.admin.model.Corp" keyProperty="id" useGeneratedKeys="true">
+  	insert into s_corp(id,pid,lev,code,name,tel,addr,corp_type_id,artificial,job)
+  	values(#{id},#{pid},#{lev},#{code},#{name},#{tel},#{addr},#{corpType.id},#{artificial},#{job})
+   </insert>
+    <update id="update" parameterType="com.mika.credit.facade.admin.model.Corp">
+  	update s_corp set
+  	pid=#{pid,jdbcType=VARCHAR},
+  	lev=#{lev,jdbcType=VARCHAR},
+  	code=#{code,jdbcType=VARCHAR},
+  	name=#{name,jdbcType=VARCHAR},
+  	tel=#{tel,jdbcType=VARCHAR},
+  	addr=#{addr,jdbcType=VARCHAR},
+  	corp_type_id=#{corpType.id,jdbcType=VARCHAR},
+  	artificial=#{artificial,jdbcType=VARCHAR},
+  	job=#{job,jdbcType=VARCHAR}
+  	where id = #{id,jdbcType=VARCHAR}
+  </update>
+    <update id="updateByIdSelective" parameterType="com.mika.credit.facade.admin.model.Corp">
+        update s_corp
+        <set>
+            <if test="pid !=null and pid != ''">
+                pid = #{pid,jdbcType=VARCHAR},
+            </if>
+            <if test="lev !=null and lev != ''">
+               lev = #{lev,jdbcType=VARCHAR},
+            </if>
+            <if test="code !=null and code != ''">
+                code = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="name !=null and name != ''">
+                 name= #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="tel !=null and tel != ''">
+                 tel = #{tel,jdbcType=VARCHAR},
+            </if>
+            <if test="addr !=null and addr != ''">
+                 addr = #{addr,jdbcType=VARCHAR},
+            </if>
+            <if test="corpType != null and corpType.id !=null and corpType.id != ''">
+                 corp_type_id = #{corpType.id,jdbcType=VARCHAR},
+            </if>
+            <if test="artificial !=null and artificial != ''">
+                 artificial = #{artificial,jdbcType=VARCHAR},
+            </if>
+            <if test="job !=null and job != ''">
+                 job = #{job,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <delete id="deleteById" parameterType="java.lang.String">
+  	delete from s_corp where id=#{id}
+  </delete>
+    <delete id="delete" parameterType="com.mika.credit.facade.admin.model.Corp">
+        delete from s_corp
+        <include refid="condition"/>
+    </delete>
+    <select id="selectCountByType" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(1) from s_corp c where c.corp_type_id = #{id}
+    </select>
+</mapper>

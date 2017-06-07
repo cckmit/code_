@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mika.credit.facade.gugu.dao.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.mika.credit.facade.gugu.model.Order">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="order_num" jdbcType="VARCHAR" property="orderNum" />
+    <result column="order_date" jdbcType="TIMESTAMP" property="orderDate" />
+    <result column="finish_date" jdbcType="TIMESTAMP" property="finishDate" />
+    <result column="order_status" jdbcType="VARCHAR" property="orderStatus" />
+    <result column="crefo_no" jdbcType="VARCHAR" property="crefoNo" />
+    <result column="subject_name" jdbcType="VARCHAR" property="subjectName" />
+    <result column="subject_tel" jdbcType="VARCHAR" property="subjectTel" />
+    <result column="subject_add" jdbcType="VARCHAR" property="subjectAdd" />
+    <result column="subject_zip" jdbcType="VARCHAR" property="subjectZip" />
+    <result column="subject_note" jdbcType="VARCHAR" property="subjectNote" />
+    <result column="file_type" jdbcType="VARCHAR" property="fileType" />
+    <result column="file_name" jdbcType="VARCHAR" property="fileName" />
+    <result column="reg" jdbcType="VARCHAR" property="reg" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="source_flag" jdbcType="VARCHAR" property="sourceFlag" />
+    <result column="base_price" jdbcType="DOUBLE" property="basePrice" />
+    <result column="money" jdbcType="DOUBLE" property="money" />
+    <result column="monitor_flag" jdbcType="VARCHAR" property="monitorFlag" />
+    <result column="monitor_period" jdbcType="VARCHAR" property="monitorPeriod" />
+    <result column="monitor_price" jdbcType="DOUBLE" property="monitorPrice" />
+    <result column="cpm_order_id" jdbcType="INTEGER" property="cpmOrderId" />
+    <result column="cpm_customer_id" jdbcType="INTEGER" property="cpmCustomerId" />
+    <result column="is_view" jdbcType="VARCHAR" property="isView" />
+    <result column="reference_num" jdbcType="VARCHAR" property="referenceNum" />
+    <result column="cpm_report_type_id" jdbcType="INTEGER" property="cpmReportTypeId" />
+    <result column="del_flag" jdbcType="VARCHAR" property="delFlag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, user_name, real_name, order_num, order_date, finish_date, order_status, 
+    crefo_no, subject_name, subject_tel, subject_add, subject_zip, subject_note, file_type, 
+    file_name, reg, remark, source_flag, base_price, money, monitor_flag, monitor_period, 
+    monitor_price, cpm_order_id, cpm_customer_id, is_view, reference_num, cpm_report_type_id, 
+    del_flag
+  </sql>
+  <sql id="condition">
+    <where>
+      <if test="id != null and id != 0">
+        and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="userId != null and userId != 0">
+        and user_id = #{userId,jdbcType=INTEGER}
+      </if>
+      <if test="userName != null">
+        and user_name = #{userName,jdbcType=VARCHAR}
+      </if>
+      <if test="realName != null">
+        and real_name = #{realName,jdbcType=VARCHAR}
+      </if>
+      <if test="orderNum != null">
+        and order_num = #{orderNum,jdbcType=VARCHAR}
+      </if>
+      <if test="orderDate != null">
+        and  order_date = #{orderDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="finishDate != null">
+        and finish_date = #{finishDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="orderStatus != null">
+        and order_status = #{orderStatus,jdbcType=VARCHAR}
+      </if>
+      <if test="crefoNo != null">
+        and  crefo_no = #{crefoNo,jdbcType=VARCHAR}
+      </if>
+      <if test="subjectName != null">
+        and subject_name = #{subjectName,jdbcType=VARCHAR}
+      </if>
+      <if test="subjectTel != null">
+        and subject_tel = #{subjectTel,jdbcType=VARCHAR}
+      </if>
+      <if test="subjectAdd != null">
+        and subject_add = #{subjectAdd,jdbcType=VARCHAR}
+      </if>
+      <if test="subjectZip != null">
+        and subject_zip = #{subjectZip,jdbcType=VARCHAR}
+      </if>
+      <if test="subjectNote != null">
+        and  subject_note = #{subjectNote,jdbcType=VARCHAR}
+      </if>
+      <if test="fileType != null">
+        and file_type = #{fileType,jdbcType=VARCHAR}
+      </if>
+      <if test="fileName != null">
+        and file_name = #{fileName,jdbcType=VARCHAR}
+      </if>
+      <if test="reg != null">
+        and reg = #{reg,jdbcType=VARCHAR}
+      </if>
+      <if test="remark != null">
+        and  remark = #{remark,jdbcType=VARCHAR}
+      </if>
+      <if test="sourceFlag != null">
+        and  source_flag = #{sourceFlag,jdbcType=VARCHAR}
+      </if>
+      <if test="basePrice != null and basePrice != 0">
+        and base_price = #{basePrice,jdbcType=DOUBLE}
+      </if>
+      <if test="money != null">
+        and money = #{money,jdbcType=DOUBLE}
+      </if>
+      <if test="monitorFlag != null">
+        and monitor_flag = #{monitorFlag,jdbcType=VARCHAR}
+      </if>
+      <if test="monitorPeriod != null">
+        and monitor_period = #{monitorPeriod,jdbcType=VARCHAR}
+      </if>
+      <if test="monitorPrice != null and monitorPrice != 0">
+        and monitor_price = #{monitorPrice,jdbcType=DOUBLE}
+      </if>
+      <if test="cpmOrderId != null and cpmOrderId != 0">
+        and cpm_order_id = #{cpmOrderId,jdbcType=INTEGER}
+      </if>
+      <if test="cpmCustomerId != null and cpmCustomerId != 0">
+        and cpm_customer_id = #{cpmCustomerId,jdbcType=INTEGER}
+      </if>
+      <if test="isView != null">
+        and is_view = #{isView,jdbcType=VARCHAR}
+      </if>
+      <if test="referenceNum != null">
+        and reference_num = #{referenceNum,jdbcType=VARCHAR}
+      </if>
+      <if test="cpmReportTypeId != null and cpmReportTypeId != 0">
+        and cpm_report_type_id = #{cpmReportTypeId,jdbcType=INTEGER}
+      </if>
+      <if test="delFlag != null">
+        and del_flag = #{delFlag,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from `order`
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPrimaryKeySelective" parameterType="com.mika.credit.facade.gugu.model.Order" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from `order``
+    <include refid="condition" />
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from `order`
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mika.credit.facade.gugu.model.Order" useGeneratedKeys="true" keyProperty="id">
+    insert into `order`(id, user_id, user_name,
+      real_name, order_num, order_date, 
+      finish_date, order_status, crefo_no, 
+      subject_name, subject_tel, subject_add, 
+      subject_zip, subject_note, file_type, 
+      file_name, reg, remark, 
+      source_flag, base_price, money, 
+      monitor_flag, monitor_period, monitor_price, 
+      cpm_order_id, cpm_customer_id, is_view, 
+      reference_num, cpm_report_type_id, del_flag
+      )
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{realName,jdbcType=VARCHAR}, #{orderNum,jdbcType=VARCHAR}, #{orderDate,jdbcType=TIMESTAMP}, 
+      #{finishDate,jdbcType=TIMESTAMP}, #{orderStatus,jdbcType=VARCHAR}, #{crefoNo,jdbcType=VARCHAR}, 
+      #{subjectName,jdbcType=VARCHAR}, #{subjectTel,jdbcType=VARCHAR}, #{subjectAdd,jdbcType=VARCHAR}, 
+      #{subjectZip,jdbcType=VARCHAR}, #{subjectNote,jdbcType=VARCHAR}, #{fileType,jdbcType=VARCHAR}, 
+      #{fileName,jdbcType=VARCHAR}, #{reg,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{sourceFlag,jdbcType=VARCHAR}, #{basePrice,jdbcType=DOUBLE}, #{money,jdbcType=DOUBLE}, 
+      #{monitorFlag,jdbcType=VARCHAR}, #{monitorPeriod,jdbcType=VARCHAR}, #{monitorPrice,jdbcType=DOUBLE}, 
+      #{cpmOrderId,jdbcType=INTEGER}, #{cpmCustomerId,jdbcType=INTEGER}, #{isView,jdbcType=VARCHAR}, 
+      #{referenceNum,jdbcType=VARCHAR}, #{cpmReportTypeId,jdbcType=INTEGER}, #{delFlag,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mika.credit.facade.gugu.model.Order" useGeneratedKeys="true" keyProperty="id">
+    insert into `order`
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="realName != null">
+        real_name,
+      </if>
+      <if test="orderNum != null">
+        order_num,
+      </if>
+      <if test="orderDate != null">
+        order_date,
+      </if>
+      <if test="finishDate != null">
+        finish_date,
+      </if>
+      <if test="orderStatus != null">
+        order_status,
+      </if>
+      <if test="crefoNo != null">
+        crefo_no,
+      </if>
+      <if test="subjectName != null">
+        subject_name,
+      </if>
+      <if test="subjectTel != null">
+        subject_tel,
+      </if>
+      <if test="subjectAdd != null">
+        subject_add,
+      </if>
+      <if test="subjectZip != null">
+        subject_zip,
+      </if>
+      <if test="subjectNote != null">
+        subject_note,
+      </if>
+      <if test="fileType != null">
+        file_type,
+      </if>
+      <if test="fileName != null">
+        file_name,
+      </if>
+      <if test="reg != null">
+        reg,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="sourceFlag != null">
+        source_flag,
+      </if>
+      <if test="basePrice != null">
+        base_price,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+      <if test="monitorFlag != null">
+        monitor_flag,
+      </if>
+      <if test="monitorPeriod != null">
+        monitor_period,
+      </if>
+      <if test="monitorPrice != null">
+        monitor_price,
+      </if>
+      <if test="cpmOrderId != null">
+        cpm_order_id,
+      </if>
+      <if test="cpmCustomerId != null">
+        cpm_customer_id,
+      </if>
+      <if test="isView != null">
+        is_view,
+      </if>
+      <if test="referenceNum != null">
+        reference_num,
+      </if>
+      <if test="cpmReportTypeId != null">
+        cpm_report_type_id,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null">
+        #{orderNum,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDate != null">
+        #{orderDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finishDate != null">
+        #{finishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderStatus != null">
+        #{orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="crefoNo != null">
+        #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectName != null">
+        #{subjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectTel != null">
+        #{subjectTel,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectAdd != null">
+        #{subjectAdd,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectZip != null">
+        #{subjectZip,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectNote != null">
+        #{subjectNote,jdbcType=VARCHAR},
+      </if>
+      <if test="fileType != null">
+        #{fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null">
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="reg != null">
+        #{reg,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceFlag != null">
+        #{sourceFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="basePrice != null">
+        #{basePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=DOUBLE},
+      </if>
+      <if test="monitorFlag != null">
+        #{monitorFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="monitorPeriod != null">
+        #{monitorPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="monitorPrice != null">
+        #{monitorPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="cpmOrderId != null">
+        #{cpmOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="cpmCustomerId != null">
+        #{cpmCustomerId,jdbcType=INTEGER},
+      </if>
+      <if test="isView != null">
+        #{isView,jdbcType=VARCHAR},
+      </if>
+      <if test="referenceNum != null">
+        #{referenceNum,jdbcType=VARCHAR},
+      </if>
+      <if test="cpmReportTypeId != null">
+        #{cpmReportTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mika.credit.facade.gugu.model.Order">
+    update `order`
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null">
+        order_num = #{orderNum,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDate != null">
+        order_date = #{orderDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finishDate != null">
+        finish_date = #{finishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderStatus != null">
+        order_status = #{orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="crefoNo != null">
+        crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectName != null">
+        subject_name = #{subjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectTel != null">
+        subject_tel = #{subjectTel,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectAdd != null">
+        subject_add = #{subjectAdd,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectZip != null">
+        subject_zip = #{subjectZip,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectNote != null">
+        subject_note = #{subjectNote,jdbcType=VARCHAR},
+      </if>
+      <if test="fileType != null">
+        file_type = #{fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null">
+        file_name = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="reg != null">
+        reg = #{reg,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceFlag != null">
+        source_flag = #{sourceFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="basePrice != null">
+        base_price = #{basePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="money != null">
+        money = #{money,jdbcType=DOUBLE},
+      </if>
+      <if test="monitorFlag != null">
+        monitor_flag = #{monitorFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="monitorPeriod != null">
+        monitor_period = #{monitorPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="monitorPrice != null">
+        monitor_price = #{monitorPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="cpmOrderId != null">
+        cpm_order_id = #{cpmOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="cpmCustomerId != null">
+        cpm_customer_id = #{cpmCustomerId,jdbcType=INTEGER},
+      </if>
+      <if test="isView != null">
+        is_view = #{isView,jdbcType=VARCHAR},
+      </if>
+      <if test="referenceNum != null">
+        reference_num = #{referenceNum,jdbcType=VARCHAR},
+      </if>
+      <if test="cpmReportTypeId != null">
+        cpm_report_type_id = #{cpmReportTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mika.credit.facade.gugu.model.Order">
+    update `order`
+    set user_id = #{userId,jdbcType=INTEGER},
+      user_name = #{userName,jdbcType=VARCHAR},
+      real_name = #{realName,jdbcType=VARCHAR},
+      order_num = #{orderNum,jdbcType=VARCHAR},
+      order_date = #{orderDate,jdbcType=TIMESTAMP},
+      finish_date = #{finishDate,jdbcType=TIMESTAMP},
+      order_status = #{orderStatus,jdbcType=VARCHAR},
+      crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      subject_name = #{subjectName,jdbcType=VARCHAR},
+      subject_tel = #{subjectTel,jdbcType=VARCHAR},
+      subject_add = #{subjectAdd,jdbcType=VARCHAR},
+      subject_zip = #{subjectZip,jdbcType=VARCHAR},
+      subject_note = #{subjectNote,jdbcType=VARCHAR},
+      file_type = #{fileType,jdbcType=VARCHAR},
+      file_name = #{fileName,jdbcType=VARCHAR},
+      reg = #{reg,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      source_flag = #{sourceFlag,jdbcType=VARCHAR},
+      base_price = #{basePrice,jdbcType=DOUBLE},
+      money = #{money,jdbcType=DOUBLE},
+      monitor_flag = #{monitorFlag,jdbcType=VARCHAR},
+      monitor_period = #{monitorPeriod,jdbcType=VARCHAR},
+      monitor_price = #{monitorPrice,jdbcType=DOUBLE},
+      cpm_order_id = #{cpmOrderId,jdbcType=INTEGER},
+      cpm_customer_id = #{cpmCustomerId,jdbcType=INTEGER},
+      is_view = #{isView,jdbcType=VARCHAR},
+      reference_num = #{referenceNum,jdbcType=VARCHAR},
+      cpm_report_type_id = #{cpmReportTypeId,jdbcType=INTEGER},
+      del_flag = #{delFlag,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

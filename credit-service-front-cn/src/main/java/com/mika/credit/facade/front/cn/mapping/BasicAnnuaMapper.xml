@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.front.cn.dao.impl.BaiscAnnuaDaoImpl" >
+  <cache eviction="LRU" type="com.mika.credit.common.core.mybatis.cache.redis.sharded.MybatiesRedisCache" />
+  <resultMap id="BaseResultMap" type="com.mika.credit.common.entity.report.cn.BasicAnnua" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="affiliation" property="affiliation" jdbcType="VARCHAR" />
+    <result column="crefo_no" property="crefoNo" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="employee" property="employee" jdbcType="VARCHAR" />
+    <result column="enterprise_status" property="enterpriseStatus" jdbcType="VARCHAR" />
+    <result column="equity_transfer" property="equityTransfer" jdbcType="VARCHAR" />
+    <result column="funds_money" property="fundsMoney" jdbcType="VARCHAR" />
+    <result column="is_guarantee_info" property="isGuaranteeInfo" jdbcType="VARCHAR" />
+    <result column="is_investment" property="isInvestment" jdbcType="VARCHAR" />
+    <result column="is_website" property="isWebsite" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="operate_name" property="operateName" jdbcType="VARCHAR" />
+    <result column="reg" property="reg" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+    <result column="year" property="year" jdbcType="VARCHAR" />
+    <result column="zip" property="zip" jdbcType="VARCHAR" />
+    <result column="full_report_id" property="fullReportId" jdbcType="INTEGER" />
+  </resultMap>
+
+  <sql id="table"> basic_annua </sql>
+
+  <sql id="Base_Column_List" >
+    id, address, affiliation, crefo_no, email, employee, enterprise_status, equity_transfer,
+    funds_money, is_guarantee_info, is_investment, is_website, name, operate_name, reg,
+    tel, update_time, year, zip, full_report_id
+  </sql>
+
+  <sql id="condition_sql">
+    <if test="id != null" >
+      and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="address != null" >
+      and address = #{address,jdbcType=VARCHAR}
+    </if>
+    <if test="affiliation != null" >
+      and affiliation = #{affiliation,jdbcType=VARCHAR}
+    </if>
+    <if test="crefoNo != null" >
+      and crefo_no = #{crefoNo,jdbcType=VARCHAR}
+    </if>
+    <if test="email != null" >
+      and email = #{email,jdbcType=VARCHAR}
+    </if>
+    <if test="employee != null" >
+      and employee = #{employee,jdbcType=VARCHAR}
+    </if>
+    <if test="enterpriseStatus != null" >
+      and enterprise_status = #{enterpriseStatus,jdbcType=VARCHAR}
+    </if>
+    <if test="equityTransfer != null" >
+      and equity_transfer = #{equityTransfer,jdbcType=VARCHAR}
+    </if>
+    <if test="fundsMoney != null" >
+      and funds_money = #{fundsMoney,jdbcType=VARCHAR}
+    </if>
+    <if test="isGuaranteeInfo != null" >
+      and is_guarantee_info = #{isGuaranteeInfo,jdbcType=VARCHAR}
+    </if>
+    <if test="isInvestment != null" >
+      and is_investment = #{isInvestment,jdbcType=VARCHAR}
+    </if>
+    <if test="isWebsite != null" >
+      and is_website = #{isWebsite,jdbcType=VARCHAR}
+    </if>
+    <if test="name != null" >
+      and name = #{name,jdbcType=VARCHAR}
+    </if>
+    <if test="operateName != null" >
+      and operate_name = #{operateName,jdbcType=VARCHAR}
+    </if>
+    <if test="reg != null" >
+      and reg = #{reg,jdbcType=VARCHAR}
+    </if>
+    <if test="tel != null" >
+      and tel = #{tel,jdbcType=VARCHAR}
+    </if>
+    <if test="updateTime != null" >
+      and update_time = #{updateTime,jdbcType=VARCHAR}
+    </if>
+    <if test="year != null" >
+      and year = #{year,jdbcType=VARCHAR}
+    </if>
+    <if test="zip != null" >
+      and zip = #{zip,jdbcType=VARCHAR}
+    </if>
+    <if test="fullReportId != null" >
+      and full_report_id = #{fullReportId,jdbcType=INTEGER}
+    </if>
+  </sql>
+
+  <select id="getById" parameterType="Integer" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    where id = #{id}
+  </select>
+
+  <select id="listBy" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <select id="listPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+    <![CDATA[ order by ID desc]]>
+  </select>
+
+  <select id="listPageCount" parameterType="java.util.Map" resultType="Integer">
+    select count(1) from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <insert id="insert" parameterType="com.mika.credit.common.entity.report.cn.BasicAnnua" keyProperty="id" useGeneratedKeys="true">
+    insert into
+    <include refid="table" />
+    (id, address, affiliation,
+    crefo_no, email, employee,
+    enterprise_status, equity_transfer, funds_money,
+    is_guarantee_info, is_investment, is_website,
+    name, operate_name, reg,
+    tel, update_time, year,full_report_id,zip)
+    values (#{id,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{affiliation,jdbcType=VARCHAR},
+    #{crefoNo,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{employee,jdbcType=VARCHAR},
+    #{enterpriseStatus,jdbcType=VARCHAR}, #{equityTransfer,jdbcType=VARCHAR}, #{fundsMoney,jdbcType=VARCHAR},
+    #{isGuaranteeInfo,jdbcType=VARCHAR}, #{isInvestment,jdbcType=VARCHAR}, #{isWebsite,jdbcType=VARCHAR},
+    #{name,jdbcType=VARCHAR}, #{operateName,jdbcType=VARCHAR}, #{reg,jdbcType=VARCHAR},
+    #{tel,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR},
+    #{zip,jdbcType=VARCHAR}, #{fullReportId,jdbcType=INTEGER})
+  </insert>
+
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from
+    <include refid="table" />
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <update id="update" parameterType="com.mika.credit.common.entity.report.cn.BasicAnnua" >
+    update baisc_annua
+    set address = #{address,jdbcType=VARCHAR},
+      affiliation = #{affiliation,jdbcType=VARCHAR},
+      crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      employee = #{employee,jdbcType=VARCHAR},
+      enterprise_status = #{enterpriseStatus,jdbcType=VARCHAR},
+      equity_transfer = #{equityTransfer,jdbcType=VARCHAR},
+      funds_money = #{fundsMoney,jdbcType=VARCHAR},
+      is_guarantee_info = #{isGuaranteeInfo,jdbcType=VARCHAR},
+      is_investment = #{isInvestment,jdbcType=VARCHAR},
+      is_website = #{isWebsite,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      operate_name = #{operateName,jdbcType=VARCHAR},
+      reg = #{reg,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      year = #{year,jdbcType=VARCHAR},
+      zip = #{zip,jdbcType=VARCHAR},
+      full_report_id = #{fullReportId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <insert id="insertSelective" parameterType="com.mika.credit.common.entity.report.cn.BasicAnnua" >
+    insert into baisc_annua
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="affiliation != null" >
+        affiliation,
+      </if>
+      <if test="crefoNo != null" >
+        crefo_no,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="employee != null" >
+        employee,
+      </if>
+      <if test="enterpriseStatus != null" >
+        enterprise_status,
+      </if>
+      <if test="equityTransfer != null" >
+        equity_transfer,
+      </if>
+      <if test="fundsMoney != null" >
+        funds_money,
+      </if>
+      <if test="isGuaranteeInfo != null" >
+        is_guarantee_info,
+      </if>
+      <if test="isInvestment != null" >
+        is_investment,
+      </if>
+      <if test="isWebsite != null" >
+        is_website,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="operateName != null" >
+        operate_name,
+      </if>
+      <if test="reg != null" >
+        reg,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="year != null" >
+        year,
+      </if>
+      <if test="zip != null" >
+        zip,
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="affiliation != null" >
+        #{affiliation,jdbcType=VARCHAR},
+      </if>
+      <if test="crefoNo != null" >
+        #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="employee != null" >
+        #{employee,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseStatus != null" >
+        #{enterpriseStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="equityTransfer != null" >
+        #{equityTransfer,jdbcType=VARCHAR},
+      </if>
+      <if test="fundsMoney != null" >
+        #{fundsMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="isGuaranteeInfo != null" >
+        #{isGuaranteeInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="isInvestment != null" >
+        #{isInvestment,jdbcType=VARCHAR},
+      </if>
+      <if test="isWebsite != null" >
+        #{isWebsite,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="operateName != null" >
+        #{operateName,jdbcType=VARCHAR},
+      </if>
+      <if test="reg != null" >
+        #{reg,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="zip != null" >
+        #{zip,jdbcType=VARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        #{fullReportId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateSelective" parameterType="com.mika.credit.common.entity.report.cn.BasicAnnua" >
+    update baisc_annua
+    <set >
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="affiliation != null" >
+        affiliation = #{affiliation,jdbcType=VARCHAR},
+      </if>
+      <if test="crefoNo != null" >
+        crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="employee != null" >
+        employee = #{employee,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseStatus != null" >
+        enterprise_status = #{enterpriseStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="equityTransfer != null" >
+        equity_transfer = #{equityTransfer,jdbcType=VARCHAR},
+      </if>
+      <if test="fundsMoney != null" >
+        funds_money = #{fundsMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="isGuaranteeInfo != null" >
+        is_guarantee_info = #{isGuaranteeInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="isInvestment != null" >
+        is_investment = #{isInvestment,jdbcType=VARCHAR},
+      </if>
+      <if test="isWebsite != null" >
+        is_website = #{isWebsite,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="operateName != null" >
+        operate_name = #{operateName,jdbcType=VARCHAR},
+      </if>
+      <if test="reg != null" >
+        reg = #{reg,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null" >
+        year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="zip != null" >
+        zip = #{zip,jdbcType=VARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id = #{fullReportId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+</mapper>

@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.front.cn.dao.impl.AjlcDaoImpl" >
+  <cache eviction="LRU" type="com.mika.credit.common.core.mybatis.cache.redis.sharded.MybatiesRedisCache" />
+  <resultMap id="BaseResultMap" type="com.mika.credit.common.entity.report.cn.Ajlc" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="crefo_no" property="crefoNo" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+    <result column="action_object" property="actionObject" jdbcType="LONGVARCHAR" />
+    <result column="ajlc_id" property="ajlcId" jdbcType="LONGVARCHAR" />
+    <result column="ajlc_status" property="ajlcStatus" jdbcType="LONGVARCHAR" />
+    <result column="body" property="body" jdbcType="LONGVARCHAR" />
+    <result column="case_cause" property="caseCause" jdbcType="LONGVARCHAR" />
+    <result column="case_no" property="caseNo" jdbcType="LONGVARCHAR" />
+    <result column="case_status" property="caseStatus" jdbcType="LONGVARCHAR" />
+    <result column="case_type" property="caseType" jdbcType="LONGVARCHAR" />
+    <result column="chief_judge" property="chiefJudge" jdbcType="LONGVARCHAR" />
+    <result column="clerk" property="clerk" jdbcType="LONGVARCHAR" />
+    <result column="clerk_phone" property="clerkPhone" jdbcType="LONGVARCHAR" />
+    <result column="court" property="court" jdbcType="LONGVARCHAR" />
+    <result column="effective_date" property="effectiveDate" jdbcType="LONGVARCHAR" />
+    <result column="filling_date" property="fillingDate" jdbcType="LONGVARCHAR" />
+    <result column="judge" property="judge" jdbcType="LONGVARCHAR" />
+    <result column="member" property="member" jdbcType="LONGVARCHAR" />
+    <result column="organizer" property="organizer" jdbcType="LONGVARCHAR" />
+    <result column="pname" property="pname" jdbcType="LONGVARCHAR" />
+    <result column="sentencing_date" property="sentencingDate" jdbcType="LONGVARCHAR" />
+    <result column="sort_time" property="sortTime" jdbcType="LONGVARCHAR" />
+    <result column="trial_limit_date" property="trialLimitDate" jdbcType="LONGVARCHAR" />
+    <result column="trial_procedure" property="trialProcedure" jdbcType="LONGVARCHAR" />
+    <result column="full_report_id" property="fullReportId" jdbcType="INTEGER" />
+    <result column="pname_en" property="pnameEN" jdbcType="LONGVARCHAR" />
+    <result column="ajlc_status_en" property="ajlcStatusEN" jdbcType="LONGVARCHAR" />
+    <result column="case_no_en" property="caseNoEN" jdbcType="LONGVARCHAR" />
+    <result column="body_en" property="bodyEN" jdbcType="LONGVARCHAR" />
+  </resultMap>
+
+  <sql id="table"> ajlc </sql>
+
+  <sql id="Base_Column_List" >
+    id, crefo_no, update_time,
+    action_object, ajlc_id, ajlc_status, body, case_cause, case_no, case_status, case_type, 
+    chief_judge, clerk, clerk_phone, court, effective_date, filling_date, judge, member,
+    organizer, pname, sentencing_date, sort_time, trial_limit_date, trial_procedure, full_report_id,
+    pname_en,ajlc_status_en,case_no_en,body_en
+  </sql>
+
+  <sql id="condition_sql">
+    <if test="id != null" >
+      and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="crefoNo != null" >
+      and crefo_no = #{crefoNo,jdbcType=VARCHAR}
+    </if>
+    <if test="updateTime != null" >
+      and update_time = #{updateTime,jdbcType=VARCHAR}
+    </if>
+    <if test="actionObject != null" >
+      and action_object = #{actionObject,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="ajlcId != null" >
+      and ajlc_id = #{ajlcId,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="ajlcStatus != null" >
+      and ajlc_status = #{ajlcStatus,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="body != null" >
+      and body = #{body,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="caseCause != null" >
+      and case_cause =  #{caseCause,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="caseNo != null" >
+      and case_no = #{caseNo,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="caseStatus != null" >
+      and case_status = #{caseStatus,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="caseType != null" >
+      and case_type = #{caseType,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="chiefJudge != null" >
+      and chief_judge = #{chiefJudge,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="clerk != null" >
+      and clerk = #{clerk,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="clerkPhone != null" >
+      and clerk_phone = #{clerkPhone,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="court != null" >
+      and court = #{court,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="effectiveDate != null" >
+      and effective_date = #{effectiveDate,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="filingDate != null" >
+      and filling_date = #{fillingDate,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="judge != null" >
+      and judge = #{judge,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="member != null" >
+      and member = #{member,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="organizer != null" >
+      and organizer = #{organizer,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="pname != null" >
+      and pname = #{pname,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="sentencingDate != null" >
+      and sentencing_date = #{sentencingDate,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="sortTime != null" >
+      and sort_time = #{sortTime,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="trialLimitDate != null" >
+      and trial_limit_date = #{trialLimitDate,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="trialProcedure != null" >
+      and trial_procedure = #{trialProcedure,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="fullReportId != null" >
+      and full_report_id = #{fullReportId,jdbcType=INTEGER}
+    </if>
+    <if test="pnameEN != null" >
+      and pname_en = #{pnameEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="ajlcStatusEN != null" >
+      and ajlc_status_en = #{ajlcStatusEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="caseNoEN != null" >
+      and case_no_en = #{caseNoEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="bodyEN != null" >
+      and body_en = #{bodyEN,jdbcType=LONGVARCHAR}
+    </if>
+  </sql>
+
+
+  <select id="getById" parameterType="Integer" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    where id = #{id}
+  </select>
+
+  <select id="listBy" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <select id="listPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+    <![CDATA[ order by ID desc]]>
+  </select>
+
+  <select id="listPageCount" parameterType="java.util.Map" resultType="Integer">
+    select count(1) from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <insert id="insert" parameterType="com.mika.credit.common.entity.report.cn.Ajlc" keyProperty="id" useGeneratedKeys="true">
+    insert into
+    <include refid="table" />
+    (id, crefo_no, update_time,
+    action_object, ajlc_id, ajlc_status, body, case_cause, case_no, case_status, case_type,
+    chief_judge, clerk, clerk_phone, court, effective_date, filling_date, judge, member,
+    organizer, pname, sentencing_date, sort_time, trial_limit_date, trial_procedure, full_report_id,
+    pname_en,ajlc_status_en,case_no_en,body_en)
+    values (#{id,jdbcType=INTEGER}, #{crefoNo,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR},
+    #{actionObject,jdbcType=LONGVARCHAR}, #{ajlcId,jdbcType=VARCHAR}, #{ajlcStatus,jdbcType=VARCHAR},
+    #{body,jdbcType=VARCHAR}, #{caseCause,jdbcType=VARCHAR}, #{caseNo,jdbcType=VARCHAR},
+    #{caseStatus,jdbcType=VARCHAR}, #{caseType,jdbcType=VARCHAR}, #{chiefJudge,jdbcType=VARCHAR},
+    #{clerk,jdbcType=VARCHAR}, #{clerkPhone,jdbcType=VARCHAR}, #{court,jdbcType=VARCHAR},
+    #{effectiveDate,jdbcType=VARCHAR}, #{fillingDate,jdbcType=VARCHAR}, #{judge,jdbcType=VARCHAR},
+    #{member,jdbcType=VARCHAR}, #{organizer,jdbcType=VARCHAR}, #{pname,jdbcType=VARCHAR},
+    #{sentencingDate,jdbcType=VARCHAR}, #{sortTime,jdbcType=VARCHAR}, #{trialLimitDate,jdbcType=VARCHAR},
+    #{trialProcedure,jdbcType=VARCHAR}, #{fullReportId,jdbcType=INTEGER}, #{pnameEN,jdbcType=LONGVARCHAR},
+    #{ajlcStatusEN,jdbcType=LONGVARCHAR}, #{caseNoEN,jdbcType=LONGVARCHAR},#{bodyEN,jdbcType=LONGVARCHAR})
+  </insert>
+
+  <delete id="deleteById" parameterType="Integer" >
+    delete from
+    <include refid="table" />
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <update id="update" parameterType="com.mika.credit.common.entity.report.cn.Ajlc" >
+    update ajlc
+    set crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      action_object = #{actionObject,jdbcType=LONGVARCHAR},
+      ajlc_id = #{ajlcId,jdbcType=LONGVARCHAR},
+      ajlc_status = #{ajlcStatus,jdbcType=LONGVARCHAR},
+      body = #{body,jdbcType=LONGVARCHAR},
+      case_cause = #{caseCause,jdbcType=LONGVARCHAR},
+      case_no = #{caseNo,jdbcType=LONGVARCHAR},
+      case_status = #{caseStatus,jdbcType=LONGVARCHAR},
+      case_type = #{caseType,jdbcType=LONGVARCHAR},
+      chief_judge = #{chiefJudge,jdbcType=LONGVARCHAR},
+      clerk = #{clerk,jdbcType=LONGVARCHAR},
+      clerk_phone = #{clerkPhone,jdbcType=LONGVARCHAR},
+      court = #{court,jdbcType=LONGVARCHAR},
+      effective_date = #{effectiveDate,jdbcType=LONGVARCHAR},
+      filling_date = #{fillingDate,jdbcType=LONGVARCHAR},
+      judge = #{judge,jdbcType=LONGVARCHAR},
+      member = #{member,jdbcType=LONGVARCHAR},
+      organizer = #{organizer,jdbcType=LONGVARCHAR},
+      pname = #{pname,jdbcType=LONGVARCHAR},
+      sentencing_date = #{sentencingDate,jdbcType=LONGVARCHAR},
+      sort_time = #{sortTime,jdbcType=LONGVARCHAR},
+      trial_limit_date = #{trialLimitDate,jdbcType=LONGVARCHAR},
+      trial_procedure = #{trialProcedure,jdbcType=LONGVARCHAR},
+      full_report_id = #{fullReportId,jdbcType=INTEGER},
+      pname_en = #{pnameEN,jdbcType=LONGVARCHAR},
+      ajlc_status_en = #{ajlcStatusEN,jdbcType=LONGVARCHAR},
+      case_no_en = #{caseNoEN,jdbcType=LONGVARCHAR},
+      body_en = #{bodyEN,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <insert id="insertSelective" parameterType="com.mika.credit.common.entity.report.cn.Ajlc" >
+    insert into ajlc
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="crefoNo != null" >
+        crefo_no,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="actionObject != null" >
+        action_object,
+      </if>
+      <if test="ajlcId != null" >
+        ajlc_id,
+      </if>
+      <if test="ajlcStatus != null" >
+        ajlc_status,
+      </if>
+      <if test="body != null" >
+        body,
+      </if>
+      <if test="caseCause != null" >
+        case_cause,
+      </if>
+      <if test="caseNo != null" >
+        case_no,
+      </if>
+      <if test="caseStatus != null" >
+        case_status,
+      </if>
+      <if test="caseType != null" >
+        case_type,
+      </if>
+      <if test="chiefJudge != null" >
+        chief_judge,
+      </if>
+      <if test="clerk != null" >
+        clerk,
+      </if>
+      <if test="clerkPhone != null" >
+        clerk_phone,
+      </if>
+      <if test="court != null" >
+        court,
+      </if>
+      <if test="effectiveDate != null" >
+        effective_date,
+      </if>
+      <if test="fillingDate != null" >
+        filling_date,
+      </if>
+      <if test="judge != null" >
+        judge,
+      </if>
+      <if test="member != null" >
+        member,
+      </if>
+      <if test="organizer != null" >
+        organizer,
+      </if>
+      <if test="pname != null" >
+        pname,
+      </if>
+      <if test="sentencingDate != null" >
+        sentencing_date,
+      </if>
+      <if test="sortTime != null" >
+        sort_time,
+      </if>
+      <if test="trialLimitDate != null" >
+        trial_limit_date,
+      </if>
+      <if test="trialProcedure != null" >
+        trial_procedure,
+      </if>
+      <if test="fullRop != null" >
+        full_report_id,
+      </if>
+      <if test="pnameEN != null" >
+        pname_en,
+      </if>
+      <if test="ajlcStatusEN != null" >
+        ajlc_status_en,
+      </if>
+      <if test="caseNoEN != null" >
+        case_no_en,
+      </if>
+      <if test="bodyEN != null" >
+        body_en,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="crefoNo != null" >
+        #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="actionObject != null" >
+        #{actionObject,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ajlcId != null" >
+        #{ajlcId,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ajlcStatus != null" >
+        #{ajlcStatus,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="body != null" >
+        #{body,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="caseCause != null" >
+        #{caseCause,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="caseNo != null" >
+        #{caseNo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="caseStatus != null" >
+        #{caseStatus,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="caseType != null" >
+        #{caseType,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="chiefJudge != null" >
+        #{chiefJudge,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="clerk != null" >
+        #{clerk,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="clerkPhone != null" >
+        #{clerkPhone,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="court != null" >
+        #{court,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="effectiveDate != null" >
+        #{effectiveDate,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="fillingDate != null" >
+        #{fillingDate,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="judge != null" >
+        #{judge,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="member != null" >
+        #{member,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="organizer != null" >
+        #{organizer,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="pname != null" >
+        #{pname,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sentencingDate != null" >
+        #{sentencingDate,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sortTime != null" >
+        #{sortTime,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="trialLimitDate != null" >
+        #{trialLimitDate,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="trialProcedure != null" >
+        #{trialProcedure,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        #{fullReportId,jdbcType=INTEGER},
+      </if>
+      <if test="pnameEN != null" >
+        #{pnameEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ajlcStatusEN != null" >
+        #{ajlcStatusEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="caseNoEN != null" >
+        #{caseNoEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bodyEN != null" >
+        #{bodyEN,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateSelective" parameterType="com.mika.credit.common.entity.report.cn.Ajlc" >
+    update ajlc
+    <set >
+      <if test="crefoNo != null" >
+        crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="actionObject != null" >
+        action_object = #{actionObject,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ajlcId != null" >
+        ajlc_id = #{ajlcId,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ajlcStatus != null" >
+        ajlc_status = #{ajlcStatus,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="body != null" >
+        body = #{body,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="caseCause != null" >
+        case_cause = #{caseCause,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="caseNo != null" >
+        case_no = #{caseNo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="caseStatus != null" >
+        case_status = #{caseStatus,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="caseType != null" >
+        case_type = #{caseType,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="chiefJudge != null" >
+        chief_judge = #{chiefJudge,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="clerk != null" >
+        clerk = #{clerk,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="clerkPhone != null" >
+        clerk_phone = #{clerkPhone,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="court != null" >
+        court = #{court,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="effectiveDate != null" >
+        effective_date = #{effectiveDate,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="fillingDate != null" >
+        filling_date = #{fillingDate,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="judge != null" >
+        judge = #{judge,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="member != null" >
+        member = #{member,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="organizer != null" >
+        organizer = #{organizer,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="pname != null" >
+        pname = #{pname,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sentencingDate != null" >
+        sentencing_date = #{sentencingDate,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sortTime != null" >
+        sort_time = #{sortTime,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="trialLimitDate != null" >
+        trial_limit_date = #{trialLimitDate,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="trialProcedure != null" >
+        trial_procedure = #{trialProcedure,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="trialProcedure != null" >
+        trial_procedure = #{trialProcedure,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id = #{fullReportId,jdbcType=INTEGER},
+      </if>
+      <if test="pnameEN != null" >
+        pname_en = #{pnameEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ajlcStatusEN != null" >
+        ajlc_status_en = #{ajlcStatusEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="caseNoEN != null" >
+        case_no_en = #{caseNoEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bodyEN != null" >
+        body_en = #{bodyEN,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+</mapper>

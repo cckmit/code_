@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/bootstrap-select.min.css" rel="stylesheet" media="screen">
+</head>
+
+<body>
+<div class="container">
+    <form action="" class="form-horizontal"  role="form">
+        <fieldset>
+            <legend>
+                Test
+                <a href="http://silviomoreto.github.io/bootstrap-select/examples/">More Samples!</a>
+            </legend>
+            <div class="form-group">
+                <label for="Standard" class="col-md-2 control-label">Standard</label>
+                <select id="Standard" class="selectpicker">
+                    <option>Mustard</option>
+                    <option>Ketchup</option>
+                    <option>Relish</option>
+                </select>
+
+            </div>
+            <div class="form-group">
+                <label for="optgroups" class="col-md-2 control-label">optgroups</label>
+                <select id="optgroups" class="selectpicker">
+                    <optgroup label="Picnic">
+                        <option>Mustard</option>
+                        <option>Ketchup</option>
+                        <option>Relish</option>
+                    </optgroup>
+                    <optgroup label="Camping">
+                        <option>Tent</option>
+                        <option>Flashlight</option>
+                        <option>Toilet Paper</option>
+                    </optgroup>
+                </select>
+
+            </div>
+            <div class="form-group">
+                <label for="Multiple" class="col-md-2 control-label">Multiple</label>
+                <select id="Multiple" class="selectpicker" multiple>
+                    <option>Mustard</option>
+                    <option>Ketchup</option>
+                    <option>Relish</option>
+                </select>
+
+            </div>
+            <div class="form-group">
+                <label for="search" class="col-md-2 control-label">Live search</label>
+                <select id="search" class="selectpicker" multiple data-live-search="true">
+                    <option>Mustard</option>
+                    <option>Ketchup</option>
+                    <option>Relish</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="keyWords" class="col-md-2 control-label">Key words</label>
+                <select id="keyWords" class="selectpicker" data-live-search="true">
+                    <option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>
+                    <option data-tokens="mustard">Burger, Shake and a Smile</option>
+                    <option data-tokens="frosting">Sugar, Spice and all things nice</option>
+                </select>
+
+            </div>
+            <div class="form-group">
+                <label for="Limit1" for="limit2" class="col-md-2 control-label">Limit the number of selections</label>
+                <select id="limit1" class="selectpicker" multiple data-max-options="2">
+                    <option>Mustard</option>
+                    <option>Ketchup</option>
+                    <option>Relish</option>
+                </select>
+                <select id="limit2" class="selectpicker" multiple>
+                    <optgroup label="Condiments" data-max-options="2">
+                        <option>Mustard</option>
+                        <option>Ketchup</option>
+                        <option>Relish</option>
+                    </optgroup>
+                    <optgroup label="Breads" data-max-options="2">
+                        <option>Plain</option>
+                        <option>Steamed</option>
+                        <option>Toasted</option>
+                    </optgroup>
+                </select>
+
+            </div>
+            <div class="form-group">
+                <label for="Placeholder" for="limit2" class="col-md-2 control-label">Placeholder</label>
+                <select id="Placeholder" class="selectpicker" multiple title="Choose one of the following...">
+                    <option>Mustard</option>
+                    <option>Ketchup</option>
+                    <option>Relish</option>
+                </select>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<script type="text/javascript" src="../jquery-1.12.4.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../bootstrap/js/bootstrap.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="js/bootstrap-select.min.js" charset="UTF-8"></script>
+<script type="text/javascript">
+
+</script>
+
+</body>
+</html>

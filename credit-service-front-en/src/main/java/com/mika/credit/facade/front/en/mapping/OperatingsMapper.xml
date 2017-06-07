@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.front.en.dao.impl.OperatingsDaoImpl" >
+  <cache eviction="LRU" type="com.mika.credit.common.core.mybatis.cache.redis.sharded.MybatiesRedisCache" />
+  <resultMap id="BaseResultMap" type="com.mika.credit.common.entity.report.en.Operatings" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="activity_code" property="activityCode" jdbcType="VARCHAR" />
+    <result column="brands" property="brands" jdbcType="VARCHAR" />
+    <result column="crefo_no" property="crefoNo" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="VARCHAR" />
+    <result column="employee_info" property="employeeInfo" jdbcType="VARCHAR" />
+    <result column="employee_num" property="employeeNum" jdbcType="VARCHAR" />
+    <result column="export_area" property="exportArea" jdbcType="VARCHAR" />
+    <result column="import_area" property="importArea" jdbcType="VARCHAR" />
+    <result column="operations_area" property="operationsArea" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+    <result column="year" property="year" jdbcType="VARCHAR" />
+    <result column="activity_description" property="activityDescription" jdbcType="LONGVARCHAR" />
+    <result column="business_overview" property="businessOverview" jdbcType="LONGVARCHAR" />
+    <result column="competitors" property="competitors" jdbcType="LONGVARCHAR" />
+    <result column="clients" property="clients" jdbcType="LONGVARCHAR" />
+    <result column="comments_staff" property="commentsStaff" jdbcType="LONGVARCHAR" />
+    <result column="sales_are" property="salesAre" jdbcType="LONGVARCHAR" />
+    <result column="suppliers" property="suppliers" jdbcType="LONGVARCHAR" />
+    <result column="terms_payment" property="termsPayment" jdbcType="LONGVARCHAR" />
+    <result column="trade_references" property="tradeReferences" jdbcType="LONGVARCHAR" />
+    <result column="other_comment" property="otherComment" jdbcType="LONGVARCHAR" />
+    <result column="main_business" property="mainBusiness" jdbcType="LONGVARCHAR" />
+    <result column="full_report_id" property="fullReportId" jdbcType="INTEGER" />
+  </resultMap>
+
+  <sql id="table"> operatings </sql>
+
+  <sql id="Base_Column_List" >
+    id, activity_code, brands, crefo_no, del_flag, employee_info, employee_num, export_area, 
+    import_area, operations_area, update_time, year,
+    activity_description, business_overview, competitors, clients, comments_staff, sales_are, 
+    suppliers, terms_payment, trade_references, other_comment, main_business,full_report_id
+  </sql>
+
+  <sql id="condition_sql">
+  <if test="id != null" >
+    and id = #{id,jdbcType=INTEGER}
+  </if>
+    <if test="activityCode != null" >
+      and activity_code = #{activityCode,jdbcType=VARCHAR}
+    </if>
+    <if test="brands != null" >
+      and brands = #{brands,jdbcType=VARCHAR}
+    </if>
+    <if test="crefoNo != null" >
+      and crefo_no = #{crefoNo,jdbcType=VARCHAR}
+    </if>
+    <if test="delFlag != null" >
+      and del_flag = #{delFlag,jdbcType=VARCHAR}
+    </if>
+    <if test="employeeInfo != null" >
+      and employee_info = #{employeeInfo,jdbcType=VARCHAR}
+    </if>
+    <if test="employeeNum != null" >
+      and employee_num = #{employeeNum,jdbcType=VARCHAR}
+    </if>
+    <if test="exportArea != null" >
+      and export_area = #{exportArea,jdbcType=VARCHAR}
+    </if>
+    <if test="importArea != null" >
+      and import_area = #{importArea,jdbcType=VARCHAR}
+    </if>
+    <if test="operationsArea != null" >
+      and operations_area = #{operationsArea,jdbcType=VARCHAR}
+    </if>
+    <if test="updateTime != null" >
+      and update_time = #{updateTime,jdbcType=VARCHAR}
+    </if>
+    <if test="year != null" >
+      and year = #{year,jdbcType=VARCHAR}
+    </if>
+    <if test="activityDescription != null" >
+      and activity_description = #{activityDescription,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="businessOverview != null" >
+      and business_overview = #{businessOverview,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="competitors != null" >
+      and competitors = #{competitors,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="clients != null" >
+      and clients = #{clients,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="commentsStaff != null" >
+      and comments_staff = #{commentsStaff,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="salesAre != null" >
+      and sales_are = #{salesAre,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="suppliers != null" >
+      and suppliers = #{suppliers,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="termsPayment != null" >
+      and terms_payment = #{termsPayment,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="tradeReferences != null" >
+      and trade_references = #{tradeReferences,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="otherComment != null" >
+      and other_comment = #{otherComment,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="mainBusiness != null" >
+      and main_business = #{mainBusiness,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="fullReportId != null" >
+      and full_report_id = #{fullReportId,jdbcType=INTEGER}
+    </if>
+  </sql>
+
+  <select id="getById" parameterType="Integer" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    where id = #{id}
+  </select>
+
+  <select id="listBy" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <select id="listPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+    <![CDATA[ order by ID desc]]>
+  </select>
+
+  <select id="listPageCount" parameterType="java.util.Map" resultType="Integer">
+    select count(1) from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <insert id="insert" parameterType="com.mika.credit.common.entity.report.en.Operatings" keyProperty="id" useGeneratedKeys="true">
+    insert into
+    <include refid="table" />
+    (id, activity_code, brands,
+    crefo_no, del_flag, employee_info,
+    employee_num, export_area, import_area,
+    operations_area, update_time, year,
+    activity_description, business_overview,
+    competitors, clients, comments_staff,
+    sales_are, suppliers, terms_payment,
+    trade_references, other_comment,
+    main_business,full_report_id)
+    values (#{id,jdbcType=INTEGER}, #{activityCode,jdbcType=VARCHAR}, #{brands,jdbcType=VARCHAR},
+    #{crefoNo,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR}, #{employeeInfo,jdbcType=VARCHAR},
+    #{employeeNum,jdbcType=VARCHAR}, #{exportArea,jdbcType=VARCHAR}, #{importArea,jdbcType=VARCHAR},
+    #{operationsArea,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR},
+    #{activityDescription,jdbcType=LONGVARCHAR}, #{businessOverview,jdbcType=LONGVARCHAR},
+    #{competitors,jdbcType=LONGVARCHAR}, #{clients,jdbcType=LONGVARCHAR}, #{commentsStaff,jdbcType=LONGVARCHAR},
+    #{salesAre,jdbcType=LONGVARCHAR}, #{suppliers,jdbcType=LONGVARCHAR}, #{termsPayment,jdbcType=LONGVARCHAR},
+    #{tradeReferences,jdbcType=LONGVARCHAR}, #{otherComment,jdbcType=LONGVARCHAR},
+    #{mainBusiness,jdbcType=LONGVARCHAR},#{fullReportId,jdbcType=INTEGER})
+  </insert>
+
+  <insert id="batchInsert" parameterType="java.util.List">
+    insert into
+    <include refid="table" />
+    (id, activity_code, brands,
+    crefo_no, del_flag, employee_info,
+    employee_num, export_area, import_area,
+    operations_area, update_time, year,
+    activity_description, business_overview,
+    competitors, clients, comments_staff,
+    sales_are, suppliers, terms_payment,
+    trade_references, other_comment,
+    main_business,full_report_id)
+    values
+    <foreach collection ="list" item="operatings" index= "index" separator =",">
+      (#{operatings.id,jdbcType=INTEGER}, #{operatings.activityCode,jdbcType=VARCHAR}, #{operatings.brands,jdbcType=VARCHAR},
+      #{operatings.crefoNo,jdbcType=VARCHAR}, #{operatings.delFlag,jdbcType=VARCHAR}, #{operatings.employeeInfo,jdbcType=VARCHAR},
+      #{operatings.employeeNum,jdbcType=VARCHAR}, #{operatings.exportArea,jdbcType=VARCHAR}, #{operatings.importArea,jdbcType=VARCHAR},
+      #{operatings.operationsArea,jdbcType=VARCHAR}, #{operatings.updateTime,jdbcType=VARCHAR}, #{operatings.year,jdbcType=VARCHAR},
+      #{operatings.activityDescription,jdbcType=LONGVARCHAR}, #{operatings.businessOverview,jdbcType=LONGVARCHAR},
+      #{operatings.competitors,jdbcType=LONGVARCHAR}, #{operatings.clients,jdbcType=LONGVARCHAR}, #{operatings.commentsStaff,jdbcType=LONGVARCHAR},
+      #{operatings.salesAre,jdbcType=LONGVARCHAR}, #{operatings.suppliers,jdbcType=LONGVARCHAR}, #{operatings.termsPayment,jdbcType=LONGVARCHAR},
+      #{operatings.tradeReferences,jdbcType=LONGVARCHAR}, #{operatings.otherComment,jdbcType=LONGVARCHAR},
+      #{operatings.mainBusiness,jdbcType=LONGVARCHAR},#{operatings.fullReportId,jdbcType=INTEGER})
+    </foreach >
+  </insert>
+
+  <delete id="deleteById" parameterType="Integer" >
+    delete from
+    <include refid="table" />
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <update id="update" parameterType="com.mika.credit.common.entity.report.en.Operatings" >
+    update operatings
+    set activity_code = #{activityCode,jdbcType=VARCHAR},
+      brands = #{brands,jdbcType=VARCHAR},
+      crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=VARCHAR},
+      employee_info = #{employeeInfo,jdbcType=VARCHAR},
+      employee_num = #{employeeNum,jdbcType=VARCHAR},
+      export_area = #{exportArea,jdbcType=VARCHAR},
+      import_area = #{importArea,jdbcType=VARCHAR},
+      operations_area = #{operationsArea,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      year = #{year,jdbcType=VARCHAR},
+      activity_description = #{activityDescription,jdbcType=LONGVARCHAR},
+      business_overview = #{businessOverview,jdbcType=LONGVARCHAR},
+      competitors = #{competitors,jdbcType=LONGVARCHAR},
+      clients = #{clients,jdbcType=LONGVARCHAR},
+      comments_staff = #{commentsStaff,jdbcType=LONGVARCHAR},
+      sales_are = #{salesAre,jdbcType=LONGVARCHAR},
+      suppliers = #{suppliers,jdbcType=LONGVARCHAR},
+      terms_payment = #{termsPayment,jdbcType=LONGVARCHAR},
+      trade_references = #{tradeReferences,jdbcType=LONGVARCHAR},
+      other_comment = #{otherComment,jdbcType=LONGVARCHAR},
+      main_business = #{mainBusiness,jdbcType=LONGVARCHAR},
+	full_report_id = #{fullReportId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <insert id="insertSelective" parameterType="com.mika.credit.common.entity.report.en.Operatings" >
+    insert into operatings
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="activityCode != null" >
+        activity_code,
+      </if>
+      <if test="brands != null" >
+        brands,
+      </if>
+      <if test="crefoNo != null" >
+        crefo_no,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="employeeInfo != null" >
+        employee_info,
+      </if>
+      <if test="employeeNum != null" >
+        employee_num,
+      </if>
+      <if test="exportArea != null" >
+        export_area,
+      </if>
+      <if test="importArea != null" >
+        import_area,
+      </if>
+      <if test="operationsArea != null" >
+        operations_area,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="year != null" >
+        year,
+      </if>
+      <if test="activityDescription != null" >
+        activity_description,
+      </if>
+      <if test="businessOverview != null" >
+        business_overview,
+      </if>
+      <if test="competitors != null" >
+        competitors,
+      </if>
+      <if test="clients != null" >
+        clients,
+      </if>
+      <if test="commentsStaff != null" >
+        comments_staff,
+      </if>
+      <if test="salesAre != null" >
+        sales_are,
+      </if>
+      <if test="suppliers != null" >
+        suppliers,
+      </if>
+      <if test="termsPayment != null" >
+        terms_payment,
+      </if>
+      <if test="tradeReferences != null" >
+        trade_references,
+      </if>
+      <if test="otherComment != null" >
+        other_comment,
+      </if>
+      <if test="mainBusiness != null" >
+        main_business,
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="activityCode != null" >
+        #{activityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="brands != null" >
+        #{brands,jdbcType=VARCHAR},
+      </if>
+      <if test="crefoNo != null" >
+        #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeInfo != null" >
+        #{employeeInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeNum != null" >
+        #{employeeNum,jdbcType=VARCHAR},
+      </if>
+      <if test="exportArea != null" >
+        #{exportArea,jdbcType=VARCHAR},
+      </if>
+      <if test="importArea != null" >
+        #{importArea,jdbcType=VARCHAR},
+      </if>
+      <if test="operationsArea != null" >
+        #{operationsArea,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="activityDescription != null" >
+        #{activityDescription,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="businessOverview != null" >
+        #{businessOverview,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="competitors != null" >
+        #{competitors,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="clients != null" >
+        #{clients,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="commentsStaff != null" >
+        #{commentsStaff,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="salesAre != null" >
+        #{salesAre,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="suppliers != null" >
+        #{suppliers,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="termsPayment != null" >
+        #{termsPayment,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="tradeReferences != null" >
+        #{tradeReferences,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="otherComment != null" >
+        #{otherComment,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="mainBusiness != null" >
+        #{mainBusiness,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        #{fullReportId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateSelective" parameterType="com.mika.credit.common.entity.report.en.Operatings" >
+    update operatings
+    <set >
+      <if test="activityCode != null" >
+        activity_code = #{activityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="brands != null" >
+        brands = #{brands,jdbcType=VARCHAR},
+      </if>
+      <if test="crefoNo != null" >
+        crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeInfo != null" >
+        employee_info = #{employeeInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeNum != null" >
+        employee_num = #{employeeNum,jdbcType=VARCHAR},
+      </if>
+      <if test="exportArea != null" >
+        export_area = #{exportArea,jdbcType=VARCHAR},
+      </if>
+      <if test="importArea != null" >
+        import_area = #{importArea,jdbcType=VARCHAR},
+      </if>
+      <if test="operationsArea != null" >
+        operations_area = #{operationsArea,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null" >
+        year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="activityDescription != null" >
+        activity_description = #{activityDescription,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="businessOverview != null" >
+        business_overview = #{businessOverview,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="competitors != null" >
+        competitors = #{competitors,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="clients != null" >
+        clients = #{clients,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="commentsStaff != null" >
+        comments_staff = #{commentsStaff,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="salesAre != null" >
+        sales_are = #{salesAre,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="suppliers != null" >
+        suppliers = #{suppliers,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="termsPayment != null" >
+        terms_payment = #{termsPayment,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="tradeReferences != null" >
+        trade_references = #{tradeReferences,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="otherComment != null" >
+        other_comment = #{otherComment,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="mainBusiness != null" >
+        main_business = #{mainBusiness,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id = #{fullReportId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

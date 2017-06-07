@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.globaleagle.admin.dao.CorpMapper" >
+  <resultMap id="corpMap" type="com.mika.credit.facade.globaleagle.admin.model.Corp" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="lev" property="lev" jdbcType="INTEGER" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="addr" property="addr" jdbcType="VARCHAR" />
+    <result column="artificial" property="artificial" jdbcType="VARCHAR" />
+    <result column="job" property="job" jdbcType="VARCHAR" />
+    <result column="pid" property="pid" jdbcType="VARCHAR" />
+    <result column="corp_type_id" property="corpTypeId" jdbcType="VARCHAR" />
+    <association property="parent" column="pid" select="com.mika.credit.facade.globaleagle.admin.dao.CorpMapper.queryById"/>
+    <association property="corpType" column="corp_type_id" select="com.mika.credit.facade.globaleagle.admin.dao.CorpMapper.queryById"/>
+  </resultMap>
+  <select id="queryById" resultMap="corpMap" parameterType="java.lang.String" >
+    select *
+    from s_corp
+    where id = #{id}
+  </select>
+    <select id="queryAll" resultMap="corpMap" >
+    select *
+    from s_corp
+  </select>
+  
+  <insert id="add" parameterType="com.mika.credit.facade.globaleagle.admin.model.Corp">
+  	insert into s_corp(id,lev,code,name,tel,addr,artificial,job,pid,corp_type_id)
+  	values(#{id},#{lev},#{code},#{name},#{tel},#{addr},#{artificial},#{job},#{pid},#{corpTypeId})
+  </insert>
+  
+  <update id="mod" parameterType="com.mika.credit.facade.globaleagle.admin.model.Corp">
+  	update s_corp set
+  	lev=#{lev},
+  	code=#{code},
+  	name=#{name},
+  	tel=#{tel},
+  	addr=#{addr},
+  	artificial=#{artificial},
+  	job=#{job},
+  	pid=#{pid},
+  	corp_type_id=#{corpTypeId}
+  	where id = #{id}
+  </update>
+  
+  <delete id="del" parameterType="java.lang.String">
+  	delete from s_corp where id=#{id}
+  </delete>
+  
+  
+</mapper>

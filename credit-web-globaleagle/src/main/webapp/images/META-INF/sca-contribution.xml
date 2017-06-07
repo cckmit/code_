@@ -1,0 +1,4 @@
+<contribution xmlns="http://www.osoa.org/xmlns/sca/1.0"
+			  xmlns:sample="http://tuscany.demo.kth.org">
+	<!--<deployable composite="sample:InvokeDemoComposite"/>-->
+</contribution>

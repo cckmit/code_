@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.front.cn.dao.impl.SxggDaoImpl" >
+  <cache eviction="LRU" type="com.mika.credit.common.core.mybatis.cache.redis.sharded.MybatiesRedisCache" />
+  <resultMap id="BaseResultMap" type="com.mika.credit.common.entity.report.cn.Sxgg" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="crefo_no" property="crefoNo" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="LONGVARCHAR" />
+    <result column="basis_unit_cn" property="basisUnitCN" jdbcType="LONGVARCHAR" />
+    <result column="basis_unit_en" property="basisUnitEN" jdbcType="LONGVARCHAR" />
+    <result column="child_check" property="childCheck" jdbcType="LONGVARCHAR" />
+    <result column="docket_no_cn" property="docketNoCN" jdbcType="LONGVARCHAR" />
+    <result column="docket_no_en" property="docketNoEN" jdbcType="LONGVARCHAR" />
+    <result column="effective_obligation_cn" property="effectiveObligationCN" jdbcType="LONGVARCHAR" />
+    <result column="effective_obligation_en" property="effectiveObligationEN" jdbcType="LONGVARCHAR" />
+    <result column="enforcee_name_cn" property="enforceeNameCN" jdbcType="LONGVARCHAR" />
+    <result column="enforcee_name_en" property="enforceeNameEN" jdbcType="LONGVARCHAR" />
+    <result column="enforcee_perform_cn" property="enforceePerformCN" jdbcType="LONGVARCHAR" />
+    <result column="enforcee_perform_en" property="enforceePerformEN" jdbcType="LONGVARCHAR" />
+    <result column="enforcement_basis_number_cn" property="enforcementBasisNumberCN" jdbcType="LONGVARCHAR" />
+    <result column="enforcement_basis_number_en" property="enforcementBasisNumberEN" jdbcType="LONGVARCHAR" />
+    <result column="ent_court_name_cn" property="entCourtNameCN" jdbcType="LONGVARCHAR" />
+    <result column="ent_court_name_en" property="entCourtNameEN" jdbcType="LONGVARCHAR" />
+    <result column="finish_date" property="finishDate" jdbcType="LONGVARCHAR" />
+    <result column="idcard_no" property="idcardNo" jdbcType="LONGVARCHAR" />
+    <result column="province_cn" property="provinceCN" jdbcType="LONGVARCHAR" />
+    <result column="province_en" property="provinceEN" jdbcType="LONGVARCHAR" />
+    <result column="related_party" property="relatedParty" jdbcType="LONGVARCHAR" />
+    <result column="sex" property="sex" jdbcType="LONGVARCHAR" />
+    <result column="sort_time" property="sortTime" jdbcType="LONGVARCHAR" />
+    <result column="specific_circumstance_cn" property="specificCircumstanceCN" jdbcType="LONGVARCHAR" />
+    <result column="specific_circumstance_en" property="specificCircumstanceEN" jdbcType="LONGVARCHAR" />
+    <result column="sxgg_id" property="sxggId" jdbcType="LONGVARCHAR" />
+    <result column="full_report_id" property="fullReportId" jdbcType="INTEGER" />
+  </resultMap>
+
+  <sql id="table"> sxgg </sql>
+
+  <sql id="Base_Column_List" >
+    id, crefo_no, del_flag, update_time,
+    age, basis_unit_cn, basis_unit_en, child_check, docket_no_cn, docket_no_en, effective_obligation_cn, 
+    effective_obligation_en, enforcee_name_cn, enforcee_name_en, enforcee_perform_cn, enforcee_perform_en, 
+    enforcement_basis_number_cn, enforcement_basis_number_en, ent_court_name_cn, ent_court_name_en, 
+    finish_date, idcard_no, province_cn, province_en, related_party, sex, sort_time, specific_circumstance_cn, 
+    specific_circumstance_en, sxgg_id,full_report_id
+  </sql>
+
+  <sql id="condition_sql">
+    <if test="id != null" >
+      and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="crefoNo != null" >
+      and crefo_no = #{crefoNo,jdbcType=VARCHAR}
+    </if>
+    <if test="delFlag != null" >
+      and del_flag = #{delFlag,jdbcType=VARCHAR}
+    </if>
+    <if test="updateTime != null" >
+      and update_time = #{updateTime,jdbcType=VARCHAR}
+    </if>
+    <if test="age != null" >
+      and age = #{age,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="basisUnitCN != null" >
+      and basis_unit_cn = #{basisUnitCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="basisUnitEN != null" >
+      and basis_unit_en = #{basisUnitEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="childCheck != null" >
+      and child_check = #{childCheck,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="docketNoCN != null" >
+      and docket_no_cn = #{docketNoCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="docketNoEN != null" >
+      and docket_no_en = #{docketNoEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="effectiveObligationCN != null" >
+      and effective_obligation_cn = #{effectiveObligationCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="effectiveObligationEN != null" >
+      and effective_obligation_en = #{effectiveObligationEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="enforceeNameCN != null" >
+      and enforcee_name_cn = #{enforceeNameCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="enforceeNameEN != null" >
+      and enforcee_name_en = #{enforceeNameEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="enforceePerformCN != null" >
+      and enforcee_perform_cn = #{enforceePerformCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="enforceePerformEN != null" >
+      and enforcee_perform_en = #{enforceePerformEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="enforcementBasisNumberCN != null" >
+      and enforcement_basis_number_cn = #{enforcementBasisNumberCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="enforcementBasisNumberEN != null" >
+      and enforcement_basis_number_en = #{enforcementBasisNumberEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="entCourtNameCN != null" >
+      and ent_court_name_cn = #{entCourtNameCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="entCourtNameEN != null" >
+      and ent_court_name_en = #{entCourtNameEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="finishDate != null" >
+      and finish_date = #{finishDate,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="idcardNo != null" >
+      and idcard_no = #{idcardNo,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="provinceCN != null" >
+      and province_cn = #{provinceCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="provinceEN != null" >
+      and province_en = #{provinceEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="relatedParty != null" >
+      and related_party = #{relatedParty,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="sex != null" >
+      and sex = #{sex,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="sortTime != null" >
+      and sort_time = #{sortTime,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="specificCircumstanceCN != null" >
+      and specific_circumstance_cn = #{specificCircumstanceCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="specificCircumstanceEN != null" >
+      and specific_circumstance_en = #{specificCircumstanceEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="sxggId != null" >
+      and sxgg_id = #{sxggId,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="fullReportId != null" >
+      and full_report_id = #{fullReportId,jdbcType=INTEGER}
+    </if>
+  </sql>
+
+  <select id="getById" parameterType="Integer" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    where id = #{id}
+  </select>
+
+  <select id="listBy" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <select id="listPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+    <![CDATA[ order by id desc]]>
+  </select>
+
+  <select id="listPageCount" parameterType="java.util.Map" resultType="Integer">
+    select count(1) from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <insert id="insert" parameterType="com.mika.credit.common.entity.report.cn.Sxgg" keyProperty="id" useGeneratedKeys="true">
+    insert into
+    <include refid="table" />
+    (id, crefo_no, del_flag,
+    update_time, age, basis_unit_cn,
+    basis_unit_en, child_check, docket_no_cn,
+    docket_no_en, effective_obligation_cn,
+    effective_obligation_en, enforcee_name_cn,
+    enforcee_name_en, enforcee_perform_cn,
+    enforcee_perform_en, enforcement_basis_number_cn,
+    enforcement_basis_number_en, ent_court_name_cn,
+    ent_court_name_en, finish_date, idcard_no,
+    province_cn, province_en, related_party,
+    sex, sort_time, specific_circumstance_cn,
+    specific_circumstance_en, sxgg_id,full_report_id)
+    values (#{id,jdbcType=INTEGER}, #{crefoNo,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR},
+    #{updateTime,jdbcType=VARCHAR}, #{age,jdbcType=LONGVARCHAR}, #{basisUnitCN,jdbcType=LONGVARCHAR},
+    #{basisUnitEN,jdbcType=LONGVARCHAR}, #{childCheck,jdbcType=LONGVARCHAR}, #{docketNoCN,jdbcType=LONGVARCHAR},
+    #{docketNoEN,jdbcType=LONGVARCHAR}, #{effectiveObligationCN,jdbcType=LONGVARCHAR},
+    #{effectiveObligationEN,jdbcType=LONGVARCHAR}, #{enforceeNameCN,jdbcType=LONGVARCHAR},
+    #{enforceeNameEN,jdbcType=LONGVARCHAR}, #{enforceePerformCN,jdbcType=LONGVARCHAR},
+    #{enforceePerformEN,jdbcType=LONGVARCHAR}, #{enforcementBasisNumberCN,jdbcType=LONGVARCHAR},
+    #{enforcementBasisNumberEN,jdbcType=LONGVARCHAR}, #{entCourtNameCN,jdbcType=LONGVARCHAR},
+    #{entCourtNameEN,jdbcType=LONGVARCHAR}, #{finishDate,jdbcType=LONGVARCHAR}, #{idcardNo,jdbcType=LONGVARCHAR},
+    #{provinceCN,jdbcType=LONGVARCHAR}, #{provinceEN,jdbcType=LONGVARCHAR}, #{relatedParty,jdbcType=LONGVARCHAR},
+    #{sex,jdbcType=LONGVARCHAR}, #{sortTime,jdbcType=LONGVARCHAR}, #{specificCircumstanceCN,jdbcType=LONGVARCHAR},
+    #{specificCircumstanceEN,jdbcType=LONGVARCHAR}, #{sxggId,jdbcType=LONGVARCHAR},#{fullReportId,jdbcType=INTEGER})
+  </insert>
+
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from
+    <include refid="table" />
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <update id="update" parameterType="com.mika.credit.common.entity.report.cn.Sxgg" >
+    update sxgg
+    set crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      age = #{age,jdbcType=LONGVARCHAR},
+      basis_unit_cn = #{basisUnitCN,jdbcType=LONGVARCHAR},
+      basis_unit_en = #{basisUnitEN,jdbcType=LONGVARCHAR},
+      child_check = #{childCheck,jdbcType=LONGVARCHAR},
+      docket_no_cn = #{docketNoCN,jdbcType=LONGVARCHAR},
+      docket_no_en = #{docketNoEN,jdbcType=LONGVARCHAR},
+      effective_obligation_cn = #{effectiveObligationCN,jdbcType=LONGVARCHAR},
+      effective_obligation_en = #{effectiveObligationEN,jdbcType=LONGVARCHAR},
+      enforcee_name_cn = #{enforceeNameCN,jdbcType=LONGVARCHAR},
+      enforcee_name_en = #{enforceeNameEN,jdbcType=LONGVARCHAR},
+      enforcee_perform_cn = #{enforceePerformCN,jdbcType=LONGVARCHAR},
+      enforcee_perform_en = #{enforceePerformEN,jdbcType=LONGVARCHAR},
+      enforcement_basis_number_cn = #{enforcementBasisNumberCN,jdbcType=LONGVARCHAR},
+      enforcement_basis_number_en = #{enforcementBasisNumberEN,jdbcType=LONGVARCHAR},
+      ent_court_name_cn = #{entCourtNameCN,jdbcType=LONGVARCHAR},
+      ent_court_name_en = #{entCourtNameEN,jdbcType=LONGVARCHAR},
+      finish_date = #{finishDate,jdbcType=LONGVARCHAR},
+      idcard_no = #{idcardNo,jdbcType=LONGVARCHAR},
+      province_cn = #{provinceCN,jdbcType=LONGVARCHAR},
+      province_en = #{provinceEN,jdbcType=LONGVARCHAR},
+      related_party = #{relatedParty,jdbcType=LONGVARCHAR},
+      sex = #{sex,jdbcType=LONGVARCHAR},
+      sort_time = #{sortTime,jdbcType=LONGVARCHAR},
+      specific_circumstance_cn = #{specificCircumstanceCN,jdbcType=LONGVARCHAR},
+      specific_circumstance_en = #{specificCircumstanceEN,jdbcType=LONGVARCHAR},
+      sxgg_id = #{sxggId,jdbcType=LONGVARCHAR},
+      full_report_id = #{fullReportId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <insert id="insertSelective" parameterType="com.mika.credit.common.entity.report.cn.Sxgg" >
+    insert into sxgg
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="crefoNo != null" >
+        crefo_no,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="basisUnitCN != null" >
+        basis_unit_cn,
+      </if>
+      <if test="basisUnitEN != null" >
+        basis_unit_en,
+      </if>
+      <if test="childCheck != null" >
+        child_check,
+      </if>
+      <if test="docketNoCN != null" >
+        docket_no_cn,
+      </if>
+      <if test="docketNoEN != null" >
+        docket_no_en,
+      </if>
+      <if test="effectiveObligationCN != null" >
+        effective_obligation_cn,
+      </if>
+      <if test="effectiveObligationEN != null" >
+        effective_obligation_en,
+      </if>
+      <if test="enforceeNameCN != null" >
+        enforcee_name_cn,
+      </if>
+      <if test="enforceeNameEN != null" >
+        enforcee_name_en,
+      </if>
+      <if test="enforceePerformCN != null" >
+        enforcee_perform_cn,
+      </if>
+      <if test="enforceePerformEN != null" >
+        enforcee_perform_en,
+      </if>
+      <if test="enforcementBasisNumberCN != null" >
+        enforcement_basis_number_cn,
+      </if>
+      <if test="enforcementBasisNumberEN != null" >
+        enforcement_basis_number_en,
+      </if>
+      <if test="entCourtNameCN != null" >
+        ent_court_name_cn,
+      </if>
+      <if test="entCourtNameEN != null" >
+        ent_court_name_en,
+      </if>
+      <if test="finishDate != null" >
+        finish_date,
+      </if>
+      <if test="idcardNo != null" >
+        idcard_no,
+      </if>
+      <if test="provinceCN != null" >
+        province_cn,
+      </if>
+      <if test="provinceEN != null" >
+        province_en,
+      </if>
+      <if test="relatedParty != null" >
+        related_party,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="sortTime != null" >
+        sort_time,
+      </if>
+      <if test="specificCircumstanceCN != null" >
+        specific_circumstance_cn,
+      </if>
+      <if test="specificCircumstanceEN != null" >
+        specific_circumstance_en,
+      </if>
+      <if test="sxggId != null" >
+        sxgg_id,
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="crefoNo != null" >
+        #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="basisUnitCN != null" >
+        #{basisUnitCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="basisUnitEN != null" >
+        #{basisUnitEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="childCheck != null" >
+        #{childCheck,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="docketNoCN != null" >
+        #{docketNoCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="docketNoEN != null" >
+        #{docketNoEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="effectiveObligationCN != null" >
+        #{effectiveObligationCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="effectiveObligationEN != null" >
+        #{effectiveObligationEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enforceeNameCN != null" >
+        #{enforceeNameCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enforceeNameEN != null" >
+        #{enforceeNameEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enforceePerformCN != null" >
+        #{enforceePerformCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enforceePerformEN != null" >
+        #{enforceePerformEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enforcementBasisNumberCN != null" >
+        #{enforcementBasisNumberCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enforcementBasisNumberEN != null" >
+        #{enforcementBasisNumberEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="entCourtNameCN != null" >
+        #{entCourtNameCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="entCourtNameEN != null" >
+        #{entCourtNameEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="finishDate != null" >
+        #{finishDate,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="idcardNo != null" >
+        #{idcardNo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="provinceCN != null" >
+        #{provinceCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="provinceEN != null" >
+        #{provinceEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="relatedParty != null" >
+        #{relatedParty,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sortTime != null" >
+        #{sortTime,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="specificCircumstanceCN != null" >
+        #{specificCircumstanceCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="specificCircumstanceEN != null" >
+        #{specificCircumstanceEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sxggId != null" >
+        #{sxggId,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        #{fullReportId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateSelective" parameterType="com.mika.credit.common.entity.report.cn.Sxgg" >
+    update sxgg
+    <set >
+      <if test="crefoNo != null" >
+        crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="basisUnitCN != null" >
+        basis_unit_cn = #{basisUnitCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="basisUnitEN != null" >
+        basis_unit_en = #{basisUnitEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="childCheck != null" >
+        child_check = #{childCheck,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="docketNoCN != null" >
+        docket_no_cn = #{docketNoCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="docketNoEN != null" >
+        docket_no_en = #{docketNoEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="effectiveObligationCN != null" >
+        effective_obligation_cn = #{effectiveObligationCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="effectiveObligationEN != null" >
+        effective_obligation_en = #{effectiveObligationEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enforceeNameCN != null" >
+        enforcee_name_cn = #{enforceeNameCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enforceeNameEN != null" >
+        enforcee_name_en = #{enforceeNameEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enforceePerformCN != null" >
+        enforcee_perform_cn = #{enforceePerformCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enforceePerformEN != null" >
+        enforcee_perform_en = #{enforceePerformEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enforcementBasisNumberCN != null" >
+        enforcement_basis_number_cn = #{enforcementBasisNumberCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enforcementBasisNumberEN != null" >
+        enforcement_basis_number_en = #{enforcementBasisNumberEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="entCourtNameCN != null" >
+        ent_court_name_cn = #{entCourtNameCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="entCourtNameEN != null" >
+        ent_court_name_en = #{entCourtNameEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="finishDate != null" >
+        finish_date = #{finishDate,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="idcardNo != null" >
+        idcard_no = #{idcardNo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="provinceCN != null" >
+        province_cn = #{provinceCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="provinceEN != null" >
+        province_en = #{provinceEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="relatedParty != null" >
+        related_party = #{relatedParty,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sortTime != null" >
+        sort_time = #{sortTime,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="specificCircumstanceCN != null" >
+        specific_circumstance_cn = #{specificCircumstanceCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="specificCircumstanceEN != null" >
+        specific_circumstance_en = #{specificCircumstanceEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sxggId != null" >
+        sxgg_id = #{sxggId,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id = #{fullReportId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

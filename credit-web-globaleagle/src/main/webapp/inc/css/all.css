@@ -1,0 +1,51 @@
+@charset "utf-8";
+
+
+/*banner*/
+.bannerbox{ background:url(../images/banner_02.jpg); width:100%; height:416px;}
+.banner_wenzi{ width:1200px; height:100px; margin:0 auto; padding-top:50px;}
+.banner_wenzi h1{font-size:40px; font-family:"苹方 细体"; padding-top:100px;color:#FFF;text-align:center;letter-spacing:2px;}
+.banner_p{float-size:18px; float-family:"微软雅黑"; padding-top:20px;color:#FFF; text-align:center; letter-spacing:2px;}
+.banner_sousuobox{  height:48px; background:#fff; margin:0 auto; margin-top:40px; width:757px;}
+.banner_sousuoimg{ background:url(../images/sousuo.png) no-repeat center center; width:56px; height:48px; float:left;}
+.banner_sousuo{ float:left; width:400px; height:48px; border:none; font-size:14px; font-family:"微软雅黑"; color:#999; line-height:48px; letter-spacing:1px;}
+.banner_shuxian{ float:left;}
+.banner_yg{ color:#999; font-size:14px; float:left; line-height:48px; width:120px; margin-left:30px; font-family:"微软雅黑"}
+.banner_tjan{height:48px; border:none; background:#f49503; width:150px;font-size:18px; color:#FFF; font-family:"微软雅黑"; float:left}
+.banner_tjan:hover{ background:#e18903;cursor:pointer;}
+
+
+
+
+
+.tabbox{width:1200px;height:140px;margin:0 auto;font-family:'微软雅黑'; margin-top:30px;}
+.tabbox .tab{overflow:hidden; margin:0 auto; width:212px; height:30px; border:1px #aaaaaa solid}
+.tabbox .tab a{display:block; width:106px; height:30px;float:left;text-decoration:none;color:#333; line-height:30px; text-align:center;}
+.tabbox .tab a:hover{background:#8b8c8d;color:#fff;text-decoration:none;}
+.tabbox .tab a.on{background:#8b8c8d;color:#fff;text-decoration:none;}
+.tabbox .content{overflow:hidden;width:1200px;height:280px;position:relative;}
+.tabbox .content ul{position:absolute;left:0;top:0;height:280px; margin-top:50px;}
+.tabbox .content li{width:1200px;height:280px;float:left; }
+.guojia_1{ background:url(../images/guojia_05.jpg) no-repeat left center; padding-left:40px; width:100px; height:30px; line-height:30px; float:left; margin-right:50px;}
+.guojia_elie{ margin-top:80px;}
+.guojia_sanlie{ margin-top:160px;}
+
+
+
+
+
+.index_mainbox{ width:100%; height:167px; border-top:1px #d1d0d0 solid; margin-top:220px; overflow:hidden;}
+.index_mainbox ul{ width:1200px; height:167px; margin:0 auto;}
+.index_mainbox ul li{ float:left; margin-right:50px;}
+.main_rx{ float:left;}
+.main_rxwz{ float:left; margin-top:30px; margin-left:20px;}
+.main_rxwz h1{ font-size:24px; color:#58544c; font-family:"微软雅黑"}
+.main_rxwz h3{ font-size:14px; color:#616875; font-family:"微软雅黑"; font-weight:normal; margin-top:10px;}
+.main_rxwz p{ font-size:14px; color:#616875; font-family:"微软雅黑"}
+
+
+
+
+.dibubox{ width:100%; height:66px; background:#34495e; overflow:hidden}
+.dibubox ul{ width:1200px; height:66px; margin:0 auto;}
+.dibubox ul li{ line-height:66px; color:#f1f1f2; font-size:14px; letter-spacing:1px; font-family:"微软雅黑"; text-transform:capitalize; float:left;}

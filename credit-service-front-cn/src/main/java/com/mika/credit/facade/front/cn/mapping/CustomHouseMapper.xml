@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.front.cn.dao.impl.CustomHouseDaoImpl" >
+  <cache eviction="LRU" type="com.mika.credit.common.core.mybatis.cache.redis.sharded.MybatiesRedisCache" />
+  <resultMap id="BaseResultMap" type="com.mika.credit.common.entity.report.cn.CustomHouse" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="mid" property="mid" jdbcType="VARCHAR" />
+    <result column="cid" property="cid" jdbcType="VARCHAR" />
+    <result column="cid_en" property="cidEN" jdbcType="VARCHAR" />
+    <result column="reg_data" property="regData" jdbcType="VARCHAR" />
+    <result column="note_cn" property="noteCN" jdbcType="VARCHAR" />
+    <result column="note_en" property="noteEN" jdbcType="VARCHAR" />
+    <result column="crefo_no" property="crefoNo" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="VARCHAR" />
+    <result column="supplier_num" property="supplierNum" jdbcType="VARCHAR" />
+    <result column="management_categories_cn" property="managementCategoriesCN" jdbcType="VARCHAR" />
+    <result column="management_categories_en" property="managementCategoriesEN" jdbcType="VARCHAR" />
+    <result column="customs_collections_cn" property="customsCollectionsCN" jdbcType="VARCHAR" />
+    <result column="customs_collections_en" property="customsCollectionsEN" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+    <result column="full_report_id" property="fullReportId" jdbcType="INTEGER" />
+  </resultMap>
+
+  <sql id="table"> custom_house </sql>
+
+  <sql id="Base_Column_List" >
+    id, code, mid, cid, cid_en, reg_data,
+    note_cn, note_en, crefo_no,del_flag,supplier_num,management_categories_cn,management_categories_en,
+    customs_collections_cn,customs_collections_en,update_time,full_report_id
+  </sql>
+
+  <sql id="condition_sql">
+    <if test="id != null" >
+      and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="code != null" >
+      and code = #{code,jdbcType=VARCHAR}
+    </if>
+    <if test="mid != null" >
+      and mid = #{mid,jdbcType=VARCHAR}
+    </if>
+    <if test="cid != null" >
+      and cid = #{cid,jdbcType=VARCHAR}
+    </if>
+    <if test="cidEN != null" >
+      and cid_en = #{cidEN,jdbcType=VARCHAR}
+    </if>
+    <if test="regData != null" >
+      and reg_data = #{regData,jdbcType=VARCHAR}
+    </if>
+    <if test="noteCN != null" >
+      and note_cn = #{noteCN,jdbcType=VARCHAR}
+    </if>
+    <if test="noteEN != null" >
+      and note_en = #{noteEN,jdbcType=VARCHAR}
+    </if>
+    <if test="crefoNo != null" >
+      and crefo_no = #{crefoNo,jdbcType=VARCHAR}
+    </if>
+    <if test="delFlag != null" >
+      and del_flag = #{delFlag,jdbcType=VARCHAR}
+    </if>
+    <if test="supplierNum != null" >
+      and supplier_num = #{supplierNum,jdbcType=VARCHAR}
+    </if>
+    <if test="managementCategoriesCN != null" >
+      and management_categories_cn = #{managementCategoriesCN,jdbcType=VARCHAR}
+    </if>
+    <if test="managementCategoriesEN != null" >
+      and management_categories_en = #{managementCategoriesEN,jdbcType=VARCHAR}
+    </if>
+    <if test="customsCollectionsCN != null" >
+      and customs_collections_cn = #{customsCollectionsCN,jdbcType=VARCHAR}
+    </if>
+    <if test="customsCollectionsEN != null" >
+      and customs_collections_en = #{customsCollectionsEN,jdbcType=VARCHAR}
+    </if>
+    <if test="updateTime != null" >
+      and update_time = #{updateTime,jdbcType=VARCHAR}
+    </if>
+    <if test="fullReportId != null" >
+      and full_report_id = #{fullReportId,jdbcType=INTEGER}
+    </if>
+  </sql>
+
+  <select id="getById" parameterType="Integer" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    where ID = #{id}
+  </select>
+
+  <select id="listBy" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <select id="listPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+    <![CDATA[ order by ID desc]]>
+  </select>
+
+  <select id="listPageCount" parameterType="java.util.Map" resultType="Integer">
+    select count(1) from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <insert id="insert" parameterType="com.mika.credit.common.entity.report.cn.CustomHouse" keyProperty="id" useGeneratedKeys="true">
+    insert into
+    <include refid="table" />
+    (id, code, mid,
+    cid, cid_en, reg_data,
+    note_cn, note_en, crefo_no,del_flag,supplier_num,management_categories_cn,management_categories_en,
+    customs_collections_cn,customs_collections_en,update_time,full_report_id)
+    values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{mid,jdbcType=VARCHAR},
+    #{cid,jdbcType=VARCHAR}, #{cidEN,jdbcType=VARCHAR}, #{regData,jdbcType=VARCHAR},
+    #{noteCN,jdbcType=VARCHAR}, #{noteEN,jdbcType=VARCHAR}, #{crefoNo,jdbcType=VARCHAR},
+    #{delFlag,jdbcType=VARCHAR},#{supplierNum,jdbcType=VARCHAR},#{managementCategoriesCN,jdbcType=VARCHAR},
+    #{managementCategoriesEN,jdbcType=VARCHAR},#{customsCollectionsCN,jdbcType=VARCHAR},
+    #{customsCollectionsEN,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR},#{fullReportId,jdbcType=INTEGER})
+  </insert>
+
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from
+    <include refid="table" />
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <update id="update" parameterType="com.mika.credit.common.entity.report.cn.CustomHouse" >
+    update custom_house
+    set code = #{code,jdbcType=VARCHAR},
+      mid = #{mid,jdbcType=VARCHAR},
+      cid = #{cid,jdbcType=VARCHAR},
+      cid_en = #{cidEN,jdbcType=VARCHAR},
+      reg_data = #{regData,jdbcType=VARCHAR},
+      note_cn = #{noteCN,jdbcType=VARCHAR},
+      note_en = #{noteEN,jdbcType=VARCHAR},
+      crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=VARCHAR},
+      supplier_num = #{supplierNum,jdbcType=VARCHAR},
+      management_categories_cn = #{managementCategoriesCN,jdbcType=VARCHAR},
+      management_categories_en = #{managementCategoriesEN,jdbcType=VARCHAR},
+      customs_collections_cn = #{customsCollectionsCN,jdbcType=VARCHAR},
+      customs_collections_en = #{customsCollectionsEN,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      full_report_id = #{fullReportId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <insert id="insertSelective" parameterType="com.mika.credit.common.entity.report.cn.CustomHouse" >
+    insert into custom_house
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="mid != null" >
+        mid,
+      </if>
+      <if test="cid != null" >
+        cid,
+      </if>
+      <if test="cidEN != null" >
+        cid_en,
+      </if>
+      <if test="regData != null" >
+        reg_data,
+      </if>
+      <if test="noteCN != null" >
+        note_cn,
+      </if>
+      <if test="noteEN != null" >
+        note_en,
+      </if>
+      <if test="crefoNo != null" >
+        crefo_no,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="supplierNum != null" >
+        supplier_num,
+      </if>
+      <if test="managementCategoriesCN != null" >
+        management_categories_cn,
+      </if>
+      <if test="managementCategoriesEN != null" >
+        management_categories_en,
+      </if>
+      <if test="customsCollectionsCN != null" >
+        customs_collections_cn,
+      </if>
+      <if test="customsCollectionsEN != null" >
+        customs_collections_en,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="mid != null" >
+        #{mid,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null" >
+        #{cid,jdbcType=VARCHAR},
+      </if>
+      <if test="cidEN != null" >
+        #{cidEN,jdbcType=VARCHAR},
+      </if>
+      <if test="regData != null" >
+        #{regData,jdbcType=VARCHAR},
+      </if>
+      <if test="noteCN != null" >
+        #{noteCN,jdbcType=VARCHAR},
+      </if>
+      <if test="noteEN != null" >
+        #{noteEN,jdbcType=VARCHAR},
+      </if>
+      <if test="crefoNo != null" >
+        #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierNum != null" >
+        #{supplierNum,jdbcType=VARCHAR},
+      </if>
+      <if test="managementCategoriesCN != null" >
+        #{managementCategoriesCN,jdbcType=VARCHAR},
+      </if>
+      <if test="managementCategoriesEN != null" >
+        #{managementCategoriesEN,jdbcType=VARCHAR},
+      </if>
+      <if test="customsCollectionsCN != null" >
+        #{customsCollectionsCN,jdbcType=VARCHAR},
+      </if>
+      <if test="customsCollectionsEN != null" >
+        #{customsCollectionsEN,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        #{fullReportId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateSelective" parameterType="com.mika.credit.common.entity.report.cn.CustomHouse" >
+    update custom_house
+    <set >
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="mid != null" >
+        mid = #{mid,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null" >
+        cid = #{cid,jdbcType=VARCHAR},
+      </if>
+      <if test="cidEN != null" >
+        cid_en = #{cidEN,jdbcType=VARCHAR},
+      </if>
+      <if test="regData != null" >
+        reg_data = #{regData,jdbcType=VARCHAR},
+      </if>
+      <if test="noteCN != null" >
+        note_cn = #{noteCN,jdbcType=VARCHAR},
+      </if>
+      <if test="noteEN != null" >
+        note_en = #{noteEN,jdbcType=VARCHAR},
+      </if>
+      <if test="crefoNo != null" >
+        crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierNum != null" >
+        supplier_num = #{supplierNum,jdbcType=VARCHAR},
+      </if>
+      <if test="managementCategoriesCN != null" >
+        management_categories_cn = #{managementCategoriesCN,jdbcType=VARCHAR},
+      </if>
+      <if test="managementCategoriesEN != null" >
+        management_categories_en = #{managementCategoriesEN,jdbcType=VARCHAR},
+      </if>
+      <if test="customsCollectionsCN != null" >
+        customs_collections_cn = #{customsCollectionsCN,jdbcType=VARCHAR},
+      </if>
+      <if test="customsCollectionsEN != null" >
+        customs_collections_en = #{customsCollectionsEN,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id = #{fullReportId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

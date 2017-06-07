@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mika.credit.facade.order.dao.OrderDetailViewMapper">
+  <resultMap id="BaseResultMap" type="com.mika.credit.common.entity.order.OrderDetailView">
+    <result column="id" jdbcType="BIGINT" property="id" />
+    <result column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="crefo_no" jdbcType="VARCHAR" property="crefoNo" />
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+    <result column="company_namecn" jdbcType="VARCHAR" property="companyNameCN" />
+    <result column="company_no" jdbcType="VARCHAR" property="companyNo" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="price_actual" jdbcType="DECIMAL" property="priceActual" />
+    <result column="product_id" jdbcType="INTEGER" property="productId" />
+    <result column="report_lang" jdbcType="TINYINT" property="reportLang" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="country_id" jdbcType="INTEGER" property="countryId" />
+    <result column="country_name" jdbcType="VARCHAR" property="countryName" />
+    <result column="path_file" jdbcType="VARCHAR" property="pathFile" />
+    <result column="path_data" jdbcType="VARCHAR" property="pathData" />
+    <result column="path_data_file" jdbcType="VARCHAR" property="pathDataFile"/>
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="expect_hour" jdbcType="INTEGER" property="expectHour" />
+    <result column="expect_time" jdbcType="TIMESTAMP" property="expectTime" />
+    <result column="finish_time" jdbcType="TIMESTAMP" property="finishTime" />
+    <result column="supplier_expect_hour" jdbcType="INTEGER" property="supplierExpectHour" />
+    <result column="supplier_expect_time" jdbcType="TIMESTAMP" property="supplierExpectTime" />
+    <result column="supplier_id" jdbcType="INTEGER" property="supplierId" />
+    <result column="report_user_id" jdbcType="INTEGER" property="reportUserId" />
+    <result column="check_user_id" jdbcType="INTEGER" property="checkUserId" />
+    <result column="charge_user_id" jdbcType="INTEGER" property="chargeUserId" />
+    <result column="is_special" jdbcType="BIT" property="isSpecial" />
+    <result column="is_express" jdbcType="BIT" property="isExpress" />
+    <result column="db_is_update" jdbcType="BIT" property="dbIsUpDate"/>
+    <result column="cpm_is_update" jdbcType="BIT" property="cpmIsUpdate"/>
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+    <result column="source" jdbcType="TINYINT" property="source" />
+    <result column="order_status" jdbcType="TINYINT" property="orderStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="order_update_time" jdbcType="TIMESTAMP" property="orderUpdateTime" />
+    <result column="order_expect_time" jdbcType="TIMESTAMP" property="orderExpectTime" />
+    <result column="order_finish_time" jdbcType="TIMESTAMP" property="orderFinishTime" />
+    <result column="customer_id" jdbcType="INTEGER" property="customerId" />
+    <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
+    <result column="customer_no" jdbcType="VARCHAR" property="customerNo" />
+    <result column="customer_email" jdbcType="VARCHAR" property="customerEmail" />
+    <result column="create_user_id" jdbcType="INTEGER" property="createUserId" />
+    <result column="create_user_name" jdbcType="VARCHAR" property="createUserName" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="amount_actual" jdbcType="DECIMAL" property="amountActual" />
+    <result column="currency" jdbcType="VARCHAR" property="currency" />
+    <result column="has_pay" jdbcType="BIT" property="hasPay" />
+    <result column="pay_method" jdbcType="TINYINT" property="payMethod" />
+    <result column="detail_count" jdbcType="TINYINT" property="detailCount" />
+    <result column="order_remark" jdbcType="VARCHAR" property="orderRemark" />
+    <result column="product_type" jdbcType="TINYINT" property="productType" />
+    <result column="product_name" property="productName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, order_id, crefo_no, company_name,company_namecn, company_no, price, price_actual, product_id,
+    report_lang, status, country_id, country_name, path_file, path_data,path_data_file, update_time,
+    expect_hour, expect_time, finish_time, supplier_expect_hour, supplier_expect_time, 
+    supplier_id, report_user_id, check_user_id, charge_user_id, is_special, is_express,db_is_update,cpm_is_update,
+    remark, order_no, source, order_status, create_time, pay_time, order_update_time, 
+    order_expect_time, order_finish_time, customer_id, customer_name, customer_no, customer_email, 
+    create_user_id, create_user_name, amount, amount_actual, currency, has_pay, pay_method, 
+    detail_count, order_remark,product_type,product_name
+  </sql>
+  <sql id="conditionWithOrderDetailViewQuery">
+    <where>
+      <if test="id != null">
+        AND id = #{id,jdbcType=BIGINT}
+      </if>
+      <if test="orderId != null">
+        AND  order_id = #{orderId,jdbcType=BIGINT}
+      </if>
+      <if test="crefoNo != null and crefoNo != ''">
+        AND  crefo_no = #{crefoNo,jdbcType=VARCHAR}
+      </if>
+      <if test="companyName != null and companyName != ''">
+        AND company_name like CONCAT('%', #{companyName}, '%')
+      </if>
+      <if test="companyNameCN != null and companyNameCN != ''">
+        AND company_namecn like CONCAT('%', #{companyNameCN}, '%')
+      </if>
+      <if test="companyNo != null and companyNo != ''">
+        AND  company_no = #{companyNo,jdbcType=VARCHAR}
+      </if>
+      <if test="price != null">
+        AND  price = #{price,jdbcType=DECIMAL}
+      </if>
+      <if test="priceActual != null">
+        AND  price_actual = #{priceActual,jdbcType=DECIMAL}
+      </if>
+      <if test="productId != null">
+        AND product_id = #{productId,jdbcType=INTEGER}
+      </if>
+      <if test="reportLang != null">
+        AND  report_lang = #{reportLang,jdbcType=TINYINT}
+      </if>
+      <if test="status != null">
+        AND  status = #{status,jdbcType=TINYINT}
+      </if>
+      <if test="countryId != null">
+        AND  country_id = #{countryId,jdbcType=INTEGER}
+      </if>
+      <if test="countryName != null and countryName != ''">
+        AND  country_name = #{countryName,jdbcType=VARCHAR}
+      </if>
+      <if test="pathFile != null and pathFile != ''">
+        AND  path_file = #{pathFile,jdbcType=VARCHAR}
+      </if>
+      <if test="pathData != null and pathData != ''">
+        AND path_data = #{pathData,jdbcType=VARCHAR}
+      </if>
+      <if test="pathDataFile != null and pathDataFile != ''">
+        AND path_data_file = #{pathDataFile,jdbcType=VARCHAR}
+      </if>
+      <if test="updateTime != null">
+        AND update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="expectHour != null">
+        AND  expect_hour = #{expectHour,jdbcType=INTEGER}
+      </if>
+      <if test="expectTime != null">
+        AND expect_time = #{expectTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="finishTime != null">
+        AND  finish_time = #{finishTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="supplierExpectHour != null">
+        AND supplier_expect_hour = #{supplierExpectHour,jdbcType=INTEGER}
+      </if>
+      <if test="supplierExpectTime != null">
+        AND supplier_expect_time = #{supplierExpectTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="supplierId != null">
+        AND  supplier_id = #{supplierId,jdbcType=INTEGER}
+      </if>
+      <if test="reportUserId != null">
+        AND  report_user_id = #{reportUserId,jdbcType=INTEGER}
+      </if>
+      <if test="checkUserId != null">
+        AND check_user_id = #{checkUserId,jdbcType=INTEGER}
+      </if>
+      <if test="chargeUserId != null">
+        AND charge_user_id = #{chargeUserId,jdbcType=INTEGER}
+      </if>
+      <if test="isSpecial != null">
+        AND is_special = #{isSpecial,jdbcType=BIT}
+      </if>
+      <if test="isExpress != null">
+        AND  is_express = #{isExpress,jdbcType=BIT}
+      </if>
+      <if test="dbIsUpDate != null">
+        AND db_is_update = #{dbIsUpDate,jdbcType=BIT}
+      </if>
+      <if test="cpmIsUpdate != null">
+        AND cpm_is_update = #{cpmIsUpdate,jdbcType=BIT}
+      </if>
+      <if test="remark != null and remark != ''">
+        AND  remark = #{remark,jdbcType=VARCHAR}
+      </if>
+      <if test="orderNo != null and orderNo != ''">
+        AND order_no = #{orderNo,jdbcType=VARCHAR}
+      </if>
+      <if test="source != null">
+        AND source = #{source,jdbcType=TINYINT}
+      </if>
+      <if test="orderStatus != null">
+        AND  order_status = #{orderStatus,jdbcType=TINYINT}
+      </if>
+      <if test="createTime != null">
+        AND create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="payTime != null">
+        AND  pay_time = #{payTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="orderUpdateTime != null">
+        AND  order_update_time = #{orderUpdateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="orderExpectTime != null">
+        AND  order_expect_time = #{orderExpectTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="orderFinishTime != null">
+        AND order_finish_time = #{orderFinishTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="customerId != null">
+        AND  customer_id = #{customerId,jdbcType=INTEGER}
+      </if>
+      <if test="customerName != null and customerName != ''">
+        AND customer_name = #{customerName,jdbcType=VARCHAR}
+      </if>
+      <if test="customerNo != null and customerNo != ''">
+        AND  customer_no = #{customerNo,jdbcType=VARCHAR}
+      </if>
+      <if test="customerEmail != null and customerEmail != ''">
+        AND  customer_email = #{customerEmail,jdbcType=VARCHAR}
+      </if>
+      <if test="createUserId != null">
+        AND  create_user_id = #{createUserId,jdbcType=INTEGER}
+      </if>
+      <if test="createUserName != null and createUserName != ''">
+        AND  create_user_name = #{createUserName,jdbcType=VARCHAR}
+      </if>
+      <if test="amount != null">
+        AND  amount = #{amount,jdbcType=DECIMAL}
+      </if>
+      <if test="amountActual != null">
+        AND  amount_actual = #{amountActual,jdbcType=DECIMAL}
+      </if>
+      <if test="currency != null and currency != ''">
+        AND  currency = #{currency,jdbcType=VARCHAR}
+      </if>
+      <if test="hasPay != null">
+        AND  has_pay = #{hasPay,jdbcType=BIT}
+      </if>
+      <if test="payMethod != null">
+        AND  pay_method = #{payMethod,jdbcType=TINYINT}
+      </if>
+      <if test="detailCount != null">
+        AND  detail_count = #{detailCount,jdbcType=TINYINT}
+      </if>
+      <if test="orderRemark != null and orderRemark != ''">
+        AND  order_remark = #{orderRemark,jdbcType=VARCHAR}
+      </if>
+      <if test="productType!=null">
+        and product_type=#{productType,jdbcType=TINYINT}
+      </if>
+      <if test="productName!=null">
+        and product_name=#{productName}
+      </if>
+      <if test="createDateFrom != null" >
+        AND create_time &gt; #{createDateFrom,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createDateTo != null" >
+        AND create_time &lt; #{createDateTo,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+  </sql>
+  <sql id="conditionWithLike">
+    <where>
+      <if test="id != null">
+        AND id = #{id,jdbcType=BIGINT}
+      </if>
+      <if test="orderId != null">
+        AND  order_id = #{orderId,jdbcType=BIGINT}
+      </if>
+      <if test="crefoNo != null and crefoNo != ''">
+        AND  crefo_no = #{crefoNo,jdbcType=VARCHAR}
+      </if>
+      <if test="companyName != null and companyName != ''">
+        AND company_name like CONCAT('%', #{companyName,jdbcType=VARCHAR}, '%')
+      </if>
+      <if test="companyNameCN != null and companyNameCN != ''">
+        AND company_namecn like CONCAT('%', #{companyNameCN,jdbcType=VARCHAR}, '%')
+      </if>
+      <if test="companyNo != null and companyNo != ''">
+        AND  company_no =#{companyNo,jdbcType=VARCHAR}
+      </if>
+      <if test="price != null">
+        AND  price = #{price,jdbcType=DECIMAL}
+      </if>
+      <if test="priceActual != null">
+        AND  price_actual = #{priceActual,jdbcType=DECIMAL}
+      </if>
+      <if test="productId != null">
+        AND product_id = #{productId,jdbcType=INTEGER}
+      </if>
+      <if test="reportLang != null">
+        AND  report_lang = #{reportLang,jdbcType=TINYINT}
+      </if>
+      <if test="status != null">
+        AND  status = #{status,jdbcType=TINYINT}
+      </if>
+      <if test="countryId != null">
+        AND  country_id = #{countryId,jdbcType=INTEGER}
+      </if>
+      <if test="countryName != null and countryName != ''">
+        AND  country_name = #{countryName,jdbcType=VARCHAR}
+      </if>
+      <if test="pathFile != null and pathFile != ''">
+        AND  path_file = #{pathFile,jdbcType=VARCHAR}
+      </if>
+      <if test="pathData != null and pathData != ''">
+        AND path_data = #{pathData,jdbcType=VARCHAR}
+      </if>
+      <if test="pathDataFile != null and pathDataFile != ''">
+        AND path_data_file = #{pathDataFile,jdbcType=VARCHAR}
+      </if>
+      <if test="updateTime != null">
+        AND update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="expectHour != null">
+        AND  expect_hour = #{expectHour,jdbcType=INTEGER}
+      </if>
+      <if test="expectTime != null">
+        AND expect_time = #{expectTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="finishTime != null">
+        AND  finish_time = #{finishTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="supplierExpectHour != null">
+        AND supplier_expect_hour = #{supplierExpectHour,jdbcType=INTEGER}
+      </if>
+      <if test="supplierExpectTime != null">
+        AND supplier_expect_time = #{supplierExpectTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="supplierId != null">
+        AND  supplier_id = #{supplierId,jdbcType=INTEGER}
+      </if>
+      <if test="reportUserId != null">
+        AND  report_user_id = #{reportUserId,jdbcType=INTEGER}
+      </if>
+      <if test="checkUserId != null">
+        AND check_user_id = #{checkUserId,jdbcType=INTEGER}
+      </if>
+      <if test="chargeUserId != null">
+        AND charge_user_id = #{chargeUserId,jdbcType=INTEGER}
+      </if>
+      <if test="isSpecial != null">
+        AND is_special = #{isSpecial,jdbcType=BIT}
+      </if>
+      <if test="isExpress != null">
+        AND  is_express = #{isExpress,jdbcType=BIT}
+      </if>
+      <if test="dbIsUpDate != null">
+        AND db_is_update = #{dbIsUpDate,jdbcType=BIT}
+      </if>
+      <if test="cpmIsUpdate != null">
+        AND cpm_is_update = #{cpmIsUpdate,jdbcType=BIT}
+      </if>
+      <if test="remark != null and remark != ''">
+        AND  remark = #{remark,jdbcType=VARCHAR}
+      </if>
+      <if test="orderNo != null and orderNo != ''">
+        AND order_no = #{orderNo,jdbcType=VARCHAR}
+      </if>
+      <if test="source != null">
+        AND source = #{source,jdbcType=TINYINT}
+      </if>
+      <if test="orderStatus != null">
+        AND  order_status = #{orderStatus,jdbcType=TINYINT}
+      </if>
+      <if test="createTime != null">
+        AND create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="payTime != null">
+        AND  pay_time = #{payTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="orderUpdateTime != null">
+        AND  order_update_time = #{orderUpdateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="orderExpectTime != null">
+        AND  order_expect_time = #{orderExpectTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="orderFinishTime != null">
+        AND order_finish_time = #{orderFinishTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="customerId != null">
+        AND  customer_id = #{customerId,jdbcType=INTEGER}
+      </if>
+      <if test="customerName != null and customerName != ''">
+        AND customer_name = #{customerName,jdbcType=VARCHAR}
+      </if>
+      <if test="customerNo != null and customerNo != ''">
+        AND  customer_no = #{customerNo,jdbcType=VARCHAR}
+      </if>
+      <if test="customerEmail != null and customerEmail != ''">
+        AND  customer_email = #{customerEmail,jdbcType=VARCHAR}
+      </if>
+      <if test="createUserId != null">
+        AND  create_user_id = #{createUserId,jdbcType=INTEGER}
+      </if>
+      <if test="createUserName != null and createUserName != ''">
+        AND  create_user_name = #{createUserName,jdbcType=VARCHAR}
+      </if>
+      <if test="amount != null">
+        AND  amount = #{amount,jdbcType=DECIMAL}
+      </if>
+      <if test="amountActual != null">
+        AND  amount_actual = #{amountActual,jdbcType=DECIMAL}
+      </if>
+      <if test="currency != null and currency != ''">
+        AND  currency = #{currency,jdbcType=VARCHAR}
+      </if>
+      <if test="hasPay != null">
+        AND  has_pay = #{hasPay,jdbcType=BIT}
+      </if>
+      <if test="payMethod != null">
+        AND  pay_method = #{payMethod,jdbcType=TINYINT}
+      </if>
+      <if test="detailCount != null">
+        AND  detail_count = #{detailCount,jdbcType=TINYINT}
+      </if>
+      <if test="orderRemark != null and orderRemark != ''">
+        AND  order_remark = #{orderRemark,jdbcType=VARCHAR}
+      </if>
+      <if test="productType!=null">
+        and product_type=#{productType,jdbcType=TINYINT}
+      </if>
+      <if test="productName!=null">
+        and product_name=#{productName}
+      </if>
+      <if test="createDateFrom != null" >
+        AND create_time &gt; #{createDateFrom,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createDateTo != null" >
+        AND create_time &lt; #{createDateTo,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+  </sql>
+  <select id="queryById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+      SELECT
+      <include refid="Base_Column_List"/>
+      from v_order_detail
+      <where>
+        id=#{id,jdbcType=BIGINT}
+      </where>
+  </select>
+  <select id="queryListByOrderId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    from v_order_detail
+    <where>
+      order_id=#{orderId,jdbcType=BIGINT}
+    </where>
+  </select>
+  <select id="queryTotalByOrderId" parameterType="java.lang.Long" resultType="int">
+    SELECT count(1)
+    from v_order_detail
+    <where>
+      order_id=#{orderId,jdbcType=BIGINT}
+    </where>
+  </select>
+  <select id="queryListByOrderDetailQuery" parameterType="com.mika.credit.common.entity.order.OrderDetailViewQuery" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    from v_order_detail
+    <include refid="conditionWithLike"/>
+    ORDER BY create_time*1 DESC
+  </select>
+  <select id="queryTotalByOrderDetailQuery" parameterType="com.mika.credit.common.entity.order.OrderDetailViewQuery" resultType="int">
+    SELECT count(1)
+    from v_order_detail
+    <include refid="conditionWithLike"/>
+  </select>
+</mapper>

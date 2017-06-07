@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.admin.dao.ge.GECountryMapper" >
+  <!--<cache eviction="LRU" type="com.mika.credit.common.core.mybatis.cache.redis.MybatiesRedisCache" />-->
+  <resultMap id="BaseResultMap" type="com.mika.credit.facade.admin.model.Country" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="cn_name" property="cnName" jdbcType="VARCHAR" />
+    <result column="en_name" property="enName" jdbcType="VARCHAR" />
+    <result column="online_order_cny_price" property="onlineOrderCnyPrice" jdbcType="REAL" />
+    <result column="online_order_usd_price" property="onlineOrderUsdPrice" jdbcType="REAL" />
+    <result column="online_order_eur_price" property="onlineOrderEurPrice" jdbcType="REAL" />
+    <result column="online_normail_delivery_days" property="onlineNormailDeliveryDays" jdbcType="INTEGER" />
+    <result column="online_express_delivery_days" property="onlineExpressDeliveryDays" jdbcType="INTEGER" />
+    <result column="online_express_delivery_cny_price" property="onlineExpressDeliveryCnyPrice" jdbcType="REAL" />
+    <result column="online_express_delivery_usd_price" property="onlineExpressDeliveryUsdPrice" jdbcType="REAL" />
+    <result column="online_express_delivery_eur_price" property="onlineExpressDeliveryEurPrice" jdbcType="REAL" />
+
+    <result column="online_full_order_cny_price" property="onlineFullOrderCnyPrice" jdbcType="REAL" />
+    <result column="online_full_order_usd_price" property="onlineFullOrderUsdPrice" jdbcType="REAL" />
+    <result column="online_full_order_eur_price" property="onlineFullOrderEurPrice" jdbcType="REAL" />
+    <result column="online_full_normail_delivery_days" property="onlineFullNormailDeliveryDays" jdbcType="INTEGER" />
+    <result column="online_full_express_delivery_days" property="onlineFullExpressDeliveryDays" jdbcType="INTEGER" />
+    <result column="online_full_express_delivery_cny_price" property="onlineFullExpressDeliveryCnyPrice" jdbcType="REAL" />
+    <result column="online_full_express_delivery_usd_price" property="onlineFullExpressDeliveryUsdPrice" jdbcType="REAL" />
+    <result column="online_full_express_delivery_eur_price" property="onlineFullExpressDeliveryEurPrice" jdbcType="REAL" />
+
+    <result column="offline_order_cny_price" property="offlineOrderCnyPrice" jdbcType="REAL" />
+    <result column="offline_order_usd_price" property="offlineOrderUsdPrice" jdbcType="REAL" />
+    <result column="offline_order_eur_price" property="offlineOrderEurPrice" jdbcType="REAL" />
+    <result column="offline_normail_delivery_days" property="offlineNormailDeliveryDays" jdbcType="INTEGER" />
+    <result column="offline_express_delivery_days" property="offlineExpressDeliveryDays" jdbcType="INTEGER" />
+    <result column="offline_express_delivery_cny_price" property="offlineExpressDeliveryCnyPrice" jdbcType="REAL" />
+    <result column="offline_express_delivery_usd_price" property="offlineExpressDeliveryUsdPrice" jdbcType="REAL" />
+    <result column="offline_express_delivery_eur_price" property="offlineExpressDeliveryEurPrice" jdbcType="REAL" />
+    <result column="is_enable" property="isEnable" jdbcType="VARCHAR" />
+    <result column="continent_id" property="continentId" jdbcType="INTEGER" />
+    <association property="continent" fetchType="eager" column="continent_id" select="com.mika.credit.facade.admin.dao.ge.GEContinentMapper.selectByPrimaryKey"></association>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, code, cn_name, en_name, online_order_cny_price, online_order_usd_price, online_order_eur_price, 
+    online_normail_delivery_days, online_express_delivery_days, online_express_delivery_cny_price, 
+    online_express_delivery_usd_price, online_express_delivery_eur_price, offline_order_cny_price, 
+    offline_order_usd_price, offline_order_eur_price, offline_normail_delivery_days, 
+    offline_express_delivery_days, offline_express_delivery_cny_price, offline_express_delivery_usd_price, 
+    offline_express_delivery_eur_price,is_enable,continent_id, online_full_order_cny_price, online_full_order_usd_price, online_full_order_eur_price,
+    online_full_normail_delivery_days, online_full_express_delivery_days, online_full_express_delivery_cny_price,
+    online_full_express_delivery_usd_price, online_full_express_delivery_eur_price
+  </sql>
+  <select id="selectAllCount" resultType="java.lang.Integer">
+    select
+    count(1)
+    from country
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from country
+  </select>
+  <select id="selectSelective" resultMap="BaseResultMap" parameterType="com.mika.credit.facade.admin.model.Country" >
+    select
+    <include refid="Base_Column_List" />
+    from country
+    <where>
+      <if test="cnName != null and cnName != ''" >
+        and cn_name like concat('%', #{cnName,jdbcType=VARCHAR}, '%')
+      </if>
+      <if test="enName != null and enName != ''" >
+        and en_name like concat('%', #{enName,jdbcType=VARCHAR}, '%')
+      </if>
+      <if test="continentId != null and continentId != 0" >
+        and continent_id = #{continentId,jdbcType=INTEGER}
+      </if>
+      <if test="isEnable != null and isEnable != ''" >
+        and is_enable = #{isEnable,jdbcType=VARCHAR}
+      </if>
+    </where>
+    order by en_name
+  </select>
+  <select id="selectSuggest" resultMap="BaseResultMap" parameterType="Map" >
+    select id, code, cn_name, en_name
+    from country
+    where
+      cn_name like concat('%', #{keyword,jdbcType=VARCHAR}, '%')
+      or en_name like concat('%', #{keyword,jdbcType=VARCHAR}, '%')
+      or code like concat('%', #{keyword,jdbcType=VARCHAR}, '%')
+    order by en_name
+    limit #{pageSize}
+  </select>
+  <select id="selectByContinentId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from country
+    where continent_id = #{continentId,jdbcType=INTEGER}
+    order by en_name
+  </select>
+  <select id="selectEabled" resultMap="BaseResultMap">
+    select id,code,cn_name,en_name
+    from country
+    where is_enable = '是'
+    order by en_name
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from country
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from country
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mika.credit.facade.admin.model.Country" >
+    insert into country (id, code, cn_name, 
+      en_name, online_order_cny_price, online_order_usd_price, 
+      online_order_eur_price, online_normail_delivery_days, 
+      online_express_delivery_days, online_express_delivery_cny_price, 
+      online_express_delivery_usd_price, online_express_delivery_eur_price,
+
+      online_full_order_cny_price, online_full_order_usd_price,
+      online_full_order_eur_price, online_full_normail_delivery_days,
+      online_full_express_delivery_days, online_full_express_delivery_cny_price,
+      online_full_express_delivery_usd_price, online_full_express_delivery_eur_price,
+
+      offline_order_cny_price, offline_order_usd_price, offline_order_eur_price, 
+      offline_normail_delivery_days, offline_express_delivery_days, 
+      offline_express_delivery_cny_price, offline_express_delivery_usd_price, 
+      offline_express_delivery_eur_price,is_enable,continent_id)
+    values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{cnName,jdbcType=VARCHAR}, 
+      #{enName,jdbcType=VARCHAR}, #{onlineOrderCnyPrice,jdbcType=REAL}, #{onlineOrderUsdPrice,jdbcType=REAL}, 
+      #{onlineOrderEurPrice,jdbcType=REAL}, #{onlineNormailDeliveryDays,jdbcType=INTEGER}, 
+      #{onlineExpressDeliveryDays,jdbcType=INTEGER}, #{onlineExpressDeliveryCnyPrice,jdbcType=REAL}, 
+      #{onlineExpressDeliveryUsdPrice,jdbcType=REAL}, #{onlineExpressDeliveryEurPrice,jdbcType=REAL},
+
+      #{onlineFullOrderCnyPrice,jdbcType=REAL}, #{onlineFullOrderUsdPrice,jdbcType=REAL},
+      #{onlineFullOrderEurPrice,jdbcType=REAL}, #{onlineFullNormailDeliveryDays,jdbcType=INTEGER},
+      #{onlineFullExpressDeliveryDays,jdbcType=INTEGER}, #{onlineFullExpressDeliveryCnyPrice,jdbcType=REAL},
+      #{onlineFullExpressDeliveryUsdPrice,jdbcType=REAL}, #{onlineFullExpressDeliveryEurPrice,jdbcType=REAL},
+      #{offlineOrderCnyPrice,jdbcType=REAL}, #{offlineOrderUsdPrice,jdbcType=REAL}, #{offlineOrderEurPrice,jdbcType=REAL}, 
+      #{offlineNormailDeliveryDays,jdbcType=INTEGER}, #{offlineExpressDeliveryDays,jdbcType=INTEGER}, 
+      #{offlineExpressDeliveryCnyPrice,jdbcType=REAL}, #{offlineExpressDeliveryUsdPrice,jdbcType=REAL}, 
+      #{offlineExpressDeliveryEurPrice,jdbcType=REAL},#{isEnable,jdbcType=VARCHAR},#{continentId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mika.credit.facade.admin.model.Country" >
+    insert into country
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="cnName != null" >
+        cn_name,
+      </if>
+      <if test="enName != null" >
+        en_name,
+      </if>
+      <if test="onlineOrderCnyPrice != null" >
+        online_order_cny_price,
+      </if>
+      <if test="onlineOrderUsdPrice != null" >
+        online_order_usd_price,
+      </if>
+      <if test="onlineOrderEurPrice != null" >
+        online_order_eur_price,
+      </if>
+      <if test="onlineNormailDeliveryDays != null" >
+        online_normail_delivery_days,
+      </if>
+      <if test="onlineExpressDeliveryDays != null" >
+        online_express_delivery_days,
+      </if>
+      <if test="onlineExpressDeliveryCnyPrice != null" >
+        online_express_delivery_cny_price,
+      </if>
+      <if test="onlineExpressDeliveryUsdPrice != null" >
+        online_express_delivery_usd_price,
+      </if>
+      <if test="onlineExpressDeliveryEurPrice != null" >
+        online_express_delivery_eur_price,
+      </if>
+
+      <if test="onlineFullOrderCnyPrice != null" >
+        online_full_order_cny_price,
+      </if>
+      <if test="onlineFullOrderUsdPrice != null" >
+        online_full_order_usd_price,
+      </if>
+      <if test="onlineFullOrderEurPrice != null" >
+        online_full_order_eur_price,
+      </if>
+      <if test="onlineFullNormailDeliveryDays != null" >
+        online_full_normail_delivery_days,
+      </if>
+      <if test="onlineFullExpressDeliveryDays != null" >
+        online_full_express_delivery_days,
+      </if>
+      <if test="onlineFullExpressDeliveryCnyPrice != null" >
+        online_full_express_delivery_cny_price,
+      </if>
+      <if test="onlineFullExpressDeliveryUsdPrice != null" >
+        online_full_express_delivery_usd_price,
+      </if>
+      <if test="onlineFullExpressDeliveryEurPrice != null" >
+        online_full_express_delivery_eur_price,
+      </if>
+
+      <if test="offlineOrderCnyPrice != null" >
+        offline_order_cny_price,
+      </if>
+      <if test="offlineOrderUsdPrice != null" >
+        offline_order_usd_price,
+      </if>
+      <if test="offlineOrderEurPrice != null" >
+        offline_order_eur_price,
+      </if>
+      <if test="offlineNormailDeliveryDays != null" >
+        offline_normail_delivery_days,
+      </if>
+      <if test="offlineExpressDeliveryDays != null" >
+        offline_express_delivery_days,
+      </if>
+      <if test="offlineExpressDeliveryCnyPrice != null" >
+        offline_express_delivery_cny_price,
+      </if>
+      <if test="offlineExpressDeliveryUsdPrice != null" >
+        offline_express_delivery_usd_price,
+      </if>
+      <if test="offlineExpressDeliveryEurPrice != null" >
+        offline_express_delivery_eur_price,
+      </if>
+      <if test="isEnable != null" >
+        is_enable,
+      </if>
+      <if test="continent_id != null" >
+        continent_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="cnName != null" >
+        #{cnName,jdbcType=VARCHAR},
+      </if>
+      <if test="enName != null" >
+        #{enName,jdbcType=VARCHAR},
+      </if>
+      <if test="onlineOrderCnyPrice != null" >
+        #{onlineOrderCnyPrice,jdbcType=REAL},
+      </if>
+      <if test="onlineOrderUsdPrice != null" >
+        #{onlineOrderUsdPrice,jdbcType=REAL},
+      </if>
+      <if test="onlineOrderEurPrice != null" >
+        #{onlineOrderEurPrice,jdbcType=REAL},
+      </if>
+      <if test="onlineNormailDeliveryDays != null" >
+        #{onlineNormailDeliveryDays,jdbcType=INTEGER},
+      </if>
+      <if test="onlineExpressDeliveryDays != null" >
+        #{onlineExpressDeliveryDays,jdbcType=INTEGER},
+      </if>
+      <if test="onlineExpressDeliveryCnyPrice != null" >
+        #{onlineExpressDeliveryCnyPrice,jdbcType=REAL},
+      </if>
+      <if test="onlineExpressDeliveryUsdPrice != null" >
+        #{onlineExpressDeliveryUsdPrice,jdbcType=REAL},
+      </if>
+      <if test="onlineExpressDeliveryEurPrice != null" >
+        #{onlineExpressDeliveryEurPrice,jdbcType=REAL},
+      </if>
+
+      <if test="onlineFullOrderCnyPrice != null" >
+        #{onlineFullOrderCnyPrice,jdbcType=REAL},
+      </if>
+      <if test="onlineFullOrderUsdPrice != null" >
+        #{onlineFullOrderUsdPrice,jdbcType=REAL},
+      </if>
+      <if test="onlineFullOrderEurPrice != null" >
+        #{onlineFullOrderEurPrice,jdbcType=REAL},
+      </if>
+      <if test="onlineFullNormailDeliveryDays != null" >
+        #{onlineFullNormailDeliveryDays,jdbcType=INTEGER},
+      </if>
+      <if test="onlineFullExpressDeliveryDays != null" >
+        #{onlineFullExpressDeliveryDays,jdbcType=INTEGER},
+      </if>
+      <if test="onlineFullExpressDeliveryCnyPrice != null" >
+        #{onlineFullExpressDeliveryCnyPrice,jdbcType=REAL},
+      </if>
+      <if test="onlineFullExpressDeliveryUsdPrice != null" >
+        #{onlineFullExpressDeliveryUsdPrice,jdbcType=REAL},
+      </if>
+      <if test="onlineFullExpressDeliveryEurPrice != null" >
+        #{onlineFullExpressDeliveryEurPrice,jdbcType=REAL},
+      </if>
+
+      <if test="offlineOrderCnyPrice != null" >
+        #{offlineOrderCnyPrice,jdbcType=REAL},
+      </if>
+      <if test="offlineOrderUsdPrice != null" >
+        #{offlineOrderUsdPrice,jdbcType=REAL},
+      </if>
+      <if test="offlineOrderEurPrice != null" >
+        #{offlineOrderEurPrice,jdbcType=REAL},
+      </if>
+      <if test="offlineNormailDeliveryDays != null" >
+        #{offlineNormailDeliveryDays,jdbcType=INTEGER},
+      </if>
+      <if test="offlineExpressDeliveryDays != null" >
+        #{offlineExpressDeliveryDays,jdbcType=INTEGER},
+      </if>
+      <if test="offlineExpressDeliveryCnyPrice != null" >
+        #{offlineExpressDeliveryCnyPrice,jdbcType=REAL},
+      </if>
+      <if test="offlineExpressDeliveryUsdPrice != null" >
+        #{offlineExpressDeliveryUsdPrice,jdbcType=REAL},
+      </if>
+      <if test="offlineExpressDeliveryEurPrice != null" >
+        #{offlineExpressDeliveryEurPrice,jdbcType=REAL},
+      </if>
+      <if test="isEnable != null" >
+        #{isEnable,jdbcType=VARCHAR},
+      </if>
+      <if test="continentId != null" >
+        #{continentId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mika.credit.facade.admin.model.Country" >
+    update country
+    <set >
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="cnName != null" >
+        cn_name = #{cnName,jdbcType=VARCHAR},
+      </if>
+      <if test="enName != null" >
+        en_name = #{enName,jdbcType=VARCHAR},
+      </if>
+      <if test="onlineOrderCnyPrice != null" >
+        online_order_cny_price = #{onlineOrderCnyPrice,jdbcType=REAL},
+      </if>
+      <if test="onlineOrderUsdPrice != null" >
+        online_order_usd_price = #{onlineOrderUsdPrice,jdbcType=REAL},
+      </if>
+      <if test="onlineOrderEurPrice != null" >
+        online_order_eur_price = #{onlineOrderEurPrice,jdbcType=REAL},
+      </if>
+      <if test="onlineNormailDeliveryDays != null" >
+        online_normail_delivery_days = #{onlineNormailDeliveryDays,jdbcType=INTEGER},
+      </if>
+      <if test="onlineExpressDeliveryDays != null" >
+        online_express_delivery_days = #{onlineExpressDeliveryDays,jdbcType=INTEGER},
+      </if>
+      <if test="onlineExpressDeliveryCnyPrice != null" >
+        online_express_delivery_cny_price = #{onlineExpressDeliveryCnyPrice,jdbcType=REAL},
+      </if>
+      <if test="onlineExpressDeliveryUsdPrice != null" >
+        online_express_delivery_usd_price = #{onlineExpressDeliveryUsdPrice,jdbcType=REAL},
+      </if>
+      <if test="onlineExpressDeliveryEurPrice != null" >
+        online_express_delivery_eur_price = #{onlineExpressDeliveryEurPrice,jdbcType=REAL},
+      </if>
+
+      <if test="onlineFullOrderCnyPrice != null" >
+        online_full_order_cny_price = #{onlineFullOrderCnyPrice,jdbcType=REAL},
+      </if>
+      <if test="onlineFullOrderUsdPrice != null" >
+        online_full_order_usd_price = #{onlineFullOrderUsdPrice,jdbcType=REAL},
+      </if>
+      <if test="onlineFullOrderEurPrice != null" >
+        online_full_order_eur_price = #{onlineFullOrderEurPrice,jdbcType=REAL},
+      </if>
+      <if test="onlineFullNormailDeliveryDays != null" >
+        online_full_normail_delivery_days = #{onlineFullNormailDeliveryDays,jdbcType=INTEGER},
+      </if>
+      <if test="onlineFullExpressDeliveryDays != null" >
+        online_full_express_delivery_days = #{onlineFullExpressDeliveryDays,jdbcType=INTEGER},
+      </if>
+      <if test="onlineFullExpressDeliveryCnyPrice != null" >
+        online_full_express_delivery_cny_price = #{onlineFullExpressDeliveryCnyPrice,jdbcType=REAL},
+      </if>
+      <if test="onlineFullExpressDeliveryUsdPrice != null" >
+        online_full_express_delivery_usd_price = #{onlineFullExpressDeliveryUsdPrice,jdbcType=REAL},
+      </if>
+      <if test="onlineFullExpressDeliveryEurPrice != null" >
+        online_full_express_delivery_eur_price = #{onlineFullExpressDeliveryEurPrice,jdbcType=REAL},
+      </if>
+
+      <if test="offlineOrderCnyPrice != null" >
+        offline_order_cny_price = #{offlineOrderCnyPrice,jdbcType=REAL},
+      </if>
+      <if test="offlineOrderUsdPrice != null" >
+        offline_order_usd_price = #{offlineOrderUsdPrice,jdbcType=REAL},
+      </if>
+      <if test="offlineOrderEurPrice != null" >
+        offline_order_eur_price = #{offlineOrderEurPrice,jdbcType=REAL},
+      </if>
+      <if test="offlineNormailDeliveryDays != null" >
+        offline_normail_delivery_days = #{offlineNormailDeliveryDays,jdbcType=INTEGER},
+      </if>
+      <if test="offlineExpressDeliveryDays != null" >
+        offline_express_delivery_days = #{offlineExpressDeliveryDays,jdbcType=INTEGER},
+      </if>
+      <if test="offlineExpressDeliveryCnyPrice != null" >
+        offline_express_delivery_cny_price = #{offlineExpressDeliveryCnyPrice,jdbcType=REAL},
+      </if>
+      <if test="offlineExpressDeliveryUsdPrice != null" >
+        offline_express_delivery_usd_price = #{offlineExpressDeliveryUsdPrice,jdbcType=REAL},
+      </if>
+      <if test="offlineExpressDeliveryEurPrice != null" >
+        offline_express_delivery_eur_price = #{offlineExpressDeliveryEurPrice,jdbcType=REAL},
+      </if>
+      <if test="isEnable != null" >
+        is_enable = #{isEnable,jdbcType=VARCHAR},
+      </if>
+      <if test="continentId != null" >
+        continent_id = #{continentId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mika.credit.facade.admin.model.Country" >
+    update country
+    set code = #{code,jdbcType=VARCHAR},
+      cn_name = #{cnName,jdbcType=VARCHAR},
+      en_name = #{enName,jdbcType=VARCHAR},
+      online_order_cny_price = #{onlineOrderCnyPrice,jdbcType=REAL},
+      online_order_usd_price = #{onlineOrderUsdPrice,jdbcType=REAL},
+      online_order_eur_price = #{onlineOrderEurPrice,jdbcType=REAL},
+      online_normail_delivery_days = #{onlineNormailDeliveryDays,jdbcType=INTEGER},
+      online_express_delivery_days = #{onlineExpressDeliveryDays,jdbcType=INTEGER},
+      online_express_delivery_cny_price = #{onlineExpressDeliveryCnyPrice,jdbcType=REAL},
+      online_express_delivery_usd_price = #{onlineExpressDeliveryUsdPrice,jdbcType=REAL},
+      online_express_delivery_eur_price = #{onlineExpressDeliveryEurPrice,jdbcType=REAL},
+
+       online_full_order_cny_price = #{onlineFullOrderCnyPrice,jdbcType=REAL},
+      online_full_order_usd_price = #{onlineFullOrderUsdPrice,jdbcType=REAL},
+      online_full_order_eur_price = #{onlineFullOrderEurPrice,jdbcType=REAL},
+      online_full_normail_delivery_days = #{onlineFullNormailDeliveryDays,jdbcType=INTEGER},
+      online_full_express_delivery_days = #{onlineFullExpressDeliveryDays,jdbcType=INTEGER},
+      online_full_express_delivery_cny_price = #{onlineFullExpressDeliveryCnyPrice,jdbcType=REAL},
+      online_full_express_delivery_usd_price = #{onlineFullExpressDeliveryUsdPrice,jdbcType=REAL},
+      online_full_express_delivery_eur_price = #{onlineFullExpressDeliveryEurPrice,jdbcType=REAL},
+
+      offline_order_cny_price = #{offlineOrderCnyPrice,jdbcType=REAL},
+      offline_order_usd_price = #{offlineOrderUsdPrice,jdbcType=REAL},
+      offline_order_eur_price = #{offlineOrderEurPrice,jdbcType=REAL},
+      offline_normail_delivery_days = #{offlineNormailDeliveryDays,jdbcType=INTEGER},
+      offline_express_delivery_days = #{offlineExpressDeliveryDays,jdbcType=INTEGER},
+      offline_express_delivery_cny_price = #{offlineExpressDeliveryCnyPrice,jdbcType=REAL},
+      offline_express_delivery_usd_price = #{offlineExpressDeliveryUsdPrice,jdbcType=REAL},
+      offline_express_delivery_eur_price = #{offlineExpressDeliveryEurPrice,jdbcType=REAL},
+      is_enable = #{isEnable,jdbcType=REAL},
+      continent_id = #{continentId,jdbcType=REAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectCountByContinent" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select count(1) from country c where c.continent_id = #{id}
+  </select>
+</mapper>

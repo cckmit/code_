@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.admin.dao.admin.CorpTypeMapper">
+    <resultMap id="corpTypeMap" type="com.mika.credit.facade.admin.model.CorpType">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+
+        <!--<collection property="corps" ofType="com.aaaCredit.shiroServer.bean.Corp">-->
+            <!--<id property="id" column="id"/>-->
+            <!--<result column="corp_type_id" property="corpTypeId" jdbcType="VARCHAR"/>-->
+        <!--</collection>-->
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, code, name
+    </sql>
+    <sql id="condition">
+        <where>
+            <if test="id !=null and id != ''">
+                and id = #{id,jdbcType=VARCHAR}
+            </if>
+            <if test="code !=null and code != ''">
+                and code = #{code,jdbcType=VARCHAR}
+            </if>
+            <if test="name !=null and name != ''">
+                and name = #{name,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </sql>
+    <select id="queryList" resultMap="corpTypeMap" parameterType="com.mika.credit.facade.admin.model.CorpType">
+        select
+        <include refid="Base_Column_List"/>
+        from s_corp_type
+        <include refid="condition"/>
+    </select>
+    <select id="queryById" resultMap="corpTypeMap" parameterType="java.lang.String">
+    select *
+    from s_corp_type
+    where id = #{id}
+  </select>
+    <select id="queryAll" resultMap="corpTypeMap">
+    select *
+    from s_corp_type
+  </select>
+    <insert id="save" parameterType="com.mika.credit.facade.admin.model.CorpType" keyProperty="id" useGeneratedKeys="true">
+  	insert into s_corp_type(id,code,name)
+  	values(#{id},#{code},#{name})
+  </insert>
+
+    <update id="update" parameterType="com.mika.credit.facade.admin.model.CorpType">
+  	update s_corp_type set
+  	code=#{code,jdbcType=VARCHAR},
+  	name=#{name,jdbcType=VARCHAR}
+  	where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <update id="updateByIdSelective" parameterType="com.mika.credit.facade.admin.model.CorpType">
+        update s_corp_type
+        <set>
+            <if test="code !=null and code != ''">
+                code = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="name !=null and name != ''">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+
+    <delete id="deleteById" parameterType="java.lang.String">
+  	delete from s_corp_type where id=#{id}
+  </delete>
+    <delete id="delete" parameterType="com.mika.credit.facade.admin.model.CorpType">
+        delete from s_corp_type
+        <include refid="condition"/>
+    </delete>
+
+</mapper>

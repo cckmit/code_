@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.globalsearch.core.dao.ManagerMapper" >
+  <resultMap id="managerMap" type="com.mika.credit.facade.globalsearch.core.model.Manager" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+      <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="passwd" property="passwd" jdbcType="VARCHAR" />
+      <result column="sex" property="sex" jdbcType="VARCHAR" />
+      <result column="birthday" property="birthday" />
+    <result column="theme" property="theme" jdbcType="VARCHAR" />
+    <result column="idcard" property="idcard" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+      <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+      <result column="other_contact" property="otherContact" jdbcType="VARCHAR" />
+      <result column="sos_person" property="sosPerson" jdbcType="VARCHAR" />
+      <result column="sos_mobile" property="sosMobile" jdbcType="VARCHAR" />
+    <result column="addr" property="addr" jdbcType="VARCHAR" />
+      <result column="born_place" property="bornPlace" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime"/>
+    <result column="login_count" property="loginCount" jdbcType="INTEGER" />
+    <result column="last_time" property="lastTime"/>
+      <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+      <result column="enable" property="enable" jdbcType="BIT" />
+    <result column="dept_id" property="deptId" jdbcType="VARCHAR" />
+    <result column="corp_id" property="corpId" jdbcType="VARCHAR" />
+   </resultMap>
+    <sql id="Base_Column_List" >
+        id, dept_id, corp_id, code, passwd, name, theme, idcard, phone, addr, email, create_time,
+        login_count, last_time, enable, create_by, sex, birthday, mobile, other_contact,
+        sos_person, sos_mobile, born_place
+    </sql>
+    <select id="selectSelective" resultMap="managerMap" parameterType="com.mika.credit.facade.globalsearch.core.model.Manager" >
+        select
+        <include refid="Base_Column_List" />
+        from manager
+        where 1=1
+            <if test="deptId != null" >
+                and    dept_id = #{deptId,jdbcType=VARCHAR}
+            </if>
+            <if test="corpId != null" >
+                and   corp_id = #{corpId,jdbcType=VARCHAR}
+            </if>
+            <if test="code != null" >
+                and   code = #{code,jdbcType=VARCHAR}
+            </if>
+            <if test="passwd != null" >
+                and   passwd = #{passwd,jdbcType=VARCHAR}
+            </if>
+            <if test="name != null" >
+                and  name = #{name,jdbcType=VARCHAR}
+            </if>
+            <if test="theme != null" >
+                and  theme= #{theme,jdbcType=VARCHAR}
+            </if>
+            <if test="idcard != null" >
+                and   idcard = #{idcard,jdbcType=VARCHAR}
+            </if>
+            <if test="phone != null" >
+                and  phone= #{phone,jdbcType=VARCHAR}
+            </if>
+            <if test="addr != null" >
+                and  addr= #{addr,jdbcType=VARCHAR}
+            </if>
+            <if test="email != null" >
+                and   email= #{email,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null" >
+                and   create_time= #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="loginCount >0" >
+                and  login_count= #{loginCount,jdbcType=VARCHAR}
+            </if>
+            <if test="lastTime != null" >
+                and  last_time= #{lastTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="enable != false" >
+                and  enable= #{enable,jdbcType=VARCHAR}
+            </if>
+            <if test="createBy != null" >
+                and   create_by= #{createBy,jdbcType=VARCHAR}
+            </if>
+            <if test="sex != null" >
+                and   sex= #{sex,jdbcType=VARCHAR}
+            </if>
+            <if test="birthday != null" >
+                and  birthday = #{birthday,jdbcType=VARCHAR}
+            </if>
+            <if test="mobile != null" >
+                and   mobile = #{mobile,jdbcType=VARCHAR}
+            </if>
+            <if test="otherContact != null" >
+                and   other_contact = #{otherContact,jdbcType=VARCHAR}
+            </if>
+            <if test="sosPerson != null" >
+                and  sos_person = #{sosPerson,jdbcType=VARCHAR}
+            </if>
+            <if test="sosMobile != null" >
+                and  sos_mobile = #{sosMobile,jdbcType=VARCHAR}
+            </if>
+            <if test="bornPlace != null" >
+                and  born_place = #{bornPlace,jdbcType=VARCHAR}
+            </if>
+
+    </select>
+  <select id="queryById" resultMap="managerMap" parameterType="java.lang.String" >
+    select *
+    from manager
+    where id = #{id}
+  </select>
+    <select id="queryAll" resultMap="managerMap" >
+    select *
+    from manager
+  </select>
+  
+  <insert id="add" parameterType="com.mika.credit.facade.globalsearch.core.model.Manager">
+  	insert into manager(name,passwd,code,sex,theme,idcard,phone,mobile,other_contact,sos_person,sos_mobile,addr,born_place,email,enable,create_time,login_count,last_time,create_by,dept_id , corp_id)
+  	values( #{name},#{passwd},#{code},#{sex},#{theme},#{idcard},#{phone},#{mobile},#{otherContact},#{sosPerson},#{sosMobile},#{addr},#{bornPlace},#{email},#{enable},#{createTime},#{loginCount},#{lastTime},#{createBy},#{deptId},#{corpId})
+  </insert>
+
+  <update id="mod" parameterType="com.mika.credit.facade.globalsearch.core.model.Manager">
+  	update manager set
+      name=#{name},
+      passwd=#{passwd},
+      code=#{code},
+      birthday=#{birthday},
+      sex=#{sex},
+      theme=#{theme},
+      idcard=#{idcard},
+      phone=#{phone},
+      mobile=#{mobile},
+      other_contact=#{otherContact},
+      sos_person=#{sosPerson},
+      sos_mobile=#{sosMobile},
+      addr=#{addr},
+      born_place=#{bornPlace},
+      email=#{email},
+      enable=#{enable},
+      create_time=#{createTime},
+      login_count=#{loginCount},
+      last_time=#{lastTime},
+      create_by=#{createBy},
+      dept_id=#{deptId},
+      corp_id=#{corpId}
+  	where id = #{id}
+  </update>
+
+  <delete id="del" parameterType="java.lang.String">
+  	delete from manager where id=#{id}
+  </delete>
+  
+  
+</mapper>

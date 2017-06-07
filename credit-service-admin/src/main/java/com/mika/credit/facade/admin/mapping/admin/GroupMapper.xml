@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.admin.dao.admin.GroupMapper">
+    <resultMap id="groupMap" type="com.mika.credit.facade.admin.model.Group">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="groupResourceMap" type="com.mika.credit.facade.admin.model.Group" extends="groupMap">
+        <collection property="resources" ofType="com.mika.credit.facade.admin.model.Resource">
+            <id column="r_id" property="id" jdbcType="VARCHAR"/>
+            <result column="is_sys" property="isSYS" jdbcType="BIT"/>
+            <result column="r_enable" property="enable" jdbcType="BIT"/>
+            <result column="r_name" property="name" jdbcType="VARCHAR"/>
+            <association property="category" column="category_id" fetchType="eager" javaType="com.mika.credit.facade.admin.model.Category"
+                         select="com.mika.credit.facade.admin.dao.admin.CategoryMapper.queryById">
+            </association>
+        </collection>
+    </resultMap>
+
+    <resultMap id="groupUserMap" type="com.mika.credit.facade.admin.model.Group" extends="groupMap">
+        <collection property="users" ofType="com.mika.credit.facade.admin.model.User">
+            <id column="u_id" property="id" jdbcType="VARCHAR"/>
+            <result column="u_name" property="name" jdbcType="VARCHAR"/>
+            <result column="u_enable" property="enable" jdbcType="BIT"/>
+            <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+            <result column="login_count" property="loginCount" jdbcType="INTEGER"/>
+            <result column="last_time" property="lastTime" jdbcType="TIMESTAMP"/>
+            <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+            <result column="other_contact" property="otherContact" jdbcType="VARCHAR"/>
+            <result column="sos_person" property="sosPerson" jdbcType="VARCHAR"/>
+            <result column="sos_mobile" property="sosMobile" jdbcType="VARCHAR"/>
+            <result column="born_place" property="bornPlace" jdbcType="VARCHAR"/>
+            <association property="corp" column="corp_id" javaType="com.mika.credit.facade.admin.model.Corp"
+                         select="com.mika.credit.facade.admin.dao.admin.CorpMapper.queryById">
+            </association>
+            <association property="dept" column="dept_id" javaType="com.mika.credit.facade.admin.model.Dept"
+                         select="com.mika.credit.facade.admin.dao.admin.DeptMapper.queryById">
+            </association>
+        </collection>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, code, name,enable
+    </sql>
+    <sql id="condition">
+        <where>
+            <if test="id !=null and id != ''">
+                and id = #{id,jdbcType=VARCHAR}
+            </if>
+            <if test="code !=null and code != ''">
+                and code =#{code,jdbcType=VARCHAR}
+            </if>
+            <if test="name !=null and name != ''">
+                and name =#{name,jdbcType=VARCHAR}
+            </if>
+            <if test="enable !=null">
+                and enable=#{enable,jdbcType=BIT}
+            </if>
+        </where>
+    </sql>
+    <select id="queryList" resultMap="groupMap" parameterType="com.mika.credit.facade.admin.model.Group">
+        select
+        <include refid="Base_Column_List"/>
+        from s_group
+        <include refid="condition"/>
+    </select>
+    <select id="queryById" resultMap="groupMap" parameterType="java.lang.String">
+    select *
+    from s_group
+    where id = #{id}
+  </select>
+    <select id="queryAll" resultMap="groupMap">
+    select *
+    from s_group
+  </select>
+
+    <insert id="save" parameterType="com.mika.credit.facade.admin.model.Group" keyProperty="id" useGeneratedKeys="true">
+  	insert into s_group(id,code,name,enable)
+  	values( #{id},#{code},#{name},#{enable})
+  </insert>
+
+    <update id="update" parameterType="com.mika.credit.facade.admin.model.Group">
+  	update s_group set
+      name=#{name,jdbcType=VARCHAR},
+      code=#{code,jdbcType=VARCHAR},
+      enable=#{enable,jdbcType=BIT}
+  	where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <update id="updateByIdSelective" parameterType="com.mika.credit.facade.admin.model.Group">
+        update s_group
+        <set>
+            <if test="code !=null and code != ''">
+                code =#{code,jdbcType=VARCHAR},
+            </if>
+            <if test="name !=null and name != ''">
+                name =#{name,jdbcType=VARCHAR},
+            </if>
+            <if test="enable !=null">
+                enable=#{enable,jdbcType=BIT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+
+    <delete id="deleteById" parameterType="java.lang.String">
+  	delete from s_group where id=#{id}
+  </delete>
+
+    <delete id="delete" parameterType="com.mika.credit.facade.admin.model.Group">
+        delete from s_group
+        <include refid="condition"/>
+    </delete>
+
+    <!-- 根据Group表中的id或name查询组信息和组内用户信息 -->
+    <select id="selectGroupUser" parameterType="com.mika.credit.facade.admin.model.Group"
+            resultMap="groupUserMap">
+        select gi.*,u.id as u_id,u.name as u_name,
+        u.enable as u_enable, u.dept_id, u.corp_id, u.usercode, u.passwd, u.username, u.salt, u.locked, u.name,
+        u.theme, u.idcard, u.phone, u.addr, u.email, u.create_time,u.login_count, u.last_time, u.create_by, u.sex,
+        u.birthday, u.mobile, u.other_contact, u.sos_person,u.sos_mobile, u.born_place
+        from s_group gi left join s_group_has_user ug on gi.id=ug.group_id
+        left join s_user u on ug.user_id=u.id
+        <where>
+            <if test="id !=null and id != ''">gi.id=#{id}</if>
+            <!-- 当name为空或为空串时，不再使用name作为查询条件 -->
+            <if test="name != null and name != ''">
+                or gi.name = #{name}
+            </if>
+        </where>
+    </select>
+
+    <!-- 删除组与组内成员之间的对应关系 -->
+    <delete id="deleteGroupUser" parameterType="com.mika.credit.facade.admin.model.UserGroupLink">
+        delete from s_group_has_user
+        <where>
+            <if test="user != null and user.id != null and user.id != ''">and user_id = #{user.id}</if>
+            <if test="group != null and group.id != null and group.id != ''">and group_id = #{group.id}</if>
+        </where>
+    </delete>
+
+    <!-- 根据Group表中的id或name查询组信息和组内资源信息 -->
+    <select id="selectGroupResource" parameterType="com.mika.credit.facade.admin.model.Group"
+            resultMap="groupResourceMap">
+        select gi.*,r.id as r_id,r.name as r_name,
+        r.enable as r_enable, r.category_id, r.icon, r.url, r.perms, r.type, r.sort, r.is_sys
+        from s_group gi left join s_group_has_resource rg on gi.id=rg.group_id
+        left join s_resource r on rg.resource_id=r.id
+        <where>
+            <if test="id !=null and id != ''">gi.id=#{id}</if>
+            <!-- 当name为空或为空串时，不再使用name作为查询条件 -->
+            <if test="name != null and name != ''">
+                or gi.name = #{name}
+            </if>
+        </where>
+    </select>
+
+    <!-- 删除组与组内资源之间的对应关系 -->
+    <delete id="deleteGroupResource" parameterType="com.mika.credit.facade.admin.model.ResourceGroupLink">
+        delete from s_group_has_resource
+        <where>
+            <if test="resource != null and resource.id != null and resource.id != ''">and resource_id = #{resource.id}</if>
+            <if test="group != null and group.id != null and group.id != ''">and group_id = #{group.id}</if>
+        </where>
+    </delete>
+</mapper>

@@ -1,0 +1,686 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mika.credit.facade.gugu.dao.ScanningCardMapper">
+  <resultMap id="BaseResultMap" type="com.mika.credit.facade.gugu.model.ScanningCard">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="carduu_id" jdbcType="INTEGER" property="carduuId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="position" jdbcType="VARCHAR" property="position" />
+    <result column="mobile1" jdbcType="VARCHAR" property="mobile1" />
+    <result column="mobile2" jdbcType="VARCHAR" property="mobile2" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="tel1" jdbcType="VARCHAR" property="tel1" />
+    <result column="tel2" jdbcType="VARCHAR" property="tel2" />
+    <result column="fax" jdbcType="VARCHAR" property="fax" />
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="website" jdbcType="VARCHAR" property="website" />
+    <result column="logo" jdbcType="VARCHAR" property="logo" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="fields" jdbcType="VARCHAR" property="fields" />
+    <result column="audit" jdbcType="VARCHAR" property="audit" />
+    <result column="del_flag" jdbcType="VARCHAR" property="delFlag" />
+    <result column="areaCode1" jdbcType="VARCHAR" property="areacode1" />
+    <result column="areaCode2" jdbcType="VARCHAR" property="areacode2" />
+    <result column="photo_path" jdbcType="VARCHAR" property="photoPath" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="b_card_flag" jdbcType="VARCHAR" property="bCardFlag" />
+    <result column="zip" jdbcType="VARCHAR" property="zip" />
+    <result column="hea_sculpture_path" jdbcType="VARCHAR" property="heaSculpturePath" />
+    <result column="shwo_hea_sculpture_path" jdbcType="VARCHAR" property="shwoHeaSculpturePath" />
+    <result column="name_coordinate" jdbcType="VARCHAR" property="nameCoordinate" />
+    <result column="position_coordinate" jdbcType="VARCHAR" property="positionCoordinate" />
+    <result column="mobile1_coordinate" jdbcType="VARCHAR" property="mobile1Coordinate" />
+    <result column="mobile2_coordinate" jdbcType="VARCHAR" property="mobile2Coordinate" />
+    <result column="email_coordinate" jdbcType="VARCHAR" property="emailCoordinate" />
+    <result column="tel1_coordinate" jdbcType="VARCHAR" property="tel1Coordinate" />
+    <result column="tel2_coordinate" jdbcType="VARCHAR" property="tel2Coordinate" />
+    <result column="fax_coordinate" jdbcType="VARCHAR" property="faxCoordinate" />
+    <result column="company_name_coordinate" jdbcType="VARCHAR" property="companyNameCoordinate" />
+    <result column="address_coordinate" jdbcType="VARCHAR" property="addressCoordinate" />
+    <result column="website_coordinate" jdbcType="VARCHAR" property="websiteCoordinate" />
+    <result column="area_code1_coordinate" jdbcType="VARCHAR" property="areaCode1Coordinate" />
+    <result column="area_code2_coordinate" jdbcType="VARCHAR" property="areaCode2Coordinate" />
+    <result column="zip_coordinate" jdbcType="VARCHAR" property="zipCoordinate" />
+    <result column="correct_coordinate" jdbcType="VARCHAR" property="correctCoordinate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, carduu_id, name, position, mobile1, mobile2, email, tel1, tel2, fax, 
+    company_name, address, website, logo, create_time, update_time, fields, audit, del_flag, 
+    areaCode1, areaCode2, photo_path, path, b_card_flag, zip, hea_sculpture_path, shwo_hea_sculpture_path, 
+    name_coordinate, position_coordinate, mobile1_coordinate, mobile2_coordinate, email_coordinate, 
+    tel1_coordinate, tel2_coordinate, fax_coordinate, company_name_coordinate, address_coordinate, 
+    website_coordinate, area_code1_coordinate, area_code2_coordinate, zip_coordinate, 
+    correct_coordinate
+  </sql>
+  <sql id="condition">
+    <where>
+      <if test="id != null and id != 0">
+        and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="userId != null and userId != 0">
+        and user_id = #{userId,jdbcType=INTEGER}
+      </if>
+      <if test="carduuId != null and carduuId != 0">
+        and carduu_id = #{carduuId,jdbcType=INTEGER}
+      </if>
+      <if test="name != null">
+        and name = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="position != null">
+        and position = #{position,jdbcType=VARCHAR}
+      </if>
+      <if test="mobile1 != null">
+        and  mobile1 = #{mobile1,jdbcType=VARCHAR}
+      </if>
+      <if test="mobile2 != null">
+        and  mobile2 = #{mobile2,jdbcType=VARCHAR}
+      </if>
+      <if test="email != null">
+        and email = #{email,jdbcType=VARCHAR}
+      </if>
+      <if test="tel1 != null">
+        and tel1 = #{tel1,jdbcType=VARCHAR}
+      </if>
+      <if test="tel2 != null">
+        and tel2 = #{tel2,jdbcType=VARCHAR}
+      </if>
+      <if test="fax != null">
+        and fax = #{fax,jdbcType=VARCHAR}
+      </if>
+      <if test="companyName != null">
+        and company_name = #{companyName,jdbcType=VARCHAR}
+      </if>
+      <if test="address != null">
+        and address = #{address,jdbcType=VARCHAR}
+      </if>
+      <if test="website != null">
+        and website = #{website,jdbcType=VARCHAR}
+      </if>
+      <if test="logo != null">
+        and logo = #{logo,jdbcType=VARCHAR}
+      </if>
+      <if test="createTime != null">
+        and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateTime != null">
+        and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="fields != null">
+        and fields = #{fields,jdbcType=VARCHAR}
+      </if>
+      <if test="audit != null">
+        and audit = #{audit,jdbcType=VARCHAR}
+      </if>
+      <if test="delFlag != null">
+        and del_flag = #{delFlag,jdbcType=VARCHAR}
+      </if>
+      <if test="areacode1 != null">
+        and areaCode1 = #{areacode1,jdbcType=VARCHAR}
+      </if>
+      <if test="areacode2 != null">
+        and areaCode2 = #{areacode2,jdbcType=VARCHAR}
+      </if>
+      <if test="photoPath != null">
+        and photo_path = #{photoPath,jdbcType=VARCHAR}
+      </if>
+      <if test="path != null">
+        and path = #{path,jdbcType=VARCHAR}
+      </if>
+      <if test="bCardFlag != null">
+        and b_card_flag = #{bCardFlag,jdbcType=VARCHAR}
+      </if>
+      <if test="zip != null">
+        and  zip = #{zip,jdbcType=VARCHAR}
+      </if>
+      <if test="heaSculpturePath != null">
+        and  hea_sculpture_path = #{heaSculpturePath,jdbcType=VARCHAR}
+      </if>
+      <if test="shwoHeaSculpturePath != null">
+        and shwo_hea_sculpture_path = #{shwoHeaSculpturePath,jdbcType=VARCHAR}
+      </if>
+      <if test="nameCoordinate != null">
+        and name_coordinate = #{nameCoordinate,jdbcType=VARCHAR}
+      </if>
+      <if test="positionCoordinate != null">
+        and position_coordinate = #{positionCoordinate,jdbcType=VARCHAR}
+      </if>
+      <if test="mobile1Coordinate != null">
+        and mobile1_coordinate = #{mobile1Coordinate,jdbcType=VARCHAR}
+      </if>
+      <if test="mobile2Coordinate != null">
+        and  mobile2_coordinate = #{mobile2Coordinate,jdbcType=VARCHAR}
+      </if>
+      <if test="emailCoordinate != null">
+        and email_coordinate = #{emailCoordinate,jdbcType=VARCHAR}
+      </if>
+      <if test="tel1Coordinate != null">
+        and tel1_coordinate = #{tel1Coordinate,jdbcType=VARCHAR}
+      </if>
+      <if test="tel2Coordinate != null">
+        and tel2_coordinate = #{tel2Coordinate,jdbcType=VARCHAR}
+      </if>
+      <if test="faxCoordinate != null">
+        and fax_coordinate = #{faxCoordinate,jdbcType=VARCHAR}
+      </if>
+      <if test="companyNameCoordinate != null">
+        and company_name_coordinate = #{companyNameCoordinate,jdbcType=VARCHAR}
+      </if>
+      <if test="addressCoordinate != null">
+        and address_coordinate = #{addressCoordinate,jdbcType=VARCHAR}
+      </if>
+      <if test="websiteCoordinate != null">
+        and website_coordinate = #{websiteCoordinate,jdbcType=VARCHAR}
+      </if>
+      <if test="areaCode1Coordinate != null">
+        and  area_code1_coordinate = #{areaCode1Coordinate,jdbcType=VARCHAR}
+      </if>
+      <if test="areaCode2Coordinate != null">
+        and area_code2_coordinate = #{areaCode2Coordinate,jdbcType=VARCHAR}
+      </if>
+      <if test="zipCoordinate != null">
+        and zip_coordinate = #{zipCoordinate,jdbcType=VARCHAR}
+      </if>
+      <if test="correctCoordinate != null">
+        and  correct_coordinate = #{correctCoordinate,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from scanning_card
+    where id = #{id,jdbcType=INTEGER}
+    ORDER  BY create_time DESC
+  </select>
+  <select id="selectByPrimaryKeySelective" parameterType="com.mika.credit.facade.gugu.model.ScanningCard" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from scanning_card
+    <include refid="condition" />
+    ORDER  BY create_time DESC
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from scanning_card
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mika.credit.facade.gugu.model.ScanningCard" useGeneratedKeys="true" keyProperty="id">
+    insert into scanning_card (id, user_id, carduu_id, 
+      name, position, mobile1, 
+      mobile2, email, tel1, 
+      tel2, fax, company_name, 
+      address, website, logo, 
+      create_time, update_time, fields, 
+      audit, del_flag, areaCode1, 
+      areaCode2, photo_path, path, 
+      b_card_flag, zip, hea_sculpture_path, 
+      shwo_hea_sculpture_path, name_coordinate, position_coordinate, 
+      mobile1_coordinate, mobile2_coordinate, email_coordinate, 
+      tel1_coordinate, tel2_coordinate, fax_coordinate, 
+      company_name_coordinate, address_coordinate, 
+      website_coordinate, area_code1_coordinate, 
+      area_code2_coordinate, zip_coordinate, correct_coordinate
+      )
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{carduuId,jdbcType=INTEGER}, 
+      #{name,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, #{mobile1,jdbcType=VARCHAR}, 
+      #{mobile2,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{tel1,jdbcType=VARCHAR}, 
+      #{tel2,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{website,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{fields,jdbcType=VARCHAR}, 
+      #{audit,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR}, #{areacode1,jdbcType=VARCHAR}, 
+      #{areacode2,jdbcType=VARCHAR}, #{photoPath,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, 
+      #{bCardFlag,jdbcType=VARCHAR}, #{zip,jdbcType=VARCHAR}, #{heaSculpturePath,jdbcType=VARCHAR}, 
+      #{shwoHeaSculpturePath,jdbcType=VARCHAR}, #{nameCoordinate,jdbcType=VARCHAR}, #{positionCoordinate,jdbcType=VARCHAR}, 
+      #{mobile1Coordinate,jdbcType=VARCHAR}, #{mobile2Coordinate,jdbcType=VARCHAR}, #{emailCoordinate,jdbcType=VARCHAR}, 
+      #{tel1Coordinate,jdbcType=VARCHAR}, #{tel2Coordinate,jdbcType=VARCHAR}, #{faxCoordinate,jdbcType=VARCHAR}, 
+      #{companyNameCoordinate,jdbcType=VARCHAR}, #{addressCoordinate,jdbcType=VARCHAR}, 
+      #{websiteCoordinate,jdbcType=VARCHAR}, #{areaCode1Coordinate,jdbcType=VARCHAR}, 
+      #{areaCode2Coordinate,jdbcType=VARCHAR}, #{zipCoordinate,jdbcType=VARCHAR}, #{correctCoordinate,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mika.credit.facade.gugu.model.ScanningCard" useGeneratedKeys="true" keyProperty="id">
+    insert into scanning_card
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="carduuId != null">
+        carduu_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="position != null">
+        position,
+      </if>
+      <if test="mobile1 != null">
+        mobile1,
+      </if>
+      <if test="mobile2 != null">
+        mobile2,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="tel1 != null">
+        tel1,
+      </if>
+      <if test="tel2 != null">
+        tel2,
+      </if>
+      <if test="fax != null">
+        fax,
+      </if>
+      <if test="companyName != null">
+        company_name,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="website != null">
+        website,
+      </if>
+      <if test="logo != null">
+        logo,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="fields != null">
+        fields,
+      </if>
+      <if test="audit != null">
+        audit,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="areacode1 != null">
+        areaCode1,
+      </if>
+      <if test="areacode2 != null">
+        areaCode2,
+      </if>
+      <if test="photoPath != null">
+        photo_path,
+      </if>
+      <if test="path != null">
+        path,
+      </if>
+      <if test="bCardFlag != null">
+        b_card_flag,
+      </if>
+      <if test="zip != null">
+        zip,
+      </if>
+      <if test="heaSculpturePath != null">
+        hea_sculpture_path,
+      </if>
+      <if test="shwoHeaSculpturePath != null">
+        shwo_hea_sculpture_path,
+      </if>
+      <if test="nameCoordinate != null">
+        name_coordinate,
+      </if>
+      <if test="positionCoordinate != null">
+        position_coordinate,
+      </if>
+      <if test="mobile1Coordinate != null">
+        mobile1_coordinate,
+      </if>
+      <if test="mobile2Coordinate != null">
+        mobile2_coordinate,
+      </if>
+      <if test="emailCoordinate != null">
+        email_coordinate,
+      </if>
+      <if test="tel1Coordinate != null">
+        tel1_coordinate,
+      </if>
+      <if test="tel2Coordinate != null">
+        tel2_coordinate,
+      </if>
+      <if test="faxCoordinate != null">
+        fax_coordinate,
+      </if>
+      <if test="companyNameCoordinate != null">
+        company_name_coordinate,
+      </if>
+      <if test="addressCoordinate != null">
+        address_coordinate,
+      </if>
+      <if test="websiteCoordinate != null">
+        website_coordinate,
+      </if>
+      <if test="areaCode1Coordinate != null">
+        area_code1_coordinate,
+      </if>
+      <if test="areaCode2Coordinate != null">
+        area_code2_coordinate,
+      </if>
+      <if test="zipCoordinate != null">
+        zip_coordinate,
+      </if>
+      <if test="correctCoordinate != null">
+        correct_coordinate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="carduuId != null">
+        #{carduuId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile1 != null">
+        #{mobile1,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile2 != null">
+        #{mobile2,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="tel1 != null">
+        #{tel1,jdbcType=VARCHAR},
+      </if>
+      <if test="tel2 != null">
+        #{tel2,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null">
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null">
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="website != null">
+        #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null">
+        #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fields != null">
+        #{fields,jdbcType=VARCHAR},
+      </if>
+      <if test="audit != null">
+        #{audit,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="areacode1 != null">
+        #{areacode1,jdbcType=VARCHAR},
+      </if>
+      <if test="areacode2 != null">
+        #{areacode2,jdbcType=VARCHAR},
+      </if>
+      <if test="photoPath != null">
+        #{photoPath,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="bCardFlag != null">
+        #{bCardFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="zip != null">
+        #{zip,jdbcType=VARCHAR},
+      </if>
+      <if test="heaSculpturePath != null">
+        #{heaSculpturePath,jdbcType=VARCHAR},
+      </if>
+      <if test="shwoHeaSculpturePath != null">
+        #{shwoHeaSculpturePath,jdbcType=VARCHAR},
+      </if>
+      <if test="nameCoordinate != null">
+        #{nameCoordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="positionCoordinate != null">
+        #{positionCoordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile1Coordinate != null">
+        #{mobile1Coordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile2Coordinate != null">
+        #{mobile2Coordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="emailCoordinate != null">
+        #{emailCoordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="tel1Coordinate != null">
+        #{tel1Coordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="tel2Coordinate != null">
+        #{tel2Coordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="faxCoordinate != null">
+        #{faxCoordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="companyNameCoordinate != null">
+        #{companyNameCoordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="addressCoordinate != null">
+        #{addressCoordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="websiteCoordinate != null">
+        #{websiteCoordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode1Coordinate != null">
+        #{areaCode1Coordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode2Coordinate != null">
+        #{areaCode2Coordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCoordinate != null">
+        #{zipCoordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="correctCoordinate != null">
+        #{correctCoordinate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mika.credit.facade.gugu.model.ScanningCard">
+    update scanning_card
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="carduuId != null">
+        carduu_id = #{carduuId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile1 != null">
+        mobile1 = #{mobile1,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile2 != null">
+        mobile2 = #{mobile2,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="tel1 != null">
+        tel1 = #{tel1,jdbcType=VARCHAR},
+      </if>
+      <if test="tel2 != null">
+        tel2 = #{tel2,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null">
+        fax = #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null">
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="website != null">
+        website = #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null">
+        logo = #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fields != null">
+        fields = #{fields,jdbcType=VARCHAR},
+      </if>
+      <if test="audit != null">
+        audit = #{audit,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="areacode1 != null">
+        areaCode1 = #{areacode1,jdbcType=VARCHAR},
+      </if>
+      <if test="areacode2 != null">
+        areaCode2 = #{areacode2,jdbcType=VARCHAR},
+      </if>
+      <if test="photoPath != null">
+        photo_path = #{photoPath,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="bCardFlag != null">
+        b_card_flag = #{bCardFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="zip != null">
+        zip = #{zip,jdbcType=VARCHAR},
+      </if>
+      <if test="heaSculpturePath != null">
+        hea_sculpture_path = #{heaSculpturePath,jdbcType=VARCHAR},
+      </if>
+      <if test="shwoHeaSculpturePath != null">
+        shwo_hea_sculpture_path = #{shwoHeaSculpturePath,jdbcType=VARCHAR},
+      </if>
+      <if test="nameCoordinate != null">
+        name_coordinate = #{nameCoordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="positionCoordinate != null">
+        position_coordinate = #{positionCoordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile1Coordinate != null">
+        mobile1_coordinate = #{mobile1Coordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile2Coordinate != null">
+        mobile2_coordinate = #{mobile2Coordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="emailCoordinate != null">
+        email_coordinate = #{emailCoordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="tel1Coordinate != null">
+        tel1_coordinate = #{tel1Coordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="tel2Coordinate != null">
+        tel2_coordinate = #{tel2Coordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="faxCoordinate != null">
+        fax_coordinate = #{faxCoordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="companyNameCoordinate != null">
+        company_name_coordinate = #{companyNameCoordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="addressCoordinate != null">
+        address_coordinate = #{addressCoordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="websiteCoordinate != null">
+        website_coordinate = #{websiteCoordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode1Coordinate != null">
+        area_code1_coordinate = #{areaCode1Coordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode2Coordinate != null">
+        area_code2_coordinate = #{areaCode2Coordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCoordinate != null">
+        zip_coordinate = #{zipCoordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="correctCoordinate != null">
+        correct_coordinate = #{correctCoordinate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mika.credit.facade.gugu.model.ScanningCard">
+    update scanning_card
+    set user_id = #{userId,jdbcType=INTEGER},
+      carduu_id = #{carduuId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      position = #{position,jdbcType=VARCHAR},
+      mobile1 = #{mobile1,jdbcType=VARCHAR},
+      mobile2 = #{mobile2,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      tel1 = #{tel1,jdbcType=VARCHAR},
+      tel2 = #{tel2,jdbcType=VARCHAR},
+      fax = #{fax,jdbcType=VARCHAR},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      website = #{website,jdbcType=VARCHAR},
+      logo = #{logo,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      fields = #{fields,jdbcType=VARCHAR},
+      audit = #{audit,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=VARCHAR},
+      areaCode1 = #{areacode1,jdbcType=VARCHAR},
+      areaCode2 = #{areacode2,jdbcType=VARCHAR},
+      photo_path = #{photoPath,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      b_card_flag = #{bCardFlag,jdbcType=VARCHAR},
+      zip = #{zip,jdbcType=VARCHAR},
+      hea_sculpture_path = #{heaSculpturePath,jdbcType=VARCHAR},
+      shwo_hea_sculpture_path = #{shwoHeaSculpturePath,jdbcType=VARCHAR},
+      name_coordinate = #{nameCoordinate,jdbcType=VARCHAR},
+      position_coordinate = #{positionCoordinate,jdbcType=VARCHAR},
+      mobile1_coordinate = #{mobile1Coordinate,jdbcType=VARCHAR},
+      mobile2_coordinate = #{mobile2Coordinate,jdbcType=VARCHAR},
+      email_coordinate = #{emailCoordinate,jdbcType=VARCHAR},
+      tel1_coordinate = #{tel1Coordinate,jdbcType=VARCHAR},
+      tel2_coordinate = #{tel2Coordinate,jdbcType=VARCHAR},
+      fax_coordinate = #{faxCoordinate,jdbcType=VARCHAR},
+      company_name_coordinate = #{companyNameCoordinate,jdbcType=VARCHAR},
+      address_coordinate = #{addressCoordinate,jdbcType=VARCHAR},
+      website_coordinate = #{websiteCoordinate,jdbcType=VARCHAR},
+      area_code1_coordinate = #{areaCode1Coordinate,jdbcType=VARCHAR},
+      area_code2_coordinate = #{areaCode2Coordinate,jdbcType=VARCHAR},
+      zip_coordinate = #{zipCoordinate,jdbcType=VARCHAR},
+      correct_coordinate = #{correctCoordinate,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.globaleagle.core.dao.CollectionInfoMapper" >
+  <!--<cache eviction="LRU" type="com.mika.credit.common.core.mybatis.cache.redis.MybatiesRedisCache" />-->
+  <resultMap id="BaseResultMap" type="com.mika.credit.facade.globaleagle.core.model.CollectionInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="court" property="court" jdbcType="VARCHAR" />
+    <result column="case_no" property="caseNo" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="topic" property="topic" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+    <result column="customer_id" property="customerId" jdbcType="INTEGER" />
+    <result column="orderdetail_id" property="orderDetailId" jdbcType="INTEGER" />
+    <result column="opera_date" property="operaDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, type, court, case_no, create_date, topic, content, customer_id, orderdetail_id, opera_date
+  </sql>
+
+  <select id="selectCountSelective" resultType="java.lang.Integer" parameterType="com.mika.credit.facade.globaleagle.core.model.CollectionInfo" >
+    select
+    count(1)
+    from collection_info
+    <where>
+      <if test="id != null" >
+        and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="type != null" >
+        and type = #{type,jdbcType=VARCHAR}
+      </if>
+      <if test="court != null" >
+        and court= #{court,jdbcType=VARCHAR}
+      </if>
+      <if test="caseNo != null" >
+        and case_no= #{caseNo,jdbcType=VARCHAR}
+      </if>
+      <if test="createDate != null" >
+        and create_date = #{createDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="topic != null" >
+        and topic = #{topic,jdbcType=VARCHAR}
+      </if>
+      <if test="content != null" >
+        and content = #{content,jdbcType=VARCHAR}
+      </if>
+      <if test="customerId != null" >
+        and customer_id = #{customerId,jdbcType=INTEGER}
+      </if>
+      <if test="orderDetailId != null" >
+        and orderdetail_id = #{orderDetailId,jdbcType=INTEGER}
+      </if>
+      <if test="operaDate != null" >
+        and opera_date = #{operaDate,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+  </select>
+  <select id="selectSelective" resultMap="BaseResultMap" parameterType="com.mika.credit.facade.globaleagle.core.model.CollectionInfo" >
+    select
+    <include refid="Base_Column_List" />
+    from collection_info
+    <where>
+      <if test="id != null" >
+        and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="type != null" >
+        and type = #{type,jdbcType=VARCHAR}
+      </if>
+      <if test="court != null" >
+        and court= #{court,jdbcType=VARCHAR}
+      </if>
+      <if test="caseNo != null" >
+        and case_no= #{caseNo,jdbcType=VARCHAR}
+      </if>
+      <if test="createDate != null" >
+        and create_date = #{createDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="topic != null" >
+        and topic = #{topic,jdbcType=VARCHAR}
+      </if>
+      <if test="content != null" >
+        and content = #{content,jdbcType=VARCHAR}
+      </if>
+      <if test="customerId != null" >
+        and customer_id = #{customerId,jdbcType=INTEGER}
+      </if>
+      <if test="orderDetailId != null" >
+        and orderdetail_id = #{orderDetailId,jdbcType=INTEGER}
+      </if>
+      <if test="operaDate != null" >
+        and opera_date = #{operaDate,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+    order by opera_date
+  </select>
+
+
+  <!-- 插入内容 -->
+  <insert id="insertCol" parameterType="com.mika.credit.facade.globaleagle.core.model.CollectionInfo">
+    insert into collection_info
+    (court,type,case_no,create_date,topic,content,customer_id,orderdetail_id,opera_date)
+    values(#{court,jdbcType=VARCHAR},#{type,jdbcType=VARCHAR},#{caseNo,jdbcType=VARCHAR},#{createDate,jdbcType=TIMESTAMP},#{topic,jdbcType=VARCHAR},#{content,jdbcType=VARCHAR},
+    #{customerId,jdbcType=INTEGER}, #{orderDetailId,jdbcType=INTEGER}, now())
+  </insert>
+
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from collection_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <!-- 查询司法信息 -->
+  <select id="loadColInfo" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from collection_info where customer_id = #{0} and orderdetail_id = #{1} ORDER BY opera_date
+  </select>
+
+  <!--根据当前id查询content-->
+  <select id="selContentById" resultType="java.lang.String" parameterType="java.lang.Integer">
+    select content from collection_info where id = #{id,jdbcType=INTEGER}
+  </select>
+
+
+</mapper>

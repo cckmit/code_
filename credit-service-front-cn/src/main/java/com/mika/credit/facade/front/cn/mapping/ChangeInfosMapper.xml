@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.front.cn.dao.impl.ChangeInfosDaoImpl" >
+  <cache eviction="LRU" type="com.mika.credit.common.core.mybatis.cache.redis.sharded.MybatiesRedisCache" />
+  <resultMap id="BaseResultMap" type="com.mika.credit.common.entity.report.cn.ChangeInfos" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="change_date" property="changeDate" jdbcType="VARCHAR" />
+    <result column="change_type" property="changeType" jdbcType="VARCHAR" />
+    <result column="change_type_en" property="changeTypeEN" jdbcType="VARCHAR" />
+    <result column="crefo_no" property="crefoNo" jdbcType="VARCHAR" />
+    <result column="company_type_id" property="companyTypeId" jdbcType="INTEGER" />
+    <result column="del_flag" property="delFlag" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+    <result column="after_cn" property="afterCN" jdbcType="LONGVARCHAR" />
+    <result column="after_en" property="afterEN" jdbcType="LONGVARCHAR" />
+    <result column="before_cn" property="beforeCN" jdbcType="LONGVARCHAR" />
+    <result column="before_en" property="beforeEN" jdbcType="LONGVARCHAR" />
+    <result column="full_report_id" property="fullReportId" jdbcType="INTEGER" />
+  </resultMap>
+
+  <sql id="table"> change_infos </sql>
+
+  <sql id="Base_Column_List" >
+    id, change_date, change_type,change_type_en, crefo_no, company_type_id, del_flag, update_time,
+    after_cn, after_en, before_cn, before_en,full_report_id
+  </sql>
+
+  <sql id="condition_sql">
+    <if test="id != null" >
+      and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="changeDate != null" >
+      and change_date = #{changeDate,jdbcType=VARCHAR}
+    </if>
+    <if test="changeType != null" >
+      and change_type = #{changeType,jdbcType=VARCHAR}
+    </if>
+    <if test="changeTypeEN != null" >
+      and change_type_en = #{changeTypeEN,jdbcType=VARCHAR}
+    </if>
+    <if test="crefoNo != null" >
+      and crefo_no = #{crefoNo,jdbcType=VARCHAR}
+    </if>
+    <if test="companyTypeId != null" >
+      and company_type_id = #{companyTypeId,jdbcType=INTEGER}
+    </if>
+    <if test="delFlag != null" >
+      and del_flag = #{delFlag,jdbcType=VARCHAR}
+    </if>
+    <if test="updateTime != null" >
+      and update_time = #{updateTime,jdbcType=VARCHAR}
+    </if>
+    <if test="afterCN != null" >
+      and after_cn = #{afterCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="afterEN != null" >
+      and after_en = #{afterEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="beforeCN != null" >
+      and before_cn = #{beforeCN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="beforeEN != null" >
+      and before_en = #{beforeEN,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="fullReportId != null" >
+      and full_report_id = #{fullReportId,jdbcType=INTEGER}
+    </if>
+  </sql>
+
+  <select id="getById" parameterType="Integer" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    where ID = #{id}
+  </select>
+
+  <select id="listBy" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+    ORDER BY change_date*1 DESC
+  </select>
+
+  <select id="listPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+    <![CDATA[ order by ID desc]]>
+  </select>
+
+  <select id="listPageCount" parameterType="java.util.Map" resultType="Integer">
+    select count(1) from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <insert id="insert" parameterType="com.mika.credit.common.entity.report.cn.ChangeInfos" keyProperty="id" useGeneratedKeys="true">
+    insert into
+    <include refid="table" />
+    (id, change_date, change_type,change_type_en,
+    crefo_no, company_type_id, del_flag,
+    update_time, after_cn, after_en,
+    before_cn, before_en,full_report_id)
+    values (#{id,jdbcType=INTEGER}, #{changeDate,jdbcType=VARCHAR}, #{changeType,jdbcType=VARCHAR},#{changeTypeEN,jdbcType=VARCHAR},
+    #{crefoNo,jdbcType=VARCHAR}, #{companyTypeId,jdbcType=INTEGER}, #{delFlag,jdbcType=VARCHAR},
+    #{updateTime,jdbcType=VARCHAR}, #{afterCN,jdbcType=LONGVARCHAR}, #{afterEN,jdbcType=LONGVARCHAR},
+    #{beforeCN,jdbcType=LONGVARCHAR}, #{beforeEN,jdbcType=LONGVARCHAR},#{fullReportId,jdbcType=INTEGER})
+  </insert>
+
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from
+    <include refid="table" />
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <update id="update" parameterType="com.mika.credit.common.entity.report.cn.ChangeInfos" >
+    update change_infos
+    set change_date = #{changeDate,jdbcType=VARCHAR},
+      change_type = #{changeType,jdbcType=VARCHAR},
+      change_type_en = #{changeTypeEN,jdbcType=VARCHAR},
+      crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      company_type_id = #{companyTypeId,jdbcType=INTEGER},
+      del_flag = #{delFlag,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      after_cn = #{afterCN,jdbcType=LONGVARCHAR},
+      after_en = #{afterEN,jdbcType=LONGVARCHAR},
+      before_cn = #{beforeCN,jdbcType=LONGVARCHAR},
+      before_en = #{beforeEN,jdbcType=LONGVARCHAR},
+      full_report_id = #{fullReportId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <insert id="insertSelective" parameterType="com.mika.credit.common.entity.report.cn.ChangeInfos" >
+    insert into change_infos
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="changeDate != null" >
+        change_date,
+      </if>
+      <if test="changeType != null" >
+        change_type,
+      </if>
+      <if test="changeTypeEN != null" >
+        change_type_en,
+      </if>
+      <if test="crefoNo != null" >
+        crefo_no,
+      </if>
+      <if test="companyTypeId != null" >
+        company_type_id,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="afterCN != null" >
+        after_cn,
+      </if>
+      <if test="afterEN != null" >
+        after_en,
+      </if>
+      <if test="beforeCN != null" >
+        before_cn,
+      </if>
+      <if test="beforeEN != null" >
+        before_en,
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="changeDate != null" >
+        #{changeDate,jdbcType=VARCHAR},
+      </if>
+      <if test="changeType != null" >
+        #{changeType,jdbcType=VARCHAR},
+      </if>
+      <if test="changeTypeEN != null" >
+        #{changeTypeEN,jdbcType=VARCHAR},
+      </if>
+      <if test="crefoNo != null" >
+        #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="companyTypeId != null" >
+        #{companyTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="afterCN != null" >
+        #{afterCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="afterEN != null" >
+        #{afterEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="beforeCN != null" >
+        #{beforeCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="beforeEN != null" >
+        #{beforeEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        #{fullReportId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateSelective" parameterType="com.mika.credit.common.entity.report.cn.ChangeInfos" >
+    update change_infos
+    <set >
+      <if test="changeDate != null" >
+        change_date = #{changeDate,jdbcType=VARCHAR},
+      </if>
+      <if test="changeType != null" >
+        change_type = #{changeType,jdbcType=VARCHAR},
+      </if>
+      <if test="changeTypeEN != null" >
+        change_type_en = #{changeTypeEN,jdbcType=VARCHAR},
+      </if>
+      <if test="crefoNo != null" >
+        crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="companyTypeId != null" >
+        company_type_id = #{companyTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="afterCN != null" >
+        after_cn = #{afterCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="afterEN != null" >
+        after_en = #{afterEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="beforeCN != null" >
+        before_cn = #{beforeCN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="beforeEN != null" >
+        before_en = #{beforeEN,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id = #{fullReportId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+</mapper>

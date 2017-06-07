@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.front.cn.dao.impl.EnterpriseShareholderDaoImpl" >
+  <cache eviction="LRU" type="com.mika.credit.common.core.mybatis.cache.redis.sharded.MybatiesRedisCache" />
+  <resultMap id="BaseResultMap" type="com.mika.credit.common.entity.report.cn.EnterpriseShareholder" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="share_name_cn" property="shareNameCN" jdbcType="VARCHAR" />
+    <result column="share" property="share" jdbcType="VARCHAR" />
+    <result column="paid_in_capital" property="paidInCapital" jdbcType="VARCHAR" />
+    <result column="paid_in_capital_contribution" property="paidInCapitalContribution" jdbcType="VARCHAR" />
+    <result column="paid_in_date" property="paidInDate" jdbcType="VARCHAR" />
+    <result column="subscription_date" property="subscriptionDate" jdbcType="VARCHAR" />
+    <result column="subscribed_investment_method" property="subscribedInvestmentMethod" jdbcType="VARCHAR" />
+    <result column="subscribed_capital_contribution" property="subscribedCapitalContribution" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+    <result column="full_report_id" property="fullReportId" jdbcType="INTEGER" />
+  </resultMap>
+
+  <sql id="table"> enterprise_shareholder </sql>
+
+  <sql id="Base_Column_List" >
+    id, share_name_cn, share, paid_in_capital, paid_in_capital_contribution, paid_in_date,
+    subscription_date, subscribed_investment_method, subscribed_capital_contribution,update_time,full_report_id
+  </sql>
+
+  <sql id="condition_sql">
+    <if test="id != null" >
+      and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="shareNameCN != null" >
+      and share_name_cn = #{shareNameCN,jdbcType=VARCHAR}
+    </if>
+    <if test="share != null" >
+      and share = #{share,jdbcType=VARCHAR}
+    </if>
+    <if test="paidInCapital != null" >
+      and paid_in_capital = #{paidInCapital,jdbcType=VARCHAR}
+    </if>
+    <if test="paidInCapitalContribution != null" >
+      and paid_in_capital_contribution = #{paidInCapitalContribution,jdbcType=VARCHAR}
+    </if>
+    <if test="paidInDate != null" >
+      and paid_in_date = #{paidInDate,jdbcType=VARCHAR}
+    </if>
+    <if test="subscriptionDate != null" >
+      and subscription_date = #{subscriptionDate,jdbcType=VARCHAR}
+    </if>
+    <if test="subscribedInvestmentMethod != null" >
+      and subscribed_investment_method = #{subscribedInvestmentMethod,jdbcType=VARCHAR}
+    </if>
+    <if test="subscribedCapitalContribution != null" >
+      and subscribed_capital_contribution = #{subscribedCapitalContribution,jdbcType=VARCHAR}
+    </if>
+    <if test="updateTime != null" >
+      and update_time = #{updateTime,jdbcType=VARCHAR}
+    </if>
+    <if test="fullReportId != null" >
+      and full_report_id = #{fullReportId,jdbcType=INTEGER}
+    </if>
+  </sql>
+
+  <select id="getById" parameterType="Integer" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    where ID = #{id}
+  </select>
+
+  <select id="listBy" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <select id="listPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+    <![CDATA[ order by ID desc]]>
+  </select>
+
+  <select id="listPageCount" parameterType="java.util.Map" resultType="Integer">
+    select count(1) from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <insert id="insert" parameterType="com.mika.credit.common.entity.report.cn.EnterpriseShareholder" keyProperty="id" useGeneratedKeys="true">
+    insert into
+    <include refid="table" />
+    (id, share_name_cn, share,
+    paid_in_capital, paid_in_capital_contribution, paid_in_date,
+    subscription_date, subscribed_investment_method, subscribed_capital_contribution,
+    update_time,full_report_id)
+    values (#{id,jdbcType=INTEGER}, #{shareNameCN,jdbcType=VARCHAR}, #{share,jdbcType=VARCHAR},
+    #{paidInCapital,jdbcType=VARCHAR}, #{paidInCapitalContribution,jdbcType=VARCHAR}, #{paidInDate,jdbcType=VARCHAR},
+    #{subscriptionDate,jdbcType=VARCHAR}, #{subscribedInvestmentMethod,jdbcType=VARCHAR}, #{subscribedCapitalContribution,jdbcType=VARCHAR},
+    #{updateTime,jdbcType=VARCHAR},#{fullReportId,jdbcType=INTEGER})
+  </insert>
+
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from
+    <include refid="table" />
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <update id="update" parameterType="com.mika.credit.common.entity.report.cn.EnterpriseShareholder" >
+    update enterprise_shareholder
+    set share_name_cn = #{shareNameCN,jdbcType=VARCHAR},
+      share = #{share,jdbcType=VARCHAR},
+      paid_in_capital = #{paidInCapital,jdbcType=VARCHAR},
+      paid_in_capital_contribution = #{paidInCapitalContribution,jdbcType=VARCHAR},
+      paid_in_date = #{paidInDate,jdbcType=VARCHAR},
+      subscription_date = #{subscriptionDate,jdbcType=VARCHAR},
+      subscribed_investment_method = #{subscribedInvestmentMethod,jdbcType=VARCHAR},
+      subscribed_capital_contribution = #{subscribedCapitalContribution,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      full_report_id = #{fullReportId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <insert id="insertSelective" parameterType="com.mika.credit.common.entity.report.cn.EnterpriseShareholder" >
+    insert into enterprise_shareholder
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="shareNameCN != null" >
+        share_name_cn,
+      </if>
+      <if test="share != null" >
+        share,
+      </if>
+      <if test="paidInCapital != null" >
+        paid_in_capital,
+      </if>
+      <if test="paidInCapitalContribution != null" >
+        paid_in_capital_contribution,
+      </if>
+      <if test="paidInDate != null" >
+        paid_in_date,
+      </if>
+      <if test="subscriptionDate != null" >
+        subscription_date,
+      </if>
+      <if test="subscribedInvestmentMethod != null" >
+        subscribed_investment_method,
+      </if>
+      <if test="subscribedCapitalContribution != null" >
+        subscribed_capital_contribution,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="shareNameCN != null" >
+        #{shareNameCN,jdbcType=VARCHAR},
+      </if>
+      <if test="share != null" >
+        #{share,jdbcType=VARCHAR},
+      </if>
+      <if test="paidInCapital != null" >
+        #{paidInCapital,jdbcType=VARCHAR},
+      </if>
+      <if test="paidInCapitalContribution != null" >
+        #{paidInCapitalContribution,jdbcType=VARCHAR},
+      </if>
+      <if test="paidInDate != null" >
+        #{paidInDate,jdbcType=VARCHAR},
+      </if>
+      <if test="subscriptionDate != null" >
+        #{subscriptionDate,jdbcType=VARCHAR},
+      </if>
+      <if test="subscribedInvestmentMethod != null" >
+        #{subscribedInvestmentMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="subscribedCapitalContribution != null" >
+        #{subscribedCapitalContribution,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        #{fullReportId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateSelective" parameterType="com.mika.credit.common.entity.report.cn.EnterpriseShareholder" >
+    update enterprise_shareholder
+    <set >
+      <if test="shareNameCN != null" >
+        share_name_cn = #{shareNameCN,jdbcType=VARCHAR},
+      </if>
+      <if test="share != null" >
+        share = #{share,jdbcType=VARCHAR},
+      </if>
+      <if test="paidInCapital != null" >
+        paid_in_capital = #{paidInCapital,jdbcType=VARCHAR},
+      </if>
+      <if test="paidInCapitalContribution != null" >
+        paid_in_capital_contribution = #{paidInCapitalContribution,jdbcType=VARCHAR},
+      </if>
+      <if test="paidInDate != null" >
+        paid_in_date = #{paidInDate,jdbcType=VARCHAR},
+      </if>
+      <if test="subscriptionDate != null" >
+        subscription_date = #{subscriptionDate,jdbcType=VARCHAR},
+      </if>
+      <if test="subscribedInvestmentMethod != null" >
+        subscribed_investment_method = #{subscribedInvestmentMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="subscribedCapitalContribution != null" >
+        subscribed_capital_contribution = #{subscribedCapitalContribution,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id = #{fullReportId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

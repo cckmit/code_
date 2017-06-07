@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.front.cn.dao.impl.EntinvinfosDaoImpl" >
+  <cache eviction="LRU" type="com.mika.credit.common.core.mybatis.cache.redis.sharded.MybatiesRedisCache" />
+  <resultMap id="BaseResultMap" type="com.mika.credit.common.entity.report.cn.Entinvinfos" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="address_cn" property="addressCN" jdbcType="VARCHAR" />
+    <result column="address_en" property="addressEN" jdbcType="VARCHAR" />
+    <result column="can_date" property="canDate" jdbcType="VARCHAR" />
+    <result column="com_crefo_no" property="comCrefoNo" jdbcType="VARCHAR" />
+    <result column="confrom" property="confrom" jdbcType="VARCHAR" />
+    <result column="crefo_no" property="crefoNo" jdbcType="VARCHAR" />
+    <result column="currency" property="currency" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="VARCHAR" />
+    <result column="enterprise_name_cn" property="enterpriseNameCN" jdbcType="VARCHAR" />
+    <result column="enterprise_name_en" property="enterpriseNameEN" jdbcType="VARCHAR" />
+    <result column="ent_status" property="entStatus" jdbcType="VARCHAR" />
+    <result column="enterprise_status" property="enterpriseStatus" jdbcType="VARCHAR" />
+    <result column="enterprise_status_en" property="enterpriseStatusEN" jdbcType="VARCHAR" />
+    <result column="enterprise_type" property="enterpriseType" jdbcType="VARCHAR" />
+    <result column="enterprise_type_cn" property="enterpriseTypeCN" jdbcType="VARCHAR" />
+    <result column="enterprise_type_en" property="enterpriseTypeEN" jdbcType="VARCHAR" />
+    <result column="es_date" property="esDate" jdbcType="VARCHAR" />
+    <result column="funded_ratio" property="fundedRatio" jdbcType="VARCHAR" />
+    <result column="name_cn" property="nameCN" jdbcType="VARCHAR" />
+    <result column="name_en" property="nameEN" jdbcType="VARCHAR" />
+    <result column="reg_cap" property="regCap" jdbcType="VARCHAR" />
+    <result column="reg_cap_cur" property="regCapCur" jdbcType="VARCHAR" />
+    <result column="reg_cap_cur_cn" property="regCapCurCN" jdbcType="VARCHAR" />
+    <result column="reg_cap_cur_en" property="regCapCurEN" jdbcType="VARCHAR" />
+    <result column="reg_no" property="regNo" jdbcType="VARCHAR" />
+    <result column="reg_org_cn" property="regOrgCN" jdbcType="VARCHAR" />
+    <result column="reg_org_en" property="regOrgEN" jdbcType="VARCHAR" />
+    <result column="rev_date" property="revDate" jdbcType="VARCHAR" />
+    <result column="subconam" property="subconam" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+    <result column="full_report_id" property="fullReportId" jdbcType="INTEGER" />
+  </resultMap>
+
+  <sql id="table"> entinvinfos </sql>
+
+  <sql id="Base_Column_List" >
+    id, address_cn, address_en, can_date, com_crefo_no, confrom, crefo_no, currency, del_flag,
+    enterprise_name_cn, enterprise_name_en,ent_status, enterprise_status,enterprise_status_en,
+    enterprise_type,enterprise_type_cn,enterprise_type_en, es_date, funded_ratio, name_cn, name_en,
+    reg_cap, reg_cap_cur,reg_cap_cur_cn,reg_cap_cur_en, reg_no, reg_org_cn, reg_org_en, rev_date,
+    subconam, update_time,full_report_id
+  </sql>
+
+  <sql id="condition_sql">
+    <if test="id != null" >
+      and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="addressCN != null" >
+      and address_cn = #{addressCN,jdbcType=VARCHAR}
+    </if>
+    <if test="addressEN != null" >
+      and address_en = #{addressEN,jdbcType=VARCHAR}
+    </if>
+    <if test="canDate != null" >
+      and can_date = #{canDate,jdbcType=VARCHAR}
+    </if>
+    <if test="comCrefoNo != null" >
+      and com_crefo_no = #{comCrefoNo,jdbcType=VARCHAR}
+    </if>
+    <if test="confrom != null" >
+      and confrom = #{confrom,jdbcType=VARCHAR}
+    </if>
+    <if test="crefoNo != null" >
+      and crefo_no = #{crefoNo,jdbcType=VARCHAR}
+    </if>
+    <if test="currency != null" >
+      and currency = #{currency,jdbcType=VARCHAR}
+    </if>
+    <if test="delFlag != null" >
+      and del_flag = #{delFlag,jdbcType=VARCHAR}
+    </if>
+    <if test="enterpriseNameCN != null" >
+      and enterprise_name_cn = #{enterpriseNameCN,jdbcType=VARCHAR}
+    </if>
+    <if test="enterpriseNameEN != null" >
+      and enterprise_name_en = #{enterpriseNameEN,jdbcType=VARCHAR}
+    </if>
+    <if test="enterpriseStatus != null" >
+      and enterprise_status = #{enterpriseStatus,jdbcType=VARCHAR}
+    </if>
+    <if test="enterpriseType != null" >
+      and enterprise_type = #{enterpriseType,jdbcType=VARCHAR}
+    </if>
+    <if test="enterpriseTypeEN != null" >
+      and enterprise_type_en = #{enterpriseTypeEN,jdbcType=VARCHAR}
+    </if>
+    <if test="esDate != null" >
+      and es_date = #{esDate,jdbcType=VARCHAR}
+    </if>
+    <if test="fundedRatio != null" >
+      and funded_ratio = #{fundedRatio,jdbcType=VARCHAR}
+    </if>
+    <if test="nameCN != null" >
+      and name_cn = #{nameCN,jdbcType=VARCHAR}
+    </if>
+    <if test="nameEN != null" >
+      and name_en = #{nameEN,jdbcType=VARCHAR}
+    </if>
+    <if test="regCap != null" >
+      and reg_cap = #{regCap,jdbcType=VARCHAR}
+    </if>
+    <if test="regCapCur != null" >
+      and reg_cap_cur = #{regCapCur,jdbcType=VARCHAR}
+    </if>
+    <if test="regNo != null" >
+      and reg_no = #{regNo,jdbcType=VARCHAR}
+    </if>
+    <if test="regOrgCN != null" >
+      and reg_org_cn = #{regOrgCN,jdbcType=VARCHAR}
+    </if>
+    <if test="regOrgEN != null" >
+      and reg_org_en = #{regOrgEN,jdbcType=VARCHAR}
+    </if>
+    <if test="revDate != null" >
+      and rev_date = #{revDate,jdbcType=VARCHAR}
+    </if>
+    <if test="subconam != null" >
+      and subconam = #{subconam,jdbcType=VARCHAR}
+    </if>
+    <if test="updateTime != null" >
+      and update_time = #{updateTime,jdbcType=VARCHAR}
+    </if>
+    <if test="fullReportId != null" >
+      and full_report_id = #{fullReportId,jdbcType=INTEGER}
+    </if>
+    <if test="entStatus != null" >
+      and ent_status = #{entStatus,jdbcType=VARCHAR}
+    </if>
+    <if test="enterpriseStatusEN != null" >
+      and enterprise_status_en = #{enterpriseStatusEN,jdbcType=VARCHAR}
+    </if>
+    <if test="enterpriseTypeCN != null" >
+      and enterprise_type_cn = #{enterpriseTypeCN,jdbcType=VARCHAR}
+    </if>
+    <if test="regCapCurCN != null" >
+      and reg_cap_cur_cn = #{regCapCurCN,jdbcType=VARCHAR}
+    </if>
+    <if test="regCapCurEN != null" >
+      and reg_cap_cur_en = #{regCapCurEN,jdbcType=VARCHAR}
+    </if>
+  </sql>
+
+  <select id="getById" parameterType="Integer" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    where ID = #{id}
+  </select>
+
+  <select id="listBy" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <select id="listPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+    <![CDATA[ order by ID desc]]>
+  </select>
+
+  <select id="listPageCount" parameterType="java.util.Map" resultType="Integer">
+    select count(1) from
+    <include refid="table" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+
+  <insert id="insert" parameterType="com.mika.credit.common.entity.report.cn.Entinvinfos" keyProperty="id" useGeneratedKeys="true">
+    insert into
+    <include refid="table" />
+    (id, address_cn, address_en,
+    can_date, com_crefo_no, confrom,
+    crefo_no, currency, del_flag,
+    enterprise_name_cn, enterprise_name_en, enterprise_status,
+    enterprise_type,enterprise_type_en, es_date, funded_ratio,
+    name_cn, name_en, reg_cap,
+    reg_cap_cur, reg_no, reg_org_cn,
+    reg_org_en, rev_date, subconam,
+    update_time,full_report_id,ent_status,enterprise_status_en,
+    enterprise_type_cn,reg_cap_cur_cn,reg_cap_cur_en)
+    values (#{id,jdbcType=INTEGER}, #{addressCN,jdbcType=VARCHAR}, #{addressEN,jdbcType=VARCHAR},
+    #{canDate,jdbcType=VARCHAR}, #{comCrefoNo,jdbcType=VARCHAR}, #{confrom,jdbcType=VARCHAR},
+    #{crefoNo,jdbcType=VARCHAR}, #{currency,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR},
+    #{enterpriseNameCN,jdbcType=VARCHAR}, #{enterpriseNameEN,jdbcType=VARCHAR}, #{enterpriseStatus,jdbcType=VARCHAR},
+    #{enterpriseType,jdbcType=VARCHAR},#{enterpriseTypeEN,jdbcType=VARCHAR}, #{esDate,jdbcType=VARCHAR}, #{fundedRatio,jdbcType=VARCHAR},
+    #{nameCN,jdbcType=VARCHAR}, #{nameEN,jdbcType=VARCHAR}, #{regCap,jdbcType=VARCHAR},
+    #{regCapCur,jdbcType=VARCHAR}, #{regNo,jdbcType=VARCHAR}, #{regOrgCN,jdbcType=VARCHAR},
+    #{regOrgEN,jdbcType=VARCHAR}, #{revDate,jdbcType=VARCHAR}, #{subconam,jdbcType=VARCHAR},
+    #{updateTime,jdbcType=VARCHAR},#{fullReportId,jdbcType=INTEGER},#{entStatus,jdbcType=VARCHAR},
+    #{enterpriseStatusEN,jdbcType=VARCHAR},#{enterpriseTypeCN,jdbcType=VARCHAR},#{regCapCurCN,jdbcType=VARCHAR},
+    #{regCapCurEN,jdbcType=VARCHAR})
+  </insert>
+
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from
+    <include refid="table" />
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <update id="update" parameterType="com.mika.credit.common.entity.report.cn.Entinvinfos" >
+    update entinvinfos
+    set address_cn = #{addressCN,jdbcType=VARCHAR},
+      address_en = #{addressEN,jdbcType=VARCHAR},
+      can_date = #{canDate,jdbcType=VARCHAR},
+      com_crefo_no = #{comCrefoNo,jdbcType=VARCHAR},
+      confrom = #{confrom,jdbcType=VARCHAR},
+      crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      currency = #{currency,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=VARCHAR},
+      enterprise_name_cn = #{enterpriseNameCN,jdbcType=VARCHAR},
+      enterprise_name_en = #{enterpriseNameEN,jdbcType=VARCHAR},
+      enterprise_status = #{enterpriseStatus,jdbcType=VARCHAR},
+      enterprise_type = #{enterpriseType,jdbcType=VARCHAR},
+      enterprise_type_en = #{enterpriseTypeEN,jdbcType=VARCHAR},
+      es_date = #{esDate,jdbcType=VARCHAR},
+      funded_ratio = #{fundedRatio,jdbcType=VARCHAR},
+      name_cn = #{nameCN,jdbcType=VARCHAR},
+      name_en = #{nameEN,jdbcType=VARCHAR},
+      reg_cap = #{regCap,jdbcType=VARCHAR},
+      reg_cap_cur = #{regCapCur,jdbcType=VARCHAR},
+      reg_no = #{regNo,jdbcType=VARCHAR},
+      reg_org_cn = #{regOrgCN,jdbcType=VARCHAR},
+      reg_org_en = #{regOrgEN,jdbcType=VARCHAR},
+      rev_date = #{revDate,jdbcType=VARCHAR},
+      subconam = #{subconam,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      full_report_id = #{fullReportId,jdbcType=INTEGER},
+      ent_status = #{entStatus,jdbcType=VARCHAR},
+      enterprise_status_en = #{enterpriseStatusEN,jdbcType=VARCHAR},
+      enterprise_type_cn = #{enterpriseTypeCN,jdbcType=VARCHAR},
+      reg_cap_cur_cn = #{regCapCurCN,jdbcType=VARCHAR},
+      reg_cap_cur_en = #{regCapCurEN,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <insert id="insertSelective" parameterType="com.mika.credit.common.entity.report.cn.Entinvinfos" >
+    insert into entinvinfos
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="addressCN != null" >
+        address_cn,
+      </if>
+      <if test="addressEN != null" >
+        address_en,
+      </if>
+      <if test="canDate != null" >
+        can_date,
+      </if>
+      <if test="comCrefoNo != null" >
+        com_crefo_no,
+      </if>
+      <if test="confrom != null" >
+        confrom,
+      </if>
+      <if test="crefoNo != null" >
+        crefo_no,
+      </if>
+      <if test="currency != null" >
+        currency,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="enterpriseNameCN != null" >
+        enterprise_name_cn,
+      </if>
+      <if test="enterpriseNameEN != null" >
+        enterprise_name_en,
+      </if>
+      <if test="enterpriseStatus != null" >
+        enterprise_status,
+      </if>
+      <if test="enterpriseType != null" >
+        enterprise_type,
+      </if>
+      <if test="enterpriseTypeEN != null" >
+        enterprise_type_en,
+      </if>
+      <if test="esDate != null" >
+        es_date,
+      </if>
+      <if test="fundedRatio != null" >
+        funded_ratio,
+      </if>
+      <if test="nameCN != null" >
+        name_cn,
+      </if>
+      <if test="nameen != null" >
+        nameen,
+      </if>
+      <if test="regCap != null" >
+        reg_cap,
+      </if>
+      <if test="regCapCur != null" >
+        reg_cap_cur,
+      </if>
+      <if test="regNo != null" >
+        reg_no,
+      </if>
+      <if test="regOrgCN != null" >
+        reg_org_cn,
+      </if>
+      <if test="regOrgEN != null" >
+        reg_org_en,
+      </if>
+      <if test="revDate != null" >
+        rev_date,
+      </if>
+      <if test="subconam != null" >
+        subconam,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id,
+      </if>
+      <if test="entStatus != null" >
+        ent_status,
+      </if>
+      <if test="enterpriseStatusEN != null" >
+        enterprise_status_en,
+      </if>
+      <if test="enterpriseTypeCN != null" >
+        enterprise_type_cn,
+      </if>
+      <if test="regCapCurCN != null" >
+        reg_cap_cur_cn,
+      </if>
+      <if test="regCapCurEN != null" >
+        reg_cap_cur_en,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="addressCN != null" >
+        #{addressCN,jdbcType=VARCHAR},
+      </if>
+      <if test="addressEN != null" >
+        #{addressEN,jdbcType=VARCHAR},
+      </if>
+      <if test="canDate != null" >
+        #{canDate,jdbcType=VARCHAR},
+      </if>
+      <if test="comCrefoNo != null" >
+        #{comCrefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="confrom != null" >
+        #{confrom,jdbcType=VARCHAR},
+      </if>
+      <if test="crefoNo != null" >
+        #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="currency != null" >
+        #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseNameCN != null" >
+        #{enterpriseNameCN,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseNameEN != null" >
+        #{enterpriseNameEN,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseStatus != null" >
+        #{enterpriseStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseType != null" >
+        #{enterpriseType,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseTypeEN != null" >
+        #{enterpriseTypeEN,jdbcType=VARCHAR},
+      </if>
+      <if test="esDate != null" >
+        #{esDate,jdbcType=VARCHAR},
+      </if>
+      <if test="fundedRatio != null" >
+        #{fundedRatio,jdbcType=VARCHAR},
+      </if>
+      <if test="nameCN != null" >
+        #{nameCN,jdbcType=VARCHAR},
+      </if>
+      <if test="nameEN != null" >
+        #{nameEN,jdbcType=VARCHAR},
+      </if>
+      <if test="regCap != null" >
+        #{regCap,jdbcType=VARCHAR},
+      </if>
+      <if test="regCapCur != null" >
+        #{regCapCur,jdbcType=VARCHAR},
+      </if>
+      <if test="regNo != null" >
+        #{regNo,jdbcType=VARCHAR},
+      </if>
+      <if test="regOrgCN != null" >
+        #{regOrgCN,jdbcType=VARCHAR},
+      </if>
+      <if test="regOrgEN != null" >
+        #{regOrgEN,jdbcType=VARCHAR},
+      </if>
+      <if test="revDate != null" >
+        #{revDate,jdbcType=VARCHAR},
+      </if>
+      <if test="subconam != null" >
+        #{subconam,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        #{fullReportId,jdbcType=INTEGER},
+      </if>
+      <if test="entStatus != null" >
+        #{entStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseStatusEN != null" >
+        #{enterpriseStatusEN,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseTypeCN != null" >
+        #{enterpriseTypeCN,jdbcType=VARCHAR},
+      </if>
+      <if test="regCapCurCN != null" >
+        #{regCapCurCN,jdbcType=VARCHAR},
+      </if>
+      <if test="regCapCurEN != null" >
+        #{regCapCurEN,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateSelective" parameterType="com.mika.credit.common.entity.report.cn.Entinvinfos" >
+    update entinvinfos
+    <set >
+      <if test="addressCN != null" >
+        address_cn = #{addressCN,jdbcType=VARCHAR},
+      </if>
+      <if test="addressEN != null" >
+        address_en = #{addressEN,jdbcType=VARCHAR},
+      </if>
+      <if test="canDate != null" >
+        can_date = #{canDate,jdbcType=VARCHAR},
+      </if>
+      <if test="comCrefoNo != null" >
+        com_crefo_no = #{comCrefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="confrom != null" >
+        confrom = #{confrom,jdbcType=VARCHAR},
+      </if>
+      <if test="crefoNo != null" >
+        crefo_no = #{crefoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="currency != null" >
+        currency = #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseNameCN != null" >
+        enterprise_name_cn = #{enterpriseNameCN,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseNameEN != null" >
+        enterprise_name_en = #{enterpriseNameEN,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseStatus != null" >
+        enterprise_status = #{enterpriseStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseType != null" >
+        enterprise_type = #{enterpriseType,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseTypeEN != null" >
+        enterprise_type_en = #{enterpriseTypeEN,jdbcType=VARCHAR},
+      </if>
+      <if test="esDate != null" >
+        es_date = #{esDate,jdbcType=VARCHAR},
+      </if>
+      <if test="fundedRatio != null" >
+        funded_ratio = #{fundedRatio,jdbcType=VARCHAR},
+      </if>
+      <if test="namecn != null" >
+        namecn = #{namecn,jdbcType=VARCHAR},
+      </if>
+      <if test="nameen != null" >
+        nameen = #{nameen,jdbcType=VARCHAR},
+      </if>
+      <if test="regCap != null" >
+        reg_cap = #{regCap,jdbcType=VARCHAR},
+      </if>
+      <if test="regCapCur != null" >
+        reg_cap_cur = #{regCapCur,jdbcType=VARCHAR},
+      </if>
+      <if test="regNo != null" >
+        reg_no = #{regNo,jdbcType=VARCHAR},
+      </if>
+      <if test="regOrgcn != null" >
+        reg_org_cn = #{regOrgCN,jdbcType=VARCHAR},
+      </if>
+      <if test="regOrgen != null" >
+        reg_org_en = #{regOrgEN,jdbcType=VARCHAR},
+      </if>
+      <if test="revDate != null" >
+        rev_date = #{revDate,jdbcType=VARCHAR},
+      </if>
+      <if test="subconam != null" >
+        subconam = #{subconam,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fullReportId != null" >
+        full_report_id = #{fullReportId,jdbcType=INTEGER},
+      </if>
+      <if test="entStatus != null" >
+        ent_status = #{entStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseStatusEN != null" >
+         enterprise_status_en = #{enterpriseStatusEN,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseTypeCN != null" >
+         enterprise_type_cn = #{enterpriseTypeCN,jdbcType=VARCHAR},
+      </if>
+      <if test="regCapCurCN != null" >
+         reg_cap_cur_cn = #{regCapCurCN,jdbcType=VARCHAR},
+      </if>
+      <if test="regCapCurEN != null" >
+         reg_cap_cur_en = #{regCapCurEN,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+
+
+</mapper>

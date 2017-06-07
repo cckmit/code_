@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.globaleagle.admin.dao.GroupMapper" >
+  <resultMap id="userMap" type="com.mika.credit.facade.globaleagle.admin.model.Group" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+      <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <collection property="groupHasMenus" ofType="com.mika.credit.facade.globaleagle.admin.model.GroupHasMenu" column="id" select="com.mika.credit.facade.globaleagle.admin.dao.GroupHasMenuMapper.selectByGroupId"/>
+  </resultMap>
+  
+  <select id="queryById" resultMap="userMap" parameterType="java.lang.String" >
+    select *
+    from s_group
+    where id = #{id}
+  </select>
+    <select id="queryAll" resultMap="userMap" >
+    select *
+    from s_group
+  </select>
+  
+  <insert id="add" parameterType="com.mika.credit.facade.globaleagle.admin.model.Group">
+  	insert into s_group(id,name,code)
+  	values( #{id},#{name},#{code})
+  </insert>
+  
+  <update id="mod" parameterType="com.mika.credit.facade.globaleagle.admin.model.Group">
+  	update s_group set
+      name=#{name},
+      code=#{code}
+  	where id = #{id}
+  </update>
+  
+  <delete id="del" parameterType="java.lang.String">
+  	delete from s_group where id=#{id}
+  </delete>
+  
+  
+</mapper>

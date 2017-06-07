@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mika.credit.facade.gugu.dao.UsersMapper">
+  <resultMap id="BaseResultMap" type="com.mika.credit.facade.gugu.model.Users">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="area_code" jdbcType="VARCHAR" property="areaCode" />
+    <result column="del_flag" jdbcType="VARCHAR" property="delFlag" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="mobile_num" jdbcType="VARCHAR" property="mobileNum" />
+    <result column="order_mail" jdbcType="VARCHAR" property="orderMail" />
+    <result column="photo_path" jdbcType="VARCHAR" property="photoPath" />
+    <result column="position" jdbcType="VARCHAR" property="position" />
+    <result column="pwd" jdbcType="VARCHAR" property="pwd" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="report_mail" jdbcType="VARCHAR" property="reportMail" />
+    <result column="statement_mail" jdbcType="VARCHAR" property="statementMail" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="website" jdbcType="VARCHAR" property="website" />
+    <result column="qr_code_path" jdbcType="VARCHAR" property="qrCodePath" />
+    <result column="phone_token" jdbcType="VARCHAR" property="phoneToken" />
+    <result column="show_photo_path" jdbcType="VARCHAR" property="showPhotoPath" />
+    <result column="show_qr_code_path" jdbcType="VARCHAR" property="showQrCodePath" />
+    <result column="balance" jdbcType="REAL" property="balance" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, address, area_code, del_flag, email, mobile_num, order_mail, photo_path, position, 
+    pwd, real_name, report_mail, statement_mail, tel, user_name, website, qr_code_path, 
+    phone_token, show_photo_path, show_qr_code_path, balance
+  </sql>
+  <sql id="condition">
+    <where>
+      <if test="id != null and id != 0">
+        and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="address != null">
+        and address = #{address,jdbcType=VARCHAR}
+      </if>
+      <if test="areaCode != null">
+        and area_code = #{areaCode,jdbcType=VARCHAR}
+      </if>
+      <if test="delFlag != null">
+        and  del_flag = #{delFlag,jdbcType=VARCHAR}
+      </if>
+      <if test="email != null">
+        and  email = #{email,jdbcType=VARCHAR}
+      </if>
+      <if test="mobileNum != null">
+        and  mobile_num = #{mobileNum,jdbcType=VARCHAR}
+      </if>
+      <if test="orderMail != null">
+        and  order_mail = #{orderMail,jdbcType=VARCHAR}
+      </if>
+      <if test="photoPath != null">
+        and photo_path = #{photoPath,jdbcType=VARCHAR}
+      </if>
+      <if test="position != null">
+        and position = #{position,jdbcType=VARCHAR}
+      </if>
+      <if test="pwd != null">
+        and  pwd = #{pwd,jdbcType=VARCHAR}
+      </if>
+      <if test="realName != null">
+        and real_name = #{realName,jdbcType=VARCHAR}
+      </if>
+      <if test="reportMail != null">
+        and  report_mail = #{reportMail,jdbcType=VARCHAR}
+      </if>
+      <if test="statementMail != null">
+        and statement_mail = #{statementMail,jdbcType=VARCHAR}
+      </if>
+      <if test="tel != null">
+        and tel = #{tel,jdbcType=VARCHAR}
+      </if>
+      <if test="userName != null">
+        and user_name = #{userName,jdbcType=VARCHAR}
+      </if>
+      <if test="website != null">
+        and website = #{website,jdbcType=VARCHAR}
+      </if>
+      <if test="qrCodePath != null">
+        and qr_code_path = #{qrCodePath,jdbcType=VARCHAR}
+      </if>
+      <if test="phoneToken != null">
+        and phone_token = #{phoneToken,jdbcType=VARCHAR}
+      </if>
+      <if test="showPhotoPath != null">
+        and show_photo_path = #{showPhotoPath,jdbcType=VARCHAR}
+      </if>
+      <if test="showQrCodePath != null">
+        and show_qr_code_path = #{showQrCodePath,jdbcType=VARCHAR}
+      </if>
+      <if test="balance != null and balance != 0">
+        and balance = #{balance,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from users
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPrimaryKeySelective" parameterType="com.mika.credit.facade.gugu.model.Users" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from users
+    <include refid="condition" />
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from users
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mika.credit.facade.gugu.model.Users" useGeneratedKeys="true" keyProperty="id">
+    insert into users (id, address, area_code, 
+      del_flag, email, mobile_num, 
+      order_mail, photo_path, position, 
+      pwd, real_name, report_mail, 
+      statement_mail, tel, user_name, 
+      website, qr_code_path, phone_token, 
+      show_photo_path, show_qr_code_path, balance
+      )
+    values (#{id,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, 
+      #{delFlag,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{mobileNum,jdbcType=VARCHAR}, 
+      #{orderMail,jdbcType=VARCHAR}, #{photoPath,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, 
+      #{pwd,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, #{reportMail,jdbcType=VARCHAR}, 
+      #{statementMail,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{website,jdbcType=VARCHAR}, #{qrCodePath,jdbcType=VARCHAR}, #{phoneToken,jdbcType=VARCHAR}, 
+      #{showPhotoPath,jdbcType=VARCHAR}, #{showQrCodePath,jdbcType=VARCHAR}, #{balance,jdbcType=REAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mika.credit.facade.gugu.model.Users" useGeneratedKeys="true" keyProperty="id">
+    insert into users
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="areaCode != null">
+        area_code,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="mobileNum != null">
+        mobile_num,
+      </if>
+      <if test="orderMail != null">
+        order_mail,
+      </if>
+      <if test="photoPath != null">
+        photo_path,
+      </if>
+      <if test="position != null">
+        position,
+      </if>
+      <if test="pwd != null">
+        pwd,
+      </if>
+      <if test="realName != null">
+        real_name,
+      </if>
+      <if test="reportMail != null">
+        report_mail,
+      </if>
+      <if test="statementMail != null">
+        statement_mail,
+      </if>
+      <if test="tel != null">
+        tel,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="website != null">
+        website,
+      </if>
+      <if test="qrCodePath != null">
+        qr_code_path,
+      </if>
+      <if test="phoneToken != null">
+        phone_token,
+      </if>
+      <if test="showPhotoPath != null">
+        show_photo_path,
+      </if>
+      <if test="showQrCodePath != null">
+        show_qr_code_path,
+      </if>
+      <if test="balance != null">
+        balance,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null">
+        #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileNum != null">
+        #{mobileNum,jdbcType=VARCHAR},
+      </if>
+      <if test="orderMail != null">
+        #{orderMail,jdbcType=VARCHAR},
+      </if>
+      <if test="photoPath != null">
+        #{photoPath,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="reportMail != null">
+        #{reportMail,jdbcType=VARCHAR},
+      </if>
+      <if test="statementMail != null">
+        #{statementMail,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="website != null">
+        #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="qrCodePath != null">
+        #{qrCodePath,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneToken != null">
+        #{phoneToken,jdbcType=VARCHAR},
+      </if>
+      <if test="showPhotoPath != null">
+        #{showPhotoPath,jdbcType=VARCHAR},
+      </if>
+      <if test="showQrCodePath != null">
+        #{showQrCodePath,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null">
+        #{balance,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mika.credit.facade.gugu.model.Users">
+    update users
+    <set>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null">
+        area_code = #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileNum != null">
+        mobile_num = #{mobileNum,jdbcType=VARCHAR},
+      </if>
+      <if test="orderMail != null">
+        order_mail = #{orderMail,jdbcType=VARCHAR},
+      </if>
+      <if test="photoPath != null">
+        photo_path = #{photoPath,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        pwd = #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="reportMail != null">
+        report_mail = #{reportMail,jdbcType=VARCHAR},
+      </if>
+      <if test="statementMail != null">
+        statement_mail = #{statementMail,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="website != null">
+        website = #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="qrCodePath != null">
+        qr_code_path = #{qrCodePath,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneToken != null">
+        phone_token = #{phoneToken,jdbcType=VARCHAR},
+      </if>
+      <if test="showPhotoPath != null">
+        show_photo_path = #{showPhotoPath,jdbcType=VARCHAR},
+      </if>
+      <if test="showQrCodePath != null">
+        show_qr_code_path = #{showQrCodePath,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null">
+        balance = #{balance,jdbcType=REAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mika.credit.facade.gugu.model.Users">
+    update users
+    set address = #{address,jdbcType=VARCHAR},
+      area_code = #{areaCode,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      mobile_num = #{mobileNum,jdbcType=VARCHAR},
+      order_mail = #{orderMail,jdbcType=VARCHAR},
+      photo_path = #{photoPath,jdbcType=VARCHAR},
+      position = #{position,jdbcType=VARCHAR},
+      pwd = #{pwd,jdbcType=VARCHAR},
+      real_name = #{realName,jdbcType=VARCHAR},
+      report_mail = #{reportMail,jdbcType=VARCHAR},
+      statement_mail = #{statementMail,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      website = #{website,jdbcType=VARCHAR},
+      qr_code_path = #{qrCodePath,jdbcType=VARCHAR},
+      phone_token = #{phoneToken,jdbcType=VARCHAR},
+      show_photo_path = #{showPhotoPath,jdbcType=VARCHAR},
+      show_qr_code_path = #{showQrCodePath,jdbcType=VARCHAR},
+      balance = #{balance,jdbcType=REAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

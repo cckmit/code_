@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+</head>
+
+<body>
+<div class="container">
+    <form action="" class="form-horizontal"  role="form">
+        <fieldset>
+            <legend>Test</legend>
+            <div class="form-group">
+                <label for="date" class="col-md-2 control-label">Date</label>
+                <input class="form-control" id="date" type="text" value="">
+            </div>
+            <div class="form-group">
+                <label for="phone" class="col-md-2 control-label">Phone</label>
+                <input class="form-control" id="phone" type="text" value="">
+            </div>
+            <div class="form-group">
+                <label for="tin" class="col-md-2 control-label">Tin</label>
+                <input class="form-control" id="tin" type="text" value="">
+            </div>
+            <div class="form-group">
+                <label for="ssn" class="col-md-2 control-label">SSN</label>
+                <input class="form-control" id="ssn" type="text" value="">
+            </div>
+            <div class="form-group">
+                <label for="product" class="col-md-2 control-label">Product</label>
+                <input class="form-control" id="product" type="text" value="">
+            </div>
+            <div class="form-group">
+                <label for="eyescript" class="col-md-2 control-label">EyeScript</label>
+                <input class="form-control" id="eyescript" type="text" value="">
+            </div>
+
+        </fieldset>
+    </form>
+</div>
+
+<script type="text/javascript" src="../jquery-1.12.4.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="bootstrap-inputmask.min.js" charset="UTF-8"></script>
+<script type="text/javascript">
+    jQuery(function($){
+        $("#date").mask("9999/99/99",{placeholder:"yyyy/mm/dd"});
+        $("#phone").mask("(+99) 999-99999999");
+        $("#tin").mask("99-9999999");
+        $("#ssn").mask("999-99-9999");
+    });
+    jQuery(function($){
+        $("#product").mask("99/99/9999",{placeholder:" "});
+//        $("#product").mask("99/99/9999",{completed:function(){alert("You typed the following: "+this.val());}});
+        $.mask.definitions['~']='[+-]';
+        $("#eyescript").mask("~9.99 ~9.99 999");
+//        $("#phone").mask("(999) 999-9999? x99999");
+//        $("#phone").mask("#hhhhhh");
+    });
+</script>
+
+</body>
+</html>

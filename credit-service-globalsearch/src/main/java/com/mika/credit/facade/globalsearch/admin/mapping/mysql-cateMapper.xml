@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mika.credit.facade.globalsearch.admin.dao.CateMapper" >
+  <resultMap id="cateMap" type="com.mika.credit.facade.globalsearch.admin.model.Cate" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result property="isSYS" column="is_sys" jdbcType="BIT"/>
+    <collection property="menus" column="category_id" ofType="com.mika.credit.facade.globalsearch.admin.model.Menu">
+      <id property="id" column="menu_id"/>
+      <result property="name" column="menu_name"/>
+      <result property="icon" column="menu_icon"/>
+      <result property="url" column="menu_url"/>
+    </collection>
+  </resultMap>
+
+  <select id="queryCateAndMenu" resultMap="cateMap">
+    select c.*,m.id menu_id,m.name menu_name,m.icon menu_icon, m.url menu_url
+    from s_menu m
+    left join s_category c on m.category_id = c.id
+    where m.enable=1
+    order by c.sort,m.sort
+  </select>
+
+  <select id="queryById" resultMap="cateMap" parameterType="java.lang.String" >
+    select *
+    from s_category
+    where id = #{id}
+  </select>
+    <select id="queryAll" resultMap="cateMap" >
+    select *
+    from s_category
+    order by sort
+  </select>
+  
+  <insert id="add" parameterType="com.mika.credit.facade.globalsearch.admin.model.Cate">
+  	insert into s_category(id,name,sort,is_sys)
+  	values(#{id},#{name},#{sort},0)
+  </insert>
+  
+  <update id="mod" parameterType="com.mika.credit.facade.globalsearch.admin.model.Cate">
+  	update s_category set
+  	name=#{name},
+  	sort=#{sort}
+  	where id = #{id}
+  	and is_sys != 1
+  </update>
+  
+  <delete id="del" parameterType="java.lang.String">
+  	delete from s_category where id=#{id} and is_sys != 1
+  </delete>
+  
+  
+</mapper>
