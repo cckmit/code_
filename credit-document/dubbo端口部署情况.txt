@@ -21,3 +21,5 @@ credit-service-record      	20822
 credit-service-front      	20823
 credit-service-commondata      	20824
 credit-service-product      	20825
+credit-service-wf      	20826
+credit-service-customer      	20827
